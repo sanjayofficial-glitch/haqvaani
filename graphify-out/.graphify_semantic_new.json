@@ -1,0 +1,2905 @@
+{
+  "nodes": [
+    {
+      "id": "project/haqvaani",
+      "label": "HaqVaani",
+      "file_type": "concept",
+      "source_file": "README.md"
+    },
+    {
+      "id": "doc/AGENTS.md",
+      "label": "AGENTS.md",
+      "file_type": "document",
+      "source_file": "AGENTS.md"
+    },
+    {
+      "id": "doc/RULES.md",
+      "label": "RULES.md",
+      "file_type": "document",
+      "source_file": "RULES.md"
+    },
+    {
+      "id": "doc/ARCHITECTURE.md",
+      "label": "ARCHITECTURE.md",
+      "file_type": "document",
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "doc/ROADMAP.md",
+      "label": "ROADMAP.md",
+      "file_type": "document",
+      "source_file": "ROADMAP.md"
+    },
+    {
+      "id": "doc/TODO.md",
+      "label": "TODO.md",
+      "file_type": "document",
+      "source_file": "TODO.md"
+    },
+    {
+      "id": "doc/CHANGELOG.md",
+      "label": "CHANGELOG.md",
+      "file_type": "document",
+      "source_file": "CHANGELOG.md"
+    },
+    {
+      "id": "doc/CONTRIBUTING.md",
+      "label": "CONTRIBUTING.md",
+      "file_type": "document",
+      "source_file": "CONTRIBUTING.md"
+    },
+    {
+      "id": "doc/README.md",
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "README.md"
+    },
+    {
+      "id": "doc/IMPLEMENTATION_PLAN.md",
+      "label": "IMPLEMENTATION_PLAN.md",
+      "file_type": "document",
+      "source_file": "IMPLEMENTATION_PLAN.md"
+    },
+    {
+      "id": "doc/PROJECT_STRUCTURE.md",
+      "label": "PROJECT_STRUCTURE.md",
+      "file_type": "document",
+      "source_file": "PROJECT_STRUCTURE.md"
+    },
+    {
+      "id": "doc/RECOMMENDATIONS.md",
+      "label": "RECOMMENDATIONS.md",
+      "file_type": "document",
+      "source_file": "RECOMMENDATIONS.md"
+    },
+    {
+      "id": "doc/legal_matrix.md",
+      "label": "docs/legal_matrix.md",
+      "file_type": "document",
+      "source_file": "docs/legal_matrix.md"
+    },
+    {
+      "id": "doc/latency_budget.md",
+      "label": "docs/latency_budget.md",
+      "file_type": "document",
+      "source_file": "docs/latency_budget.md"
+    },
+    {
+      "id": "doc/demo_storyboard.md",
+      "label": "docs/demo_storyboard.md",
+      "file_type": "document",
+      "source_file": "docs/demo_storyboard.md"
+    },
+    {
+      "id": "doc/interview_qa.md",
+      "label": "docs/interview_qa.md",
+      "file_type": "document",
+      "source_file": "docs/interview_qa.md"
+    },
+    {
+      "id": "doc/evaluation.md",
+      "label": "docs/evaluation.md",
+      "file_type": "document",
+      "source_file": "docs/evaluation.md"
+    },
+    {
+      "id": "doc/ui_ux_design_system.md",
+      "label": "docs/ui_ux_design_system.md",
+      "file_type": "document",
+      "source_file": "docs/ui_ux_design_system.md"
+    },
+    {
+      "id": "doc/system_diagrams.md",
+      "label": "docs/system_diagrams.md",
+      "file_type": "document",
+      "source_file": "docs/system_diagrams.md"
+    },
+    {
+      "id": "prompt/ENGINEER_A_PROMPT.md",
+      "label": "ENGINEER_A_PROMPT.md",
+      "file_type": "document",
+      "source_file": "agent_prompts/ENGINEER_A_PROMPT.md"
+    },
+    {
+      "id": "prompt/ENGINEER_B_PROMPT.md",
+      "label": "ENGINEER_B_PROMPT.md",
+      "file_type": "document",
+      "source_file": "agent_prompts/ENGINEER_B_PROMPT.md"
+    },
+    {
+      "id": "prompt/SHARED_CONTEXT.md",
+      "label": "SHARED_CONTEXT.md",
+      "file_type": "document",
+      "source_file": "agent_prompts/SHARED_CONTEXT.md"
+    },
+    {
+      "id": "module/schemas.py",
+      "label": "haqvaani/schemas.py",
+      "file_type": "code",
+      "source_file": "haqvaani/schemas.py"
+    },
+    {
+      "id": "module/statutory.py",
+      "label": "haqvaani/statutory.py",
+      "file_type": "code",
+      "source_file": "haqvaani/statutory.py"
+    },
+    {
+      "id": "module/safety.py",
+      "label": "haqvaani/safety.py",
+      "file_type": "code",
+      "source_file": "haqvaani/safety.py"
+    },
+    {
+      "id": "module/dsp_audio.py",
+      "label": "haqvaani/dsp_audio.py",
+      "file_type": "code",
+      "source_file": "haqvaani/dsp_audio.py"
+    },
+    {
+      "id": "module/stt_client.py",
+      "label": "haqvaani/stt_client.py",
+      "file_type": "code",
+      "source_file": "haqvaani/stt_client.py"
+    },
+    {
+      "id": "module/tts_client.py",
+      "label": "haqvaani/tts_client.py",
+      "file_type": "code",
+      "source_file": "haqvaani/tts_client.py"
+    },
+    {
+      "id": "module/evon_client.py",
+      "label": "haqvaani/evon_client.py",
+      "file_type": "code",
+      "source_file": "haqvaani/evon_client.py"
+    },
+    {
+      "id": "module/complaint_builder.py",
+      "label": "haqvaani/complaint_builder.py",
+      "file_type": "code",
+      "source_file": "haqvaani/complaint_builder.py"
+    },
+    {
+      "id": "module/rb_ios.py",
+      "label": "haqvaani/rb_ios.py",
+      "file_type": "code",
+      "source_file": "haqvaani/rb_ios.py"
+    },
+    {
+      "id": "module/orchestrator.py",
+      "label": "haqvaani/orchestrator.py",
+      "file_type": "code",
+      "source_file": "haqvaani/orchestrator.py"
+    },
+    {
+      "id": "frontend/glass_ui.html",
+      "label": "frontend/glass_ui.html",
+      "file_type": "code",
+      "source_file": "frontend/glass_ui.html"
+    },
+    {
+      "id": "frontend/hud.html",
+      "label": "frontend/hud.html",
+      "file_type": "code",
+      "source_file": "frontend/hud.html"
+    },
+    {
+      "id": "eval/benchmark.py",
+      "label": "eval/benchmark.py",
+      "file_type": "code",
+      "source_file": "eval/benchmark.py"
+    },
+    {
+      "id": "concept/mode1",
+      "label": "Mode 1 Voice Intake",
+      "file_type": "concept",
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "concept/mode2",
+      "label": "Mode 2 Rights Checker",
+      "file_type": "concept",
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "concept/mode3",
+      "label": "Mode 3 Complaint Builder",
+      "file_type": "concept",
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "concept/mode4",
+      "label": "Mode 4 Assisted Call",
+      "file_type": "concept",
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "concept/prisma",
+      "label": "Gnani Prisma v2.5 STT",
+      "file_type": "concept",
+      "source_file": "README.md"
+    },
+    {
+      "id": "concept/evon",
+      "label": "Gnani Evon v3.3 LLM",
+      "file_type": "concept",
+      "source_file": "README.md"
+    },
+    {
+      "id": "concept/timbre",
+      "label": "Gnani Timbre v2.5/v3.0 TTS",
+      "file_type": "concept",
+      "source_file": "README.md"
+    },
+    {
+      "id": "concept/statutory",
+      "label": "RBI Statutory Engine",
+      "file_type": "concept",
+      "source_file": "RULES.md"
+    },
+    {
+      "id": "concept/safety",
+      "label": "Safety Gates",
+      "file_type": "concept",
+      "source_file": "RULES.md"
+    },
+    {
+      "id": "concept/consent",
+      "label": "Consent Gate",
+      "file_type": "concept",
+      "source_file": "RULES.md"
+    },
+    {
+      "id": "concept/forbidden_secret_re",
+      "label": "FORBIDDEN_SECRET_RE",
+      "file_type": "concept",
+      "source_file": "RULES.md"
+    },
+    {
+      "id": "concept/verbatim_substring",
+      "label": "Verbatim Docket Verification",
+      "file_type": "concept",
+      "source_file": "RULES.md"
+    },
+    {
+      "id": "concept/no_autonomous_dialing",
+      "label": "No Autonomous Dialing",
+      "file_type": "concept",
+      "source_file": "RULES.md"
+    },
+    {
+      "id": "concept/rbi_2019_20_67",
+      "label": "RBI/2019-20/67",
+      "file_type": "concept",
+      "source_file": "RULES.md"
+    },
+    {
+      "id": "concept/rb_ios_2026",
+      "label": "RB-IOS 2026",
+      "file_type": "concept",
+      "source_file": "RULES.md"
+    },
+    {
+      "id": "concept/dpdp",
+      "label": "DPDP Act 2023",
+      "file_type": "concept",
+      "source_file": "RULES.md"
+    },
+    {
+      "id": "concept/trai_2026",
+      "label": "TRAI 2026",
+      "file_type": "concept",
+      "source_file": "RULES.md"
+    },
+    {
+      "id": "concept/citizen_intake",
+      "label": "CitizenIntake",
+      "file_type": "concept",
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "concept/statutory_entitlement",
+      "label": "StatutoryEntitlement",
+      "file_type": "concept",
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "concept/complaint_draft",
+      "label": "ComplaintDraft",
+      "file_type": "concept",
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "concept/call_transcript",
+      "label": "CallTranscript",
+      "file_type": "concept",
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "concept/case_record",
+      "label": "HaqVaaniCaseRecord",
+      "file_type": "concept",
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "concept/consent_record",
+      "label": "ConsentRecord",
+      "file_type": "concept",
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "concept/brush_off_type",
+      "label": "BrushOffType",
+      "file_type": "concept",
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "concept/ivr_action",
+      "label": "IVRAction",
+      "file_type": "concept",
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "engineer/a",
+      "label": "Engineer A",
+      "file_type": "concept",
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "engineer/b",
+      "label": "Engineer B",
+      "file_type": "concept",
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "challenge/gnani",
+      "label": "Great Indian AI Internship Challenge",
+      "file_type": "concept",
+      "source_file": "README.md"
+    },
+    {
+      "id": "state/idle",
+      "label": "IDLE state",
+      "file_type": "concept",
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "state/listening",
+      "label": "LISTENING state",
+      "file_type": "concept",
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "state/script_display",
+      "label": "SCRIPT_DISPLAY state",
+      "file_type": "concept",
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "state/docket_capture",
+      "label": "DOCKET_CAPTURE state",
+      "file_type": "concept",
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "state/post_call",
+      "label": "POST_CALL state",
+      "file_type": "concept",
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "haqvaani:project",
+      "label": "HaqVaani (हक़-वाणी)",
+      "type": "project",
+      "file_type": "concept",
+      "properties": {
+        "description": "India's first citizen-side RBI Statutory Refund Advocate — human-controlled voice assistant for failed UPI refunds",
+        "tagline": "आपकी आवाज़, आपका हक़ (Your voice, your right)",
+        "challenge": "Great Indian AI Internship Challenge by Gnani AI",
+        "deadline": "2026-11-10T23:59:00 IST",
+        "phase": "Day 1 of 16 — Foundation & Sprint 0 (2026-10-25 → 2026-11-10)",
+        "credits": "5,000 free Gnani programme credits",
+        "constraint": "Completely free stack — Gnani credits + open-source + free GPU (Kaggle/Colab)"
+      }
+    },
+    {
+      "id": "haqvaani:thesis",
+      "label": "Project Thesis",
+      "type": "concept",
+      "file_type": "concept",
+      "properties": {
+        "summary": "Human-controlled voice assistant helping non-English-speaking citizens recover money lost to failed UPI transactions ('money deducted but not received')",
+        "modes": "Assisted Call Mode (citizen dials bank; HaqVaani listens, scripts, captures docket, summarizes)",
+        "never": "HaqVaani never autonomously dials the bank"
+      },
+      "source_file": "agent_prompts/SHARED_CONTEXT.md"
+    },
+    {
+      "id": "haqvaani:engineer_a",
+      "label": "Engineer A — Voice, DSP, Telephony & Latency",
+      "type": "persona",
+      "file_type": "concept",
+      "properties": {
+        "ownership": "Silero VAD, ring buffer, Prisma WSS + Timbre SSE, vLLM/SGLang server & benchmarks, WER harness, assisted-call listening UI, DTMF generator & Goertzel decoder, hold-music suppressor"
+      },
+      "source_file": "agent_prompts/SHARED_CONTEXT.md"
+    },
+    {
+      "id": "haqvaani:engineer_b",
+      "label": "Engineer B — Statutory Engine, Evon v3.3 & Product UI",
+      "type": "persona",
+      "file_type": "concept",
+      "properties": {
+        "ownership": "compute_statutory_entitlement (pure Python), RB-IOS 2026 PDF generator, Evon prompts & BrushOffType taxonomy, Pydantic v2 validators, complaint builder, Telemetry HUD + compliance indicators, 60s demo video narrative"
+      },
+      "source_file": "agent_prompts/SHARED_CONTEXT.md"
+    },
+    {
+      "id": "haqvaani:schemas.py",
+      "label": "haqvaani/schemas.py (Treaty Border)",
+      "type": "file",
+      "file_type": "code",
+      "properties": {
+        "schemas": "CitizenIntake, AgentNegotiationExtraction, HaqVaaniCaseRecord, ConsentRecord",
+        "rule": "Changes require both engineers' sign-off"
+      },
+      "source_file": "agent_prompts/SHARED_CONTEXT.md"
+    },
+    {
+      "id": "gnani:stack",
+      "label": "Gnani Sovereign Stack (free only)",
+      "type": "stack",
+      "file_type": "concept",
+      "properties": {
+        "STT": "Gnani Prisma v2.5 (WebSocket) — 8 kHz Indian telephony, ITN digits, <200 ms partials",
+        "LLM": "Gnani Evon v3.3 (30B-A3B MoE) — structured JSON extraction, brush-off parsing, Apache-2.0 open weights",
+        "TTS": "Gnani Timbre v2.5/v3.0 (SSE) — en-IN + hi-IN, <100–200 ms TTFA, role-switch caching",
+        "credits": "5,000 free Gnani programme credits"
+      },
+      "source_file": "agent_prompts/SHARED_CONTEXT.md"
+    },
+    {
+      "id": "haqvaani:hard_rules",
+      "label": "Hard Rules (from RULES.md)",
+      "type": "constraint",
+      "file_type": "concept",
+      "properties": {
+        "no_autonomous_dialing": "Never make real outbound calls; user dials bank; simulated/synthetic demo only",
+        "ai_disclosure": "'This is an AI assistant assisting [user name].' Never impersonate the user",
+        "consent": "Timestamped, explicit consent before AI speaks on user's behalf or processes voice data (DPDP Act 2023)",
+        "synthetic_data": "No real phone numbers, bank accounts, Aadhaar, PAN, real UTRs, recorded calls — synthetic only",
+        "statutory_math": "Pure Python only in haqvaani/statutory.py — never LLM-computed",
+        "secret_redaction": "FORBIDDEN_SECRET_RE blocks OTP/PIN/MPIN/CVV/password in outbound TTS/text",
+        "free_constraint": "Zero paid infrastructure",
+        "no_misleading_demos": "Label all bank interactions 'Simulated IVR / synthetic demo'"
+      },
+      "source_file": "agent_prompts/SHARED_CONTEXT.md"
+    },
+    {
+      "id": "rbi:circular_2019-20/67",
+      "label": "RBI/2019-20/67 (DPSS.CO.PD No.629/02.01.014/2019-20)",
+      "type": "citation",
+      "file_type": "document",
+      "properties": {
+        "date": "20 September 2019",
+        "trigger": "Sender's account debited; beneficiary not credited",
+        "tat_p2p": "T + 1 calendar day (T = calendar date of transaction)",
+        "tat_p2m_atm_pos": "T + 5 calendar days",
+        "compensation": "₹100 per day for every day of delay beyond TAT",
+        "payment_basis": "Suo motu (automatic; no separate claim required)",
+        "formula_p2p": "tat_date = txn_date + timedelta(days=1)",
+        "formula_p2m": "tat_date = txn_date + timedelta(days=5)",
+        "worked_example": "T=18 Oct 2026, amount ₹3,200, today 25 Oct 2026 → TAT=19 Oct, days_overdue=6, penalty=₹600, total=₹3,800"
+      },
+      "source_file": "docs/legal_matrix.md"
+    },
+    {
+      "id": "dbr:circular_2017-18",
+      "label": "DBR.No.Leg.BC.78/09.07.005/2017-18",
+      "type": "citation",
+      "file_type": "document",
+      "properties": {
+        "trigger": "Third-party fraud / unauthorised debit",
+        "reporting_window": "Within 3 working days",
+        "protection": "Zero Customer Liability",
+        "bank_duty": "Shadow-credit disputed amount within 10 working days"
+      },
+      "source_file": "docs/legal_matrix.md"
+    },
+    {
+      "id": "rbi:rb_ios_2026",
+      "label": "RB-IOS 2026 — Reserve Bank – Integrated Ombudsman Scheme, 2026",
+      "type": "citation",
+      "file_type": "document",
+      "properties": {
+        "notified": "16 January 2026",
+        "in_force": "1 July 2026",
+        "portal": "https://cms.rbi.org.in",
+        "toll_free": "14448",
+        "scope": "Commercial Banks, RRBs, Co-op Banks, NBFCs, Non-bank PPIs, CICs",
+        "clause_3": "Authorised Representation — complainant may use authorised representative other than an advocate",
+        "award_ceiling_principal": "No cap",
+        "award_ceiling_consequential": "₹30 lakh",
+        "award_ceiling_moral": "₹3 lakh",
+        "filing_clock": "If RE rejects or fails to resolve within 30 days, complainant has 90 days to file"
+      },
+      "source_file": "docs/legal_matrix.md"
+    },
+    {
+      "id": "trai:2026_a2p",
+      "label": "TRAI 2026 — A2P Calling Regulations",
+      "type": "citation",
+      "file_type": "document",
+      "properties": {
+        "rule": "Entities using A2P calls must pre-declare CLI details to telecom provider",
+        "undeclared": "Treated as Unsolicited Commercial Communication (UCC)",
+        "haqvaani_v1": "Does not make A2P calls; user dials bank; HaqVaani assists only",
+        "ai_speaks_on_behalf": "Only with consent + disclosure 'This is an AI assistant assisting [user name]'"
+      },
+      "source_file": "docs/legal_matrix.md"
+    },
+    {
+      "id": "dpdp:act_2023",
+      "label": "DPDP Act 2023",
+      "type": "citation",
+      "file_type": "document",
+      "properties": {
+        "lawful_basis": "Consent (free, specific, informed, unconditional, unambiguous)",
+        "consent_screen": "Plain-language consent before recording/processing voice",
+        "purpose_limitation": "Collect only: UTR, amount, date, bank name, dispute type",
+        "data_minimization": "No Aadhaar, PAN, OTP, PIN, MPIN, CVV, password ever collected",
+        "right_to_deletion": "User can delete case record; data not sold",
+        "storage": "Local SQLite or in-memory; no raw audio to unnecessary third parties",
+        "breach_notification": "Log all access; notify user if data compromised"
+      },
+      "source_file": "docs/legal_matrix.md"
+    },
+    {
+      "id": "haqvaani:statutory.py",
+      "label": "haqvaani/statutory.py — Pure Python Statutory Engine",
+      "type": "file",
+      "file_type": "code",
+      "properties": {
+        "function": "compute_statutory_entitlement",
+        "rule": "Never LLM-computed; LLM may format/explain but never compute deadlines or penalties",
+        "p2p_tat": "T + 1 day",
+        "p2m_tat": "T + 5 days",
+        "penalty": "days_overdue × ₹100",
+        "total_claim": "amount + penalty"
+      },
+      "source_file": "docs/legal_matrix.md"
+    },
+    {
+      "id": "haqvaani:safety.py",
+      "label": "safety.py — Safety Guards",
+      "type": "file",
+      "file_type": "code",
+      "properties": {
+        "guards": "Secret Redaction + Consent + Substring Verification",
+        "forbidden_secret_re": "Blocks OTP/PIN/MPIN/CVV/password",
+        "consent_gate": "citizen_consent_verified == True with timestamp",
+        "disclosure_gate": "ai_disclosure_played == True",
+        "substring_gate": "Docket ID must be exact case-insensitive substring of support_transcript"
+      },
+      "source_file": "docs/system_diagrams.md"
+    },
+    {
+      "id": "haqvaani:orchestrator.py",
+      "label": "orchestrator.py — 7-Stage Pipeline",
+      "type": "file",
+      "file_type": "code",
+      "properties": {
+        "stages": "DSP → Prisma STT → Statutory Engine → IVR Orchestrator → Verbatim Gate → Citizen Callback → RB-IOS Dossier"
+      },
+      "source_file": "docs/system_diagrams.md"
+    },
+    {
+      "id": "haqvaani:dsp_ivr.py",
+      "label": "dsp_ivr.py — DSP + IVR",
+      "type": "file",
+      "file_type": "code",
+      "properties": {
+        "functions": "8→16 kHz FIR Resample, Silero VAD + Ring Buffer, DTMF Generator (ITU-T Q.23) + Goertzel Decoder, Hold-Music Suppressor, DemoBank IVR"
+      },
+      "source_file": "docs/system_diagrams.md"
+    },
+    {
+      "id": "haqvaani:stt_client.py",
+      "label": "stt_client.py — Prisma v2.5 STT Client",
+      "type": "file",
+      "file_type": "code",
+      "properties": {
+        "protocol": "WebSocket Stream (x-format=transcribe, lang_code=hi-IN)",
+        "features": "Inverse Text Normalization (Digits → ASCII)"
+      },
+      "source_file": "docs/system_diagrams.md"
+    },
+    {
+      "id": "haqvaani:evon_client.py",
+      "label": "evon_client.py — Evon v3.3 Client",
+      "type": "file",
+      "file_type": "code",
+      "properties": {
+        "functions": "Intake Parser, Brush-Off & Docket Parser",
+        "ttft": "≤ 302 ms (257 tok/s, short JSON schema <45 tok)"
+      },
+      "source_file": "docs/system_diagrams.md"
+    },
+    {
+      "id": "haqvaani:tts_client.py",
+      "label": "tts_client.py — Timbre SSE TTS Client",
+      "type": "file",
+      "file_type": "code",
+      "properties": {
+        "protocol": "SSE",
+        "languages": "en-IN + hi-IN",
+        "ttfa": "≤ 184 ms",
+        "role_switch_cache": "en-IN ↔ hi-IN voice contexts"
+      },
+      "source_file": "docs/system_diagrams.md"
+    },
+    {
+      "id": "haqvaani:rb_ios.py",
+      "label": "rb_ios.py — RB-IOS 2026 Dossier Generator",
+      "type": "file",
+      "file_type": "code",
+      "properties": {
+        "outputs": "PDF / JSON",
+        "portal": "cms.rbi.org.in · 14448"
+      },
+      "source_file": "docs/system_diagrams.md"
+    },
+    {
+      "id": "pipeline:stage_1_dsp",
+      "label": "Stage 1 — Telephony DSP",
+      "type": "stage",
+      "file_type": "concept",
+      "properties": {
+        "components": "8→16 kHz FIR Resample, Silero VAD (220 ms hangover), Ring Buffer (200 ms / 60 ms)",
+        "latency": "36 ms (DSP + Silero VAD frame check)"
+      },
+      "source_file": "docs/system_diagrams.md"
+    },
+    {
+      "id": "pipeline:stage_2_stt",
+      "label": "Stage 2 — Prisma v2.5 STT",
+      "type": "stage",
+      "file_type": "concept",
+      "properties": {
+        "components": "WebSocket Stream #1 (x-format=transcribe, lang_code=hi-IN), Inverse Text Normalization (Digits → ASCII)",
+        "latency": "168 ms final segment"
+      },
+      "source_file": "docs/system_diagrams.md"
+    },
+    {
+      "id": "pipeline:stage_3_statutory",
+      "label": "Stage 3 — Statutory Engine",
+      "type": "stage",
+      "file_type": "concept",
+      "properties": {
+        "components": "Evon v3.3 Intake Parser, Pure Python compute_statutory_entitlement (T+1 / T+5 / ₹100/day)",
+        "latency": "302 ms Evon TTFT"
+      },
+      "source_file": "docs/system_diagrams.md"
+    },
+    {
+      "id": "pipeline:stage_4_ivr_orchestrator",
+      "label": "Stage 4 — Outbound IVR Orchestrator",
+      "type": "stage",
+      "file_type": "concept",
+      "properties": {
+        "components": "Acoustic State Classifier (RINGING / IVR_MENU / HOLD_MUSIC / HUMAN_AGENT), DTMF Generator (2 → 4 → 629188340112#), WebSocket Stream #2 (en-IN corporate transcript), Evon v3.3 Brush-Off & Docket Parser, Timbre SSE en-IN Disclosure + Citation"
+      },
+      "source_file": "docs/system_diagrams.md"
+    },
+    {
+      "id": "pipeline:stage_5_verbatim_gate",
+      "label": "Stage 5 — Verbatim Gate",
+      "type": "stage",
+      "file_type": "concept",
+      "properties": {
+        "components": "Substring Verification (Docket ID in support_transcript), SafetyGuardBlock (Consent + Disclosure + Secret Redaction)"
+      },
+      "source_file": "docs/system_diagrams.md"
+    },
+    {
+      "id": "pipeline:stage_6_callback",
+      "label": "Stage 6 — Citizen Callback",
+      "type": "stage",
+      "file_type": "concept",
+      "properties": {
+        "components": "Timbre SSE hi-IN ~8 s warm summary"
+      },
+      "source_file": "docs/system_diagrams.md"
+    },
+    {
+      "id": "pipeline:stage_7_dossier",
+      "label": "Stage 7 — RB-IOS 2026 Dossier",
+      "type": "stage",
+      "file_type": "concept",
+      "properties": {
+        "components": "RB-IOS 2026 CMS PDF / JSON (cms.rbi.org.in · 14448)"
+      },
+      "source_file": "docs/system_diagrams.md"
+    },
+    {
+      "id": "fsm:acoustic_state_machine",
+      "label": "Acoustic State Machine (Stage 4)",
+      "type": "state_machine",
+      "file_type": "concept",
+      "properties": {
+        "states": "RINGING → IVR_MENU → HOLD_MUSIC → HUMAN_AGENT → RINGING (re-dial)",
+        "substates": "RINGING{Waiting→Answered}, IVR_MENU{Listening→Classified}, HOLD_MUSIC{Playing→Looping}, HUMAN_AGENT{Speaking→Negotiating}",
+        "dtmf": "2 → 4 → 629188340112# injected in IVR_MENU",
+        "vad": "Active in RINGING/IVR_MENU/HUMAN_AGENT; SUPPRESSED in HOLD_MUSIC"
+      },
+      "source_file": "docs/system_diagrams.md"
+    },
+    {
+      "id": "safety:gates_flow",
+      "label": "Safety Gates Flow (Mandatory)",
+      "type": "flow",
+      "file_type": "concept",
+      "properties": {
+        "gates": "citizen_consent_verified → ai_rep_disclosure_played → FORBIDDEN_SECRET_RE → Docket substring check",
+        "blocks": "Consent Missing, Disclosure Missing, Secret Redacted, Docket Fabrication",
+        "allow": "CaseRecord.verbatim_verified = true → Proceed to Negotiation (Timbre SSE en-IN)"
+      },
+      "source_file": "docs/system_diagrams.md"
+    },
+    {
+      "id": "statutory:computation_flow",
+      "label": "Statutory Computation Flow (Pure Python)",
+      "type": "flow",
+      "file_type": "concept",
+      "properties": {
+        "inputs": "Transaction Date T + Amount + Dispute Type + Today's Date",
+        "branch": "Failed UPI P2P → T+1 | P2M/ATM/PoS → T+5",
+        "calc": "days_overdue = max(0, today − TAT); penalty = days_overdue × ₹100",
+        "output": "total_claim = amount + penalty"
+      },
+      "source_file": "docs/system_diagrams.md"
+    },
+    {
+      "id": "duo:ownership_matrix",
+      "label": "Duo Ownership Matrix",
+      "type": "concept",
+      "file_type": "concept",
+      "properties": {
+        "engineer_a": "8→16 kHz FIR Resampler, Silero VAD + Ring Buffer, DTMF Generator + Goertzel Decoder, Hold-Music Suppressor, Prisma Dual WSS Streams, Timbre SSE + Role-Switch Cache, vLLM/SGLang Server & Benchmarks, 30-clip WER Benchmark",
+        "engineer_b": "compute_statutory_entitlement (Pure Python), RB-IOS 2026 PDF Generator, Evon Prompts + BrushOffType Taxonomy, Pydantic v2 Validators, Telemetry HUD (4 Quadrants), 60s Demo Video (16:9 + 9:16)",
+        "shared": "schemas.py (CitizenIntake, AgentNegotiationExtraction, HaqVaaniCaseRecord) — both sign-off"
+      },
+      "source_file": "docs/system_diagrams.md"
+    },
+    {
+      "id": "demo:storyboard",
+      "label": "60-Second Demo Day Drop Storyboard",
+      "type": "storyboard",
+      "file_type": "document",
+      "properties": {
+        "format": "16:9 master (1920×1080) + 9:16 vertical cut (1080×1920)",
+        "hud": "Persistent 4-quadrant dark Telemetry HUD",
+        "audio": "Citizen speaks live into mic; bank IVR simulated (pre-recorded synthetic audio); Prisma WSS → Evon v3.3 → Timbre SSE",
+        "captions": "Burned captions in Hindi/Hinglish + English",
+        "badges": "SIMULATED DEMO, SYNTHETIC DATA, NO AUTONOMOUS DIALING, BUILT ON GNANI PRISMA v2.5 · EVON v3.3 · TIMBRE, #GnaniAI #GreatIndianAIInternshipChallenge",
+        "segments": "0–4s Cold Open · 4–12s Prisma vs Whisper + Statutory Card · 12–23s IVR Cracker · 23–36s Brush-Off · 36–47s Docket SR-DB-884120 · 47–55s Role Switch en-IN→hi-IN · 55–60s RB-IOS 2026 PDF + CTA"
+      },
+      "source_file": "docs/demo_storyboard.md"
+    },
+    {
+      "id": "demo:segment_0_4",
+      "label": "Segment 0–4 s — Cold Open",
+      "type": "segment",
+      "file_type": "concept",
+      "properties": {
+        "visual": "Citizen presses mic in street noise; SIMULATED DEMO badge visible",
+        "audio": "Raw traffic horn + Hinglish: 'Bhaiya 18 Oct ko 3,200 UPI kiya tha, paisa kat gaya par pahuncha nahi—UTR 629188340112!'",
+        "telemetry": "8 kHz NOISY INTAKE · SYNTHETIC DEMO"
+      },
+      "source_file": "docs/demo_storyboard.md"
+    },
+    {
+      "id": "demo:segment_4_12",
+      "label": "Segment 4–12 s — Prisma vs Whisper",
+      "type": "segment",
+      "file_type": "concept",
+      "properties": {
+        "visual": "Whisper mangling UTR/amount vs Prisma v2.5 nailing every digit; Statutory Card lights up",
+        "audio": "Intake finishes; Rights Checker locks claim",
+        "telemetry": "PRISMA @ 168ms · UTR 629188340112 ✓ · RBI TAT T+1 BREACHED: +₹600 PENALTY OWED"
+      },
+      "source_file": "docs/demo_storyboard.md"
+    },
+    {
+      "id": "demo:segment_12_23",
+      "label": "Segment 12–23 s — Complaint Builder",
+      "type": "segment",
+      "file_type": "concept",
+      "properties": {
+        "visual": "Bank complaint draft, WhatsApp draft, evidence checklist appear",
+        "audio": "Voiceover: 'HaqVaani builds your complaint draft in Hindi and English.'",
+        "telemetry": "COMPLAINT DRAFT GENERATED · RBI/2019-20/67 CITED"
+      },
+      "source_file": "docs/demo_storyboard.md"
+    },
+    {
+      "id": "demo:segment_23_36",
+      "label": "Segment 23–36 s — Assisted Call (Simulated)",
+      "type": "segment",
+      "file_type": "concept",
+      "properties": {
+        "visual": "User calls bank; script displays RBI/2019-20/67 script",
+        "audio": "Simulated bank rep: 'Wait 7–10 working days.' HaqVaani script (en-IN): 'Authorised AI assistant for Ramesh. Under RBI/2019-20/67, T+1 passed Oct 19; ₹600 penalty accrued. Please log UDIR & share SR ID.'",
+        "telemetry": "EVON v3.3 @ 302ms · BRUSH-OFF DETECTED · TIMBRE en-IN @ 184ms · AI DISCLOSURE PLAYED"
+      },
+      "source_file": "docs/demo_storyboard.md"
+    },
+    {
+      "id": "demo:segment_36_47",
+      "label": "Segment 36–47 s — Docket Verified",
+      "type": "segment",
+      "file_type": "concept",
+      "properties": {
+        "visual": "Simulated rep reads SR-DB-884120; Pydantic substring check turns green",
+        "audio": "Rep: 'UDIR logged under SR-DB-884120 with ₹600 TAT claim.'",
+        "telemetry": "DOCKET: SR-DB-884120 ✓ SUBSTRING VERIFIED · NO SECRETS LEAKED"
+      },
+      "source_file": "docs/demo_storyboard.md"
+    },
+    {
+      "id": "demo:segment_47_55",
+      "label": "Segment 47–55 s — Role Switch en-IN → hi-IN",
+      "type": "segment",
+      "file_type": "concept",
+      "properties": {
+        "visual": "Language switches en-IN → hi-IN; citizen receives warm Hindi voice summary",
+        "audio": "Timbre (hi-IN): 'Ramesh bhaiya, ₹3,200 aur ₹600 RBI jurmana darj ho gaya—docket SR-DB-884120!'",
+        "telemetry": "ROLE SWITCH: en-IN → hi-IN · ZERO SECRETS LEAKED"
+      },
+      "source_file": "docs/demo_storyboard.md"
+    },
+    {
+      "id": "demo:segment_55_60",
+      "label": "Segment 55–60 s — RB-IOS Dossier + CTA",
+      "type": "segment",
+      "file_type": "concept",
+      "properties": {
+        "visual": "RB-IOS 2026 complaint draft slides in alongside Gnani Artha badges; NO AUTONOMOUS DIALING badge visible",
+        "audio": "Clean chime + 1-line CTA",
+        "telemetry": "Built on Gnani Prisma v2.5 · Evon v3.3 · Timbre · #GnaniAI #GreatIndianAIInternshipChallenge"
+      },
+      "source_file": "docs/demo_storyboard.md"
+    },
+    {
+      "id": "synthetic:utr_629188340112",
+      "label": "Synthetic UTR 629188340112",
+      "type": "entity",
+      "file_type": "concept",
+      "properties": {
+        "value": "629188340112",
+        "type": "UTR",
+        "usage": "Demo/test placeholder — never substitute real values"
+      },
+      "source_file": "docs/legal_matrix.md"
+    },
+    {
+      "id": "synthetic:docket_sr-db-884120",
+      "label": "Synthetic Docket SR-DB-884120",
+      "type": "entity",
+      "file_type": "concept",
+      "properties": {
+        "value": "SR-DB-884120",
+        "type": "Docket / SR ID",
+        "usage": "Demo/test placeholder — never substitute real values"
+      },
+      "source_file": "docs/legal_matrix.md"
+    },
+    {
+      "id": "synthetic:phone_90000",
+      "label": "Synthetic Phone +91-90000-00000",
+      "type": "entity",
+      "file_type": "concept",
+      "properties": {
+        "value": "+91-90000-00000",
+        "type": "Phone",
+        "usage": "Demo/test placeholder — never substitute real values"
+      },
+      "source_file": "docs/legal_matrix.md"
+    },
+    {
+      "id": "synthetic:citizen_ramesh",
+      "label": "Citizen Ramesh (example)",
+      "type": "entity",
+      "file_type": "concept",
+      "properties": {
+        "name": "Ramesh",
+        "type": "Citizen name",
+        "usage": "Example citizen name — synthetic only"
+      },
+      "source_file": "docs/legal_matrix.md"
+    },
+    {
+      "id": "synthetic:demobank",
+      "label": "DemoBank Support (synthetic)",
+      "type": "entity",
+      "file_type": "concept",
+      "properties": {
+        "name": "DemoBank Support",
+        "type": "Bank",
+        "usage": "Synthetic bank — simulated IVR only, no real telecom network"
+      },
+      "source_file": "docs/legal_matrix.md"
+    },
+    {
+      "id": "ui:design_system",
+      "label": "UI/UX Design System — Bharat Glass",
+      "type": "design_system",
+      "file_type": "concept",
+      "properties": {
+        "philosophy": "Voice-First, Human-in-Control, Zero-Literacy Friendly, Consent-First, Modern but Practical, Compliance-Visible, Responsive, Free Stack",
+        "styles": "Glassmorphism (containers) + Claymorphism (primary actions) + Neumorphism (accents only)",
+        "wcag": "WCAG 2.2 AA",
+        "research": "Apple Liquid Glass (iOS 26), Microsoft Fluent Acrylic, uxdt.nic.in, Microsoft Research 'UIs for Low-Literate Users', TRAI 2026, DPDP Act 2023"
+      },
+      "source_file": "docs/ui_ux_design_system.md"
+    },
+    {
+      "id": "ui:color_palette",
+      "label": "Color Palette",
+      "type": "design_tokens",
+      "file_type": "concept",
+      "properties": {
+        "brand_primary": "#00f2ff (Cyan — Prisma / live data)",
+        "brand_secondary": "#7c3aed (Purple — Evon / script display)",
+        "brand_success": "#00d97a (Green — verified, safe)",
+        "brand_warning": "#ffb020 (Amber — penalty, pending)",
+        "brand_error": "#ff4d4d (Red — blocked, brush-off)",
+        "brand_hindi": "#ff85a2 (Pink — Hindi text highlight)",
+        "bg_deep": "#050508",
+        "bg_panel": "#0f1118",
+        "clay_surface": "#161925"
+      },
+      "source_file": "docs/ui_ux_design_system.md"
+    },
+    {
+      "id": "ui:components",
+      "label": "Component Library",
+      "type": "component",
+      "file_type": "concept",
+      "properties": {
+        "glass_card": "Glass Card (Container) — backdrop-filter blur, translucent background",
+        "clay_btn": "Clay Button (Primary Action) — soft inflated rounded buttons with translateY press feedback",
+        "compliance_badge": "Compliance Badge — SIMULATED DEMO / NO AUTONOMOUS DIALING / AI DISCLOSURE PLAYED / ZERO SECRETS LEAKED / SYNTHETIC DATA",
+        "consent_screen": "Consent Screen — Hindi + English text, checkbox 'मैं सहमत हूँ / I consent', timestamp capture, clay button (min 44px tap target)",
+        "statutory_meter": "Statutory Meter — gradient fill (red→amber→green), label '₹100/दिन जुर्माना'",
+        "assisted_call_script": "Assisted-Call Script Display — en-IN script (top), hi-IN translation (bottom), docket capture field with verbatim verification"
+      },
+      "source_file": "docs/ui_ux_design_system.md"
+    },
+    {
+      "id": "ui:accessibility",
+      "label": "Accessibility Checklist (WCAG 2.2 AA)",
+      "type": "standard",
+      "file_type": "concept",
+      "properties": {
+        "items": "Contrast ratio ≥ 4.5:1, Tap targets ≥ 44×44px, aria-label on icon buttons, lang=hi on Hindi sections, Reduced-motion support, Reduced-transparency fallback, Focus-visible indicators, Screen reader announcements, No color-only information, Hindi/Devanagari font fallback"
+      },
+      "source_file": "docs/ui_ux_design_system.md"
+    },
+    {
+      "id": "ui:citizen_flow",
+      "label": "Citizen Flow (Voice-First)",
+      "type": "flow",
+      "file_type": "concept",
+      "properties": {
+        "steps": "Consent screen → Idle (mic button 'बोलें') → Listening (pulses cyan) → Processing ('गणना कर रहा है…') → Rights Checker result → Complaint Builder → Assisted Call → Post-call (Timbre hi-IN summary + dossier saved)"
+      },
+      "source_file": "docs/ui_ux_design_system.md"
+    },
+    {
+      "id": "ui:hud_flow",
+      "label": "HUD Flow (Engineer/Judge)",
+      "type": "flow",
+      "file_type": "concept",
+      "properties": {
+        "quadrants": "STT · Statutory · Assisted Call · Compliance",
+        "features": "Real-time animated values, compliance badges always visible, demo playback controls (Run / Reset)"
+      },
+      "source_file": "docs/ui_ux_design_system.md"
+    },
+    {
+      "id": "frontend:glass_ui.html",
+      "label": "frontend/glass_ui.html — Production UI",
+      "type": "file",
+      "file_type": "code",
+      "properties": {
+        "purpose": "Production-ready responsive UI (Glass + Clay + Voice-First + Compliance)",
+        "lang": "hi-IN",
+        "features": "Consent modal, mic button, statutory meter (₹3,200 + ₹600 = ₹3,800), assisted-call script card, docket capture field (SR-DB-884120), quick actions (Bank Call, Complaint Draft, RB-IOS 2026), compliance badges"
+      },
+      "source_file": "docs/ui_ux_design_system.md"
+    },
+    {
+      "id": "frontend:hud.html",
+      "label": "frontend/hud.html — Telemetry HUD",
+      "type": "file",
+      "file_type": "code",
+      "properties": {
+        "purpose": "Telemetry HUD with compliance indicators",
+        "features": "4-quadrant grid (STT Prisma vs Whisper, RBI Statutory Engine, Assisted Call script + docket, Latency + Compliance), 4-mode pipeline, run/reset demo controls, live latency bars, compliance cards (autonomous calls=0, secrets leaked=0, consent ✓, disclosure ✓)"
+      },
+      "source_file": "docs/ui_ux_design_system.md"
+    },
+    {
+      "id": "diagrams_viewer:html",
+      "label": "docs/diagrams_viewer.html — System Diagrams Viewer",
+      "type": "file",
+      "file_type": "code",
+      "properties": {
+        "purpose": "Renders all Mermaid diagrams in one page",
+        "diagrams": "7-Stage Pipeline, Acoustic State Machine, Data Flow, Safety Gates, Statutory Computation, Duo Ownership, Demo Storyboard, Complete System Overview",
+        "library": "mermaid@10.9.1 from unpkg"
+      },
+      "source_file": "docs/system_diagrams.md"
+    },
+    {
+      "id": "eval:metrics",
+      "label": "Evaluation Metrics",
+      "type": "concept",
+      "file_type": "document",
+      "properties": {
+        "categories": "WER, Latency, Safety, Compliance, Demo Quality, Award Alignment",
+        "method": "Genuinely measured on synthetic data (30-clip benchmark), displayed on Telemetry HUD"
+      },
+      "source_file": "docs/evaluation.md"
+    },
+    {
+      "id": "eval:wer",
+      "label": "WER (Word Error Rate)",
+      "type": "metric",
+      "file_type": "concept",
+      "properties": {
+        "prisma_utr_wer": "< 5% on 12-digit UTRs (30 synthetic noisy clips 8 kHz street ambience)",
+        "whisper_utr_wer": "Baseline (expected higher) — same 30 clips, split-screen on HUD",
+        "prisma_hindi_numerals_wer": "< 5% on Hindi numerals (lakhs/crores)",
+        "languages": "hi-IN + en-IN (code-mixed Hinglish)"
+      },
+      "source_file": "docs/evaluation.md"
+    },
+    {
+      "id": "eval:latency",
+      "label": "Latency Metrics",
+      "type": "metric",
+      "file_type": "concept",
+      "properties": {
+        "stt_partials": "≤ 200 ms per utterance",
+        "stt_final_segment": "≤ 168 ms per utterance",
+        "evon_json_ttft": "≤ 302 ms (257 tok/s, short schema <45 tok)",
+        "timbre_first_audio": "≤ 184 ms SSE TTFA",
+        "vad_hangover": "200 ms (tracked separately; 890 ms wall-clock)",
+        "post_call_summary": "~8 s (offline-ish, not in real-time loop)",
+        "script_display": "< 100 ms after transcript available",
+        "reporting": "p50 and p95 across 30-clip benchmark on Latency Bar"
+      },
+      "source_file": "docs/evaluation.md"
+    },
+    {
+      "id": "eval:safety",
+      "label": "Safety Metrics",
+      "type": "metric",
+      "file_type": "concept",
+      "properties": {
+        "secrets_leaked": "0 — FORBIDDEN_SECRET_RE audit (OTP/PIN/MPIN/CVV/password never spoken or shown)",
+        "ai_actions_without_consent": "0 — SafetyGuardBlock audit log",
+        "ai_actions_without_disclosure": "0 — ai_disclosure_played audit log",
+        "fabricated_docket_ids": "0 — Verbatim substring gate",
+        "autonomous_outbound_calls": "0 — Call log audit",
+        "real_pii_in_repo_demo": "0 — Synthetic data only; grep audit"
+      },
+      "source_file": "docs/evaluation.md"
+    },
+    {
+      "id": "eval:compliance",
+      "label": "Compliance Metrics (TRAI / DPDP / RBI)",
+      "type": "metric",
+      "file_type": "concept",
+      "properties": {
+        "ai_disclosure_played": "100% — ai_disclosure_played flag in every assisted-call session",
+        "consent_timestamped": "100% — citizen_consent_verified with timestamp in ConsentRecord",
+        "demo_labeled_synthetic": "100% — SIMULATED DEMO / SYNTHETIC DATA / NO AUTONOMOUS DIALING badges visible",
+        "rbi_circular_cited": "100% — RBI/2019-20/67, RB-IOS 2026, DBR circular hardcoded in statutory.py",
+        "docket_verified_verbatim": "100% — Substring check passes before case marked 'registered'"
+      },
+      "source_file": "docs/evaluation.md"
+    },
+    {
+      "id": "eval:demo_quality",
+      "label": "Demo Quality Metrics",
+      "type": "metric",
+      "file_type": "concept",
+      "properties": {
+        "demo_length": "60 s (uncut)",
+        "formats": "16:9 master + 9:16 cut",
+        "hud_quadrants": "4 (STT, Statutory, Assisted Call, Compliance)",
+        "legal_cues": "SIMULATED DEMO, SYNTHETIC DATA, NO AUTONOMOUS DIALING, ZERO SECRETS LEAKED, AI DISCLOSURE PLAYED",
+        "docket_verified": "SR-DB-884120 ✓ SUBSTRING VERIFIED visible",
+        "penalty_counter": "₹600 RBI penalty on Statutory Card",
+        "real_api_execution": "100% (Prisma → Evon → Timbre over real PCM)"
+      },
+      "source_file": "docs/evaluation.md"
+    },
+    {
+      "id": "eval:award_alignment",
+      "label": "Award Alignment",
+      "type": "concept",
+      "file_type": "concept",
+      "properties": {
+        "jugaad_genius": "Human-controlled advocate: voice intake + deterministic RBI math + assisted-call script + simulated IVR",
+        "real_deal": "Helps citizens recover stuck working capital + ₹100/day statutory compensation",
+        "noise_canceller": "8 kHz street intake + Prisma vs Whisper WER split-screen",
+        "mixed_vibes": "Hinglish intake + hi-IN↔en-IN script switch",
+        "demo_day_drop": "60s simulated video per docs/demo_storyboard.md",
+        "crowd_favourite": "Universal IVR/UPI pain point; LinkedIn & X votes",
+        "small_town_big_build": "Tier-2/3 build; clean duo split + individual write-ups"
+      },
+      "source_file": "docs/evaluation.md"
+    },
+    {
+      "id": "latency:budget",
+      "label": "Latency Budget",
+      "type": "budget",
+      "file_type": "document",
+      "properties": {
+        "stage_1_dsp_vad": "36 ms — Local vectorized CPU (<1 ms/frame)",
+        "stage_2_prisma_stt": "168 ms — Published sub-200 ms streaming STT",
+        "stage_3_evon_json": "302 ms — Published 302 ms TTFT (257 tok/s)",
+        "stage_4_timbre_tts": "184 ms — Published <100–200 ms SSE TTFA",
+        "post_transcript_total": "690 ms — 210 ms headroom under 900 ms",
+        "ceiling_rule": "If any stage exceeds budget for 3+ consecutive benchmark clips, optimize before adding features; sub-900 ms ceiling is hard requirement"
+      },
+      "source_file": "docs/latency_budget.md"
+    },
+    {
+      "id": "latency:optimization",
+      "label": "Latency Optimization Playbook",
+      "type": "concept",
+      "file_type": "concept",
+      "properties": {
+        "chunk_cadence": "Stream 160–200 ms audio chunks to Prisma → keeps STT at 168 ms",
+        "vllm_prefix_cache": "Cache Evon system prompt; short JSON schema (<45 tok) → holds Evon at 302 ms TTFT",
+        "tts_pre_warm": "Pre-warm static statutory clause prefixes → holds Timbre at 184 ms TTFA",
+        "ring_buffer": "Pre-allocated NumPy buffer (no alloc per frame) → keeps DSP+VAD at 36 ms",
+        "role_switch_cache": "Cache Timbre en-IN↔hi-IN voice contexts → fast summary switch"
+      },
+      "source_file": "docs/latency_budget.md"
+    },
+    {
+      "id": "interview:qa",
+      "label": "Gnani Interview Q&A with Model Answers",
+      "type": "document",
+      "file_type": "document",
+      "properties": {
+        "purpose": "High-probability Gnani interview questions for Duo Defense (Day 16) and Gnani reviewers",
+        "emphasis": "Human-controlled advocate design, TRAI/DPDP compliance, no autonomous dialing",
+        "questions": "Q1 autonomous calling · Q2 impersonation · Q3 RBI rules hallucination · Q4 OTP/PIN handling · Q5 Gnani stack vs OpenAI Realtime · Q6 synthetic data demo · Q7 LLM penalty computation · Q8 consent handling · Q9 Demo Day metrics · Q10 duo ownership · Q11 RBI CMS filing · Q12 refund guarantee"
+      },
+      "source_file": "docs/interview_qa.md"
+    },
+    {
+      "id": "requirements:txt",
+      "label": "requirements.txt",
+      "type": "file",
+      "file_type": "code",
+      "properties": {
+        "dependencies": "gnani-vachana>=0.1.0, fastapi>=0.115.0, uvicorn>=0.30.0, python-multipart>=0.0.9, numpy>=1.26.0, silero-vad>=0.4.1, pydantic>=2.9.0, reportlab>=4.2.0, pytest>=8.0.0, openai-whisper>=20231117",
+        "constraint": "Free / open source only; Whisper is local STT benchmark baseline, NOT used in production path"
+      },
+      "source_file": "requirements.txt"
+    },
+    {
+      "id": "shared_context:file_pointers",
+      "label": "File Pointers (read these)",
+      "type": "reference",
+      "file_type": "document",
+      "properties": {
+        "AGENTS.md": "Master agent instructions",
+        "RULES.md": "Non-negotiable legal/safety/challenge constraints (incl. TRAI/DPDP)",
+        "ARCHITECTURE.md": "4-mode pipeline, module ownership, assisted-call state machine",
+        "ROADMAP.md": "16-day ship plan",
+        "TODO.md": "Prioritized atomic tasks",
+        "CHANGELOG.md": "Change log",
+        "CONTRIBUTING.md": "Human duo + AI agent guidelines",
+        "docs/legal_matrix.md": "Exact statutory numbers, circulars, TRAI/DPDP compliance",
+        "docs/latency_budget.md": "690 ms post-VAD budget",
+        "docs/demo_storyboard.md": "Simulated 60-second demo storyboard",
+        "docs/interview_qa.md": "Gnani interview Q&A with model answers",
+        "docs/evaluation.md": "Success metrics",
+        "docs/ui_ux_design_system.md": "Design system (glass + clay + accessibility)",
+        "docs/system_diagrams.md": "Mermaid diagrams of all connections"
+      },
+      "source_file": "agent_prompts/SHARED_CONTEXT.md"
+    }
+  ],
+  "edges": [
+    {
+      "source": "project/haqvaani",
+      "target": "doc/AGENTS.md",
+      "relation": "documents",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md"
+    },
+    {
+      "source": "project/haqvaani",
+      "target": "doc/ARCHITECTURE.md",
+      "relation": "documents",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "project/haqvaani",
+      "target": "doc/RULES.md",
+      "relation": "documents",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "project/haqvaani",
+      "target": "doc/ROADMAP.md",
+      "relation": "documents",
+      "confidence_score": 1.0,
+      "source_file": "ROADMAP.md"
+    },
+    {
+      "source": "project/haqvaani",
+      "target": "doc/TODO.md",
+      "relation": "documents",
+      "confidence_score": 1.0,
+      "source_file": "TODO.md"
+    },
+    {
+      "source": "project/haqvaani",
+      "target": "challenge/gnani",
+      "relation": "built_for",
+      "confidence_score": 1.0,
+      "source_file": "README.md"
+    },
+    {
+      "source": "doc/AGENTS.md",
+      "target": "doc/RULES.md",
+      "relation": "references",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md"
+    },
+    {
+      "source": "doc/AGENTS.md",
+      "target": "doc/ARCHITECTURE.md",
+      "relation": "references",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md"
+    },
+    {
+      "source": "doc/AGENTS.md",
+      "target": "doc/ROADMAP.md",
+      "relation": "references",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md"
+    },
+    {
+      "source": "doc/AGENTS.md",
+      "target": "doc/TODO.md",
+      "relation": "references",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md"
+    },
+    {
+      "source": "doc/AGENTS.md",
+      "target": "module/schemas.py",
+      "relation": "treaty_border",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "concept/mode1",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "concept/mode2",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "concept/mode3",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "concept/mode4",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "module/schemas.py",
+      "relation": "owns",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "module/statutory.py",
+      "relation": "owns",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "module/safety.py",
+      "relation": "owns",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "module/dsp_audio.py",
+      "relation": "owns",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "module/stt_client.py",
+      "relation": "owns",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "module/tts_client.py",
+      "relation": "owns",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "module/evon_client.py",
+      "relation": "owns",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "module/complaint_builder.py",
+      "relation": "owns",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "module/rb_ios.py",
+      "relation": "owns",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "module/orchestrator.py",
+      "relation": "owns",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "concept/citizen_intake",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "concept/statutory_entitlement",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "concept/complaint_draft",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "concept/call_transcript",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "concept/case_record",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "concept/consent_record",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "concept/brush_off_type",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "concept/ivr_action",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "state/idle",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "state/listening",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "state/script_display",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "state/docket_capture",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/ARCHITECTURE.md",
+      "target": "state/post_call",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "doc/RULES.md",
+      "target": "concept/rbi_2019_20_67",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "doc/RULES.md",
+      "target": "concept/rb_ios_2026",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "doc/RULES.md",
+      "target": "concept/dpdp",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "doc/RULES.md",
+      "target": "concept/trai_2026",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "doc/RULES.md",
+      "target": "concept/forbidden_secret_re",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "doc/RULES.md",
+      "target": "concept/verbatim_substring",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "doc/RULES.md",
+      "target": "concept/no_autonomous_dialing",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "doc/RULES.md",
+      "target": "concept/consent",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "doc/RULES.md",
+      "target": "concept/safety",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "doc/RULES.md",
+      "target": "module/statutory.py",
+      "relation": "constrains",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "doc/RULES.md",
+      "target": "module/safety.py",
+      "relation": "constrains",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "doc/README.md",
+      "target": "concept/prisma",
+      "relation": "uses",
+      "confidence_score": 1.0,
+      "source_file": "README.md"
+    },
+    {
+      "source": "doc/README.md",
+      "target": "concept/evon",
+      "relation": "uses",
+      "confidence_score": 1.0,
+      "source_file": "README.md"
+    },
+    {
+      "source": "doc/README.md",
+      "target": "concept/timbre",
+      "relation": "uses",
+      "confidence_score": 1.0,
+      "source_file": "README.md"
+    },
+    {
+      "source": "doc/README.md",
+      "target": "concept/statutory",
+      "relation": "uses",
+      "confidence_score": 1.0,
+      "source_file": "README.md"
+    },
+    {
+      "source": "doc/README.md",
+      "target": "concept/no_autonomous_dialing",
+      "relation": "enforces",
+      "confidence_score": 1.0,
+      "source_file": "README.md"
+    },
+    {
+      "source": "concept/mode1",
+      "target": "concept/prisma",
+      "relation": "uses",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "concept/mode1",
+      "target": "module/stt_client.py",
+      "relation": "uses",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "concept/mode1",
+      "target": "module/dsp_audio.py",
+      "relation": "uses",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "concept/mode1",
+      "target": "concept/citizen_intake",
+      "relation": "produces",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "concept/mode2",
+      "target": "module/statutory.py",
+      "relation": "uses",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "concept/mode2",
+      "target": "concept/statutory_entitlement",
+      "relation": "produces",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "concept/mode2",
+      "target": "concept/rbi_2019_20_67",
+      "relation": "uses",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "concept/mode3",
+      "target": "module/complaint_builder.py",
+      "relation": "uses",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "concept/mode3",
+      "target": "concept/complaint_draft",
+      "relation": "produces",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "concept/mode3",
+      "target": "module/rb_ios.py",
+      "relation": "uses",
+      "confidence_score": 0.9,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "concept/mode4",
+      "target": "concept/timbre",
+      "relation": "uses",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "concept/mode4",
+      "target": "module/tts_client.py",
+      "relation": "uses",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "concept/mode4",
+      "target": "module/stt_client.py",
+      "relation": "uses",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "concept/mode4",
+      "target": "concept/call_transcript",
+      "relation": "produces",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "concept/mode4",
+      "target": "concept/verbatim_substring",
+      "relation": "uses",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "concept/mode4",
+      "target": "concept/case_record",
+      "relation": "produces",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "module/schemas.py",
+      "target": "concept/citizen_intake",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "PROJECT_STRUCTURE.md"
+    },
+    {
+      "source": "module/schemas.py",
+      "target": "concept/statutory_entitlement",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "PROJECT_STRUCTURE.md"
+    },
+    {
+      "source": "module/schemas.py",
+      "target": "concept/case_record",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "PROJECT_STRUCTURE.md"
+    },
+    {
+      "source": "module/schemas.py",
+      "target": "concept/consent_record",
+      "relation": "defines",
+      "confidence_score": 1.0,
+      "source_file": "PROJECT_STRUCTURE.md"
+    },
+    {
+      "source": "module/statutory.py",
+      "target": "concept/statutory",
+      "relation": "implements",
+      "confidence_score": 1.0,
+      "source_file": "PROJECT_STRUCTURE.md"
+    },
+    {
+      "source": "module/statutory.py",
+      "target": "concept/rbi_2019_20_67",
+      "relation": "implements",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "module/statutory.py",
+      "target": "concept/rb_ios_2026",
+      "relation": "implements",
+      "confidence_score": 0.9,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "module/safety.py",
+      "target": "concept/safety",
+      "relation": "implements",
+      "confidence_score": 1.0,
+      "source_file": "PROJECT_STRUCTURE.md"
+    },
+    {
+      "source": "module/safety.py",
+      "target": "concept/forbidden_secret_re",
+      "relation": "implements",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "module/safety.py",
+      "target": "concept/consent",
+      "relation": "implements",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "module/safety.py",
+      "target": "concept/verbatim_substring",
+      "relation": "implements",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "module/evon_client.py",
+      "target": "concept/evon",
+      "relation": "uses",
+      "confidence_score": 1.0,
+      "source_file": "PROJECT_STRUCTURE.md"
+    },
+    {
+      "source": "module/evon_client.py",
+      "target": "concept/brush_off_type",
+      "relation": "uses",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "module/complaint_builder.py",
+      "target": "concept/complaint_draft",
+      "relation": "produces",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "module/orchestrator.py",
+      "target": "concept/mode1",
+      "relation": "orchestrates",
+      "confidence_score": 1.0,
+      "source_file": "PROJECT_STRUCTURE.md"
+    },
+    {
+      "source": "module/orchestrator.py",
+      "target": "concept/mode2",
+      "relation": "orchestrates",
+      "confidence_score": 1.0,
+      "source_file": "PROJECT_STRUCTURE.md"
+    },
+    {
+      "source": "module/orchestrator.py",
+      "target": "concept/mode3",
+      "relation": "orchestrates",
+      "confidence_score": 1.0,
+      "source_file": "PROJECT_STRUCTURE.md"
+    },
+    {
+      "source": "module/orchestrator.py",
+      "target": "concept/mode4",
+      "relation": "orchestrates",
+      "confidence_score": 1.0,
+      "source_file": "PROJECT_STRUCTURE.md"
+    },
+    {
+      "source": "engineer/a",
+      "target": "module/stt_client.py",
+      "relation": "owns",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "engineer/a",
+      "target": "module/tts_client.py",
+      "relation": "owns",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "engineer/a",
+      "target": "module/dsp_audio.py",
+      "relation": "owns",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "engineer/a",
+      "target": "eval/benchmark.py",
+      "relation": "owns",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "engineer/b",
+      "target": "module/statutory.py",
+      "relation": "owns",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "engineer/b",
+      "target": "module/complaint_builder.py",
+      "relation": "owns",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "engineer/b",
+      "target": "module/rb_ios.py",
+      "relation": "owns",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "engineer/b",
+      "target": "module/evon_client.py",
+      "relation": "owns",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "engineer/b",
+      "target": "frontend/hud.html",
+      "relation": "owns",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "engineer/b",
+      "target": "frontend/glass_ui.html",
+      "relation": "owns",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "engineer/a",
+      "target": "engineer/b",
+      "relation": "treaty_border",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md"
+    },
+    {
+      "source": "module/schemas.py",
+      "target": "engineer/a",
+      "relation": "shared_with",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md"
+    },
+    {
+      "source": "module/schemas.py",
+      "target": "engineer/b",
+      "relation": "shared_with",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md"
+    },
+    {
+      "source": "module/safety.py",
+      "target": "engineer/a",
+      "relation": "co_owned",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "module/safety.py",
+      "target": "engineer/b",
+      "relation": "co_owned",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "module/orchestrator.py",
+      "target": "engineer/a",
+      "relation": "co_owned",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "module/orchestrator.py",
+      "target": "engineer/b",
+      "relation": "co_owned",
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "source": "concept/consent",
+      "target": "concept/dpdp",
+      "relation": "complies_with",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "concept/no_autonomous_dialing",
+      "target": "concept/trai_2026",
+      "relation": "complies_with",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "concept/forbidden_secret_re",
+      "target": "concept/safety",
+      "relation": "part_of",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "concept/verbatim_substring",
+      "target": "concept/safety",
+      "relation": "part_of",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "concept/consent",
+      "target": "concept/safety",
+      "relation": "part_of",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "concept/statutory",
+      "target": "concept/rbi_2019_20_67",
+      "relation": "implements",
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "concept/statutory",
+      "target": "concept/rb_ios_2026",
+      "relation": "implements",
+      "confidence_score": 0.9,
+      "source_file": "RULES.md"
+    },
+    {
+      "source": "frontend/hud.html",
+      "target": "concept/prisma",
+      "relation": "displays",
+      "confidence_score": 0.9,
+      "source_file": "RECOMMENDATIONS.md"
+    },
+    {
+      "source": "frontend/hud.html",
+      "target": "concept/statutory",
+      "relation": "displays",
+      "confidence_score": 0.9,
+      "source_file": "RECOMMENDATIONS.md"
+    },
+    {
+      "source": "frontend/glass_ui.html",
+      "target": "concept/consent",
+      "relation": "displays",
+      "confidence_score": 0.9,
+      "source_file": "RECOMMENDATIONS.md"
+    },
+    {
+      "source": "frontend/glass_ui.html",
+      "target": "concept/mode4",
+      "relation": "displays",
+      "confidence_score": 0.9,
+      "source_file": "RECOMMENDATIONS.md"
+    },
+    {
+      "source": "eval/benchmark.py",
+      "target": "concept/prisma",
+      "relation": "benchmarks",
+      "confidence_score": 0.9,
+      "source_file": "ROADMAP.md"
+    },
+    {
+      "source": "eval/benchmark.py",
+      "target": "frontend/hud.html",
+      "relation": "feeds",
+      "confidence_score": 0.9,
+      "source_file": "ROADMAP.md"
+    },
+    {
+      "source": "doc/CHANGELOG.md",
+      "target": "doc/AGENTS.md",
+      "relation": "tracks",
+      "confidence_score": 1.0,
+      "source_file": "CHANGELOG.md"
+    },
+    {
+      "source": "doc/CONTRIBUTING.md",
+      "target": "doc/AGENTS.md",
+      "relation": "references",
+      "confidence_score": 1.0,
+      "source_file": "CONTRIBUTING.md"
+    },
+    {
+      "source": "doc/IMPLEMENTATION_PLAN.md",
+      "target": "doc/ROADMAP.md",
+      "relation": "maps_to",
+      "confidence_score": 1.0,
+      "source_file": "IMPLEMENTATION_PLAN.md"
+    },
+    {
+      "source": "doc/PROJECT_STRUCTURE.md",
+      "target": "module/schemas.py",
+      "relation": "documents",
+      "confidence_score": 1.0,
+      "source_file": "PROJECT_STRUCTURE.md"
+    },
+    {
+      "source": "doc/RECOMMENDATIONS.md",
+      "target": "frontend/hud.html",
+      "relation": "recommends",
+      "confidence_score": 1.0,
+      "source_file": "RECOMMENDATIONS.md"
+    },
+    {
+      "source": "doc/RECOMMENDATIONS.md",
+      "target": "frontend/glass_ui.html",
+      "relation": "recommends",
+      "confidence_score": 1.0,
+      "source_file": "RECOMMENDATIONS.md"
+    },
+    {
+      "source": "prompt/ENGINEER_A_PROMPT.md",
+      "target": "engineer/a",
+      "relation": "specifies",
+      "confidence_score": 1.0,
+      "source_file": "agent_prompts/ENGINEER_A_PROMPT.md"
+    },
+    {
+      "source": "prompt/ENGINEER_B_PROMPT.md",
+      "target": "engineer/b",
+      "relation": "specifies",
+      "confidence_score": 1.0,
+      "source_file": "agent_prompts/ENGINEER_B_PROMPT.md"
+    },
+    {
+      "source": "prompt/ENGINEER_A_PROMPT.md",
+      "target": "module/stt_client.py",
+      "relation": "owns_spec",
+      "confidence_score": 1.0,
+      "source_file": "agent_prompts/ENGINEER_A_PROMPT.md"
+    },
+    {
+      "source": "prompt/ENGINEER_A_PROMPT.md",
+      "target": "module/tts_client.py",
+      "relation": "owns_spec",
+      "confidence_score": 1.0,
+      "source_file": "agent_prompts/ENGINEER_A_PROMPT.md"
+    },
+    {
+      "source": "prompt/ENGINEER_A_PROMPT.md",
+      "target": "module/dsp_audio.py",
+      "relation": "owns_spec",
+      "confidence_score": 1.0,
+      "source_file": "agent_prompts/ENGINEER_A_PROMPT.md"
+    },
+    {
+      "source": "prompt/ENGINEER_B_PROMPT.md",
+      "target": "module/statutory.py",
+      "relation": "owns_spec",
+      "confidence_score": 1.0,
+      "source_file": "agent_prompts/ENGINEER_B_PROMPT.md"
+    },
+    {
+      "source": "prompt/ENGINEER_B_PROMPT.md",
+      "target": "module/complaint_builder.py",
+      "relation": "owns_spec",
+      "confidence_score": 1.0,
+      "source_file": "agent_prompts/ENGINEER_B_PROMPT.md"
+    },
+    {
+      "source": "prompt/ENGINEER_B_PROMPT.md",
+      "target": "module/rb_ios.py",
+      "relation": "owns_spec",
+      "confidence_score": 1.0,
+      "source_file": "agent_prompts/ENGINEER_B_PROMPT.md"
+    },
+    {
+      "source": "prompt/ENGINEER_B_PROMPT.md",
+      "target": "module/safety.py",
+      "relation": "owns_spec",
+      "confidence_score": 1.0,
+      "source_file": "agent_prompts/ENGINEER_B_PROMPT.md"
+    },
+    {
+      "source": "prompt/ENGINEER_B_PROMPT.md",
+      "target": "frontend/hud.html",
+      "relation": "owns_spec",
+      "confidence_score": 1.0,
+      "source_file": "agent_prompts/ENGINEER_B_PROMPT.md"
+    },
+    {
+      "source": "prompt/ENGINEER_B_PROMPT.md",
+      "target": "frontend/glass_ui.html",
+      "relation": "owns_spec",
+      "confidence_score": 1.0,
+      "source_file": "agent_prompts/ENGINEER_B_PROMPT.md"
+    },
+    {
+      "source": "haqvaani:project",
+      "target": "haqvaani:thesis",
+      "label": "embodies",
+      "confidence_score": 0.98,
+      "type": "conceptual"
+    },
+    {
+      "source": "haqvaani:project",
+      "target": "haqvaani:hard_rules",
+      "label": "governed_by",
+      "confidence_score": 0.99,
+      "type": "constraint"
+    },
+    {
+      "source": "haqvaani:project",
+      "target": "gnani:stack",
+      "label": "built_on",
+      "confidence_score": 0.98,
+      "type": "stack"
+    },
+    {
+      "source": "haqvaani:project",
+      "target": "haqvaani:engineer_a",
+      "label": "owned_by",
+      "confidence_score": 0.95,
+      "type": "ownership"
+    },
+    {
+      "source": "haqvaani:project",
+      "target": "haqvaani:engineer_b",
+      "label": "owned_by",
+      "confidence_score": 0.95,
+      "type": "ownership"
+    },
+    {
+      "source": "haqvaani:engineer_a",
+      "target": "haqvaani:schemas.py",
+      "label": "signs_off",
+      "confidence_score": 0.99,
+      "type": "governance"
+    },
+    {
+      "source": "haqvaani:engineer_b",
+      "target": "haqvaani:schemas.py",
+      "label": "signs_off",
+      "confidence_score": 0.99,
+      "type": "governance"
+    },
+    {
+      "source": "haqvaani:schemas.py",
+      "target": "haqvaani:statutory.py",
+      "label": "validates",
+      "confidence_score": 0.9,
+      "type": "data_flow"
+    },
+    {
+      "source": "haqvaani:statutory.py",
+      "target": "rbi:circular_2019-20/67",
+      "label": "implements",
+      "confidence_score": 0.99,
+      "type": "legal"
+    },
+    {
+      "source": "haqvaani:statutory.py",
+      "target": "dbr:circular_2017-18",
+      "label": "references",
+      "confidence_score": 0.9,
+      "type": "legal"
+    },
+    {
+      "source": "haqvaani:statutory.py",
+      "target": "rbi:rb_ios_2026",
+      "label": "references",
+      "confidence_score": 0.9,
+      "type": "legal"
+    },
+    {
+      "source": "haqvaani:hard_rules",
+      "target": "trai:2026_a2p",
+      "label": "enforces",
+      "confidence_score": 0.99,
+      "type": "legal"
+    },
+    {
+      "source": "haqvaani:hard_rules",
+      "target": "dpdp:act_2023",
+      "label": "enforces",
+      "confidence_score": 0.99,
+      "type": "legal"
+    },
+    {
+      "source": "haqvaani:safety.py",
+      "target": "dpdp:act_2023",
+      "label": "implements",
+      "confidence_score": 0.95,
+      "type": "legal"
+    },
+    {
+      "source": "haqvaani:safety.py",
+      "target": "trai:2026_a2p",
+      "label": "implements",
+      "confidence_score": 0.95,
+      "type": "legal"
+    },
+    {
+      "source": "haqvaani:safety.py",
+      "target": "rbi:rb_ios_2026",
+      "label": "implements",
+      "confidence_score": 0.9,
+      "type": "legal"
+    },
+    {
+      "source": "pipeline:stage_1_dsp",
+      "target": "pipeline:stage_2_stt",
+      "label": "feeds",
+      "confidence_score": 0.98,
+      "type": "data_flow"
+    },
+    {
+      "source": "pipeline:stage_2_stt",
+      "target": "pipeline:stage_3_statutory",
+      "label": "feeds",
+      "confidence_score": 0.98,
+      "type": "data_flow"
+    },
+    {
+      "source": "pipeline:stage_3_statutory",
+      "target": "pipeline:stage_4_ivr_orchestrator",
+      "label": "feeds",
+      "confidence_score": 0.98,
+      "type": "data_flow"
+    },
+    {
+      "source": "pipeline:stage_4_ivr_orchestrator",
+      "target": "pipeline:stage_5_verbatim_gate",
+      "label": "feeds",
+      "confidence_score": 0.98,
+      "type": "data_flow"
+    },
+    {
+      "source": "pipeline:stage_5_verbatim_gate",
+      "target": "pipeline:stage_6_callback",
+      "label": "feeds",
+      "confidence_score": 0.98,
+      "type": "data_flow"
+    },
+    {
+      "source": "pipeline:stage_6_callback",
+      "target": "pipeline:stage_7_dossier",
+      "label": "feeds",
+      "confidence_score": 0.98,
+      "type": "data_flow"
+    },
+    {
+      "source": "haqvaani:dsp_ivr.py",
+      "target": "pipeline:stage_1_dsp",
+      "label": "implements",
+      "confidence_score": 0.95,
+      "type": "implementation"
+    },
+    {
+      "source": "haqvaani:stt_client.py",
+      "target": "pipeline:stage_2_stt",
+      "label": "implements",
+      "confidence_score": 0.95,
+      "type": "implementation"
+    },
+    {
+      "source": "haqvaani:statutory.py",
+      "target": "pipeline:stage_3_statutory",
+      "label": "implements",
+      "confidence_score": 0.95,
+      "type": "implementation"
+    },
+    {
+      "source": "haqvaani:orchestrator.py",
+      "target": "pipeline:stage_4_ivr_orchestrator",
+      "label": "implements",
+      "confidence_score": 0.95,
+      "type": "implementation"
+    },
+    {
+      "source": "haqvaani:safety.py",
+      "target": "pipeline:stage_5_verbatim_gate",
+      "label": "implements",
+      "confidence_score": 0.95,
+      "type": "implementation"
+    },
+    {
+      "source": "haqvaani:tts_client.py",
+      "target": "pipeline:stage_6_callback",
+      "label": "implements",
+      "confidence_score": 0.95,
+      "type": "implementation"
+    },
+    {
+      "source": "haqvaani:rb_ios.py",
+      "target": "pipeline:stage_7_dossier",
+      "label": "implements",
+      "confidence_score": 0.95,
+      "type": "implementation"
+    },
+    {
+      "source": "fsm:acoustic_state_machine",
+      "target": "pipeline:stage_4_ivr_orchestrator",
+      "label": "governs",
+      "confidence_score": 0.95,
+      "type": "control"
+    },
+    {
+      "source": "safety:gates_flow",
+      "target": "pipeline:stage_5_verbatim_gate",
+      "label": "defines",
+      "confidence_score": 0.98,
+      "type": "control"
+    },
+    {
+      "source": "statutory:computation_flow",
+      "target": "pipeline:stage_3_statutory",
+      "label": "defines",
+      "confidence_score": 0.98,
+      "type": "control"
+    },
+    {
+      "source": "demo:storyboard",
+      "target": "demo:segment_0_4",
+      "label": "contains",
+      "confidence_score": 0.99,
+      "type": "containment"
+    },
+    {
+      "source": "demo:storyboard",
+      "target": "demo:segment_4_12",
+      "label": "contains",
+      "confidence_score": 0.99,
+      "type": "containment"
+    },
+    {
+      "source": "demo:storyboard",
+      "target": "demo:segment_12_23",
+      "label": "contains",
+      "confidence_score": 0.99,
+      "type": "containment"
+    },
+    {
+      "source": "demo:storyboard",
+      "target": "demo:segment_23_36",
+      "label": "contains",
+      "confidence_score": 0.99,
+      "type": "containment"
+    },
+    {
+      "source": "demo:storyboard",
+      "target": "demo:segment_36_47",
+      "label": "contains",
+      "confidence_score": 0.99,
+      "type": "containment"
+    },
+    {
+      "source": "demo:storyboard",
+      "target": "demo:segment_47_55",
+      "label": "contains",
+      "confidence_score": 0.99,
+      "type": "containment"
+    },
+    {
+      "source": "demo:storyboard",
+      "target": "demo:segment_55_60",
+      "label": "contains",
+      "confidence_score": 0.99,
+      "type": "containment"
+    },
+    {
+      "source": "demo:segment_0_4",
+      "target": "demo:segment_4_12",
+      "label": "precedes",
+      "confidence_score": 0.99,
+      "type": "temporal"
+    },
+    {
+      "source": "demo:segment_4_12",
+      "target": "demo:segment_12_23",
+      "label": "precedes",
+      "confidence_score": 0.99,
+      "type": "temporal"
+    },
+    {
+      "source": "demo:segment_12_23",
+      "target": "demo:segment_23_36",
+      "label": "precedes",
+      "confidence_score": 0.99,
+      "type": "temporal"
+    },
+    {
+      "source": "demo:segment_23_36",
+      "target": "demo:segment_36_47",
+      "label": "precedes",
+      "confidence_score": 0.99,
+      "type": "temporal"
+    },
+    {
+      "source": "demo:segment_36_47",
+      "target": "demo:segment_47_55",
+      "label": "precedes",
+      "confidence_score": 0.99,
+      "type": "temporal"
+    },
+    {
+      "source": "demo:segment_47_55",
+      "target": "demo:segment_55_60",
+      "label": "precedes",
+      "confidence_score": 0.99,
+      "type": "temporal"
+    },
+    {
+      "source": "demo:segment_23_36",
+      "target": "synthetic:demobank",
+      "label": "simulates",
+      "confidence_score": 0.98,
+      "type": "simulation"
+    },
+    {
+      "source": "demo:segment_36_47",
+      "target": "synthetic:docket_sr-db-884120",
+      "label": "verifies",
+      "confidence_score": 0.99,
+      "type": "verification"
+    },
+    {
+      "source": "demo:segment_0_4",
+      "target": "synthetic:utr_629188340112",
+      "label": "mentions",
+      "confidence_score": 0.99,
+      "type": "reference"
+    },
+    {
+      "source": "ui:design_system",
+      "target": "ui:color_palette",
+      "label": "defines",
+      "confidence_score": 0.98,
+      "type": "design"
+    },
+    {
+      "source": "ui:design_system",
+      "target": "ui:components",
+      "label": "defines",
+      "confidence_score": 0.98,
+      "type": "design"
+    },
+    {
+      "source": "ui:design_system",
+      "target": "ui:accessibility",
+      "label": "requires",
+      "confidence_score": 0.95,
+      "type": "standard"
+    },
+    {
+      "source": "ui:design_system",
+      "target": "ui:citizen_flow",
+      "label": "specifies",
+      "confidence_score": 0.95,
+      "type": "design"
+    },
+    {
+      "source": "ui:design_system",
+      "target": "ui:hud_flow",
+      "label": "specifies",
+      "confidence_score": 0.95,
+      "type": "design"
+    },
+    {
+      "source": "frontend:glass_ui.html",
+      "target": "ui:design_system",
+      "label": "implements",
+      "confidence_score": 0.95,
+      "type": "implementation"
+    },
+    {
+      "source": "frontend:hud.html",
+      "target": "ui:hud_flow",
+      "label": "implements",
+      "confidence_score": 0.95,
+      "type": "implementation"
+    },
+    {
+      "source": "frontend:hud.html",
+      "target": "eval:wer",
+      "label": "displays",
+      "confidence_score": 0.95,
+      "type": "display"
+    },
+    {
+      "source": "frontend:hud.html",
+      "target": "eval:latency",
+      "label": "displays",
+      "confidence_score": 0.95,
+      "type": "display"
+    },
+    {
+      "source": "frontend:hud.html",
+      "target": "eval:safety",
+      "label": "displays",
+      "confidence_score": 0.95,
+      "type": "display"
+    },
+    {
+      "source": "frontend:hud.html",
+      "target": "eval:compliance",
+      "label": "displays",
+      "confidence_score": 0.95,
+      "type": "display"
+    },
+    {
+      "source": "eval:metrics",
+      "target": "eval:wer",
+      "label": "includes",
+      "confidence_score": 0.99,
+      "type": "containment"
+    },
+    {
+      "source": "eval:metrics",
+      "target": "eval:latency",
+      "label": "includes",
+      "confidence_score": 0.99,
+      "type": "containment"
+    },
+    {
+      "source": "eval:metrics",
+      "target": "eval:safety",
+      "label": "includes",
+      "confidence_score": 0.99,
+      "type": "containment"
+    },
+    {
+      "source": "eval:metrics",
+      "target": "eval:compliance",
+      "label": "includes",
+      "confidence_score": 0.99,
+      "type": "containment"
+    },
+    {
+      "source": "eval:metrics",
+      "target": "eval:demo_quality",
+      "label": "includes",
+      "confidence_score": 0.99,
+      "type": "containment"
+    },
+    {
+      "source": "eval:metrics",
+      "target": "eval:award_alignment",
+      "label": "includes",
+      "confidence_score": 0.99,
+      "type": "containment"
+    },
+    {
+      "source": "latency:budget",
+      "target": "latency:optimization",
+      "label": "drives",
+      "confidence_score": 0.95,
+      "type": "control"
+    },
+    {
+      "source": "gnani:stack",
+      "target": "haqvaani:stt_client.py",
+      "label": "powers",
+      "confidence_score": 0.95,
+      "type": "stack"
+    },
+    {
+      "source": "gnani:stack",
+      "target": "haqvaani:evon_client.py",
+      "label": "powers",
+      "confidence_score": 0.95,
+      "type": "stack"
+    },
+    {
+      "source": "gnani:stack",
+      "target": "haqvaani:tts_client.py",
+      "label": "powers",
+      "confidence_score": 0.95,
+      "type": "stack"
+    },
+    {
+      "source": "duo:ownership_matrix",
+      "target": "haqvaani:engineer_a",
+      "label": "defines_scope",
+      "confidence_score": 0.98,
+      "type": "ownership"
+    },
+    {
+      "source": "duo:ownership_matrix",
+      "target": "haqvaani:engineer_b",
+      "label": "defines_scope",
+      "confidence_score": 0.98,
+      "type": "ownership"
+    },
+    {
+      "source": "requirements:txt",
+      "target": "haqvaani:statutory.py",
+      "label": "provides_deps_for",
+      "confidence_score": 0.85,
+      "type": "dependency"
+    },
+    {
+      "source": "requirements:txt",
+      "target": "haqvaani:dsp_ivr.py",
+      "label": "provides_deps_for",
+      "confidence_score": 0.85,
+      "type": "dependency"
+    },
+    {
+      "source": "shared_context:file_pointers",
+      "target": "docs:legal_matrix.md",
+      "label": "points_to",
+      "confidence_score": 0.99,
+      "type": "reference"
+    },
+    {
+      "source": "shared_context:file_pointers",
+      "target": "docs:latency_budget.md",
+      "label": "points_to",
+      "confidence_score": 0.99,
+      "type": "reference"
+    },
+    {
+      "source": "shared_context:file_pointers",
+      "target": "docs:demo_storyboard.md",
+      "label": "points_to",
+      "confidence_score": 0.99,
+      "type": "reference"
+    },
+    {
+      "source": "shared_context:file_pointers",
+      "target": "docs:evaluation.md",
+      "label": "points_to",
+      "confidence_score": 0.99,
+      "type": "reference"
+    },
+    {
+      "source": "shared_context:file_pointers",
+      "target": "docs:ui_ux_design_system.md",
+      "label": "points_to",
+      "confidence_score": 0.99,
+      "type": "reference"
+    },
+    {
+      "source": "shared_context:file_pointers",
+      "target": "docs:system_diagrams.md",
+      "label": "points_to",
+      "confidence_score": 0.99,
+      "type": "reference"
+    },
+    {
+      "source": "shared_context:file_pointers",
+      "target": "docs:interview_qa.md",
+      "label": "points_to",
+      "confidence_score": 0.99,
+      "type": "reference"
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "he_pipeline",
+      "label": "4-mode pipeline",
+      "nodes": [
+        "concept/mode1",
+        "concept/mode2",
+        "concept/mode3",
+        "concept/mode4"
+      ],
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "he_safety",
+      "label": "Safety gates",
+      "nodes": [
+        "concept/consent",
+        "concept/forbidden_secret_re",
+        "concept/verbatim_substring",
+        "concept/no_autonomous_dialing"
+      ],
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "id": "he_stack",
+      "label": "Free stack",
+      "nodes": [
+        "concept/prisma",
+        "concept/evon",
+        "concept/timbre",
+        "concept/statutory"
+      ],
+      "confidence_score": 1.0,
+      "source_file": "README.md"
+    },
+    {
+      "id": "he_state_machine",
+      "label": "Assisted-call state machine",
+      "nodes": [
+        "state/idle",
+        "state/listening",
+        "state/script_display",
+        "state/docket_capture",
+        "state/post_call"
+      ],
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "id": "he_treaty",
+      "label": "Ownership treaty",
+      "nodes": [
+        "engineer/a",
+        "engineer/b",
+        "module/schemas.py"
+      ],
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md"
+    },
+    {
+      "id": "he_legal",
+      "label": "RBI legal rules",
+      "nodes": [
+        "concept/rbi_2019_20_67",
+        "concept/rb_ios_2026",
+        "concept/dpdp",
+        "concept/trai_2026"
+      ],
+      "confidence_score": 1.0,
+      "source_file": "RULES.md"
+    },
+    {
+      "id": "he_case_record",
+      "label": "HaqVaaniCaseRecord composition",
+      "nodes": [
+        "concept/citizen_intake",
+        "concept/statutory_entitlement",
+        "concept/complaint_draft",
+        "concept/call_transcript",
+        "concept/case_record",
+        "concept/consent_record"
+      ],
+      "confidence_score": 1.0,
+      "source_file": "ARCHITECTURE.md"
+    },
+    {
+      "nodes": [
+        "haqvaani:engineer_a",
+        "haqvaani:engineer_b",
+        "haqvaani:schemas.py"
+      ],
+      "label": "Treaty Border co-ownership — schemas.py changes require both engineers' sign-off",
+      "confidence_score": 0.99
+    },
+    {
+      "nodes": [
+        "haqvaani:safety.py",
+        "dpdp:act_2023",
+        "trai:2026_a2p",
+        "rbi:rb_ios_2026"
+      ],
+      "label": "Safety Gates — consent + disclosure + secret redaction + verbatim docket substring, mapped to DPDP/TRAI/RB-IOS",
+      "confidence_score": 0.98
+    },
+    {
+      "nodes": [
+        "pipeline:stage_1_dsp",
+        "pipeline:stage_2_stt",
+        "pipeline:stage_3_statutory",
+        "pipeline:stage_4_ivr_orchestrator",
+        "pipeline:stage_5_verbatim_gate",
+        "pipeline:stage_6_callback",
+        "pipeline:stage_7_dossier"
+      ],
+      "label": "7-Stage End-to-End Pipeline — citizen audio → RB-IOS dossier",
+      "confidence_score": 0.98
+    },
+    {
+      "nodes": [
+        "gnani:stack",
+        "haqvaani:stt_client.py",
+        "haqvaani:evon_client.py",
+        "haqvaani:tts_client.py"
+      ],
+      "label": "Gnani Sovereign Stack execution path — Prisma STT → Evon LLM → Timbre TTS",
+      "confidence_score": 0.98
+    },
+    {
+      "nodes": [
+        "demo:storyboard",
+        "frontend:glass_ui.html",
+        "frontend:hud.html"
+      ],
+      "label": "Demo Day deliverables — 60s video + UI + HUD, all synthetic data, no autonomous dialing",
+      "confidence_score": 0.97
+    },
+    {
+      "nodes": [
+        "eval:wer",
+        "eval:latency",
+        "eval:safety",
+        "eval:compliance",
+        "eval:demo_quality",
+        "eval:award_alignment"
+      ],
+      "label": "Evaluation metrics framework — WER, Latency, Safety, Compliance, Demo Quality, Award Alignment",
+      "confidence_score": 0.98
+    }
+  ],
+  "input_tokens": 108000,
+  "output_tokens": 14500
+}
