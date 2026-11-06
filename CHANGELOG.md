@@ -73,3 +73,19 @@
 - Offline E2E verified: synthetic intake → rights (₹600/₹1,800 penalties) → drafts → verbatim docket `SR-DB-884120` → case record.
 - Solo build confirmed; hosted Evon via app.gnani.ai/voice chosen (no GPU ops).
 - NEXT: user registers on gnani.ai, claims 5,000 credits, provides real endpoints + API key → build `stt_client.py`/`tts_client.py`, wire `glass_ui.html`, record demo.
+
+---
+
+## [2026-11-06] — Day 13: Free-constraint audit
+
+### Added
+- `scripts/free_constraint_audit.py` — stdlib audit: per-dependency licenses + paid-service token scan of `.env.example`.
+- Installed `gnani-vachana 0.9.0` (MIT, verified on PyPI; official Gnani SDK).
+
+### Verified
+- All 10 requirements are permissive open source (MIT/BSD/Apache).
+- `wss://api.vachana.ai/stt/v3/stream` confirmed as the real Prisma streaming endpoint.
+- Auth header `X-API-Key-ID` confirmed; `GNANI_API_KEY` env var matches the SDK.
+- Timbre models `timbre-v2.0/v2.5` (42 voices, en-IN/hi-IN), AudioConfig container/rate matrix confirmed.
+- No paid hosting/GPU/SMS/telephony/analytics referenced anywhere.
+- Open item: credit burn-rate per second/minute not yet measured — track in app.gnani.ai/voice after registration.
