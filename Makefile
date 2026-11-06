@@ -4,9 +4,8 @@ install:
 	pip install -r requirements.txt
 
 self-test:
-	python -m haqvaani.stt_client --self-test
-	python -m haqvaani.tts_client --self-test
 	python -m haqvaani.statutory --self-test
+	# stt_client / tts_client self-tests appear once Gnani endpoints are verified.
 
 benchmark:
 	python eval/benchmark.py

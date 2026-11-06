@@ -56,3 +56,20 @@
 ### Notes
 - Statutory math matches `docs/legal_matrix.md` §1 worked example exactly: T=18 Oct, ₹3,200, today=25 Oct → TAT 19 Oct, 6 days overdue, ₹600 penalty, ₹3,800 total.
 - No API credentials required for this slice; Gnani access + STT/TTS clients are the next dependency.
+
+---
+
+## [2026-11-06] — Day 13: Core vertical slice part 2 — backend + PRD/FRD
+
+### Added
+- `docs/PRD.md` — product requirements for the submission scope (what we ship, what we cut).
+- `docs/FRD.md` — functional spec: modes, API contract for the UI, acceptance criteria.
+- `haqvaani/complaint_builder.py` — Mode 3 drafts: bank complaint (en+hi), WhatsApp, email, evidence checklist, RB-IOS 2026 CMS draft; every outbound string passes the secret-redaction gate.
+- `haqvaani/rb_ios.py` — RB-IOS 2026 CMS draft + JSON dossier + summary line for Timbre.
+- `haqvaani/orchestrator.py` — 4-mode switcher with `VoiceAPI` adapter (synthetic transcript until Prisma/Evon wired); `--self-test` runs a full offline case.
+- `tests/test_complaint.py`, `tests/test_orchestrator.py` (36 tests total, all green).
+
+### Notes
+- Offline E2E verified: synthetic intake → rights (₹600/₹1,800 penalties) → drafts → verbatim docket `SR-DB-884120` → case record.
+- Solo build confirmed; hosted Evon via app.gnani.ai/voice chosen (no GPU ops).
+- NEXT: user registers on gnani.ai, claims 5,000 credits, provides real endpoints + API key → build `stt_client.py`/`tts_client.py`, wire `glass_ui.html`, record demo.

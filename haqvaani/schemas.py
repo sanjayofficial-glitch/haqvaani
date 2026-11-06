@@ -71,6 +71,16 @@ class StatutoryEntitlement(BaseModel):
     shadow_credit_due_date: date | None = None
 
 
+class ComplaintDraft(BaseModel):
+    """Mode 3 output: ready-to-send drafts + evidence checklist."""
+
+    bank_complaint_text: str
+    whatsapp_draft: str
+    email_draft: str
+    evidence_checklist: list[str]
+    rbi_cms_draft: str | None = None
+
+
 class AgentNegotiationExtraction(BaseModel):
     """Mode 4 extraction: bank agent brush-off + suggested counter-script."""
 

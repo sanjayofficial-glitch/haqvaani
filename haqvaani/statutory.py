@@ -167,3 +167,24 @@ def _zero_liability_entitlement(
         rbi_filing_deadline=filing_deadline,
         shadow_credit_due_date=shadow_credit_due,
     )
+
+
+def _self_test() -> None:
+    """CLI sanity check: print the docs/legal_matrix.md §1 worked example."""
+    from .schemas import DisputeType as _DT
+
+    e = compute_statutory_entitlement(
+        amount_inr=3200,
+        txn_date=date(2026, 10, 18),
+        today=date(2026, 10, 25),
+        dispute_type=_DT.UPI_P2P,
+    )
+    print(f"circular : {e.circular_ref}")
+    print(f"TAT date : {e.tat_date}")
+    print(f"overdue  : {e.days_overdue} days")
+    print(f"penalty  : ₹{e.penalty_inr:.0f}")
+    print(f"total    : ₹{e.total_inr:.0f}")
+
+
+if __name__ == "__main__":
+    _self_test()

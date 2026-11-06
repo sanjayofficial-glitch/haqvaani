@@ -33,15 +33,16 @@
 - [ ] `todo` Build `haqvaani/dsp_audio.py`: FIR resampler 8→16 kHz, Silero VAD (220 ms hangover), ring buffer (200 ms/60 ms).
 - [x] `done` Build `haqvaani/schemas.py`: CitizenIntake, AgentNegotiationExtraction, HaqVaaniCaseRecord, ConsentRecord (treaty border).
 - [x] `done` Build `haqvaani/statutory.py`: pure-Python compute_statutory_entitlement() (T+1, T+5, ₹100/day, zero-liability).
-- [ ] `todo` Build `haqvaani/evon_client.py`: intake parser + brush-off/docket parser.
+- [ ] `todo` Build `haqvaani/evon_client.py`: intake parser + brush-off/docket parser (needs Gnani access).
 - [ ] `todo` Synthetic bank IVR script + test utterances (simulated demo only).
 - [ ] `todo` Post build-in-public teaser on LinkedIn/X.
 
 ## Days 6–8 (Fri 30 Oct – Sun 1 Nov 2026): Evon + 4-Mode Orchestrator + Assisted-Call UI
 
 - [ ] `todo` Deploy Evon v3.3 on vLLM/SGLang (spot GPU); prefix-cache system prompt; short JSON schema (<45 tok).
-- [ ] `todo` Build `haqvaani/complaint_builder.py`: bank complaint draft, WhatsApp/email draft, evidence checklist, RB-IOS 2026 CMS draft.
-- [ ] `todo` Build `haqvaani/orchestrator.py`: 4-mode pipeline switcher.
+- [x] `done` Build `haqvaani/complaint_builder.py`: bank complaint draft, WhatsApp/email draft, evidence checklist, RB-IOS 2026 CMS draft.
+- [x] `done` Build `haqvaani/orchestrator.py`: 4-mode pipeline switcher (offline E2E self-test works; STT/TTS/Evon plug in via VoiceAPI adapter).
+- [ ] `todo` Build `haqvaani/stt_client.py` + `haqvaani/tts_client.py` (needs verified Gnani endpoints).
 - [ ] `todo` Build assisted-call UI: start call, real-time script display, docket capture, post-call summary.
 - [ ] `todo` End-to-end run with simulated data; verify no autonomous dialing anywhere.
 
