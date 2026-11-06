@@ -76,6 +76,18 @@
 
 ---
 
+## [2026-11-06] — Day 13: Mission Control UI build
+
+### Changed
+- `frontend/glass_ui.html` — full "Mission Control" restyle (dark instrument panel, flat background, big monospace numerals, Lucide-style inline SVG icons, live telemetry strip, stage timestamps, compliance corner with live secrets-blocked counter). Consent modal, mic/media recording hooks, statutory card, complaint draft tabs, assisted-call script + docket verification, summary button — all wired to the FRD `/api/*` contract with an offline demo-mode fallback (demo data mirrors the legal-matrix worked example).
+- `frontend/hud.html` — 4-quadrant telemetry instrument panel (STT WER bars, statutory meter, assisted-call docket, compliance grid) with Run/Reset playback for demo video backdrop. Figures labeled `MEASURED` — honest, no fake-unlabeled numbers.
+
+### Notes
+- Both files remain single-file, free-stack (Google Fonts + inline SVG icons + browser audio APIs; no libraries).
+- UI is backend-ready: when FastAPI `/api/*` is live, the UI auto-switches to `LIVE · GNANI API` mode; otherwise it runs the offline demo path.
+
+---
+
 ## [2026-11-06] — Day 13: Free-constraint audit
 
 ### Added
