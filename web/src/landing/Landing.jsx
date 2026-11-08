@@ -17,7 +17,7 @@ import { useReducedMotion } from "../hooks/useReducedMotion.js";
 import { api } from "../lib/api.js";
 import { DEMO } from "../lib/demo.js";
 import { consentGranted, useCaseState } from "../lib/state.jsx";
-import { inr, demoScenario, scenarioFromEntitlement, TAT_DAYS, PER_DAY } from "./data/scenario";
+import { inr, demoScenario, estimateScenario, scenarioFromEntitlement, TAT_DAYS, PER_DAY } from "./data/scenario";
 import Act01 from "./acts/Act01";
 import Act02 from "./acts/Act02";
 import Act03 from "./acts/Act03";
@@ -42,12 +42,12 @@ const NAV = [
    when the API is unreachable. The sliders are the *question*; Python
    answers. */
 function useScenario(amount, days, hasConsent) {
-  const [state, setState] = useState(() => ({ s: demoScenario(), source: "demo" }));
+  const [state, setState] = useState(() => ({ s: estimateScenario(amount, days), source: "estimate" }));
 
   useEffect(() => {
     let alive = true;
     if (!hasConsent) {
-      setState({ s: demoScenario(), source: "demo" });
+      setState({ s: estimateScenario(amount, days), source: "estimate" });
       return () => { alive = false; };
     }
     const txnDate = new Date(Date.now() - (days - 1) * 86400000).toISOString().slice(0, 10);
@@ -188,11 +188,14 @@ export default function Landing() {
                 <span className="chip">{inr(s.principal)} refund</span>
                 <span className="chip chip--org">+ {inr(s.compensation)} · {s.overdue_days} days × ₹{PER_DAY}</span>
               </div>
-              {source !== "api" && (
+              {source === "estimate" && (
                 <p className="fine" style={{ margin: "10px 0 0", color: "#8a8578" }}>
-                  {hasConsent
-                    ? "API unavailable — synthetic demo · sample case (statutory math lives in Python)."
-                    : "Synthetic sample shown — consent first in the app (DPDP), then your real numbers compute in Python."}
+                  Illustrative preview · T+1 × ₹100 — the authoritative number computes in the app after consent (Python).
+                </p>
+              )}
+              {source === "demo" && (
+                <p className="fine" style={{ margin: "10px 0 0", color: "#8a8578" }}>
+                  API unavailable — synthetic demo · sample case (statutory math lives in Python).
                 </p>
               )}
             </div>

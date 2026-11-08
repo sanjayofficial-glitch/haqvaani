@@ -50,6 +50,27 @@ export function demoScenario() {
 }
 
 /**
+ * Illustrative preview used BEFORE consent (the API refuses /api/rights with
+ * 403 until DPDP consent). Mirrors the UPI P2P T+1 rule so the sliders
+ * respond; it is a labelled preview — the authoritative number is always
+ * the Python engine's, unlocked by starting a case.
+ */
+export function estimateScenario(amount, days) {
+  const overdue = Math.max(0, days - TAT_DAYS);
+  const compensation = overdue * PER_DAY;
+  return makeScenario({
+    principal: amount,
+    tat: TAT_DAYS,
+    elapsed: days,
+    overdue_days: overdue,
+    per_day: PER_DAY,
+    compensation,
+    total_refund: amount + compensation,
+    utr: "—",
+  });
+}
+
+/**
  * Map a live /api/rights entitlement into the display scenario.
  * @param {import("../../lib/api.js").Entitlement} ent
  * @param {number} elapsed days-since-payment shown by the slider
