@@ -5,6 +5,46 @@
 
 ---
 
+## [2026-11-08] — Cinematic visual pass on `web/` (epic-design)
+
+The `web/` landing and case screens moved from prose-heavy to visual-first:
+motion, depth layers, and marquee tickers instead of paragraphs (the "too
+much text" feedback). Same tokens, same safety/consent contract — integrity
+check green.
+
+### Changed
+- `web/src/landing/Landing.jsx` — rewritten storytelling composition:
+  * Hero (Act 01): giant ghost `₹3,200` depth numeral, 2-line Hindi display
+    headline with masked line-reveal, single short sub-line (the long
+    bilingual paragraph removed), CTA row, the TxnBreak payment line with a
+    scrubbed coin that travels and stops at the break, and a mono marquee
+    ticker (UTR · date · amount · KAT GAYA).
+  * Act 02 RULE: ghost `T+1` layer, rule-meta chips (T / TAT / RBI
+    circular), the deadline line drawing on scrub, kept ledger art.
+  * Act 03 ₹100/DIN: ghost ₹ layer, kept orange ticker, one-line tag.
+  * Act 04 WAPAS: ghost total layer, green stamp + green marquee
+    (`REFUND CREDITED`), only the green in the product.
+  * Journey: steps become large orange numerals with short one-line
+    captions (English prose trimmed from long pairs).
+  * CTA band: shortened copy; safety lines (OTP/PIN/CVV, no autonomous
+    dialing, Simulated IVR / synthetic demo) intact.
+- `web/src/styles/app.css` — cinematic system appended: `.ghost-num`
+  (depth numerals, variant tints), `.hd-mask`/`.hd-line` (line reveals),
+  `.marquee`/`.marquee-track`/`.marquee-item` (CSS loop, accent/success
+  tones), `.rule-meta`/`.rule-chip`, `.steps-visual`, `.screen-ghost`
+  (case-screen depth layer) + `.app-main { position: relative }`.
+- `web/src/screens/StartCase.jsx`, `web/src/screens/RightsCheck.jsx` —
+  ghost ₹ / ₹100 depth layers so the case screens share the visual system.
+- All motion is GPU-safe and fully disabled under `prefers-reduced-motion`.
+
+### Notes
+- Image generation was attempted for editorial illustrations but the image
+  account has no funds, so the pass is 100% vector/SVG/CSS — crisper and
+  consistent with the hairline system anyway.
+- `npm run build` clean; `python scripts/_ui_integrity_check.py` green.
+
+---
+
 ## [2026-11-08] — Vite + React rebuild — "Heron × HaqVaani" (Day 15/16)
 
 A second frontend committed beside the vanilla `frontend/` system: an

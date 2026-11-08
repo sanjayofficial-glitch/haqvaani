@@ -65,6 +65,7 @@ export default function StartCase() {
 
   return (
     <>
+      <div className="screen-ghost" aria-hidden="true">₹</div>
       <div className="col" style={{ gap: "var(--s-xs)" }}>
         <h1 className="d-lg" lang="hi-IN">आपकी शिकायत किस तरह की है?</h1>
         <p className="body mute-2" style={{ maxWidth: "62ch" }}>

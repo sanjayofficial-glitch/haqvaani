@@ -622,6 +622,141 @@ a:hover {
 
 details > summary { cursor: pointer; }
 
+/* ========================================================================
+   Cinematic landing system (Heron × HaqVaani, epic-design pass):
+   ghost depth numerals, masked line reveals, marquee tickers, rule chips,
+   visual journey steps. All GPU-safe (transform/opacity), all killed by
+   the global prefers-reduced-motion block below.                    */
+.ghost-num {
+  position: absolute;
+  top: 10%;
+  right: 4%;
+  z-index: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-size: clamp(120px, 24vw, 360px);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(40, 40, 40, 0.10);
+  pointer-events: none;
+  user-select: none;
+}
+.rule-ghost {
+  top: auto;
+  bottom: 5%;
+  left: 5%;
+  right: auto;
+  color: rgba(250, 54, 0, 0.06);
+  -webkit-text-stroke: 0;
+}
+.din-ghost {
+  color: rgba(250, 54, 0, 0.05);
+  -webkit-text-stroke: 0;
+}
+.wapas-ghost {
+  color: rgba(26, 127, 75, 0.07);
+  -webkit-text-stroke: 0;
+}
+
+.hd-mask { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.hd-line { display: inline-block; will-change: transform; }
+.hero-h1 { position: relative; z-index: 1; }
+.hero-sub { max-width: 34ch; margin-top: var(--s-sm); }
+.hero-cta { margin-top: var(--s-md); }
+.hero-art { position: relative; z-index: 1; }
+
+/* marquee tickers */
+.marquee {
+  position: absolute;
+  left: 74px;
+  right: 0;
+  bottom: 0;
+  border-top: var(--ruled);
+  overflow: hidden;
+  background: var(--canvas);
+  z-index: 2;
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: mqScroll 30s linear infinite;
+}
+@keyframes mqScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-item {
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-3);
+  padding: 12px 28px;
+  white-space: nowrap;
+  border-right: 1px solid var(--line);
+}
+.marquee.accent .marquee-item:nth-child(odd) { color: var(--accent); }
+.marquee.success .marquee-item { color: var(--success); }
+
+/* rule meta chips */
+.rule-meta { display: flex; gap: 10px; flex-wrap: wrap; }
+.rule-chip {
+  border: var(--ruled);
+  border-radius: var(--radius-card);
+  padding: 10px 16px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  background: var(--canvas);
+}
+.rule-chip .k {
+  font-family: var(--font-mono);
+  font-size: var(--fs-tiny);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.rule-chip .v { font-family: var(--font-mono); font-size: var(--fs-body-sm); font-weight: 600; }
+
+/* visual journey steps */
+.steps-visual li {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: var(--s-sm);
+  align-items: start;
+}
+.steps-visual .step-num {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--accent);
+}
+.steps-visual h3 { margin: 0 0 4px; }
+.steps-visual p { margin: 0 0 6px; }
+
+/* app-screen ghost depth layer (subtle, for case screens) */
+.app-main { position: relative; }
+.screen-ghost {
+  position: absolute;
+  top: 4%;
+  right: 2%;
+  z-index: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(120px, 24vw, 300px);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(40, 40, 40, 0.08);
+  pointer-events: none;
+  user-select: none;
+}
+.app-main > * { position: relative; z-index: 1; }
+
 /* ------------------------------------------------------- reduced motion -- */
 @media (prefers-reduced-motion: reduce) {
   *,

@@ -1,16 +1,18 @@
 /* ==========================================================================
-   The HaqVaani landfall — scroll-driven, interactive storytelling.
+   The HaqVaani landfall — scroll-driven, cinematic storytelling.
    Four acts mapped to the citizen's journey in the merged Heron×HaqVaani
    language: stark editorial white, charcoal ink, hairline rules, ONE orange
-   signal accent, mono technical voice.
-     Act 01  KAT GAYA   — money deducted, UTR in mono, hairline break diagram
-     Act 02  RULE       — the RBI clock: display numeral + orange progress line
+   signal accent (#fa3600), mono technical voice. Visual-first: ghost
+   numerals, marquee tickers, masked line reveals, pinned scrub scenes,
+   parallax art — prose is cut to short captions. (epic-design: 2.5D
+   depth layers, marquee, line-mask reveal, scrub timelines — all GPU-safe
+   transform/opacity/clip-path, all disabled under reduced motion.)
+     Act 01  KAT GAYA   — payment breaks: coin travels, stops at the break
+     Act 02  RULE       — the RBI clock: giant T+1 numeral, line draws
      Act 03  ₹100/DIN   — the compensation ticker counts (orange mono)
      Act 04  WAPAS      — refund credited: the ONLY place --success appears
-   Lenis smooth scroll + GSAP ScrollTrigger (pin/scrub); both fully disabled
-   under prefers-reduced-motion (static layouts, final states).
-   `data-tone` beat sections keep the old design contract; the edge rail is
-   scrub-linked to scroll.                                                */
+   Lenis + GSAP ScrollTrigger. `data-tone` sections keep the old contract;
+   the edge rail is scrub-linked to scroll.                          */
 
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
@@ -21,7 +23,7 @@ import { useMode } from "../hooks/useMode.jsx";
 import { useWorksExample } from "../hooks/useWorksExample.js";
 import { fmtInr } from "../lib/format.js";
 import { Pair } from "../lib/i18n.jsx";
-import { TxnBreak, VoiceTiles, LedgerArt, DraftArt, WhisperArt, Stamp, DeadLineRule } from "../components/Svg.jsx";
+import { TxnBreak, LedgerArt, WhisperArt, Stamp, DeadLineRule } from "../components/Svg.jsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,7 +41,6 @@ function EdgeRail({ reduced }) {
   const [activeIdx, setActiveIdx] = useState(0);
 
   useEffect(() => {
-    /* progress line: exact same scroll math as the old rail.js */
     let raf = null;
     const update = () => {
       raf = null;
@@ -59,7 +60,6 @@ function EdgeRail({ reduced }) {
     window.addEventListener("resize", onScroll);
     update();
 
-    /* beat activation: nearest act wins, root margin mid-viewport */
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -134,89 +134,147 @@ function ActKicker({ n, en, hi }) {
   );
 }
 
-/* Act 01 — KAT GAYA · the hero + the break diagram */
-function ActKat({ reduced, works }) {
-  const figWrap = useRef(null);
+/* ghost layer: giant background numeral (depth-0) */
+function GhostNum({ children, cls = "", style = {} }) {
+  return (
+    <div className={"ghost-num " + cls} aria-hidden="true" style={style}>
+      {children}
+    </div>
+  );
+}
+
+/* mono marquee ticker — pure CSS loop (killed by reduced motion) */
+function Marquee({ items, tone = "" }) {
+  const row = items.concat(items); /* duplicate for seamless loop */
+  return (
+    <div className={"marquee " + tone} aria-hidden="true">
+      <div className="marquee-track">
+        {row.map((it, i) => (
+          <span className="marquee-item" key={i}>{it}</span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* masked line reveal: each <Line mask> wraps one line of the headline */
+function Line({ children, as = "span" }) {
+  const Tag = as;
+  return (
+    <span className="hd-mask">
+      <Tag className="hd-line">{children}</Tag>
+    </span>
+  );
+}
+
+/* Act 01 — KAT GAYA · hero + the break diagram + coin travel */
+function HeroAct({ reduced, works }) {
+  const sceneRef = useRef(null);
+  const coinWrap = useRef(null);
 
   useEffect(() => {
-    if (reduced) return;
+    if (reduced || !sceneRef.current) return undefined;
     const ctx = gsap.context(() => {
-      /* hairline diagram draws in as you settle on it */
-      gsap.from(".act-hero .trxfigure svg g", {
-        opacity: 0,
-        yPercent: 8,
-        stagger: 0.08,
-        duration: 0.7,
-        ease: "power2.out",
-        scrollTrigger: { trigger: ".act-hero", start: "top 60%", toggleActions: "play none none none" },
+      /* headline lines rise out of their masks */
+      gsap.from(sceneRef.current.querySelectorAll(".hd-line"), {
+        yPercent: 115,
+        stagger: 0.1,
+        duration: 0.9,
+        ease: "power4.out",
+        scrollTrigger: { trigger: sceneRef.current, start: "top 70%", toggleActions: "play none none none" },
       });
-      /* precise parallax on the line-art block */
-      gsap.to(figWrap.current, {
-        yPercent: -9,
-        ease: "none",
-        scrollTrigger: { trigger: figWrap.current, start: "top bottom", end: "bottom top", scrub: true },
-      });
-      /* the coin stops exactly at the break (small precise nudge, scrubbed) */
-      const coin = figWrap.current && figWrap.current.querySelector(".coin-g");
+      /* the coin travels the hairline, stops at the break */
+      const coin = coinWrap.current && coinWrap.current.querySelector(".coin-g");
       if (coin) {
         gsap.fromTo(
           coin,
-          { xPercent: -34 },
+          { xPercent: -26, opacity: 0.2 },
           {
             xPercent: 0,
+            opacity: 1,
             ease: "none",
-            scrollTrigger: { trigger: figWrap.current, start: "top bottom", end: "center center", scrub: true },
+            scrollTrigger: { trigger: coinWrap.current, start: "top 85%", end: "center 60%", scrub: true },
           }
         );
       }
+      /* subtle parallax on the ghost numeral */
+      gsap.to(sceneRef.current.querySelector(".ghost-num"), {
+        yPercent: 18,
+        ease: "none",
+        scrollTrigger: { trigger: sceneRef.current, start: "top bottom", end: "bottom top", scrub: true },
+      });
+      /* art and info float at different depths */
+      gsap.to(sceneRef.current.querySelector(".hero-art"), {
+        yPercent: -8,
+        ease: "none",
+        scrollTrigger: { trigger: sceneRef.current, start: "top bottom", end: "bottom top", scrub: true },
+      });
     });
     return () => ctx.revert();
   }, [reduced]);
 
   const over = works.ent.days_overdue || 0;
+
   return (
-    <section className="act act-hero" id="actKat" data-tone="cyan" style={{ paddingTop: "110px" }}>
+    <section className="act act-hero" id="actKat" data-tone="cyan" ref={sceneRef} style={{ paddingTop: "110px" }}>
+      <GhostNum cls="hero-ghost">{fmtInr(3200)}</GhostNum>
       <div className="act-inner">
         <ActKicker n="ACT 01" en="kat gaya — money deducted" hi="कट गया — पैसा कट गया" />
-        <h1 className="display" style={{ marginBottom: "var(--s-sm)" }} lang="hi-IN">
-          पैसा कट गया,<br />पर पहुँचा नहीं।
+        <h1 className="display hero-h1" lang="hi-IN">
+          <Line>पैसा कट गया,</Line>
+          <Line>पहुँचा नहीं।</Line>
         </h1>
-        <p className="sub" style={{ color: "var(--ink-2)", marginBottom: "var(--s-sm)" }}>
+        <p className="sub hero-sub" style={{ color: "var(--ink-2)" }}>
           Money left. The law has a clock. Your voice builds the proof.
         </p>
-        <p className="tag" style={{ color: "var(--accent)", marginBottom: "var(--s-md)" }}>
-          UTR {utrid(works)} · {fmtInr(3200)} · 18 OCT 2026
-        </p>
-        <div ref={figWrap} style={{ marginTop: "var(--s-xs)" }}>
+        <div className="hero-cta row">
+          <a className="btn btn--primary" href="#/start-case">
+            <span style={{ display: "inline-flex", alignItems: "baseline", gap: 10 }}>
+              <span lang="hi-IN" style={{ fontWeight: 700 }}>शुरू करें</span>
+              <span style={{ fontSize: ".78em", opacity: 0.85 }}>Start my case</span>
+            </span>
+          </a>
+          <a className="btn btn--line" href="#/rights-check">
+            <span style={{ display: "inline-flex", alignItems: "baseline", gap: 10 }}>
+              <span lang="hi-IN">हक जाँचें</span>
+              <span style={{ fontSize: ".78em", opacity: 0.85 }}>check my rights</span>
+            </span>
+          </a>
+        </div>
+        <div ref={coinWrap} className="hero-art" style={{ marginTop: "var(--s-lg)" }}>
           <TxnBreak parallaxClass="act-fig" />
         </div>
-        <p className="body mute-2" style={{ maxWidth: "60ch", marginTop: "var(--s-sm)" }}>
+        <p className="caption mute-3 src-note" style={{ marginTop: "var(--s-sm)" }}>
           <Pair
-            hi={`विफल UPI, IMPS या ATM लेन-देन। RBI के नियम आपके पक्ष में हैं: पूरा रिफंड और ₹100/दिन देरी की क्षतिपूर्ति। हक़-वाणी गणना करता है, आपकी आवाज़ सबूत बनाता है, और कॉल में आपका साथी रहता है। कॉल हमेशा आप करते हैं। ${over > 0 ? "सैंपल में " + over + " दिन देरी = " + fmtInr(works.ent.penalty_inr) + " क्षतिपूर्ति तक।" : ""}`}
-            en="Failed UPI, IMPS or ATM transaction? RBI rules are exact in your favour: the full refund plus ₹100 per day of delay. HaqVaani computes them in plain Python, turns your spoken words into evidence, and stays beside you on the call. You always make the call yourself."
+            hi={over > 0 ? `सैंपल · ${over} दिन देरी = ${fmtInr(works.ent.penalty_inr)} क्षतिपूर्ति तक` : "सैंपल · synthetic demo"}
+            en={over > 0 ? `Sample · ${over} days overdue = up to ${fmtInr(works.ent.penalty_inr)} compensation` : "Sample · synthetic demo"}
           />
         </p>
-        <VoiceTiles parallaxClass="act-fig" />
       </div>
+      <Marquee
+        tone="accent"
+        items={[
+          "UTR 629188340112",
+          "18 OCT 2026",
+          "₹3,200 · UPI P2P",
+          "KAT GAYA — पैसा कट गया",
+          "RBI/2019-20/67",
+        ]}
+      />
     </section>
   );
 }
 
-function utrid(works) {
-  const it = works.ent.utr || (works.source === "demo" ? "629188340112" : "");
-  return it ? it : "—";
-}
-
-/* Act 02 — RULE · the RBI clock */
-function ActRule({ reduced, works }) {
-  const ruleRef = useRef(null);
+/* Act 02 — RULE · the RBI clock, pinned scrub scene */
+function RuleAct({ reduced, works }) {
+  const sceneRef = useRef(null);
   const lineDraw = useRef(null);
   const [staticProgress, setStaticProgress] = useState(reduced ? 1 : 0);
 
   useEffect(() => {
     if (reduced) {
       setStaticProgress(1);
-      return;
+      return undefined;
     }
     const ctx = gsap.context(() => {
       gsap.fromTo(
@@ -227,46 +285,51 @@ function ActRule({ reduced, works }) {
           transformOrigin: "0 20px",
           ease: "none",
           scrollTrigger: {
-            trigger: ruleRef.current,
+            trigger: sceneRef.current,
             start: "top 70%",
             end: "center 40%",
             scrub: true,
           },
         }
       );
-      gsap.from(ruleRef.current.querySelectorAll(".rule-payload > *"), {
+      gsap.from(sceneRef.current.querySelectorAll(".rule-payload > *"), {
         opacity: 0,
         y: 24,
         stagger: 0.1,
         duration: 0.5,
         ease: "power2.out",
-        scrollTrigger: { trigger: ruleRef.current, start: "top 55%" },
+        scrollTrigger: { trigger: sceneRef.current, start: "top 55%" },
+      });
+      gsap.to(sceneRef.current.querySelector(".ghost-num"), {
+        yPercent: 20,
+        ease: "none",
+        scrollTrigger: { trigger: sceneRef.current, start: "top bottom", end: "bottom top", scrub: true },
       });
     });
     return () => ctx.revert();
   }, [reduced]);
 
   const tat = works.ent.tat_date;
+
   return (
-    <section className="act" id="actRule" data-tone="red">
-      <div className="act-inner" ref={ruleRef}>
-        <ActKicker n="ACT 02" en="rule — the law's clock" hi="क़ानून की घड़ी" />
+    <section className="act" id="actRule" data-tone="red" ref={sceneRef}>
+      <GhostNum cls="rule-ghost">T+1</GhostNum>
+      <div className="act-inner">
         <div className="rule-payload">
-          <h2 className="d-lg" lang="hi-IN" style={{ marginBottom: "var(--s-xs)" }}>
+          <ActKicker n="ACT 02" en="rule — the law's clock" hi="क़ानून की घड़ी" />
+          <h2 className="d-lg" lang="hi-IN" style={{ marginBottom: "var(--s-md)" }}>
             नियम आपकी तरफ़ है।
           </h2>
-          <p className="body mute-2" style={{ maxWidth: "58ch", marginBottom: "var(--s-sm)" }}>
-            <Pair
-              hi="UPI P2P में बैंक को अगले कार्य दिवस (T+1) तक सुलझाना है — RBI/2019-20/67। उसको पार करने का हर दिन महँगा है (बैंक के लिए)।"
-              en="For a failed UPI P2P payment the bank must settle by the next working day (T+1) — circular RBI/2019-20/67. Every day past it becomes expensive for the bank."
-            />
-          </p>
+          <div className="rule-meta">
+            <div className="rule-chip"><span className="k">T</span><span className="v num">18 OCT</span></div>
+            <div className="rule-chip"><span className="k">TAT</span><span className="v num">{tat ? String(tat).toUpperCase() : "—"}</span></div>
+            <div className="rule-chip"><span className="k">RBI</span><span className="v">/2019-20/67</span></div>
+          </div>
         </div>
-        {/* the orange progress line draws toward the deadline numeral (scrub) */}
         <DeadLineRule progressRef={lineDraw} staticProgress={staticProgress} />
         <p className="omega-num num" style={{ marginTop: "var(--s-xs)" }}>T+1</p>
         <p className="tag" style={{ color: "var(--ink-3)", marginTop: "var(--s-sm)" }}>
-          {tat && <span>BANK TAT · {String(tat).toUpperCase()}</span>} {works.source === "demo" ? "· SAMPLE CASE · SYNTHETIC DEMO" : "· FROM PYTHON"}
+          {works.source === "demo" ? "SAMPLE CASE · SYNTHETIC DEMO" : "FROM PYTHON — never AI"}
         </p>
         <LedgerArt parallaxClass="act-fig" />
       </div>
@@ -274,15 +337,15 @@ function ActRule({ reduced, works }) {
   );
 }
 
-/* Act 03 — ₹100/DIN · the compensation ticker */
-function ActDin({ reduced, works }) {
+/* Act 03 — ₹100/DIN · compensation ticker */
+function DinAct({ reduced, works }) {
   const secRef = useRef(null);
   const [value, setValue] = useState(reduced ? works.ent.penalty_inr || 100 : 0);
 
   useEffect(() => {
     if (reduced) {
       setValue(works.ent.penalty_inr || 100);
-      return;
+      return undefined;
     }
     const target = works.ent.penalty_inr || 100;
     const obj = { v: 0 };
@@ -301,37 +364,48 @@ function ActDin({ reduced, works }) {
         ease: "power2.out",
         scrollTrigger: { trigger: secRef.current, start: "top 60%" },
       });
+      gsap.to(secRef.current.querySelector(".ghost-num"), {
+        yPercent: 16,
+        ease: "none",
+        scrollTrigger: { trigger: secRef.current, start: "top bottom", end: "bottom top", scrub: true },
+      });
     });
     return () => ctx.revert();
   }, [reduced, works.ent.penalty_inr]);
 
   return (
-    <section className="act" id="actDin" data-tone="indigo">
-      <div className="act-inner" ref={secRef}>
-        <ActKicker n="ACT 03" en="₹100 din — every late day pays" hi="₹100 हर दिन" />
+    <section className="act" id="actDin" data-tone="indigo" ref={secRef}>
+      <GhostNum cls="din-ghost">₹</GhostNum>
+      <div className="act-inner">
         <div className="tick-payload">
-          <p className="tag" style={{ color: "var(--ink-3)" }}>RBI suo motu compensation</p>
-          <p className="omega-num num" aria-live="off" style={{ fontVariantNumeric: "tabular-nums" }}>
+          <ActKicker n="ACT 03" en="₹100 din — every late day pays" hi="₹100 हर दिन" />
+          <p className="omega-num num" aria-live="off">
             {fmtInr(value)}<span style={{ fontSize: "0.28em", color: "var(--ink-3)" }}> / दिन</span>
           </p>
-          <p className="body mute-2" style={{ maxWidth: "58ch" }}>
-            <Pair
-              hi="यह हिसाब कोई AI नहीं : खुले Python कोड (haqvaani/statutory.py) से निकलता है। गणना दिखाएँ, हर क़दम देखें।"
-              en="The math is never an AI guess: it comes from open Python (haqvaani/statutory.py). Open the calculation drawer and see every line."
-            />
+          <p className="tag" style={{ color: "var(--ink-3)" }}>
+            RBI suo motu compensation · open Python, never an AI guess
           </p>
         </div>
-        <DraftArt parallaxClass="act-fig" />
+        <DraftGhostArt />
       </div>
     </section>
   );
 }
 
+/* tiny recurring-coin stack (visual, not a number source) */
+function DraftGhostArt() {
+  return (
+    <div className="draft-ghost-art" aria-hidden="true">
+      <WhisperArt parallaxClass="act-fig" />
+    </div>
+  );
+}
+
 /* Act 04 — WAPAS · refund credited — the ONLY --success moment */
-function ActWapas({ reduced, works }) {
+function WapasAct({ reduced, works }) {
   const ref = useRef(null);
   useEffect(() => {
-    if (reduced) return;
+    if (reduced) return undefined;
     const ctx = gsap.context(() => {
       gsap.from(ref.current.querySelectorAll(".wapas-payload > *"), {
         opacity: 0,
@@ -346,9 +420,11 @@ function ActWapas({ reduced, works }) {
   }, [reduced]);
 
   const total = works.ent.total_inr || works.ent.claim_inr;
+
   return (
-    <section className="act" id="actWapas" data-tone="green">
-      <div className="act-inner" ref={ref}>
+    <section className="act" id="actWapas" data-tone="green" ref={ref}>
+      <GhostNum cls="wapas-ghost">{total ? fmtInr(total) : "₹"}</GhostNum>
+      <div className="act-inner">
         <div className="wapas-payload">
           <ActKicker n="ACT 04" en="wapas — refund credited" hi="पैसा वापस" />
           <div style={{ display: "flex", gap: "var(--s-md)", alignItems: "center", flexWrap: "wrap" }}>
@@ -360,15 +436,19 @@ function ActWapas({ reduced, works }) {
           <p className="sub num" style={{ color: "var(--success)", marginTop: "var(--s-sm)" }}>
             REFUND CREDITED {total ? "· " + fmtInr(total) : ""}
           </p>
-          <p className="body mute-2" style={{ maxWidth: "58ch", marginTop: "var(--s-sm)" }}>
+          <p className="caption mute-2" style={{ maxWidth: "52ch", marginTop: "var(--s-sm)" }}>
             <Pair
-              hi="हर शिकायत की कहानी यहीं ख़त्म होनी चाहिए : रिफंड, क्षतिपूर्ति, सबूत आपके पास। इसी लिए यह पूरे प्रोडक्ट में इकलौती हरी जगह है।"
-              en="Every complaint should end exactly here: refund, compensation, and evidence in your hands. This is the only green in the entire product."
+              hi="हर शिकायत की कहानी यहीं ख़त्म होनी चाहिए : रिफंड, क्षतिपूर्ति, सबूत आपके पास। यह पूरे प्रोडक्ट में इकलौती हरी जगह है।"
+              en="Every complaint ends here: refund, compensation, evidence in your hands. The only green in the product."
             />
           </p>
           <WhisperArt parallaxClass="act-fig" />
         </div>
       </div>
+      <Marquee
+        tone="success"
+        items={["REFUND CREDITED", "पैसा वापस", "ऊपर लौटा", "₹" + (total ? fmtInr(total).replace("₹", "") : "3,800")]}
+      />
     </section>
   );
 }
@@ -377,7 +457,7 @@ function ActWapas({ reduced, works }) {
 function Journey({ reduced }) {
   const ref = useRef(null);
   useEffect(() => {
-    if (reduced) return;
+    if (reduced) return undefined;
     const ctx = gsap.context(() => {
       gsap.from(ref.current.querySelectorAll(".steps li"), {
         opacity: 0,
@@ -394,41 +474,36 @@ function Journey({ reduced }) {
   const steps = [
     {
       n: "01",
-      hi: "बोलिए · Speak",
-      en: "Voice intake — one messy Hinglish breath condenses into four checked facts.",
-      hiLong: "एक गड़बड़ Hinglish शिकायत सुनिए : राशि, तारीख़, UTR, क़िसम — हर सच आप जाँचेंगे।",
+      hi: "बोलिए",
+      en: "Voice intake — one breath becomes four checked facts.",
       href: "#/voice-intake",
       cta: "बोलना शुरू करें · start speaking",
     },
     {
       n: "02",
-      hi: "जाँचें · Check",
-      en: "Rights check — pure Python prints the RBI timeline and ₹100/day ledger.",
-      hiLong: "हक की जाँच : Python स ही मेरा आगे कहना क्षतिपूर्ति है — कोई AI नहीं।",
+      hi: "जाँचें",
+      en: "Rights check — Python prints the RBI timeline and ₹100/day ledger.",
       href: "#/rights-check",
       cta: "मेरा हक देखें · my rights",
     },
     {
       n: "03",
-      hi: "तैयार करें · Prepare",
-      en: "Complaint drafts in Hindi & English — you approve every single word.",
-      hiLong: "बैंक, व्हाट्सएप, ईमेल ड्राफ़्ट : हिन्दी + English : आपकी सहमति के बिना कुछ नहीं जाता।",
+      hi: "तैयार करें",
+      en: "Complaint drafts in Hindi & English — you approve every word.",
       href: "#/complaint-builder",
       cta: "ड्राफ़्ट बनाइए · build the draft",
     },
     {
       n: "04",
-      hi: "कॉल · Call",
-      en: "Assisted call — you dial the bank, HaqVaani whispers what to say, and catches the docket.",
-      hiLong: "सहायता कॉल : आप डायल करते हैं, हक़-वाणी क्या कहना है दिखाता है और डॉकेट नंबर पकड़ता है — Simulated IVR / synthetic demo.",
+      hi: "कॉल",
+      en: "Assisted call — you dial, HaqVaani whispers what to say, catches the docket.",
       href: "#/assisted-call",
-      cta: "साथ में कॉल · the call",
+      cta: "साथ में कॉल · the call — Simulated IVR / synthetic demo",
     },
     {
       n: "05",
-      hi: "सबूत · Prove",
+      hi: "सबूत",
       en: "Docket, dossier, export — the whole case verbatim-verified, JSON in your hand.",
-      hiLong: "जाँचा हुआ डॉकेट, पूरा केस फ़ोल्डर — JSON सेव व प्रिंट : सबूत आपके पास।",
       href: "#/dossier",
       cta: "पूरा फ़ोल्डर · the dossier",
     },
@@ -438,20 +513,17 @@ function Journey({ reduced }) {
     <section id="journey" data-tone="indigo" style={{ padding: "var(--pad-section) 0" }}>
       <div className="act-inner" ref={ref}>
         <ActKicker n="HOW" en="the five steps" hi="पाँच क़दम" />
-        <h2 className="d-lg" style={{ marginBottom: "var(--s-lg)" }} lang="hi-IN">
+        <h2 className="d-lg" style={{ marginBottom: "var(--s-md)" }} lang="hi-IN">
           पाँच क़दम, एक कहानी।
         </h2>
-        <ol className="steps">
+        <ol className="steps steps-visual">
           {steps.map((s) => (
             <li key={s.n}>
               <span className="step-num" aria-hidden="true">{s.n}</span>
               <div>
                 <h3 lang="hi-IN">{s.hi}</h3>
-                <p>
-                  <Pair hi={s.hiLong} en={s.en} />
-                  <br />
-                  <a href={s.href}>{s.cta}</a>
-                </p>
+                <p className="mute-2" lang="en-IN">{s.en}</p>
+                <a href={s.href}>{s.cta}</a>
               </div>
             </li>
           ))}
@@ -469,7 +541,7 @@ function Cta({ works }) {
         <h2 className="d-lg" lang="hi-IN" style={{ marginBottom: "var(--s-sm)" }}>
           अपना मामला शुरू करें।
         </h2>
-        <p className="body mute-2" style={{ maxWidth: "58ch", marginBottom: "var(--s-md)" }}>
+        <p className="caption mute-2" style={{ maxWidth: "56ch", marginBottom: "var(--s-md)" }}>
           <Pair
             hi="सबसे पहले सहमति (DPDP Act 2023), फिर माइक। सब कुछ सिर्फ़ इसी सत्र तक।"
             en="Consent first (DPDP Act 2023), then the mic. Everything stays within this session."
@@ -536,26 +608,22 @@ export default function Landing() {
     };
   }, [reduced]);
 
-  /* in-page anchors (#actKat…) scroll in place — they must never become
-     routes: the hash router parses location.hash, so a bare #actKat would
-     re-parse as a path and App's scroll-reset would kill the glide.
-     #/… links stay with the router untouched. Reduced-motion → instant. */
   function onNavClick(e) {
     const a = e.target && e.target.closest && e.target.closest("a[href^='#']");
     if (!a) return;
     const href = a.getAttribute("href");
-    if (!href || href.startsWith("#/")) return; /* hash routes: leave to the router */
+    if (!href || href.startsWith("#/")) return;
     if (e.defaultPrevented) return;
     e.preventDefault();
     if (href === "#top" || href === "#") {
       if (lenisRef.current) lenisRef.current.scrollTo(0);
-      else window.scrollTo({ top: 0 }); /* reduced motion: instant */
+      else window.scrollTo({ top: 0 });
       return;
     }
     const el = document.querySelector(href);
     if (!el) return;
     if (lenisRef.current) lenisRef.current.scrollTo(el, { offset: -84, duration: 1.05 });
-    else el.scrollIntoView({ block: "start" }); /* reduced motion: instant */
+    else el.scrollIntoView({ block: "start" });
   }
 
   return (
@@ -563,10 +631,10 @@ export default function Landing() {
       <LandingNav mode={mode} />
       <EdgeRail reduced={reduced} />
       <main>
-        <ActKat reduced={reduced} works={works} />
-        <ActRule reduced={reduced} works={works} />
-        <ActDin reduced={reduced} works={works} />
-        <ActWapas reduced={reduced} works={works} />
+        <HeroAct reduced={reduced} works={works} />
+        <RuleAct reduced={reduced} works={works} />
+        <DinAct reduced={reduced} works={works} />
+        <WapasAct reduced={reduced} works={works} />
         <Journey reduced={reduced} />
         <Cta works={works} />
       </main>

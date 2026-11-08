@@ -109,6 +109,7 @@ export default function RightsCheck() {
 
   return (
     <>
+      <div className="screen-ghost" aria-hidden="true">₹100</div>
       <div className="col" style={{ gap: "var(--s-xs)" }}>
         <h1 className="d-lg" lang="hi-IN">RBI नियम कहते हैं : आपको कितना मिलना चाहिए।</h1>
         <p className="body mute-2" style={{ maxWidth: "60ch" }}>
