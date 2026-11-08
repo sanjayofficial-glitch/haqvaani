@@ -9,6 +9,9 @@
    disclosure).                                                        */
 
 import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
 import { useMode } from "../hooks/useMode.jsx";
 import { useReducedMotion } from "../hooks/useReducedMotion.js";
 import { api } from "../lib/api.js";
@@ -19,6 +22,8 @@ import Act02 from "./acts/Act02";
 import Act03 from "./acts/Act03";
 import Act04 from "./acts/Act04";
 import "../styles/paper.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const NAV = [
   ["#act1", "Failed"],
@@ -67,16 +72,46 @@ export default function Landing() {
   const [days, setDays] = useState(7);
   const { s, source } = useScenario(amount, days, mode);
   const rootRef = useRef(null);
+  const lenisRef = useRef(null);
 
-  /* page progress -> top bar (same as the reference) */
+  /* Lenis smooth scroll, synced with ScrollTrigger (disabled under reduced
+     motion — native scroll remains). This is the single biggest smoothness
+     win: the wheel input is smoothed independently of the pinned scenes. */
   useEffect(() => {
+    if (reduced) return undefined;
+    const lenis = new Lenis({ autoRaf: false, smoothWheel: true });
+    lenisRef.current = lenis;
+    lenis.on("scroll", ScrollTrigger.update);
+    const tick = (time) => lenis.raf(time * 1000);
+    gsap.ticker.add(tick);
+    gsap.ticker.lagSmoothing(0);
+    return () => {
+      lenisRef.current = null;
+      gsap.ticker.remove(tick);
+      lenis.destroy();
+    };
+  }, [reduced]);
+
+  /* page progress -> top bar (same as the reference, but throttled to one
+     style write per animation frame instead of per scroll event) */
+  useEffect(() => {
+    let raf = null;
     const on = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      document.documentElement.style.setProperty("--p", String(max > 0 ? window.scrollY / max : 0));
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = null;
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        document.documentElement.style.setProperty("--p", String(max > 0 ? window.scrollY / max : 0));
+      });
     };
     on();
     window.addEventListener("scroll", on, { passive: true });
-    return () => window.removeEventListener("scroll", on);
+    window.addEventListener("resize", on);
+    return () => {
+      window.removeEventListener("scroll", on);
+      window.removeEventListener("resize", on);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
 
   /* in-page anchors scroll in place; #/… links keep routing to the app */
@@ -88,12 +123,14 @@ export default function Landing() {
     if (e.defaultPrevented) return;
     e.preventDefault();
     if (href === "#top" || href === "#") {
-      window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
+      if (lenisRef.current) lenisRef.current.scrollTo(0, { duration: 1.2 });
+      else window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
       return;
     }
     const el = document.querySelector(href);
     if (!el) return;
-    el.scrollIntoView({ block: "start", behavior: reduced ? "auto" : "smooth" });
+    if (lenisRef.current) lenisRef.current.scrollTo(el, { duration: 1.2 });
+    else el.scrollIntoView({ block: "start", behavior: reduced ? "auto" : "smooth" });
   }
 
   return (

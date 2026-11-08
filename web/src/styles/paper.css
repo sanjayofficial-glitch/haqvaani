@@ -116,6 +116,22 @@
 }
 .paper-root .scene { flex: 1; min-height: 0; width: 100%; display: block; overflow: visible; transform: scale(1.05); transform-origin: 50% 50%; }
 
+/* ---------- performance ---------- */
+/* hint the compositor about groups GSAP animates during the pinned scrub */
+.paper-root .act__stage { will-change: transform; }
+.paper-root .coin-g, .paper-root .sheet-fly, .paper-root .over-tile,
+.paper-root .coin-k, .paper-root .seal, .paper-root .burst,
+.paper-root .back-coin, .paper-root .glint, .paper-root .whisper,
+.paper-root .stamp-fail, .paper-root .stamp-overdue, .paper-root .stamp-rate,
+.paper-root .stamp-credit, .paper-root .confetti-bit, .paper-root .tick-badge {
+  will-change: transform, opacity;
+}
+/* skip layout/paint for off-screen static regions */
+.paper-root .hero, .paper-root .details, .paper-root footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
 /* spinner on the phone's "processing" step */
 .paper-root .ph-proc { transform-box: fill-box; transform-origin: center; animation: hvSpin 1s linear infinite; }
 @keyframes hvSpin { to { transform: rotate(360deg); } }
