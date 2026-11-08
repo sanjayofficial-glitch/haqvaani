@@ -40,10 +40,13 @@ See `RULES.md` for the full, authoritative list. Summary:
 
 ## 3. Current Phase
 
-**Day 1 of 16 — Foundation & Sprint 0** (25 October 2026 → 10 November 2026).
-Immediate goal: register on gnani.ai/internship, claim the 5,000 API credits, verify a live
-Prisma v2.5 WSS + Timbre SSE roundtrip, and scaffold the repo with this documentation.
-See `ROADMAP.md` and `TODO.md`.
+**Day 15 of 16 — Design System & Demo Prep** (25 October 2026 → 10 November 2026).
+The "HaqVaani Story" design system (`docs/DESIGN.md`) is the frontend: story landing + all
+11 app screens wired to `haqvaani/api.py` with honest synthetic-demo fallbacks;
+`python scripts/_ui_integrity_check.py` must stay green after any UI change (it now checks
+**both** the `frontend/` system and the React/Vite rebuild in `web/`). Remaining:
+smoke-test the screens against `make run-api`, record the simulated 60s demo video, submit
+before 10 November 2026, 11:59 PM IST. See `ROADMAP.md` and `TODO.md`.
 
 ---
 
@@ -57,7 +60,7 @@ See `ROADMAP.md` and `TODO.md`.
 | Orchestrator | Python FastAPI + asyncio | Free, single-file deployable, easy for agents to read |
 | DSP / audio | NumPy + Silero VAD | Local voice activity detection for assisted call listening |
 | Statutory engine | Pure Python + Pydantic v2 | Deterministic, auditable, LLM-proof RBI calculations |
-| Frontend / HUD | Single HTML file (vanilla JS, Canvas, Tailwind CDN) | Completely free, previewable, no build step |
+| Frontend | Story landing + 11 app screens, shared tokens/rail/router (vanilla JS, no build step) | Free, previewable, spec in `docs/DESIGN.md` |
 | Database | SQLite (file-based) or none | Free, zero-config; prefer none for MVP |
 | Auth | Minimal: consent screen + session, no real PII | Free; no real users |
 | Deployment | Hugging Face Spaces (Docker) / Render free / Colab | Free tier only |
@@ -111,3 +114,4 @@ The treaty border is `haqvaani/schemas.py` (`CitizenIntake`, `AgentNegotiationEx
 - `docs/interview_qa.md` — Gnani interview Q&A with model answers.
 - `docs/evaluation.md` — Success metrics (WER, latency, safety, compliance, demo quality).
 - `docs/ui_ux_design_system.md` — Design system (glass + clay + accessibility).
+- `docs/DESIGN.md` — "HaqVaani Story" design system — the frontend source of truth: two canvases (story/evidence), rail device, semantic colours, screen flow, accessibility rules. `frontend/landing.html`, `frontend/screens/*.html`, `frontend/css/*`, `frontend/js/{rail,router}.js` implement it; `scripts/_ui_integrity_check.py` enforces the shell contract.

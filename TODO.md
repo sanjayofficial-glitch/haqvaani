@@ -4,9 +4,14 @@
 > bank dialing. Tasks are ordered by priority. Pick the top `todo` task, mark it `in progress`,
 > implement, test, mark `done`, and update `CHANGELOG.md`.
 >
-> **Status (6 Nov 2026):** Core pure-Python engine shipped — `schemas.py`, `statutory.py`,
-> `safety.py` + tests, `pyproject.toml`, git initialized. NEXT: register/claim Gnani credits,
-> verify real API endpoints, build `stt_client.py`/`tts_client.py`, then wire E2E demo.
+> **Status (8 Nov 2026, Day 15/16):** The "HaqVaani Story" design system (docs/DESIGN.md) is
+> the frontend: story landing + all 11 app screens (start-case → consent → intake → statutory
+> check → complaint → call → dossier) live in `frontend/screens/`, wired to `haqvaani/api.py`
+> with honest synthetic-demo fallbacks; `scripts/_ui_integrity_check.py` green. **A second,
+> Awwwards-style React/Vite rebuild now lives in `web/`** (Heron × HaqVaani: editorial white,
+> charcoal ink, hairline rules, one orange accent `#fa3600`, mono technical voice; Lenis + GSAP
+> ScrollTrigger; all 11 screens + landing; same safety/consent/API contract, enforced by the
+> extended integrity check — both checks green). NEXT: record the 60s simulated demo video.
 
 ---
 
@@ -14,7 +19,7 @@
 
 - [ ] `todo` Register on `gnani.ai/internship`; claim the 5,000 free API credits on `app.gnani.ai/voice`.
 - [ ] `todo` Request `gnani/gnani-evon-v3.3-30B-A3B` weights on Hugging Face.
-- [ ] `todo` Verify a live Prisma v2.5 WSS + Timbre SSE roundtrip (speak → transcribe → speak back).
+- [ ] `in progress` Verify a live Prisma v2.5 WSS + Timbre SSE roundtrip (speak → transcribe → speak back) — run `python scripts/verify_gnani_roundtrip.py` once `GNANI_API_KEY` is set.
 - [ ] `todo` Compliance review: confirm no autonomous dialing; plan simulated bank IVR for demo.
 - [x] `done` Scaffold repo structure (docs/, haqvaani/, eval/, frontend/, tests/).
 - [x] `done` Write root documentation: AGENTS.md, RULES.md, ARCHITECTURE.md, ROADMAP.md, TODO.md, CHANGELOG.md, README.md, CONTRIBUTING.md.
@@ -22,8 +27,8 @@
 
 ## Day 2 (Mon 26 Oct 2026): Gnani Clients + Consent UI
 
-- [ ] `todo` Build `haqvaani/stt_client.py` (Prisma v2.5 WSS, x-format=transcribe, ITN digits, hi-IN/en-IN).
-- [ ] `todo` Build `haqvaani/tts_client.py` (Timbre v2.5/v3.0 SSE, en-IN + hi-IN).
+- [x] `done` Build `haqvaani/stt_client.py` (Prisma v2.5 WSS per docs: x-api-key-id header, PCM 1024-byte frames @ real-time cadence, commit frame, VAD/telephony preset, ITN transcribe, bias).
+- [x] `done` Build `haqvaani/tts_client.py` (Timbre v2.5/v3.0 SSE per docs: /api/v1/tts/sse, {text, voice, model, language, speed, audio_config}, chunk reassembly → single WAV; voice catalog map).
 - [x] `done` Build `haqvaani/safety.py`: consent/disclosure gates, FORBIDDEN_SECRET_RE, AI disclosure text, verbatim docket verify.
 - [ ] `todo` End-to-end micro-test: 8 kHz noisy utterance → Prisma → Timbre playback; measure TTFA.
 - [ ] `todo` Track Gnani credit budget (5,000 free credits).
@@ -42,7 +47,7 @@
 - [ ] `todo` Deploy Evon v3.3 on vLLM/SGLang (spot GPU); prefix-cache system prompt; short JSON schema (<45 tok).
 - [x] `done` Build `haqvaani/complaint_builder.py`: bank complaint draft, WhatsApp/email draft, evidence checklist, RB-IOS 2026 CMS draft.
 - [x] `done` Build `haqvaani/orchestrator.py`: 4-mode pipeline switcher (offline E2E self-test works; STT/TTS/Evon plug in via VoiceAPI adapter).
-- [ ] `todo` Build `haqvaani/stt_client.py` + `haqvaani/tts_client.py` (needs verified Gnani endpoints).
+- [ ] `todo` Build `haqvaani/stt_client.py` + `haqvaani/tts_client.py` (needs verified Gnani endpoints) — **done** (see Day 2; live verification pending key).
 - [ ] `todo` Build assisted-call UI: start call, real-time script display, docket capture, post-call summary.
 - [ ] `todo` End-to-end run with simulated data; verify no autonomous dialing anywhere.
 
@@ -60,7 +65,16 @@
 
 ## Days 14–15 (Sat 7 – Sun 8 Nov 2026): Simulated Demo Video
 
-- [ ] `todo` Record uncut 60s Simulated Demo Day Drop (16:9 + 9:16) per docs/demo_storyboard.md.
+- [x] `done` Restyle `frontend/landing.html`, `frontend/glass_ui.html`, `frontend/hud.html` with `docs/experience_concept.md` tokens (two canvases, indigo primary, AA-safe semantics) before recording.
+- [x] `done` Build `haqvaani/api.py` (serves frontend at `/`, `/api/health|consent|intake|rights|complaint|assisted|tts|dossier`, consent-gated, secret-redacted) + `haqvaani/voice_clients.py` adapters; 41 tests pass; run with `make run-api`.
+- [x] `done` Mirror Gnani docs into `docs/gnani_api/` (README, quick-start, api-reference-cheatsheet, llms-index) and rewrite live paths to the documented contract — `X-API-Key-ID`, real endpoints, PCM framing, TTS payload/audio_config. Offline contract tests in `tests/test_voice_contract.py`; live verify script `scripts/verify_gnani_roundtrip.py`.
+- [x] `done` Product-completeness pass on `glass_ui.html`: calculation drawer, EN/HI draft toggle + approval model, brush-off badge, dossier modal with JSON export, browser-TTS fallback for Hindi summary.
+- [x] `done` Design-system build-out per `docs/DESIGN.md`: story landing (`frontend/landing.html`, scroll-rail + beats) and all 11 app screens in `frontend/screens/` — start-case, consent, voice-intake, fact-review, rights-check, complaint-builder, call-prep, assisted-call, docket-capture, post-call, dossier — each with the shared shell (step bar via `#stepMount`, "Synthetic demo" chip, persistent safety bar), Hindi-first copy, and honest demo fallbacks mirroring `statutory.py` self-test values.
+- [x] `done` Rewrite `scripts/_ui_integrity_check.py` for the new system: 11-screen shell contract, landing rail beats, consent gate on voice screens, end-to-end flow links, banned `alert()`/`text-transform`/gradients/entrance-everywhere hooks. Green.
+- [x] `done` Rebuild the frontend as a Vite + React 18 app in `web/` (Heron × HaqVaani: editorial white `#ffffff`, charcoal ink `#282828`, hairline rules `#e5e7eb`, ONE orange accent `#fa3600`, green `#1a7f4b` only for refund-credited; Archivo / Geist Mono / Noto Sans Devanagari; spacing 8/18/26/54/132, section pad 75px, gutter 38px; buttons 0-radius/75px/min-222px; cards 8px; chips pill; `--speed:260ms` + `--ease`; `prefers-reduced-motion` disables all motion). Dependencies: gsap + ScrollTrigger, lenis, framer-motion — no UI library. Landing scroll-story (4 acts: KAT GAYA → RULE → ₹100/DIN → WAPAS + 5-step journey + CTA/safety band), all 11 screens mirroring `frontend/screens/*.html` behaviour, hash router + API client + session state + consent gate + demo fixtures + i18n Pair/LangToggle in `web/src/lib/`, AppShell (brand head, mode chip, 5-step rail, safety bar), hooks (useCapture/useMode/useToast/useSpeak/useReducedMotion/useWorksExample), SVG line-art library. `npm run build` clean (64 modules, gzip 130 kB).
+- [x] `done` Extend `scripts/_ui_integrity_check.py` to enforce the same contract on `web/` in the same commit: exact token values, approved Google fonts only, no gradients/glass/string-DOM, SECRET_RE + exact AI-disclosure line + "Simulated IVR / synthetic demo" labels + no-autonomous-dialing line, consent-gate dispatch, all 11 routes in router + dispatch, `/api` proxy. Both systems green.
+- [x] `done` Smoke-test the `web/` app against the API: `npm run dev` on 5173 + proxy → `make run-api` on 8000; `GET /api/health`, consent → rights API contract verified through the proxy (rights returns full entitlement; dossier correctly 404 CASE_INCOMPLETE until all four modes complete).
+- [ ] `todo` Smoke-test every screen against the API (`make run-api`, pages at `/` and `/screens/*.html`), then record uncut 60s Simulated Demo Day Drop (16:9 + 9:16) per docs/demo_storyboard.md.
 - [ ] `todo` Burned captions; "SIMULATED DEMO" + "NO AUTONOMOUS DIALING" badges.
 - [ ] `todo` Publish on LinkedIn/X with #GnaniAI #GreatIndianAIInternshipChallenge.
 - [ ] `todo` Save post URLs for submission.

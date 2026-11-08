@@ -1,0 +1,75 @@
+/* ==========================================================================
+   HaqVaani "Heron × HaqVaani" design tokens — web/ source of truth.
+   One canvas (white), charcoal ink, hairline rules, ONE orange signal accent,
+   mono technical voice. Depth comes from scale, contrast and the accent only:
+   no shadows, no gradients, no glass. (docs/DESIGN.md behavioral spec +
+   the user prompt's merged Heron palette, which resolves colour conflicts.)
+   ========================================================================== */
+
+:root {
+  /* ------------------------------------------------------------- colors -- */
+  --accent: #fa3600; /* the ONLY signal colour: rail progress, deadline
+                            countdown, ₹/day ticker, primary CTA, focus rings */
+  --ink: #282828; /* all text — never pure black */
+  --line: #e5e7eb; /* 1px borders, hairline rules, separators */
+  --canvas: #ffffff; /* the dominant background everywhere */
+  --surface: #ffffff;
+  --success: #1a7f4b; /* ONLY for the "refund credited" terminal state */
+
+  /* derivative neutrals (opacity of ink/line, never new hues) */
+  --ink-2: rgba(40, 40, 40, 0.72);
+  --ink-3: rgba(40, 40, 40, 0.52);
+  --ink-4: rgba(40, 40, 40, 0.38);
+  --accent-soft: rgba(250, 54, 0, 0.08); /* 8% wash only for focus/track fills */
+  --success-soft: rgba(26, 127, 75, 0.08);
+
+  /* --------------------------------------------------------- typography -- */
+  --font-display: "Archivo", "Noto Sans Devanagari", sans-serif;
+  --font-mono: "Geist Mono", "SFMono-Regular", Consolas, monospace;
+  --font-hi: "Noto Sans Devanagari", "Archivo", sans-serif;
+
+  --fs-display: clamp(40px, 6.4vw, 62px); /* 62px display */
+  --fs-display-lg: clamp(30px, 4.6vw, 44px); /* 44px lg */
+  --fs-h2: clamp(20px, 2.4vw, 26px);
+  --fs-sub: clamp(18px, 2vw, 20px); /* 20px subheads */
+  --fs-sub-sm: 18px;
+  --fs-body: 18px;
+  --fs-body-sm: 16px;
+  --fs-caption: 14px;
+  --fs-tiny: 12px;
+
+  --track-display: -0.02em; /* Archivo headline tracking */
+  --track-mono: 0.01em;
+
+  /* ----------------------------------------------------------- spacing -- */
+  --s-xs: 8px;
+  --s-sm: 18px;
+  --s-md: 26px;
+  --s-lg: 54px;
+  --s-xl: 132px;
+  --pad-section: 75px; /* vertical section padding */
+  --gutter: 38px; /* horizontal page gutter */
+
+  /* --------------------------------------------------------- components -- */
+  --radius-card: 8px;
+  --radius-chip: 999px; /* chips are the one pill element */
+  --btn-h: 75px;
+  --btn-h-sm: 64px; /* small-viewport shrink; never fixed width */
+  --btn-min: 222px;
+  --ruled: 1px solid var(--line);
+
+  --speed: 260ms; /* interaction feedback ≤ 260ms, precise not bouncy */
+  --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  --focus-ring: 0 0 0 2px var(--accent);
+}
+
+@media (max-width: 720px) {
+  :root {
+    --pad-section: 54px;
+    --gutter: 22px;
+    --btn-h: 64px;
+    --s-xl: 90px;
+    --s-lg: 42px;
+  }
+}

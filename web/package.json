@@ -1,0 +1,26 @@
+{
+  "name": "haqvaani-web",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "HaqVaani interactive storytelling frontend (Heron x HaqVaani design) - scroll-driven landing + 11 case screens, wired to the FastAPI on :8000.",
+  "scripts": {
+    "dev": "vite --port 5173",
+    "build": "vite build",
+    "preview": "vite preview --port 4173"
+  },
+  "dependencies": {
+    "framer-motion": "^11.15.0",
+    "gsap": "^3.12.5",
+    "lenis": "^1.1.18",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.11"
+  },
+  "allowScripts": {
+    "esbuild@0.21.5": true
+  }
+}

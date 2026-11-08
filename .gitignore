@@ -9,6 +9,9 @@ __pycache__/
 build/
 dist/
 
+# Node / web app
+node_modules/
+
 # Local results (measured benchmark outputs — gitignored per PROJECT_STRUCTURE.md)
 eval/results/
 

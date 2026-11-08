@@ -58,7 +58,7 @@ trail — while keeping them in control.
 | Orchestrator | Python + FastAPI |
 | DSP / audio | NumPy + Silero VAD |
 | Statutory engine | Pure Python + Pydantic v2 |
-| Frontend / HUD | Single HTML file (vanilla JS, Canvas, Tailwind CDN) |
+| Frontend / HUD | Two frontends: `frontend/` (vanilla HTML/CSS/JS, served at `/`) and `web/` (Vite + React 18 scroll-story rebuild, dev at :5173) |
 | Database | SQLite (file-based) or none |
 | Deployment | Hugging Face Spaces (Docker) / Render free / Colab |
 
@@ -72,19 +72,35 @@ Budget: Gnani free 5,000 programme credits + open-source tools + free GPU (Kaggl
 # 1. Clone
 git clone <repo> haqvaani && cd haqvaani
 
-# 2. Configure Gnani credentials
-cp .env.example .env
-# Add GNANI_API_KEY=... (5,000 free credits from app.gnani.ai/voice)
-
-# 3. Install dependencies
+# 2. Install dependencies
 pip install -r requirements.txt
 
-# 4. Verify the Prisma → Timbre roundtrip (Day 1 milestone)
-python -m haqvaani.stt_client --self-test
-python -m haqvaani.tts_client --self-test
+# 3. Run the whole app (frontend + API)
+make run-api            # or: python -m haqvaani
+# → open http://localhost:8000  (landing → citizen app → HUD)
+```
 
-# 5. Run the statutory engine sanity check
-python -m haqvaani.statutory --self-test
+**The new React/Vite frontend (`web/`) — optional, dev mode:**
+
+```bash
+cd web && npm install && npm run dev     # → http://localhost:5173
+```
+
+`vite.config.js` proxies `/api` → `http://localhost:8000`, so the same
+backend contract works with no CORS changes. See `web/README.md` for the
+static-deploy (`VITE_API_BASE`) caveat.
+
+**Windows:** just double-click `run.bat` — it creates a venv, installs deps, starts
+the server, and opens the browser.
+
+**Live Gnani speech (optional):** copy `.env.example` → `.env`, add
+`GNANI_API_KEY` + endpoint URLs. Without them the app runs in offline demo mode
+fully (synthetic intake, deterministic statutory math, browser-TTS summary). The
+API health endpoint reports which capabilities are live:
+
+```bash
+curl http://localhost:8000/api/health
+# {"ok":true,"mode":"demo","stt_live":false,"tts_live":false,"evon_live":false}
 ```
 
 > All test data is synthetic (e.g. UTR 629188340112, SR-DB-884120). No real phone numbers,
@@ -102,6 +118,7 @@ python -m haqvaani.statutory --self-test
 - `CHANGELOG.md` — change log.
 - `CONTRIBUTING.md` — contribution guidelines.
 - `docs/` — legal matrix, latency budget, demo storyboard, interview Q&A, evaluation, UI/UX design system.
+- `web/README.md` — the React/Vite rebuild: run, proxy, static-deploy caveat, integrity contract.
 
 ---
 
