@@ -103,16 +103,6 @@ export default function StartCase() {
         </p>
       </div>
 
-      <div className="call-foot" style={{ marginTop: "var(--s-xs)" }}>
-        <div className="call-foot-row">
-          <Arrow size={14} />
-          <p className="caption mute-3" style={{ margin: 0, maxWidth: "64ch" }}>
-            चुनाव आपका : बाद में बदला जा सकता है। चित्र देखिए, फिर चुनिए।
-            <span className="pair"><span className="alt" lang="en-IN">Your pick — changeable later. Read with the picture, then choose.</span></span>
-          </p>
-        </div>
-      </div>
-
       <section style={{ marginTop: "var(--s-md)" }} aria-label="शिकायत प्रकार · dispute type">
         <ul className="case-cards" role="list" style={{ listStyle: "none", padding: 0, margin: 0 }}>
           {CARDS.map((c) => (

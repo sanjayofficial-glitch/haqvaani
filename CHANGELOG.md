@@ -5,6 +5,27 @@
 
 ---
 
+## [2026-11-09] — Remove start-case hint row (UX clean-up)
+
+Removed the non-compliance hint footer on the start-case screen
+("Your pick — changeable later …"). Safety/compliance rows kept:
+AppShell `.safety-in` panel + `.call-foot-row` (no autonomous dialing,
+AI disclosure, secret warnings) and PostCall's OTP-warning row.
+
+### Changed
+- `web/src/screens/StartCase.jsx` — deleted the `.call-foot` / `.call-foot-row`
+  hint block (the card grid still has its go-arrows; `Arrow` import kept).
+- `conftest.py` — autouse fixture strips `GNANI_/STT_/TTS_/EVON_` env before
+  every test, so the suite stays deterministic/offline now that `api.py`
+  loads `.env` (fixes the two env-leak failures).
+
+### Verified
+- `web/ npm run build` — clean.
+- `python scripts/_ui_integrity_check.py` — green (11 frontend + 11 web).
+- `python -m pytest tests/` — 54 passed.
+
+---
+
 ## [2026-11-09] — Fix consent-gate state wipe (React SPA) + browser QA scripts
 
 A headless-browser audit of `web/` (the React SPA served at :8001) found
