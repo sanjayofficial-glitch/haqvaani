@@ -60,7 +60,7 @@
 
 /* ---------- hero ---------- */
 .paper-root .hero {
-  min-height: 100svh; padding: 96px clamp(16px, 4vw, 56px) 40px;
+  min-height: 92svh; padding: 84px clamp(16px, 4vw, 56px) 28px;
   display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.9fr); gap: clamp(24px, 4vw, 64px);
   align-items: center; position: relative; overflow: hidden;
 }
@@ -97,13 +97,13 @@
 .paper-root .chip--org { background: var(--org); color: #fff; }
 
 /* ---------- acts ---------- */
-.paper-root .act { position: relative; height: 290vh; background: var(--paper); }
+.paper-root .act { position: relative; height: 230vh; background: var(--paper); }
 .paper-root .act:nth-of-type(even) { background: var(--paper-2); }
 .paper-root .act__stage {
   position: sticky; top: 0; height: 100vh; height: 100svh;
-  display: flex; flex-direction: column; padding: 70px clamp(12px, 3vw, 44px) 10px; box-sizing: border-box;
+  display: flex; flex-direction: column; padding: 46px clamp(12px, 3vw, 44px) 8px; box-sizing: border-box;
 }
-.paper-root .act__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; min-height: 88px; flex: none; }
+.paper-root .act__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; min-height: 76px; flex: none; }
 .paper-root .eyebrow { font-size: var(--fs-cap); letter-spacing: 0.18em; font-weight: 800; color: var(--ink-2); }
 .paper-root .eyebrow__n { color: var(--org); font-size: 15px; }
 .paper-root .act h2 { font-size: clamp(44px, 6.4vw, 84px); line-height: 0.98; margin: 2px 0 0; }
@@ -122,8 +122,8 @@
 @media (prefers-reduced-motion: reduce) { .paper-root .ph-proc { animation: none; } }
 
 /* ---------- details ---------- */
-.paper-root .details { padding: 96px clamp(16px, 4vw, 56px) 72px; background: var(--ink); color: var(--paper); }
-.paper-root .details h2 { font-size: clamp(48px, 7vw, 96px); line-height: 0.95; margin: 8px 0 36px; }
+.paper-root .details { padding: 72px clamp(16px, 4vw, 56px) 56px; background: var(--ink); color: var(--paper); }
+.paper-root .details h2 { font-size: clamp(48px, 7vw, 96px); line-height: 0.95; margin: 8px 0 28px; }
 .paper-root .details .kicker { color: #ff7a52; }
 .paper-root .details .kicker::before { background: #ff7a52; }
 .paper-root .grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
