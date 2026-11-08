@@ -5,6 +5,57 @@
 
 ---
 
+## [2026-11-08] — Landing rebuilt as the chosen "paper poster" UI (exact port)
+
+The landing page is rebuilt to match `optimizing-ui-visual-storytelling` —
+the user's chosen UI — **visually identical**: same layout, copy,
+animation choreography, stamps, phone/citizen/bank vector art, and same
+interaction. App screens untouched.
+
+### Changed
+- `web/src/landing/Landing.jsx` — rewritten as the reference App: top
+  progress bar (`.bar` + `--p`), hero with the interactive case calculator
+  (amount/days sliders), Acts 01–04, details ("Where text belongs"), and
+  footer. Hash-route handling kept (`#/…` → app; `#act1…#details` scroll
+  in place). Statutory numbers come from `POST /api/rights` (live) or the
+  labelled Python demo fixture — never computed in the frontend; demo mode
+  shows an honest "synthetic demo · sample case" note.
+- `web/src/landing/acts/Act.jsx`, `Act01–04.jsx` — exact ports of the
+  reference's sticky-scene shell and the four scrubbed GSAP timelines
+  (coin/barrier/FAILED; calendar/torn sheet/OVERDUE; ruler/coin stack/
+  burst; vault/bezier refund/CREDITED ✓). `prefers-reduced-motion` jumps
+  every timeline to its final frame.
+- `web/src/landing/art/{Bank,Citizen,Effects,Phone}.jsx` — exact ports of
+  the reference vector art (poses rig, phone tracker screens, stamps,
+  hatch/halftone/burst/speed/shock/spark/confetti/ear, ground).
+- `web/src/landing/data/scenario.js` — display model only; maps API/demo
+  numbers into the act shape (never computes statutory math).
+- `web/src/styles/paper.css` — the reference stylesheet, scoped under
+  `.paper-root` so shared class names on app screens (`.field`, `.chip`,
+  `.steps`, `.card`) are unaffected. Keyframe renamed `hvSpin`.
+- `web/index.html` — font link now loads the approved families for both
+  systems: Anton, Teko, Inter, JetBrains Mono, Noto Sans Devanagari
+  (paper landing) + Archivo, Geist Mono (app screens).
+- `scripts/_ui_integrity_check.py` — web-section moved to the new contract:
+  paper tokens (`--paper:#f4efe4`, `--org:#fa3600`, `--grn:#1a7f4b`),
+  `.paper-root` scope, `hvSpin` keyframe, hero sliders, `#top`/`#details`,
+  four `.act` scenes with `id=act1..4` + GSAP `build` timelines, font
+  allowlist incl. both families (BT Grotesk still banned). Safety checks
+  unchanged: `SECRET_RE`, exact AI-disclosure line, "Simulated IVR /
+  synthetic demo", "No autonomous dialing", consent gate, routes, proxy.
+- Footer carries the required honesty lines (no autonomous dialing ·
+  Simulated IVR / synthetic demo · AI disclosure) and a "Start your case"
+  link into the app flow.
+
+### Notes
+- This is a faithful port of the reference project; the only deviations are
+  invisible: the case calculator's numbers are sourced from the API (or the
+  labelled demo fixture) instead of client-side arithmetic, and the footer
+  honesty lines required by HaqVaani's rules.
+- `npm run build` clean; `python scripts/_ui_integrity_check.py` green.
+
+---
+
 ## [2026-11-08] — Cinematic visual pass on `web/` (epic-design)
 
 The `web/` landing and case screens moved from prose-heavy to visual-first:

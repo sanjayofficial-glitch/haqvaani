@@ -185,6 +185,7 @@ def web_read(rel: str) -> str:
 
 web_tokens = web_read("src/styles/tokens.css")
 web_app_css = web_read("src/styles/app.css")
+web_paper_css = web_read("src/styles/paper.css")
 web_index = web_read("index.html")
 web_vite = web_read("vite.config.js")
 web_router = web_read("src/lib/router.js")
@@ -235,14 +236,46 @@ for m in re.finditer(r"dangerouslySetInnerHTML|\.innerHTML\s*=|innerHTML\s*:\s*"
                      web_landing + web_app_jsx):
     fail(f"web/: DOM-via-strings found ({m.group(0)}) — the docket <mark> highlight is JSX")
 
-# --- fonts: only the three approved Google families -----------------------
-WEB_FONT_OK = {"Archivo", "Geist+Mono", "Noto+Sans+Devanagari"}
+# --- fonts: the approved Google families — the paper-poster set
+#     (Anton / Teko / Inter / JetBrains Mono / Noto Sans Devanagari)
+#     + the app-screen set (Archivo / Geist Mono). BT Grotesk is paid
+#     and banned. -----------------------------------------------------
+WEB_FONT_OK = {
+    "Anton", "Teko", "Inter", "JetBrains+Mono", "Noto+Sans+Devanagari",
+    "Archivo", "Geist+Mono",
+}
 web_families = re.findall(r"[?&]family=([A-Za-z+]+)", web_index)
 need(len(web_families) == len(WEB_FONT_OK) and set(web_families) == WEB_FONT_OK,
      f"web/index.html: Google Fonts must be exactly {sorted(WEB_FONT_OK)} (found {web_families})")
 for cssf in (web_tokens, web_app_css):
-    for m in re.finditer(r'[\'"](?:Inter|Inter\s+|BT\s+Grotesk|JetBrains\s+Mono)[\'"]', cssf):
+    for m in re.finditer(r'[\'"](?:BT\s+Grotesk)[\'"]', cssf):
         fail(f"web/styles: unapproved font {m.group(0)}")
+# the paper landing must carry its own font stack vars
+for var in ("--f-disp", "--f-body", "--f-mono"):
+    need(var in web_paper_css, f"web/paper.css: missing font token {var}")
+
+# --- paper landing: the chosen reference UI contract ----------------------
+need(".paper-root" in web_paper_css, "web/paper.css: missing .paper-root scope")
+for var, value in {"--paper": "#f4efe4", "--ink": "#282828",
+                   "--org": "#fa3600", "--grn": "#1a7f4b"}.items():
+    need(re.search(rf"^\s*{re.escape(var)}:\s*{re.escape(value)}\s*[;]", web_paper_css, re.M),
+         f"web/paper.css: {var} must be exactly {value}")
+need("prefers-reduced-motion" in web_paper_css,
+     "web/paper.css: missing prefers-reduced-motion handling")
+need("@keyframes hvSpin" in web_paper_css or "@keyframes spin" in web_paper_css,
+     "web/paper.css: missing phone-processing spinner keyframe")
+for anchor in ("#top", "#details"):
+    need(f'id="{anchor[1:]}"' in web_landing, f"web/landing: missing section {anchor}")
+need(web_landing.count('type="range"') >= 2,
+     "web/landing: the case calculator needs its two sliders")
+# the act scenes live in acts/Act.jsx + acts/Act01..04.jsx
+need('className="act"' in web_read("src/landing/acts/Act.jsx"),
+     "web/landing/acts/Act.jsx: missing .act scene shell")
+for n in ("01", "02", "03", "04"):
+    act = web_read(f"src/landing/acts/Act{n}.jsx")
+    need(f'id="act{int(n)}"' in act, f"web/landing/acts/Act{n}.jsx: missing id=act{int(n)}")
+    need(act.count("<Act") >= 1 or "Act " in act, f"web/landing/acts/Act{n}.jsx: empty act")
+    need("build={" in act, f"web/landing/acts/Act{n}.jsx: missing GSAP build timeline")
 
 # --- safety: the secret net, the AI line, the simulated-IVR honesty -------
 need(re.search(r"export const SECRET_RE\s*=.*(?:otp|OTP)", web_format) is not None
@@ -284,14 +317,6 @@ for route in WEB_ROUTES:
 need(web_vite and "/api" in web_vite and "localhost:8000" in web_vite,
      "web/vite.config.js: /api → localhost:8000 proxy missing")
 
-# --- landing beats feed the rail contract (4 acts + the journey act) ------
-web_tones = re.findall(r'data-tone="([^"]+)"', web_landing)
-need(len(web_tones) >= 5,
-     f"web/landing: scroll rail needs >=5 data-tone beats (found {len(web_tones)})")
-need('data-tone-hits="cyan red indigo green"' in web_landing,
-     "web/landing: data-tone-hits marker missing (old rail contract parser)")
-
-# ----------------------------------------------------------------------- report
 print("HaqVaani UI integrity check — design system docs/DESIGN.md")
 print(f"  screens checked: {len(screens)} + web screens: {len(web_screens)}")
 for s in screens:
