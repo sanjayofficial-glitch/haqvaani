@@ -11,6 +11,7 @@ import { useToast } from "../hooks/useToast.jsx";
 import { useCaseFile, useCaseState } from "../lib/state.jsx";
 import { api } from "../lib/api.js";
 import { DEMO, AI_DISCLOSURE } from "../lib/demo.js";
+import { RollingRedactor } from "../lib/redact.js";
 import { navigate } from "../lib/router.js";
 
 export default function VoiceIntake() {
@@ -35,6 +36,8 @@ export default function VoiceIntake() {
   const [after, setAfter] = useState(false);
   const waveRef = useRef(null);
   const typeRef = useRef(null);
+  /* sliding-window redaction: secrets split across segments still get caught */
+  const redactorRef = useRef(new RollingRedactor());
 
   /* ------------------------------------------------- waveform (levelRef) -- */
   useEffect(() => {
@@ -90,10 +93,17 @@ export default function VoiceIntake() {
   function finish(transcript, intake) {
     setTLabel("मुझे जो सुनाई दिया · what I heard");
     setTText(transcript || stRef.current.rawTranscript || "");
-    commit({
+    /* redaction: any secret in the rolling 10s window bumps the counter */
+    const check = redactorRef.current.push(transcript || "", Date.now());
+    const update = {
       rawTranscript: transcript || stRef.current.rawTranscript || "",
       suggestedIntake: intake || DEMO.intake,
-    });
+    };
+    if (check.blocked) {
+      update.secretsBlocked = (stRef.current.secretsBlocked || 0) + 1;
+      toast("OTP/PIN/CVV जैसी जानकारी रोक दी गई · blocked in the transcript", "bad");
+    }
+    commit(update);
     setAfter(true);
   }
 

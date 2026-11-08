@@ -70,6 +70,24 @@ export default function RightsCheck() {
   const intake = stRef.current.intake || DEMO.intake;
   const demoMismatch = Boolean(ent.__demo) && stRef.current.factsEdited === true;
 
+  /* RBI timeline per dispute type: T+1 peer transfers vs T+5 merchant/ATM/PoS */
+  const ruleFor = (type) => {
+    switch (type) {
+      case "upi_p2p":
+      case "imps":
+        return { round: "T+1", scope: "P2P / IMPS — peer transfers" };
+      case "upi_p2m":
+      case "atm_cash_not_dispensed":
+      case "pos_card_debit":
+        return { round: "T+5", scope: "merchant / ATM / PoS — you pay the merchant" };
+      case "unauthorised":
+        return { round: "zero-liability", scope: "report ≤ 3 working days" };
+      default:
+        return { round: "T+1", scope: "UPI P2P" };
+    }
+  };
+  const rule = ruleFor(intake.dispute_type);
+
   /* timeline rows: T → TAT → today (the breach marker when overdue) */
   const overdue = (ent.days_overdue || 0) > 0;
   const timeline = [
@@ -143,6 +161,15 @@ export default function RightsCheck() {
             डेमो मोड में हिसाब <b>सैंपल केस</b> से दिखाया जाता है (synthetic demo) : आपके अपने सचों की गणना सर्वर चालू होने पर होगी।
             <span className="pair"><span className="alt" lang="en-IN">With the API running, your own facts are computed exactly by haqvaani/statutory.py.</span></span>
           </p>
+        </div>
+
+        {/* RBI timeline per type: clear T+1 vs T+5 split */}
+        <div className="kv src-note" aria-label="RBI नियम">
+          <span className="k">RBI timeline · सांविधिक समय</span>
+          <span className="xsmall">
+            <b>{rule.round}</b> · {rule.scope} —{" "}
+            <span className="mono">{(ent.circular_ref || "").split(" (")[0]}</span>
+          </span>
         </div>
 
         {/* timeline: T → TAT → today */}

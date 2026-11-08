@@ -153,6 +153,67 @@ export default function Dossier() {
     toast("फ़ोल्डर JSON सेव हो गया · case JSON saved");
   }
 
+  /* RBI CMS / Ombudsman prefill: shaped for cms.rbi.org.in + 14448 */
+  function cmsPrefill() {
+    const draft = cDraft.bank_complaint_text || DEMO.hindiDrafts.bank_complaint_text || "";
+    return {
+      portal: "cms.rbi.org.in",
+      helpline: "14448",
+      fields: {
+        applicant_name: cCons.citizen_name || "",
+        bank_name: cInt.bank_name || "DemoBank Support",
+        transaction_date: fmtDate(cInt.txn_date),
+        amount_inr: cInt.amount_inr,
+        utr: cInt.utr || "",
+        dispute_type: cInt.dispute_type,
+        tat_date: fmtDate(cEnt.tat_date),
+        days_overdue: cEnt.days_overdue || 0,
+        compensation_inr: cEnt.penalty_inr || 0,
+        claim_total_inr: cEnt.total_inr || 0,
+        complaint_text: draft,
+      },
+      generated_at: new Date().toISOString(),
+    };
+  }
+
+  function downloadCms() {
+    const p = cmsPrefill();
+    const f = p.fields;
+    const txt = [
+      "RBI Complaint Management System (CMS) prefill — cms.rbi.org.in · helpline 14448",
+      "",
+      `Applicant: ${f.applicant_name || "(add your name)"}`,
+      `Bank: ${f.bank_name}`,
+      `Transaction date: ${f.transaction_date}`,
+      `Amount debited: ₹${Number(f.amount_inr).toLocaleString("en-IN")}`,
+      `UTR: ${f.utr || "—"}`,
+      `Dispute type: ${f.dispute_type}`,
+      `Expected reversal (TAT): ${f.tat_date}`,
+      `Days overdue: ${f.days_overdue}`,
+      `Suo motu compensation claimed: ₹${Number(f.compensation_inr).toLocaleString("en-IN")}`,
+      `Total claimed: ₹${Number(f.claim_total_inr).toLocaleString("en-IN")}`,
+      "",
+      "Complaint text:",
+      "",
+      f.complaint_text,
+    ].join("\n");
+
+    const base = (rec.case_id || "haqvaani-case") + "-cms";
+    const save = (name, content, type) => {
+      const blob = new Blob([content], { type });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = name;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    };
+    save(base + ".json", JSON.stringify(p, null, 2), "application/json");
+    save(base + ".txt", txt, "text/plain;charset=utf-8");
+    toast("Ombudsman prefill सेव हुआ · CMS prefill saved (JSON + TXT)");
+  }
+
   return (
     <>
       <div className="col" style={{ gap: "var(--s-xs)" }}>
@@ -233,6 +294,10 @@ export default function Dossier() {
           <button className="btn btn--primary" type="button" onClick={download} aria-label="केस JSON सेव करें">
             JSON सेव करें · download JSON
             <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M12 3v12" /><polyline points="6 9 12 15 18 9" /><path d="M4 21h16" /></svg>
+          </button>
+          <button className="btn btn--line" type="button" onClick={downloadCms} aria-label="RBI Ombudsman prefill डाउनलोड करें">
+            Ombudsman prefill (CMS)
+            <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="12" y1="18" x2="12" y2="12" /><polyline points="9 15 12 18 15 15" /></svg>
           </button>
           <button className="btn btn--line" type="button" onClick={() => window.print()} aria-label="प्रिंट या PDF बनाएँ">
             प्रिंट / PDF <span className="pair"><span className="alt" lang="en-IN">print</span></span>

@@ -8,6 +8,7 @@ import { useState, useRef } from "react";
 import { useCaseFile } from "../lib/state.jsx";
 import { DEMO } from "../lib/demo.js";
 import { isoToday } from "../lib/format.js";
+import { parseOcrText } from "../lib/ocr.js";
 import { navigate } from "../lib/router.js";
 
 export default function FactReview() {
@@ -30,6 +31,35 @@ export default function FactReview() {
   const [bank, setBank] = useState(src.bank_name || "");
   const [touched, setTouched] = useState({});
   const [badSubmit, setBadSubmit] = useState(false);
+  const [ocrBusy, setOcrBusy] = useState(false);
+  const [ocrMsg, setOcrMsg] = useState(null);
+
+  /* screenshot OCR → prefill the four facts; runs entirely on this device */
+  async function onOcr(e) {
+    const f = e.target.files && e.target.files[0];
+    e.target.value = "";
+    if (!f) return;
+    setOcrBusy(true);
+    setOcrMsg("पढ़ रहा है… यहीं इसी डिवाइस पर · reading on this device…");
+    try {
+      const Tesseract = await import("tesseract.js");
+      const { data } = await Tesseract.recognize(f, "eng+hin", { logger: () => {} });
+      const box = parseOcrText(data.text);
+      const applied = [];
+      if (box.amount) { setAmount(String(box.amount)); applied.push("राशि · amount"); }
+      if (box.utr) { setUtr(box.utr); applied.push("UTR"); }
+      if (box.date) { setDate(box.date); applied.push("तारीख़ · date"); }
+      setOcrMsg(
+        applied.length
+          ? "OCR से भरा गया · prefilled from the screenshot: " + applied.join(", ")
+          : "OCR में पैसे / UTR / तारीख़ नहीं मिले · nothing recognized — fill by hand"
+      );
+    } catch {
+      setOcrMsg("OCR असफल · could not read this screenshot");
+    } finally {
+      setOcrBusy(false);
+    }
+  }
 
   /* ------------------------------------------------------- validation --- */
   /* amount ₹1–1 Cr; date ≤ today; UTR optional but digits-only 10–24 */
@@ -114,6 +144,21 @@ export default function FactReview() {
             ) : (
               <>सैंपल केस : <b>synthetic demo</b> · ₹3,200 · 18 Oct · UPI P2P — the worked example</>
             )}
+          </span>
+        </div>
+
+        {/* screenshot OCR prefill (optional, on-device) */}
+        <div className="kv src-note" aria-label="स्क्रीनशॉट OCR">
+          <span className="k">स्क्रीनशॉट से भरें · fill from a screenshot</span>
+          <span className="xsmall">
+            <label className="btn btn--line" style={{ minHeight: 36, padding: "6px 14px", cursor: "pointer" }}>
+              {ocrBusy ? "पढ़ रहा है… · reading…" : "UPI स्क्रीनशॉट चुनें · choose screenshot"}
+              <input type="file" accept="image/*" hidden disabled={ocrBusy} onChange={onOcr} aria-label="UPI screenshot upload" />
+            </label>
+            {ocrMsg && <span className="mute-2" style={{ display: "block", marginTop: 6 }}>{ocrMsg}</span>}
+            <span className="mute-3" style={{ display: "block", marginTop: 4, fontSize: 12 }}>
+              राशि / UTR / तारीख़ भर जाएँगे — यहाँ इसी डिवाइस पर, कुछ भी बाहर नहीं जाता।
+            </span>
           </span>
         </div>
 
