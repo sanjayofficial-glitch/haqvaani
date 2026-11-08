@@ -1,0 +1,11 @@
+name,reach,impact,confidence,effort,description
+API loading states,1000,massive,high,s,Show spinner/aria-busy while rights/complaint/dossier fetch; no silent waits
+Dossier incomplete guidance,800,high,high,s,Explain WHY dossier is incomplete (which modes missing) instead of bare demo fallback
+Consistent shell back navigation,700,medium,high,s,Back button in app header stepping to previous logical step on every screen
+Responsive app pass (320/375/768),900,medium,high,m,Grid, ledger and CTA rows adapt cleanly; no horizontal overflow
+Disabled-state button styling,600,medium,high,s,Visible .btn[disabled] style (cursor, opacity) for gated CTAs
+Error toast reuse on API failures,800,medium,high,s,Standard toast path for all API errors incl. 403/422/404 context
+Landing-to-app transition polish,700,medium,medium,s,Consistent header band + entrance when entering case flow from landing
+Empty-state for no-case-yet,600,medium,high,s,Friendly empty state on dossier/rights when nothing started
+Keyboard & focus polish,500,low,high,m,Focus-visible rings on all interactive elements, skip-links
+Reduce editorial weight on case screens,600,medium,low,m,App-style sections: tighter type, clearer H1s, standard cards

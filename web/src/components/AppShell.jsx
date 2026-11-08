@@ -7,11 +7,11 @@ import { useMemo } from "react";
 import { useCaseState } from "../lib/state.jsx";
 import { useMode } from "../hooks/useMode.jsx";
 import { useToast } from "../hooks/useToast.jsx";
-import { navigate } from "../lib/router.js";
+import { navigate, useRoute } from "../lib/router.js";
 import React from "react";
 import { fmtTs } from "../lib/format.js";
 import { LangToggle, Pair } from "../lib/i18n.jsx";
-import { Mic, Eye, Phone, Stamp, Check, Clock, Lock } from "../components/Icon.jsx";
+import { Mic, Eye, Phone, Stamp, Check, Clock, Lock, Arrow } from "../components/Icon.jsx";
 import { AI_DISCLOSURE } from "../lib/demo.js";
 
 const DONE_ICONS = [Check, Clock, Phone, Stamp, Eye];
@@ -31,6 +31,20 @@ export const STEP_PATHS = {
   2: "/complaint-builder",
   3: "/assisted-call",
   4: "/dossier",
+};
+
+/* natural previous screen for the header back button (one step up the flow) */
+const PREV_PATH = {
+  "/consent": "/start-case",
+  "/voice-intake": "/consent",
+  "/fact-review": "/voice-intake",
+  "/rights-check": "/fact-review",
+  "/complaint-builder": "/rights-check",
+  "/call-prep": "/complaint-builder",
+  "/assisted-call": "/call-prep",
+  "/docket-capture": "/assisted-call",
+  "/post-call": "/docket-capture",
+  "/dossier": "/post-call",
 };
 
 export function StepBar({ active, onStepClick }) {
@@ -127,6 +141,8 @@ function SafetyBar() {
 
 export function AppShell({ title, step, children }) {
   const mode = useMode();
+  const { path } = useRoute();
+  const prev = PREV_PATH[path] || null;
   const onStepClick = (i) => {
     const p = STEP_PATHS[i];
     if (p) navigate(p);
@@ -144,6 +160,16 @@ export function AppShell({ title, step, children }) {
             <small>{title || "case"}</small>
           </a>
           <div className="head-tools">
+            {prev && (
+              <button
+                type="button"
+                className="btn btn--quiet back"
+                aria-label="वापस जाएँ · back"
+                onClick={() => navigate(prev)}
+              >
+                <Arrow size={13} /> वापस · back
+              </button>
+            )}
             <span className="chip" id="modeChip" data-mode={mode}>
               <span className="dot" aria-hidden="true"></span>
               {mode === "live" ? "Live · Gnani connected" : "Synthetic demo (demo)"}

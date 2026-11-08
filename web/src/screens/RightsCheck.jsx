@@ -15,6 +15,7 @@ import { fmtInr, fmtDate } from "../lib/format.js";
 import { navigate } from "../lib/router.js";
 import { Check, Arrow } from "../components/Icon.jsx";
 import { RightsScene } from "./art/CaseArt.jsx";
+import Busy from "../components/Busy.jsx";
 
 export default function RightsCheck() {
   const { commit } = useCaseFile();
@@ -66,7 +67,7 @@ export default function RightsCheck() {
   }, [ent]);
 
   if (!ent) {
-    return <p className="body mute-3" style={{ marginTop: "var(--s-md)" }}>हिसाब तैयार हो रहा है… · calculating…</p>;
+    return <Busy label="हिसाब तैयार हो रहा है… · calculating…" />;
   }
 
   const intake = stRef.current.intake || DEMO.intake;

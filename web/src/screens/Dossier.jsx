@@ -14,6 +14,7 @@ import { fmtInr, fmtDate, fmtTs } from "../lib/format.js";
 import { Stamp, StampVintage } from "../components/Icon.jsx";
 import { File, Eye, Arrow } from "../components/Icon.jsx";
 import { DossierScene } from "./art/CaseArt.jsx";
+import Busy from "../components/Busy.jsx";
 
 /* dispute rows keep the old bilingual labels */
 function disputeLabel(v) {
@@ -78,9 +79,19 @@ export default function Dossier() {
     api
       .get("/api/dossier")
       .then((r) => { setRec(r); setFromServer(true); })
-      .catch(() => { setRec(assembleLocal(stRef.current)); setFromServer(false); });
+      .catch(() => {
+        toast("सर्वर फ़ोल्डर नहीं मिला : डिवाइस पर जोड़ा गया (synthetic demo)", "bad");
+        setRec(assembleLocal(stRef.current)); setFromServer(false);
+      });
     /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, [mode]);
+
+  /* what's missing in this session (drives the guidance chips) */
+  const missingSteps = [];
+  if (!st.consent || !st.consent.ts) missingSteps.push({ href: "#/consent?next=voice-intake", label: "सहमति · consent" });
+  if (!st.intake) missingSteps.push({ href: "#/voice-intake", label: "बोली · voice intake" });
+  if (!st.entitlement) missingSteps.push({ href: "#/rights-check", label: "हिसाब · rights check" });
+  if (!st.docket && !st.call) missingSteps.push({ href: "#/call-prep", label: "कॉल · assisted call" });
 
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
@@ -88,7 +99,7 @@ export default function Dossier() {
   }, [rec]);
 
   if (!rec) {
-    return <p className="body mute-3">फ़ोल्डर बन रहा है… · assembling the dossier…</p>;
+    return <Busy label="फ़ोल्डर बन रहा है… · assembling the dossier…" />;
   }
 
   const docket =
@@ -241,6 +252,24 @@ export default function Dossier() {
             )}
           </p>
         </div>
+
+        {/* what's missing: friendly guidance to complete the real case */}
+        {missingSteps.length > 0 && (
+          <div className="card" style={{ borderLeft: "4px solid var(--accent)" }}>
+            <p className="h3" style={{ margin: "0 0 6px" }}>यह फ़ोल्डर अभी अधूरा है · not complete yet</p>
+            <p className="xsmall mute-2" style={{ margin: "0 0 10px" }}>
+              पूरा सर्वर-सत्यापित रिकॉर्ड बनाने के लिए आगे के चरण पूरे करें :
+              <span className="pair"><span className="alt" lang="en-IN">Complete these steps for a full server-verified record:</span></span>
+            </p>
+            <div className="row" style={{ justifyItems: "flex-start", alignItems: "center" }}>
+              {missingSteps.map((m) => (
+                <a key={m.href} className="btn btn--line" href={m.href} style={{ minHeight: 0, padding: "8px 14px", fontSize: "var(--fs-body-sm)" }}>
+                  {m.label} <Arrow size={12} />
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* case identity + accent-verified stamp (drawn only when verbatim) */}
         <div className="card row" style={{ justifyContent: "flex-start", gap: 18 }}>

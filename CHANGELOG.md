@@ -5,6 +5,33 @@
 
 ---
 
+## [2026-11-09] — "Proper app" polish pass (PM/RICE)
+
+Product-manager-toolkit pass: RICE-scored the "doesn't feel like an app"
+gaps and shipped the top items (see `docs/PRD-app-v2.md`).
+
+### Added
+- `web/src/components/Busy.jsx` — `aria-live` spinner/status indicator; used by
+  RightsCheck and Dossier (API-backed screens).
+- Dossier: "what's missing" guidance card when the server record is incomplete
+  (jump links: consent / voice intake / rights / call) + toast on server failure.
+- AppShell header back button (`← वापस · back`) on every case screen except
+  start-case/landing, mapped to the previous logical step (`PREV_PATH`).
+- `web/src/styles/app.css` — `.btn--quiet` + `.busy` spinner styles
+  (reduced-motion disabled).
+- `docs/PRD-app-v2.md` — PRD + RICE results + roadmap.
+- `scripts/_verify_polish.cjs` — responsive (375/768) overflow + back-button
+  verifier.
+
+### Verified
+- `web/ npm run build` — clean.
+- `python scripts/_ui_integrity_check.py` — green (11 frontend + 11 web).
+- `node scripts/_verify_polish.cjs` — ALL GOOD: 0 px horizontal overflow on all
+  11 routes at 375 and 768; back from rights-check → fact-review.
+- `python -m pytest tests/` — 54 passed (unchanged).
+
+---
+
 ## [2026-11-09] — Remove start-case hint row (UX clean-up)
 
 Removed the non-compliance hint footer on the start-case screen
