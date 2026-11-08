@@ -1,115 +1,192 @@
-# Graph Report - haqvaani  (2026-11-06)
+# Graph Report - haqvaani  (2026-11-08)
 
 ## Corpus Check
-- Corpus is ~25,344 words - fits in a single context window. You may not need a graph.
+- 117 files · ~112,835 words
+- Verdict: corpus is large enough that graph structure adds value.
+- Unclassified: 11 file(s) not represented in the graph (top: (none) 6, .css 2, .zst 1)
 
 ## Summary
-- 135 nodes · 209 edges · 22 communities (6 shown, 16 thin omitted)
-- Extraction: 0% EXTRACTED · 100% INFERRED · 0% AMBIGUOUS · INFERRED: 208 edges (avg confidence: 0.98)
-- Token cost: 108,000 input · 14,500 output
+- 736 nodes · 1963 edges · 30 communities (22 shown, 8 thin omitted)
+- Extraction: 91% EXTRACTED · 9% INFERRED · 0% AMBIGUOUS · INFERRED: 176 edges (avg confidence: 0.87)
+- Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
-- Statutory Engine & RBI Rules
-- Schemas & Agent Extraction
-- Safety Gates & Compliance
-- Evaluation & Metrics
-- Complaint Builder & Modes
-- Demo Storyboard
-- Project Documentation
-- Latency Budget
-- Document Node
-- Document Node
-- Document Node
-- Document Node
-- Document Node
+- React App Shell & Routing
+- Engineer A · Voice/DSP & QA
+- FastAPI Backend Routes
+- Core Docs: Thesis & Hard Rules
+- Legacy Frontend Screens
+- Frontend Toolchain & Dependencies
+- Orchestrator & 4-Mode Pipeline
+- Statutory Engine (RBI Math)
+- SVG Line-Art Library
+- Legacy JS Runtime (HQ Router)
+- STT Client (Prisma v2.5)
+- Speech Protocol Internals
+- TTS Client (Timbre SSE)
+- DSP & VAD Pipeline
+- Complaint Builder (Mode 3)
+- Evon LLM Client (Negotiation)
+- Free-Constraint Audit Script
+- Eval Benchmark (STT WER)
+- Ring Buffer & Audio Streaming
+- RB-IOS 2026 Dossier Module
+- Shared Schemas (Treaty Border)
+- Intake Parsing (Evon + Regex)
+- CLI Entry & Roundtrip Verify
+- Legacy Scroll-Rail JS
+- API Tests
+- VoiceAPI Adapters
+- Synthetic IVR Scripts
+- Package Root Node
 
 ## God Nodes (most connected - your core abstractions)
-1. `Engineer B` - 11 edges
-2. `Mode 4 Assisted Call` - 9 edges
-3. `Engineer A` - 9 edges
-4. `60-Second Demo Day Drop Storyboard` - 7 edges
-5. `HaqVaani` - 6 edges
-6. `Mode 1 Voice Intake` - 6 edges
-7. `haqvaani/statutory.py — Pure Python Statutory Engine` - 6 edges
-8. `UI/UX Design System — Bharat Glass` - 6 edges
-9. `Evaluation Metrics` - 6 edges
-10. `Mode 2 Rights Checker` - 5 edges
+1. `compute_statutory_entitlement()` - 31 edges
+2. `CitizenIntake` - 30 edges
+3. `DisputeType` - 27 edges
+4. `SafetyGuardBlock` - 25 edges
+5. `useCaseFile()` - 24 edges
+6. `react` - 23 edges
+7. `useMode()` - 22 edges
+8. `HaqVaani Story landing` - 22 edges
+9. `navigate()` - 21 edges
+10. `Glass UI citizen app (single-page 4-mode prototype)` - 21 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Mode 4 Assisted Call` --uses--> `Gnani Timbre v2.5/v3.0 TTS`  [INFERRED]
-  ARCHITECTURE.md → README.md
-- `Duo Ownership Matrix` --ownership--> `Engineer A — Voice, DSP, Telephony & Latency`  [INFERRED]
-  docs/system_diagrams.md → agent_prompts/SHARED_CONTEXT.md
-- `Duo Ownership Matrix` --ownership--> `Engineer B — Statutory Engine, Evon v3.3 & Product UI`  [INFERRED]
-  docs/system_diagrams.md → agent_prompts/SHARED_CONTEXT.md
-- `haqvaani/schemas.py (Treaty Border)` --data_flow--> `haqvaani/statutory.py — Pure Python Statutory Engine`  [INFERRED]
-  agent_prompts/SHARED_CONTEXT.md → docs/legal_matrix.md
-- `Gnani Sovereign Stack (free only)` --stack--> `evon_client.py — Evon v3.3 Client`  [INFERRED]
-  agent_prompts/SHARED_CONTEXT.md → docs/system_diagrams.md
+- `docs/system_diagrams.md (Mermaid)` --references--> `SafetyGuardBlock`  [EXTRACTED]
+  docs/system_diagrams.md → haqvaani/safety.py
+- `RULES.md (non-negotiable constraints)` --references--> `SafetyGuardBlock`  [EXTRACTED]
+  RULES.md → haqvaani/safety.py
+- `docs/system_diagrams.md (Mermaid)` --references--> `compute_statutory_entitlement()`  [EXTRACTED]
+  docs/system_diagrams.md → haqvaani/statutory.py
+- `RULES.md (non-negotiable constraints)` --references--> `compute_statutory_entitlement()`  [EXTRACTED]
+  RULES.md → haqvaani/statutory.py
+- `Sloplint UI Audit Gate` --semantically_similar_to--> `30-Clip Prisma vs Whisper Benchmark`  [INFERRED] [semantically similar]
+  .hallmark/landing-render.txt → docs/evaluation.md
 
 ## Import Cycles
 - None detected.
 
 ## Hyperedges (group relationships)
-- **4-mode pipeline** — concept/mode1, concept/mode2, concept/mode3, concept/mode4 [INFERRED 1.00]
-- **Safety gates** — concept/consent, concept/forbidden_secret_re, concept/verbatim_substring, concept/no_autonomous_dialing [INFERRED 1.00]
-- **Free stack** — concept/prisma, concept/evon, concept/timbre, concept/statutory [INFERRED 1.00]
-- **Assisted-call state machine** — state/idle, state/listening, state/script_display, state/docket_capture, state/post_call [INFERRED 1.00]
-- **Ownership treaty** — engineer/a, engineer/b, module/schemas.py [INFERRED 1.00]
-- **RBI legal rules** — concept/rbi_2019_20_67, concept/rb_ios_2026, concept/dpdp, concept/trai_2026 [INFERRED 1.00]
-- **HaqVaaniCaseRecord composition** — concept/citizen_intake, concept/statutory_entitlement, concept/complaint_draft, concept/call_transcript, concept/case_record, concept/consent_record [INFERRED 1.00]
-- **Treaty Border co-ownership — schemas.py changes require both engineers' sign-off** — haqvaani:engineer_a, haqvaani:engineer_b, haqvaani:schemas.py [INFERRED 0.99]
-- **Safety Gates — consent + disclosure + secret redaction + verbatim docket substring, mapped to DPDP/TRAI/RB-IOS** — haqvaani:safety.py, dpdp:act_2023, trai:2026_a2p, rbi:rb_ios_2026 [INFERRED 0.98]
-- **7-Stage End-to-End Pipeline — citizen audio → RB-IOS dossier** — pipeline:stage_1_dsp, pipeline:stage_2_stt, pipeline:stage_3_statutory, pipeline:stage_4_ivr_orchestrator, pipeline:stage_5_verbatim_gate, pipeline:stage_6_callback, pipeline:stage_7_dossier [INFERRED 0.98]
-- **Gnani Sovereign Stack execution path — Prisma STT → Evon LLM → Timbre TTS** — gnani:stack, haqvaani:stt_client.py, haqvaani:evon_client.py, haqvaani:tts_client.py [INFERRED 0.98]
-- **Demo Day deliverables — 60s video + UI + HUD, all synthetic data, no autonomous dialing** — docs_demo_storyboard, frontend:glass_ui.html, frontend:hud.html [INFERRED 0.97]
-- **Evaluation metrics framework — WER, Latency, Safety, Compliance, Demo Quality, Award Alignment** — eval:wer, eval:latency, eval:safety, eval:compliance, eval:demo_quality, eval:award_alignment [INFERRED 0.98]
+- **Four-Mode Pipeline Definition Group** — architecture_four_mode_pipeline, docs_frd_functional_requirements, docs_prd_product_requirements, readme_project_overview [EXTRACTED 0.90]
+- **Safety Gate Quartet (Consent, Disclosure, Redaction, Docket)** — architecture_forbidden_secret_re, docs_experience_concept_consentgate, docs_experience_concept_docketverification, docs_diagrams_viewer_safety_gates [EXTRACTED 0.85]
+- **Mandatory Safety Gate Set** — haqvaani_safety_forbidden_secret_re, haqvaani_safety_citizen_consent_verified, haqvaani_safety_ai_disclosure_played, haqvaani_safety_verbatim_substring_gate, haqvaani_safety_safetyguardblock [EXTRACTED 1.00]
+- **Gnani Sovereign Stack Composition** — gnani_sovereign_stack, gnani_prisma_v2_5, gnani_evon_v3_3, gnani_timbre_v2_5_v3_0 [EXTRACTED 1.00]
+- **Design System Lineage (Revolut Foundation → Concept → DESIGN)** — docs_design_revolut_revolut_fintech_analysis, docs_experience_concept_experience_concept, docs_design_haqvaani_story_design_system, docs_ui_ux_design_system_superseded_design_system [INFERRED 0.75]
+- **Post-VAD 690 ms Voice Intake Pipeline** — latency_budget_690ms, silero_vad, gnani_prisma_v2_5, gnani_evon_v3_3, gnani_timbre_v2_5_v3_0 [EXTRACTED 1.00]
+- **4-Mode human-controlled pipeline** — frontend_glass_ui, frontend_screens_voice_intake, frontend_screens_rights_check, frontend_screens_complaint_builder, frontend_screens_assisted_call [EXTRACTED 1.00]
+- **Compliance/safety guardrails** — haqvaani_dpdp_consent, haqvaani_ai_disclosure, haqvaani_secret_redaction, haqvaani_no_autonomous_dialing, haqvaani_synthetic_demo [INFERRED 0.95]
+- **Gnani sovereign stack** — haqvaani_prisma, haqvaani_evon, haqvaani_timbre [INFERRED 0.95]
 
-## Communities (22 total, 16 thin omitted)
+## Communities (30 total, 8 thin omitted)
 
-### Community 0 - "Statutory Engine & RBI Rules"
-Cohesion: 0.08
-Nodes (30): DBR.No.Leg.BC.78/09.07.005/2017-18, DPDP Act 2023, Duo Ownership Matrix, Acoustic State Machine (Stage 4), Gnani Sovereign Stack (free only), dsp_ivr.py — DSP + IVR, Engineer A — Voice, DSP, Telephony & Latency, Engineer B — Statutory Engine, Evon v3.3 & Product UI (+22 more)
+### Community 0 - "React App Shell & Routing"
+Cohesion: 0.05
+Nodes (83): react, App(), SCREEN_MAP, AppShell(), SafetyBar(), safetyRows(), STEP_LABELS, StepBar() (+75 more)
 
-### Community 1 - "Schemas & Agent Extraction"
+### Community 1 - "Engineer A · Voice/DSP & QA"
+Cohesion: 0.06
+Nodes (58): Landing Render QA Log, Acoustic State Machine (RINGING/IVR/HOLD/HUMAN), Dual WSS Streams (intake + assisted call), Engineer A Role (Voice/DSP/Telephony/Latency), Timbre Role-Switch Cache, Engineer B Role (Statutory/Evon/Product UI), HaqVaani Project Thesis, Assisted Call Mode (+50 more)
+
+### Community 2 - "FastAPI Backend Routes"
+Cohesion: 0.06
+Nodes (32): assisted_route(), complaint(), ComplaintRequest, consent(), ConsentRequest, dossier(), _guard(), health() (+24 more)
+
+### Community 3 - "Core Docs: Thesis & Hard Rules"
+Cohesion: 0.06
+Nodes (54): Duo Engineer Ownership Treaty, HaqVaani Hard Rules (non-negotiable), Assisted-Call State Machine (Mode 4), Data Flow (Key Objects), Evon v3.3 LLM (30B-A3B MoE), FORBIDDEN_SECRET_RE Redaction Gate, Four-Mode Pipeline, Module Ownership Matrix (+46 more)
+
+### Community 4 - "Legacy Frontend Screens"
+Cohesion: 0.21
+Nodes (29): Landing experience concept (archived), Glass UI citizen app (single-page 4-mode prototype), Glass UI mobile variant (clay buttons), Telemetry HUD (4-quadrant demo panel), HaqVaani Story landing, Assisted call screen (listen + docket), Call prep screen (script + never-share), Complaint builder screen (drafts + approve) (+21 more)
+
+### Community 5 - "Frontend Toolchain & Dependencies"
+Cohesion: 0.09
+Nodes (26): framer-motion, gsap, lenis, react-dom, vite, @vitejs/plugin-react, allowScripts, esbuild@0.21.5 (+18 more)
+
+### Community 6 - "Orchestrator & 4-Mode Pipeline"
 Cohesion: 0.15
-Nodes (16): BrushOffType, CallTranscript, HaqVaaniCaseRecord, CitizenIntake, ConsentRecord, Gnani Evon v3.3 LLM, IVRAction, Mode 1 Voice Intake (+8 more)
+Nodes (11): run_assisted(), run_complaint(), run_full_case(), run_rights(), _self_test(), HaqVaaniCaseRecord, test_assisted_verifies_verbatim(), test_full_case_offline_e2e() (+3 more)
 
-### Community 2 - "Safety Gates & Compliance"
-Cohesion: 0.25
-Nodes (12): Consent Gate, DPDP Act 2023, FORBIDDEN_SECRET_RE, Mode 2 Rights Checker, No Autonomous Dialing, RB-IOS 2026, RBI/2019-20/67, Safety Gates (+4 more)
+### Community 7 - "Statutory Engine (RBI Math)"
+Cohesion: 0.15
+Nodes (15): DisputeType, compute_statutory_entitlement(), _failed_txn_entitlement(), _next_working_day(), _self_test(), _zero_liability_entitlement(), test_atm_t_plus_5(), test_future_txn_rejected() (+7 more)
 
-### Community 3 - "Evaluation & Metrics"
+### Community 8 - "SVG Line-Art Library"
+Cohesion: 0.20
+Nodes (21): DeadLineRule(), DraftArt(), LedgerArt(), STROKE, TxnBreak(), VoiceTiles(), WhisperArt(), useReducedMotion() (+13 more)
+
+### Community 9 - "Legacy JS Runtime (HQ Router)"
+Cohesion: 0.14
+Nodes (7): applyLang(), chipEl(), init(), HQ, safetyEl(), wireLang(), write()
+
+### Community 10 - "STT Client (Prisma v2.5)"
+Cohesion: 0.13
+Nodes (8): _as_pcm_bytes(), available(), _frame_seconds(), STTResult, transcribe_wss(), _run(), test_stt_result_dataclass(), test_transcribe_wss_pipeline_fails_cleanly_offline()
+
+### Community 11 - "Speech Protocol Internals"
+Cohesion: 0.15
+Nodes (12): build_headers(), _pcm_frames(), build_audio_config(), default_voice(), test_audio_config_defaults_raw_pcm(), test_default_voice_en_is_kaveri(), test_default_voice_hi_is_nalini(), test_default_voice_hinglish_is_poorvi() (+4 more)
+
+### Community 12 - "TTS Client (Timbre SSE)"
 Cohesion: 0.16
-Nodes (15): Award Alignment, Compliance Metrics (TRAI / DPDP / RBI), Demo Quality Metrics, Latency Metrics, Evaluation Metrics, Safety Metrics, WER (Word Error Rate), frontend/glass_ui.html — Production UI (+7 more)
+Nodes (6): assemble_wav(), synthesize_sse(), TTSAPIError, TTSResult, test_assemble_wav_has_valid_header(), test_tts_result_roundtrip_b64()
 
-### Community 4 - "Complaint Builder & Modes"
-Cohesion: 0.33
-Nodes (4): ComplaintDraft, Mode 3 Complaint Builder, Gnani Prisma v2.5 STT, Engineer B
+### Community 13 - "DSP & VAD Pipeline"
+Cohesion: 0.14
+Nodes (5): _fir_lowpass(), _load_silero_vad(), preprocess_intake(), resample_8k_to_16k(), vad_segments()
 
-### Community 5 - "Demo Storyboard"
-Cohesion: 0.29
-Nodes (11): Segment 0–4 s — Cold Open, Segment 12–23 s — Complaint Builder, Segment 23–36 s — Assisted Call (Simulated), Segment 36–47 s — Docket Verified, Segment 47–55 s — Role Switch en-IN → hi-IN, Segment 4–12 s — Prisma vs Whisper, Segment 55–60 s — RB-IOS Dossier + CTA, 60-Second Demo Day Drop Storyboard (+3 more)
+### Community 14 - "Complaint Builder (Mode 3)"
+Cohesion: 0.21
+Nodes (9): build_complaint_draft(), build_hindi_drafts(), _inr(), _fixture(), test_draft_contains_facts_and_citations(), test_drafts_never_contain_forbidden_secrets(), test_evidence_checklist_nonempty(), test_no_rbi_draft_when_not_eligible() (+1 more)
+
+### Community 15 - "Evon LLM Client (Negotiation)"
+Cohesion: 0.18
+Nodes (6): available(), _deterministic_negotiation(), EvonNegotiationResult, extract_negotiation(), _llm_chat(), BrushOffType
+
+### Community 16 - "Free-Constraint Audit Script"
+Cohesion: 0.23
+Nodes (7): _license_of(), main(), check_screen(), fail(), need(), read(), web_read()
+
+### Community 17 - "Eval Benchmark (STT WER)"
+Cohesion: 0.23
+Nodes (4): run_benchmark(), _synth_clip(), _wer(), _write_wav()
+
+### Community 19 - "RB-IOS 2026 Dossier Module"
+Cohesion: 0.21
+Nodes (5): _rbi_cms_draft(), build_rbi_cms_draft(), dossier_summary(), render_case_json(), StatutoryEntitlement
+
+### Community 20 - "Shared Schemas (Treaty Border)"
+Cohesion: 0.20
+Nodes (4): AgentNegotiationExtraction, ComplaintDraft, Engineer A Ownership (Voice/DSP/Telephony), Engineer B Ownership (Statutory/Evon/UI)
+
+### Community 21 - "Intake Parsing (Evon + Regex)"
+Cohesion: 0.22
+Nodes (4): _deterministic_intake(), EvonIntakeResult, parse_intake(), CitizenIntake
+
+### Community 23 - "Legacy Scroll-Rail JS"
+Cohesion: 0.36
+Nodes (8): buildRail(), init(), initLoopPause(), initScrollRail(), onScroll(), update(), initStepBar(), reducedMotion()
 
 ## Knowledge Gaps
-- **33 isolated node(s):** `IVRAction`, `Great Indian AI Internship Challenge`, `IDLE state`, `LISTENING state`, `SCRIPT_DISPLAY state` (+28 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 47 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **16 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **32 isolated node(s):** `haqvaani`, `Sloplint Landing Render Audit Record (before)`, `frontend/landing.html`, `frontend/css/app.css`, `frontend/css/tokens.css` (+27 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 237 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `HaqVaani` connect `Project Documentation` to `Schemas & Agent Extraction`, `Safety Gates & Compliance`?**
-  _High betweenness centrality (0.016) - this node is a cross-community bridge._
-- **Are the 11 inferred relationships involving `Engineer B` (e.g. with `Engineer A` and `frontend/glass_ui.html`) actually correct?**
-  _`Engineer B` has 11 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `IVRAction`, `Great Indian AI Internship Challenge`, `IDLE state` to the rest of the system?**
-  _33 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Statutory Engine & RBI Rules` be split into smaller, more focused modules?**
-  _Cohesion score 0.07862903225806452 - nodes in this community are weakly interconnected._
-- **Why does `Mode 4 Assisted Call` connect `Schemas & Agent Extraction` to `Safety Gates & Compliance`, `Complaint Builder & Modes`?**
-  _High betweenness centrality (0.014) - this node is a cross-community bridge._
-- **Are the 9 inferred relationships involving `Mode 4 Assisted Call` (e.g. with `CallTranscript` and `HaqVaaniCaseRecord`) actually correct?**
-  _`Mode 4 Assisted Call` has 9 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 9 inferred relationships involving `Engineer A` (e.g. with `Engineer B` and `eval/benchmark.py`) actually correct?**
-  _`Engineer A` has 9 INFERRED edges - model-reasoned connections that need verification._
+- **Why does `CitizenIntake` connect `Intake Parsing (Evon + Regex)` to `FastAPI Backend Routes`, `Orchestrator & 4-Mode Pipeline`, `DSP & VAD Pipeline`, `Complaint Builder (Mode 3)`, `Evon LLM Client (Negotiation)`, `RB-IOS 2026 Dossier Module`, `Shared Schemas (Treaty Border)`, `VoiceAPI Adapters`?**
+  _High betweenness centrality (0.022) - this node is a cross-community bridge._
+- **Are the 2 inferred relationships involving `compute_statutory_entitlement()` (e.g. with `DisputeType` and `StatutoryEntitlement`) actually correct?**
+  _`compute_statutory_entitlement()` has 2 INFERRED edges - model-reasoned connections that need verification._
+- **What connects `haqvaani`, `Sloplint Landing Render Audit Record (before)`, `frontend/landing.html` to the rest of the system?**
+  _32 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `React App Shell & Routing` be split into smaller, more focused modules?**
+  _Cohesion score 0.054838709677419356 - nodes in this community are weakly interconnected._
+- **Why does `compute_statutory_entitlement()` connect `Statutory Engine (RBI Math)` to `Engineer A · Voice/DSP & QA`, `FastAPI Backend Routes`, `Legacy Frontend Screens`, `Orchestrator & 4-Mode Pipeline`, `Complaint Builder (Mode 3)`, `RB-IOS 2026 Dossier Module`, `API Tests`?**
+  _High betweenness centrality (0.017) - this node is a cross-community bridge._
+- **Are the 15 inferred relationships involving `CitizenIntake` (e.g. with `assisted_route()` and `ComplaintRequest`) actually correct?**
+  _`CitizenIntake` has 15 INFERRED edges - model-reasoned connections that need verification._
+- **Should `Engineer A · Voice/DSP & QA` be split into smaller, more focused modules?**
+  _Cohesion score 0.060350877192982454 - nodes in this community are weakly interconnected._
