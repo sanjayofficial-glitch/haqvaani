@@ -16,6 +16,7 @@ import { useMode } from "../hooks/useMode.jsx";
 import { useReducedMotion } from "../hooks/useReducedMotion.js";
 import { api } from "../lib/api.js";
 import { DEMO } from "../lib/demo.js";
+import { consentGranted, useCaseState } from "../lib/state.jsx";
 import { inr, demoScenario, scenarioFromEntitlement, TAT_DAYS, PER_DAY } from "./data/scenario";
 import Act01 from "./acts/Act01";
 import Act02 from "./acts/Act02";
@@ -34,14 +35,18 @@ const NAV = [
 ];
 
 /* ------------------------------------------------------------- scenario -- */
-/* Statutory numbers come from the API (live) or the labelled Python demo
-   fixture — never computed in the frontend. The sliders only *ask*. */
-function useScenario(amount, days, mode) {
+/* Statutory numbers ALWAYS come from the Python API (/api/rights) — never
+   computed in the frontend. The calculator asks the API for the real
+   numbers whenever consent has been granted (DPDP); the only fallback is
+   the labelled synthetic sample: before consent (the API returns 403) or
+   when the API is unreachable. The sliders are the *question*; Python
+   answers. */
+function useScenario(amount, days, hasConsent) {
   const [state, setState] = useState(() => ({ s: demoScenario(), source: "demo" }));
 
   useEffect(() => {
     let alive = true;
-    if (mode !== "live") {
+    if (!hasConsent) {
       setState({ s: demoScenario(), source: "demo" });
       return () => { alive = false; };
     }
@@ -59,7 +64,7 @@ function useScenario(amount, days, mode) {
       }
     }, 250);
     return () => { alive = false; clearTimeout(timer); };
-  }, [mode, amount, days]);
+  }, [hasConsent, amount, days]);
 
   return state;
 }
@@ -70,7 +75,9 @@ export default function Landing() {
   const mode = useMode();
   const [amount, setAmount] = useState(3200);
   const [days, setDays] = useState(7);
-  const { s, source } = useScenario(amount, days, mode);
+  const caseState = useCaseState();
+  const hasConsent = consentGranted(caseState);
+  const { s, source } = useScenario(amount, days, hasConsent);
   const rootRef = useRef(null);
   const lenisRef = useRef(null);
 
@@ -183,7 +190,9 @@ export default function Landing() {
               </div>
               {source !== "api" && (
                 <p className="fine" style={{ margin: "10px 0 0", color: "#8a8578" }}>
-                  Synthetic demo · sample case (statutory math lives in Python).
+                  {hasConsent
+                    ? "API unavailable — synthetic demo · sample case (statutory math lives in Python)."
+                    : "Synthetic sample shown — consent first in the app (DPDP), then your real numbers compute in Python."}
                 </p>
               )}
             </div>
