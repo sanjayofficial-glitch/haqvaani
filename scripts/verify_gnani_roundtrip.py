@@ -22,6 +22,10 @@ import time
 import numpy as np
 import soundfile as sf
 
+from dotenv import load_dotenv
+
+load_dotenv()  # same .env source as haqvaani/api.py
+
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 
 from haqvaani import dsp_audio, stt_client, tts_client  # noqa: E402
