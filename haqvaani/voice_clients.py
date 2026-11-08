@@ -118,7 +118,7 @@ class VoiceAPI:
             logger.info("No speech segments detected by VAD")
             return ""
 
-        speech = np.concatenate([audio_16k[s:e] for s in segments]).astype(np.float32)
+        speech = np.concatenate([audio_16k[s:e] for s, e in segments]).astype(np.float32)
         speech = np.clip(speech, -1.0, 1.0)
 
         # 3. Live Gnani Prisma v2.5 WSS (preferred when credentials present).

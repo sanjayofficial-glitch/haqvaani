@@ -5,6 +5,33 @@
 
 ---
 
+## [2026-11-09] — Live voice actually works: STT fix + async-route fix + proof
+
+The Gnani live path was configured but not truly functional inside the app:
+
+- `haqvaani/voice_clients.py` — `transcribe` sliced `audio_16k[s:e]` over a
+  list of `(start, end)` tuples → `NameError: e` on any real audio, 500 on
+  upload. Now unpacks `s, e`.
+- `haqvaani/api.py` — `/api/intake` called the blocking WSS transcription
+  directly inside the async route; `asyncio.run()` inside a running loop
+  made live Prisma fail silently → whisper fallback. Now runs via
+  `asyncio.to_thread`, so live Prisma is used.
+- `scripts/verify_gnani_roundtrip.py` — loads `.env` (runs from a clean
+  shell).
+- `docs/LIVE_PROOF.md` — reproducible evidence file (roundtrips, in-app
+  intake result, health).
+
+### Verified
+- Live roundtrip: Timbre TTS → WAV (1.6 s) → Prisma STT → identical Hindi
+  transcript (~21 s). Second utterance with amount/UTR → `₹3,200` + digit
+  transcript.
+- In-app `/api/intake` with a real Timbre WAV → 200, parsed
+  `UTR 629188340112 · ₹3,200 · 2026-10-18 · upi_p2p` from the live Prisma
+  transcript (no whisper fallback).
+- `python -m pytest tests/` — 54 passed.
+
+---
+
 ## [2026-11-09] — "Proper app" polish pass (PM/RICE)
 
 Product-manager-toolkit pass: RICE-scored the "doesn't feel like an app"

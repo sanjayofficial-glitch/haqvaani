@@ -12,6 +12,7 @@ Consent (DPDP Act 2023) is enforced per-session before any voice work.
 
 from __future__ import annotations
 
+import asyncio
 import json
 import os
 import uuid
@@ -112,7 +113,9 @@ async def intake_route(
         obj = CitizenIntake.model_validate(json.loads(intake))
     else:
         blob = await audio.read() if audio else None
-        transcript = VoiceAPI.transcribe(audio_bytes=blob)
+        # STT/WSS is blocking and uses asyncio.run() — run it off the loop
+        # so live Prisma works inside this async route (no event-loop error).
+        transcript = await asyncio.to_thread(VoiceAPI.transcribe, audio_bytes=blob)
         obj = VoiceAPI.parse_intake(transcript)
 
     s["parts"]["intake"] = obj
