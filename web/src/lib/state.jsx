@@ -4,7 +4,7 @@
      factsEdited, rawTranscript, suggestedIntake, disputeType }
    The consent record is the DPDP gate: { ts, disclosure, name, disclosureText } */
 
-import React, { createContext, useContext, useMemo, useRef } from "react";
+import React, { createContext, useContext, useMemo, useState } from "react";
 
 const STORE_KEY = "hv.state";
 
@@ -23,25 +23,26 @@ function write(s) {
 
 const StateCtx = createContext(null);
 
-/* merge-and-save keeps one source of truth; every setter writes straight through */
+/* merge-and-save keeps one source of truth; every setter writes straight through.
+   State lives in React state so context consumers (incl. the consent gate in
+   App.jsx) see fresh values immediately after a commit — previously the provider
+   published a one-time snapshot, so a submit→navigate could be re-redirected
+   back by the still-stale gate (state wipe). */
 export function CaseStateProvider({ children }) {
-  const stateRef = useRef(read());
-  const listeners = useRef(new Set());
+  const [state, setState] = useState(read);
 
   const value = useMemo(() => {
-    const state = stateRef.current;
     const commit = (updater) => {
-      const next = typeof updater === "function" ? updater(stateRef.current) : updater;
-      stateRef.current = { ...stateRef.current, ...next };
-      write(stateRef.current);
-      listeners.current.forEach((fn) => fn(stateRef.current));
+      setState((prev) => {
+        const next = typeof updater === "function" ? updater(prev) : updater;
+        const merged = { ...prev, ...next };
+        write(merged);
+        return merged;
+      });
     };
-    const subscribe = (fn) => {
-      listeners.current.add(fn);
-      return () => listeners.current.delete(fn);
-    };
+    const subscribe = () => () => {}; // kept for API compat (state pushes via React)
     return { state, commit, subscribe };
-  }, []);
+  }, [state]);
 
   return <StateCtx.Provider value={value}>{children}</StateCtx.Provider>;
 }

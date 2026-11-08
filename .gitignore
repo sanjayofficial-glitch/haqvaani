@@ -31,3 +31,4 @@ graphify-out/.graphify_python
 .codebase-memory/
 graphify-out/.graphify_*
 scripts/.cdp-profile/
+scripts/.*/

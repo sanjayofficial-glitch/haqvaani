@@ -5,6 +5,40 @@
 
 ---
 
+## [2026-11-09] — Fix consent-gate state wipe (React SPA) + browser QA scripts
+
+A headless-browser audit of `web/` (the React SPA served at :8001) found
+every screen renders — no blank/white screens — but the **consent submit
+was silently broken**: the form posted consent (200), stored it, then the
+App-level consent gate re-redirected to consent because it still read a
+stale state snapshot, wiping the user's input.
+
+### Changed
+- `web/src/lib/state.jsx` — `CaseStateProvider` now holds state in React
+  state instead of publishing a one-time snapshot from a ref. `commit()`
+  immediately refreshes every consumer (including the consent gate in
+  `App.jsx`), so submit→navigate works in one shot. API unchanged
+  (`useCaseFile` / `useCaseState` / `consentGranted`).
+- `scripts/_verify_app_screens.cjs` — CDP render audit: loads all 11 hash
+  routes, measures root/text, collects JS exceptions + HTTP errors,
+  screenshots start-case.
+- `scripts/_verify_flow.cjs` — CDP click-through of the whole user journey
+  (start-case → consent → intake → review → rights → complaint → call →
+  assisted → docket → post-call → dossier).
+- `scripts/_probe_mic.cjs`, `scripts/_probe_mic2.cjs` — mic/demo
+  classification probes.
+
+### Verified
+- Consent submit: `POST /api/consent` → 200, `hashchange` exactly once →
+  `#/voice-intake` (no redirect-back, no input wipe). Screens render with
+  real content (root children=5, text 689–1,962 chars each).
+- `python scripts/_ui_integrity_check.py` — green (11 frontend + 11 web).
+- `web/ npm run build` — clean.
+- Deep-link API guard errors (403 consent / 422 invalid body / 404
+  CASE_INCOMPLETE) confirmed as expected gates; UI recovers gracefully.
+
+---
+
 ## [2026-11-09] — CTO review fixes: dotenv live boot + full worktree commit
 
 A CTO review found the app healthy but shipping in **demo mode** on a clean
