@@ -6,6 +6,13 @@
    the user prompt's merged Heron palette, which resolves colour conflicts.)
    ========================================================================== */
 
+/* base viewport hardening: never collapse the app frame */
+html, body, #root {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
 :root {
   /* ------------------------------------------------------------- colors -- */
   --accent: #fa3600; /* the ONLY signal colour: rail progress, deadline
