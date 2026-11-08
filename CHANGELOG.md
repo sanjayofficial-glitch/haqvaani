@@ -5,6 +5,99 @@
 
 ---
 
+## [2026-11-08] — Round-1 moat features (anti-wrapper proof)
+
+Five deliverables that make the "not a generic LLM wrapper" claim concrete,
+shipped free without touching `haqvaani/`:
+
+### Added
+- `web/src/lib/redact.js` — `RollingRedactor`: a 10s sliding buffer runs
+  `FORBIDDEN_SECRET_RE` over the whole window, so secrets split across VAD
+  frames are still blocked (voiced "OTP" pause across segments is caught).
+  Wired into `VoiceIntake.finish()`: a block bumps `secretsBlocked` and
+  toasts. Safety panel now reflects rolling-window catches.
+- `web/src/lib/ocr.js` — on-device screenshot OCR parsers (amount/UTR/date,
+  accepting Indian grouping, grouped UTRs, dd/mm/yyyy · dd MMM yyyy · ISO).
+- `web/src/screens/FactReview.jsx` — upload a UPI screenshot; `tesseract.js`
+  (lazy-loaded, own 15 KB chunk) reads it in-browser and pre-fills the four
+  facts. Nothing leaves the device; graceful failure note.
+- `web/src/screens/Dossier.jsx` — "Ombudsman prefill (CMS)" export: a JSON +
+  TXT pair shaped for `cms.rbi.org.in` / helpline 14448, assembled from the
+  case record.
+- `docs/pitching.md` — positioning narrative ("why not just ChatGPT?"):
+  neuro-symbolic architecture, DPDP/PII/SLM mapping, the four probe edges,
+  honesty guardrails.
+
+### Changed
+- `web/src/screens/RightsCheck.jsx` — RBI timeline split per dispute type in
+  a rule strip: **T+1 (P2P/IMPS)** vs **T+5 (merchant/ATM/PoS)** vs
+  zero-liability, showing the circular anchor
+  (`DPSS.CO.PD.No.629/02.01.014/2019-20`).
+- Package: `tesseract.js@7` added (lazy chunk).
+
+### Verified
+- OCR parser: `"Rs 3,200.00 · UTR 6291 8834 0112 · 18/10/2026"` →
+  `{amount:3200, utr:"629188340112", date:"2026-10-18"}`.
+- Redactor: split-segment OTP blocked; clean text after the window slides
+  passes.
+- `npm run build` clean; `_ui_integrity_check.py` green.
+
+---
+
+## [2026-11-08] — Start-case cards become pictorial (illustrated dispute types)
+
+Per the product clause that citizens should recognise their problem without
+reading: every dispute-choice card now leads with a hand-drawn SVG scene in
+the repo's art convention (INK lines, one accent marking only where the money
+went wrong), and card copy is trimmed to one short bilingual line + the mono
+deadline footer.
+
+### Added
+- `web/src/screens/art/DisputeArt.jsx` — four decorative, glyph-free
+  scenes mirroring `landing/art/` conventions: UPI (phone → arrow → person,
+  accent ✕ = never received), ATM (machine, note going in, accent dashed
+  empty tray), unauthorised (card → note pulled to a dashed unknown actor,
+  accent ✕), unsure (phone + dashed path + drawn accent question mark).
+- `web/src/screens/StartCase.jsx` — art well on top of each card, trimmed
+  copy (जानकारी सुनाई जाएगी; reading now optional), art cells kept
+  aria-hidden since the link text carries the full meaning.
+- `web/src/styles/app.css` — `.case-card .art` well (hairline footer,
+  centred scene) with a restrained hover/focus lift.
+
+### Verified
+- `vite build` OK (needs `NODE_OPTIONS=--max-old-space-size` on this
+  machine: transient WASM OOM in the bundle parser, unrelated to code);
+  `python scripts/_ui_integrity_check.py` OK; dev server serves both files.
+
+---
+
+## [2026-11-08] — Start-case screen: missing styles ported + accessibility pass
+
+The React rebuild rendered the four dispute-choice cards as bare text links —
+the `.case-cards` / `.case-card` CSS that exists inline in
+`frontend/screens/start-case.html` was never carried into `web/src`. Ported
+and upgraded against the flat border-led tokens.
+
+### Changed
+- `web/src/styles/app.css` — added the `start-case` component block: card
+  grid (1 col → 2 col ≥720px), hairline sheets with hover/`focus-visible`
+  equivalence (accent border + 8% wash), `:active` press, sliding go-arrow
+  (reduced-motion kills the slide), AA-contrast footer line, dashed "not
+  sure" variant. Also widened the Devanagari font funnel to `[lang^="hi-"]`
+  (screens mark Hindi as `lang="hi-IN"`, which `[lang="hi"]` missed).
+- `web/src/screens/StartCase.jsx` — a11y cleanup: cards now a semantic
+  choice group (`ul[role=list] > li > a`, bilingual section label), the
+  statutory readout (`.tat`) is real visible text instead of
+  `aria-hidden` (SR users keep T+1/T+5 + ₹100/day), per-card bilingual
+  descriptions/readouts, AA small copy (`mute-2` not `mute-3`), `lang="hi"`
+  on headings. Pick/reset state contract unchanged.
+
+### Verified
+- `web/ npm run build` clean; `python scripts/_ui_integrity_check.py` OK
+  (11 frontend screens + 11 web screens); dev server serves the new CSS.
+
+---
+
 ## [2026-11-08] — Landing rebuilt as the chosen "paper poster" UI (exact port)
 
 The landing page is rebuilt to match `optimizing-ui-visual-storytelling` —
