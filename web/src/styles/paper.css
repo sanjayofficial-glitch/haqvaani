@@ -97,13 +97,13 @@
 .paper-root .chip--org { background: var(--org); color: #fff; }
 
 /* ---------- acts ---------- */
-.paper-root .act { position: relative; height: 230vh; background: var(--paper); }
+.paper-root .act { position: relative; height: 150vh; background: var(--paper); }
 .paper-root .act:nth-of-type(even) { background: var(--paper-2); }
 .paper-root .act__stage {
   position: sticky; top: 0; height: 100vh; height: 100svh;
-  display: flex; flex-direction: column; padding: 46px clamp(12px, 3vw, 44px) 8px; box-sizing: border-box;
+  display: flex; flex-direction: column; padding: 32px clamp(12px, 3vw, 44px) 8px; box-sizing: border-box;
 }
-.paper-root .act__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; min-height: 76px; flex: none; }
+.paper-root .act__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; min-height: 68px; flex: none; }
 .paper-root .eyebrow { font-size: var(--fs-cap); letter-spacing: 0.18em; font-weight: 800; color: var(--ink-2); }
 .paper-root .eyebrow__n { color: var(--org); font-size: 15px; }
 .paper-root .act h2 { font-size: clamp(44px, 6.4vw, 84px); line-height: 0.98; margin: 2px 0 0; }
@@ -114,7 +114,7 @@
   .paper-root .annotation { text-align: left; margin: 4px 0 0; }
   .paper-root .act h2 { font-size: clamp(36px, 11vw, 56px); }
 }
-.paper-root .scene { flex: 1; min-height: 0; width: 100%; display: block; overflow: visible; }
+.paper-root .scene { flex: 1; min-height: 0; width: 100%; display: block; overflow: visible; transform: scale(1.05); transform-origin: 50% 50%; }
 
 /* spinner on the phone's "processing" step */
 .paper-root .ph-proc { transform-box: fill-box; transform-origin: center; animation: hvSpin 1s linear infinite; }
