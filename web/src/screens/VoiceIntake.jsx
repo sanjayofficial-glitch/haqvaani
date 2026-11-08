@@ -12,6 +12,7 @@ import { useCaseFile, useCaseState } from "../lib/state.jsx";
 import { api } from "../lib/api.js";
 import { DEMO, AI_DISCLOSURE } from "../lib/demo.js";
 import { RollingRedactor } from "../lib/redact.js";
+import { SpeakScene } from "./art/CaseArt.jsx";
 import { navigate } from "../lib/router.js";
 
 export default function VoiceIntake() {
@@ -167,6 +168,10 @@ export default function VoiceIntake() {
         </p>
       </div>
 
+      <div className="art" aria-hidden="true" style={{ marginTop: "var(--s-sm)" }}>
+        <SpeakScene />
+      </div>
+
       <section className="col" style={{ alignItems: "center", gap: "var(--s-sm)", padding: "34px 0 10px" }} aria-label="माइक">
         <p className="caption mute-3" aria-live="polite">{hint}</p>
         <button
@@ -210,6 +215,9 @@ export default function VoiceIntake() {
           <div className="t-text" lang="hi-IN">{tText}</div>
         </div>
         <div className="row" hidden={!after}>
+          <a className="btn btn--line" href="#/start-case">
+            वापस · back
+          </a>
           <button className="btn btn--primary" onClick={() => navigate("#/fact-review")}>
             चार सच समीक्षा · review the four facts
           </button>

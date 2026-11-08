@@ -151,3 +151,81 @@ def _rbi_cms_draft(
         f"6. File at {_RBI_PORTAL} or call {_RBI_TOLLFREE} (toll-free).\n\n"
         f"{DISCLAIMER}"
     )
+
+
+# --------------------------------------------------------------- Hindi drafts -----
+
+HI_DISCLAIMER = (
+    "हक़-वाणी आपकी शिकायत बनाने और RBI अधिकार समझने में मदद करता है; "
+    "यह धनवापसी की गारंटी नहीं देता।"
+)
+
+
+def build_hindi_drafts(
+    intake: CitizenIntake,
+    entitlement: StatutoryEntitlement,
+    *,
+    citizen_name: str = "रमेश",
+) -> dict:
+    """Deterministic Hindi (Devanagari) versions of the Mode 3 drafts.
+
+    Pure-Python templates (Engineer B file) — no LLM, no schema change.
+    Returned as a plain dict so the treaty border at schemas.py stays untouched.
+    """
+    bank = intake.bank_name or SYNTHETIC_BANK
+    amount = _inr(intake.amount_inr)
+    claim = _inr(entitlement.total_inr)
+    penalty = _inr(entitlement.penalty_inr)
+    utr = intake.utr or "(UTR नहीं मिला)"
+
+    intro = (
+        f"मैं {citizen_name} हूँ। {intake.txn_date.isoformat()} को मैंने UPI से "
+        f"{amount} का भुगतान किया था। मेरे खाते से राशि कट गई पर लाभार्थी को "
+        f"नहीं पहुँची (UTR: {utr})।"
+    )
+    legal = (
+        f"{entitlement.circular_ref} के तहत सांविधिक समय-सीमा "
+        f"{entitlement.tat_date.isoformat()} (T+1/T+5) थी। आज तक "
+        f"{entitlement.days_overdue} दिन की देरी हो चुकी है, इसलिए मैं {penalty} "
+        f"(₹100/दिन) क्षतिपूर्ति का अधिकारी हूँ, साथ में {amount} की वापसी। "
+        f"कुल दावा: {claim}।"
+    )
+    request = (
+        f"कृपया (1) {amount} विफल डेबिट तुरंत वापस करें और (2) {penalty} "
+        f"सांविधिक क्षतिपूर्ति जमा करें — दोनों suo motu, जैसा RBI द्वारा "
+        f"अनिवार्य है। शिकायत दर्ज करें और ट्रैकिंग हेतु सेवा अनुरोध / "
+        f"डॉकेट नंबर दें।"
+    )
+    closing = f"धन्यवाद।\n{citizen_name}\nफ़ोन: {SYNTHETIC_PHONE}"
+
+    bank_text = (
+        f"विषय: विफल UPI लेन-देन — धनवापसी + RBI/2019-20/67 के तहत "
+        f"सांविधिक क्षतिपूर्ति\n\n{intro}\n\n{legal}\n\n{request}\n\n{closing}\n\n"
+        f"{HI_DISCLAIMER}"
+    )
+    whatsapp = (
+        f"प्रिय {bank}, मैं {citizen_name} हूँ। {intake.txn_date.isoformat()} को "
+        f"{amount} का UPI भुगतान डेबिट हुआ पर क्रेडिट नहीं हुआ (UTR: {utr})। "
+        f"{entitlement.circular_ref} के तहत कृपया {amount} वापस करें और {penalty} "
+        f"क्षतिपूर्ति (₹100/दिन) दें। SR/डॉकेट आईडी दर्ज कर साझा करें। "
+        f"{HI_DISCLAIMER}"
+    )
+    email = (
+        f"To: complaints@{bank.lower().replace(' ', '')}.in\n"
+        f"विषय: धनवापसी + ₹100/दिन क्षतिपूर्ति — विफल UPI (UTR: {utr})\n\n"
+        f"{intro}\n\n{legal}\n\n{request}\n\n{closing}\n\n{HI_DISCLAIMER}"
+    )
+    checklist = [
+        "UPI लेन-देन संदर्भ (UTR) — भुगतान एप का स्क्रीनशॉट",
+        "बैंक स्टेटमेंट / पासबुक प्रविष्टि जो डेबिट दिखाती है",
+        "लाभार्थी की पुष्टि (P2P हो तो) — मित्र/विक्रेता स्क्रीनशॉट",
+        "यह शिकायत पत्र शिकायत की तारीख के साथ",
+        "बैंक का स्वीकृति / SR / डॉकेट आईडी मिलने पर",
+    ]
+    assert_no_forbidden_secret(bank_text + whatsapp + email + " ".join(checklist))
+    return {
+        "bank_complaint_text": bank_text,
+        "whatsapp_draft": whatsapp,
+        "email_draft": email,
+        "evidence_checklist": checklist,
+    }

@@ -1,0 +1,104 @@
+/* Hallmark · tokens.css — shared HaqVaani design tokens; story/evidence canvases, semantic ink ladders and edges, type and motion. posture: swiss editorial · surface: paper · shape: grid · redesign: swiss v3.0 */
+/* ==========================================================================
+   HaqVaani tokens.css — the single source of visual truth (docs/DESIGN.md v3.0)
+   Semantic colour: cyan live · red broken/overdue · green verified
+                    black your action · violet AI explanation · pink Hindi
+   v3.0 "Swiss Editorial": light high-contrast canvases, opacity hierarchy,
+   hairline rules, sharp corners, oversized display type. Black is the one
+   action colour; the semantic set exists only for legal meaning (never hue
+   alone — always icon + word + colour).
+   ========================================================================== */
+
+:root {
+  /* canvases — both light; story is the brighter, evidence slightly toned */
+  --story-black:     #ffffff;
+  --story-surface:   #f4f4f1;
+  --evidence-canvas: #fafaf8;
+  --soft-surface:    #eff0ec;
+  --ink:             #0b0b0c;
+  --line:            #d9dad4;
+
+  /* paper + firm ink for filled surfaces (buttons, coins, stamps) */
+  --paper:     #ffffff;
+  --on-tone:   #ffffff;   /* ink on filled black/cyan surfaces */
+
+  /* meaning — Swiss palette, status colours kept strictly semantic */
+  --primary:          #0b0b0c;  /* black — evidence CTAs, current step */
+  --live-cyan:        #006fb8;  /* live signal, story canvas only */
+  --verified-green:   #0e7a3c;
+  --pending-orange:   #b45309;
+  --blocked-red:      #d4382e;
+  --reasoning-violet: #5a2e8f;  /* AI explanations only */
+  --hindi-pink:       #b8375f;  /* Hindi emphasis only */
+
+  /* small text on the light story canvas uses the full red (≥4.5:1) */
+  --blocked-ink: var(--blocked-red);
+
+  /* ink tint for text hierarchy — opacity only, never hue (Swiss rule) */
+  --ink-2: rgba(11,11,12,.72);  /* secondary text */
+  --ink-3: rgba(11,11,12,.52);  /* tertiary text */
+
+  /* story-canvas ink steps — same ink, six strengths */
+  --story-ink:       #0b0b0c;                /* primary text on story */
+  --story-ink-hi:    rgba(11,11,12,.88);
+  --story-ink-2:     rgba(11,11,12,.72);     /* secondary — mirrors --ink-2 */
+  --story-ink-3:     rgba(11,11,12,.55);
+  --story-ink-4:     rgba(11,11,12,.45);     /* mirrors --ink-3 */
+  --story-ink-dim:   rgba(11,11,12,.38);
+  --story-ink-ghost: rgba(11,11,12,.30);     /* decorative only, never body copy */
+
+  /* story-canvas hairline edges — one ladder, six strengths */
+  --story-edge-soft:   rgba(0,0,0,.06);
+  --story-edge-1:      rgba(0,0,0,.08);
+  --story-edge-2:      rgba(0,0,0,.10);
+  --story-edge-3:      rgba(0,0,0,.12);      /* default card edge */
+  --story-edge-4:      rgba(0,0,0,.18);
+  --story-edge-strong: rgba(0,0,0,.22);      /* controls, inputs */
+
+  /* story-canvas tap wash — pressed/filled feedback */
+  --story-tap: rgba(0,0,0,.05);
+
+  /* cyan wash — AI/cyan accent backgrounds on story surface */
+  --cyan-wash: color-mix(in srgb, var(--live-cyan) 6%, transparent);
+
+  /* shadow — none. Swiss surfaces are flat; hierarchy comes from hairlines,
+     weight, and space. */
+  --shadow-card: none;
+
+  /* focus ring — black, ≥3:1 on every surface */
+  --ring-on-paper: #0b0b0c;
+
+  /* type */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-hi:   'Noto Sans Devanagari', 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', monospace;
+
+  --display-size: clamp(44px, 7.5vw, 104px);
+  --display-ls:   -0.04em;    /* tight, precise */
+  --display-lh:   0.98;
+  --h2-size:      clamp(34px, 4.6vw, 60px);
+  --body-size:    17px;
+  --body-lh:      1.6;
+  --hindi-size:   19px;
+  --hindi-lh:     1.7;
+
+  /* shape — rectilinear, Swiss */
+  --radius-card:   0;
+  --radius-button: 0;
+  --radius-input:  0;
+
+  /* motion — a change of state, never decoration; classic ease */
+  --t-fast:  160ms cubic-bezier(.25, .1, .25, 1);
+  --t-base:  420ms cubic-bezier(.25, .1, .25, 1);
+  --t-story: 900ms cubic-bezier(.25, .1, .25, 1);
+
+  /* rail / step bar — the hairline signature */
+  --rail-width: 1px;
+  --rail-coin:  14px;
+  --rail-left:  26px;
+  --rail-gutter: 76px;
+  --rail-tone:   var(--live-cyan); /* overridden per beat in JS */
+
+  /* layout */
+  --maxw: 1080px;
+}

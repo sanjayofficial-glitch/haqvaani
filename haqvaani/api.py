@@ -18,6 +18,13 @@ import uuid
 from datetime import datetime
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+# Load .env BEFORE any env-gated module (voice_clients etc.) is imported,
+# so `make run-api` / `run.bat` / `python -m haqvaani` all boot in live
+# Gnani mode from a clean shell (see CTO review, 2026-11-09).
+load_dotenv()
+
 from fastapi import FastAPI, File, Form, Header, HTTPException, UploadFile
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -30,6 +37,8 @@ from .statutory import compute_statutory_entitlement
 from .voice_clients import DEMO_IVR_TRANSCRIPT, VoiceAPI, synthesize_tts
 
 FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
+WEB_DIR = Path(__file__).resolve().parent.parent / "web"
+WEB_DIST_DIR = WEB_DIR / "dist"
 
 app = FastAPI(title="HaqVaani API", version="0.1.0")
 
@@ -230,9 +239,18 @@ def dossier(x_session: str | None = Header(default=None, alias="X-Haqvaani-Sessi
 
 @app.get("/", include_in_schema=False)
 def root():
-    """Entry point: the story/landing page (HaqVaani chapter 00–05)."""
+    """Entry point: the HaqVaani React app (web/dist) if built, else the
+    story/landing page (frontend/landing.html) as a fallback."""
+    if WEB_DIST_DIR.is_dir() and (WEB_DIST_DIR / "index.html").is_file():
+        return FileResponse(WEB_DIST_DIR / "index.html")
     return FileResponse(FRONTEND_DIR / "landing.html")
 
 
-if FRONTEND_DIR.exists():
+# The newer React/Vite rebuild (web/) is the primary citizen app. Serve its
+# built output (web/dist) at / so http://localhost:8000 opens the SPA; /api/*
+# routes on the same FastAPI handle API calls same-origin (the web/ client
+# sends BASE="" when VITE_API_BASE is unset, so fetch("/api/...") lands here).
+if WEB_DIST_DIR.is_dir():
+    app.mount("/", StaticFiles(directory=str(WEB_DIST_DIR), html=True), name="webapp")
+elif FRONTEND_DIR.exists():
     app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="frontend")

@@ -13,6 +13,8 @@ import { useCaseFile, useCaseState } from "../lib/state.jsx";
 import { api } from "../lib/api.js";
 import { DEMO } from "../lib/demo.js";
 import { substringVerify } from "../lib/format.js";
+import { Eye, Arrow, Mic } from "../components/Icon.jsx";
+import { CallScene } from "./art/CaseArt.jsx";
 
 export default function AssistedCall() {
   const { commit } = useCaseFile();
@@ -152,6 +154,10 @@ export default function AssistedCall() {
         </p>
       </div>
 
+      <div className="art" aria-hidden="true" style={{ marginTop: "var(--s-md)" }}>
+        <CallScene />
+      </div>
+
       <section className="col" style={{ marginTop: "var(--s-md)", gap: "var(--s-md)" }} aria-label="सहायता कॉल">
         {/* status pill: ready → listening → captured */}
         <div className={"status-pill " + pill} role="status" aria-live="polite">
@@ -162,13 +168,13 @@ export default function AssistedCall() {
         <div className="call-stage">
           <div className="row">
             <button className="btn btn--primary" type="button" aria-pressed={recording}
-              aria-label="सुनना चालू करें" disabled={recording} onClick={onListen}>
-              <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /></svg>
+              aria-label="सुनना चालू करें" disabled={recording} onClick={onListen}>              <Mic size={15} />
               सुनना शुरू · start listening
             </button>
             <button className="btn btn--ink" type="button" disabled={!recording}
               aria-label="सुनना बंद करें और नंबर पढ़ें" onClick={onStop}>
               बंद रोकें <span className="xsmall">stop &amp; read</span>
+              <Eye />
             </button>
           </div>
           <p className="xsmall mute-3">
@@ -183,11 +189,16 @@ export default function AssistedCall() {
         </div>
 
         <div className="row" hidden={!after}>
-          <a className="btn btn--primary" href="#/docket-capture">
-            नंबर देखें और मंजूर करें · review the docket
-            <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+          <a className="btn btn--line" href="#/call-prep">
+            वापस · back
           </a>
-          <button className="btn btn--line" type="button" onClick={again}>फिर सुनें · listen again</button>
+          <a className="btn btn--primary" href="#/docket-capture">
+            नंबर देखें और मंजूर करें · review the docket              <Arrow />
+          </a>
+          <button className="btn btn--line" type="button" onClick={again}>
+            फिर सुनें · listen again
+            <Arrow />
+          </button>
         </div>
 
         {/* no mic? what you heard, typed honestly */}

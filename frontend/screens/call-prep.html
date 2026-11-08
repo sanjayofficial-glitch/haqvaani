@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="hi-IN" data-lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>कॉल की तैयारी · Call prep: हक़-वाणी</title>
+<meta name="description" content="कॉल से पहले: क्या बोलना है, क्या कभी नहीं देना (OTP/PIN/CVV)। Call prep: what to say, never share.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/app.css">
+</head>
+<body data-page="app" data-step="2" data-canvas="story" data-tone="indigo">
+
+<header class="app-head">
+  <a class="brand" href="../landing.html" aria-label="हक़-वाणी मुख्य पेज">
+    <span class="hi" lang="hi">हक़-वाणी</span><small>Call prep</small>
+  </a>
+  <div class="head-right">
+    <span class="chip" id="modeChip" data-mode="demo"><span class="dot"></span>Synthetic demo</span>
+    <div class="lang-seg" role="group" aria-label="भाषा">
+      <button type="button" data-lang="hi">हिन्दी</button>
+      <button type="button" data-lang="en">English</button>
+    </div>
+  </div>
+</header>
+
+<div id="stepMount"></div>
+
+<main class="app-main narrow">
+  <div class="beat-head stack">
+    <h1 class="hi" lang="hi">आप डायल करेंगे। हक़-वाणी सुनेगा।</h1>
+    <p class="when-en ink-2">You call the bank yourself : HaqVaani never dials anyone. It sits with you,
+    shows what to say, and writes down the docket number.</p>
+  </div>
+
+  <section class="stack" style="margin-top:26px" aria-label="कॉल की तैयारी">
+    <!-- you ↔ bank : the one move: the citizen dials, the assistant listens -->
+    <div class="card" style="background:var(--story-surface)">
+      <svg viewBox="0 0 320 46" width="100%" height="46" aria-hidden="true">
+        <line class="whisper" x1="16" y1="23" x2="304" y2="23" stroke="currentColor" stroke-width="2"/>
+        <text x="16" y="40" font-size="11" fill="rgba(11,11,12,.62)">आप · you dial</text>
+        <text x="304" y="40" font-size="11" fill="rgba(11,11,12,.62)" text-anchor="end">बैंक · bank IVR</text>
+        <circle cx="16" cy="23" r="6" fill="var(--live-cyan)"/>
+        <circle cx="304" cy="23" r="6" fill="none" stroke="rgba(11,11,12,.62)" stroke-width="2"/>
+      </svg>
+      <p class="xsmall" style="margin-top:8px;color:var(--story-ink-4)">हक़-वाणी बीच में बैठता है : बाहरी लाइन पर कुछ भी नहीं भेजता ·
+      everything stays on your side of the call</p>
+    </div>
+
+    <!-- what to say when you're through -->
+    <div class="scriptcard">
+      <p class="xsmall" style="margin-bottom:12px;color:var(--story-ink-4)">
+        जुड़ते ही यह बोलिए · say this when the agent joins : क्रम से</p>
+      <p class="say hi" lang="hi" id="sayHi">…</p>
+      <p class="say when-en" id="sayEn" style="margin-top:10px; color:var(--story-ink-hi)">…</p>
+      <div class="row" style="margin-top:18px">
+        <button class="btn btn-ghost-dark" id="speakBtn" type="button" aria-label="हिन्दी में बोली सुनें">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.5 8.5a4 4 0 0 1 0 7"/></svg>
+          सुनिए · hear it
+        </button>
+      </div>
+    </div>
+
+    <!-- the bank's favourite requests : refuse freely -->
+    <div class="card">
+      <p class="h3" style="margin:0 0 10px">कभी न देना · never share</p>
+      <ul class="stack" style="gap:0; margin:0; padding:0; list-style:none">
+        <li class="you-bank" style="padding:10px 0;border-top:1px solid var(--story-edge-soft)"><span class="n"></span><span>otp <span class="when-en">(one-time password)</span></span></li>
+        <li class="you-bank" style="padding:10px 0;border-top:1px solid var(--story-edge-soft)"><span class="n"></span><span>pin · mpin</span></li>
+        <li class="you-bank" style="padding:10px 0;border-top:1px solid var(--story-edge-soft)"><span class="n"></span><span>cvv <span class="when-en">(back of card)</span></span></li>
+        <li class="you-bank" style="padding:10px 0;border-top:1px solid var(--story-edge-soft)"><span class="n"></span><span>लोगिन पासवर्ड · banking password</span></li>
+      </ul>
+      <p class="xsmall" style="margin-top:12px;color:var(--story-ink-4)">ये बैंक ने कभी नहीं माँगा होता : जो भी पूछे, फोन रख दीजिए।
+      <span class="when-en">Even the bank never asks these : refuse and hang up.</span></p>
+    </div>
+
+    <div class="row">
+      <a class="btn btn-light" href="assisted-call.html">
+        कॉल शुरू करें : सुनना चालू करें · open assisted call
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a class="btn btn-ghost-dark" href="complaint-builder.html">ड्राफ्ट पर वापस <span class="en">back to drafts</span></a>
+    </div>
+  </section>
+</main>
+
+<div class="safety" role="region" aria-label="सुरक्षा जानकारी">
+  <div class="safety-in">
+    <span class="short">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span class="hi" lang="hi">कभी OTP, PIN या CVV न बोलें : बैंक इनके लिए कभी पूछता नहीं।</span>
+      <span class="when-en">Never share OTP, PIN or CVV : the bank never asks.</span>
+    </span>
+    <details>
+      <summary>सुरक्षा विवरण · safety status</summary>
+      <div class="panel" id="safetyPanel"></div>
+    </details>
+  </div>
+</div>
+
+<script src="../js/rail.js"></script>
+<script src="../js/router.js"></script>
+<script>
+(function () {
+  "use strict";
+  var state = HQ.state;
+  var q = HQ.q, el = function (id) { return document.getElementById(id); };
+  var ent = state.entitlement || HQ.DEMO.entitlement;
+  var intake = state.intake || HQ.DEMO.intake;
+
+  /* the counter-script is narrative formatting of Python-computed values;
+     numbers here are only ever read from state.entitlement / demo canned */
+  var overdue = (ent.days_overdue || 0) > 0;
+  var circ = ent.circular_ref || "RBI/2019-20/67";
+  var tat = ent.tat_date;
+
+      var sayHi = overdue
+    ? "मैं " + (intake.bank_name || "अपने बैंक") + " से बात कर रहा/रही हूँ। " + tat + " को TAT पूरी हो चुकी थी और आज तक वापसी नहीं हुई। " + circ + " के अनुसार ₹100 प्रति दिन क्षतिपूर्ति मेरा सांविधिक हक़ है। कृपया मेरी शिकायत दर्ज करें और सर्विस रिक्वेस्ट / डॉकेट नंबर तुरंत दें : मैं लिख रहा/रही हूँ।"
+    : "मेरी राशि अभी तक वापस नहीं आई है। TAT (" + tat + ") निकट है : कृपया अभी शिकायत दर्ज करें और डॉकेट नंबर दें, ताकि सांविधिक समय से पहले रिपोर्ट दर्ज रहे।";
+
+  var sayEn = overdue
+    ? 'I have a failed transaction beyond the statutory TAT of ' + tat + '. Under ' + circ +
+      ' I am owed the refund plus ₹100 per day as statutory compensation. Please register my complaint now and give me the service request number : I will note it down.'
+    : 'I want to pre-empt the TAT of ' + tat + '. Please register my complaint today and give me the service request number for tracking.';
+
+  el("sayHi").textContent = sayHi;
+  el("sayEn").textContent = sayEn;
+
+  el("speakBtn").addEventListener("click", function () {
+    /* TTS route is redaction-gated server-side; browser fallback keeps it audible */
+    HQ.speak(sayHi, "hi");
+  });
+})();
+</script>
+</body>
+</html>

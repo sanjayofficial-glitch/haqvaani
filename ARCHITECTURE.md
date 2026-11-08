@@ -20,6 +20,10 @@ language support, correct RBI-rule calculations, evidence organization, and a cl
 
 All bank interactions in the hackathon demo are **simulated/synthetic**. No autonomous dialing.
 
+The product experience and visual system are specified in `docs/experience_concept.md`
+(authoritative; supersedes the older glass/clay design doc). See `docs/DESIGN-revolut.md`
+for the fintech foundation reference.
+
 ---
 
 ## 2. The 4-Mode Pipeline
@@ -134,7 +138,7 @@ Citizen Summary (audio) + Complaint Dossier (PDF/JSON)
 
 ## 5. Assisted-Call State Machine (Mode 4)
 
-States: `IDLE` | `LISTENING` | `SCRIPT_DISPLAY` | `DOTT_CAPTURE` | `POST_CALL`
+States: `IDLE` | `LISTENING` | `SCRIPT_DISPLAY` | `DOCKET_CAPTURE` | `POST_CALL`
 
 Transitions:
 - `IDLE → LISTENING`: User starts call, taps "Start Assisted Call" in HaqVaani.

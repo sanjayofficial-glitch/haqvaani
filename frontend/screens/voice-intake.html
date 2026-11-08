@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="hi-IN" data-lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>बोलिए · Voice intake: हक़-वाणी</title>
+<meta name="description" content="अपनी शिकायत बोलिए : हक़-वाणी चार सच निकालता है। Speak your complaint : extracted into four facts.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/app.css">
+<style>
+  .mic-stage { display:flex; flex-direction:column; align-items:center; gap:18px; padding:34px 0 10px; }
+  .transcript {
+    min-height: 108px; border: 1px solid var(--story-edge-3); border-radius: var(--radius-card);
+    background: var(--story-surface); padding: 20px 22px;
+  }
+  .transcript .t-label { font-size: 12.5px; color: var(--story-ink-dim); margin-bottom: 6px; }
+  .transcript .t-text { font-size: clamp(18px, 2.4vw, 23px); line-height: 1.6; color: var(--story-ink); }
+  .wavebar { height: 8px; width: 260px; }
+</style>
+</head>
+<body data-page="app" data-step="0" data-canvas="story" data-tone="cyan">
+
+<header class="app-head">
+  <a class="brand" href="../landing.html" aria-label="हक़-वाणी मुख्य पेज">
+    <span class="hi" lang="hi">हक़-वाणी</span><small>Voice intake</small>
+  </a>
+  <div class="head-right">
+    <span class="chip" id="modeChip" data-mode="demo"><span class="dot"></span>Synthetic demo</span>
+    <div class="lang-seg" role="group" aria-label="भाषा">
+      <button type="button" data-lang="hi">हिन्दी</button>
+      <button type="button" data-lang="en">English</button>
+    </div>
+  </div>
+</header>
+
+<div id="stepMount"></div>
+
+<main class="app-main narrow">
+  <div class="beat-head stack" style="align-items:flex-start">
+    <h1 class="hi" lang="hi">अपनी बात अपने शब्दों में बोलिए।</h1>
+    <p class="when-en ink-2">This is an AI assistant assisting you. • Say it in one messy breath : amount, date, UTR, who, where.</p>
+  </div>
+
+  <div class="mic-stage">
+    <p class="xsmall ink-3" id="micHint" aria-live="polite">दबाइए और बोलिए · press and speak</p>
+    <button class="mic-big" id="micBtn" aria-pressed="false" aria-label="माइक: बोलना शुरू करें या रोकें">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/>
+      </svg>
+    </button>
+    <canvas class="wavebar" id="wave" width="260" height="8" aria-hidden="true"></canvas>
+    <div class="row">
+      <button class="btn btn-ghost-dark" id="pauseBtn" disabled aria-label="बोली रोकें">रोकें · pause</button>
+      <button class="btn btn-danger" id="stopBtn" disabled aria-label="बोली समाप्त करें और समीक्षा">समाप्त <span class="en">end &amp; review</span></button>
+    </div>
+  </div>
+
+  <section class="stack" style="margin-top:26px" aria-label="मुझे जो सुनाई दिया">
+    <div class="transcript">
+      <div class="t-label" id="tLabel">मुझे जो सुनाई दिया · what I heard (always visible : works muted)</div>
+      <div class="t-text" id="transcript" lang="hi">…</div>
+    </div>
+    <div class="row" id="afterRow" hidden>
+      <a class="btn btn-light" id="toFacts" href="fact-review.html">चार सच समीक्षा · review the four facts
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <button class="btn btn-ghost-dark" id="againBtn" aria-label="फिर से बोलें">फिर बोलें <span class="en">say again</span></button>
+    </div>
+    <div class="card">
+      <button type="button" class="btn btn-quiet" id="fileBtn" style="border-color:var(--story-edge-strong); color:var(--story-ink)" aria-label="ऑडियो फ़ाइल चुनें">सुनने की जगह ऑडियो फ़ाइल दीजिए · use an audio file</button>
+      <input type="file" id="fileInput" accept="audio/*,.webm,.wav,.m4a" hidden>
+      <p class="xsmall" id="fileNote" style="color:var(--story-ink-dim); margin-top:8px">8 kHz टेलीफ़ोनी रिकॉर्डिंग भी चलेगी · 8 kHz phone recordings work too</p>
+    </div>
+  </section>
+</main>
+
+<div class="safety" role="region" aria-label="सुरक्षा जानकारी">
+  <div class="safety-in">
+    <span class="short">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span class="hi" lang="hi">कभी OTP, PIN या CVV न बोलें : बैंक इनके लिए कभी पूछता नहीं।</span>
+      <span class="when-en">Never share OTP, PIN or CVV : the bank never asks.</span>
+    </span>
+    <details>
+      <summary>सुरक्षा विवरण · safety status</summary>
+      <div class="panel" id="safetyPanel"></div>
+    </details>
+  </div>
+</div>
+
+<script src="../js/rail.js"></script>
+<script src="../js/router.js"></script>
+<script>
+(function () {
+  "use strict";
+  var state = HQ.state;
+  var q = HQ.q;
+
+  if (!HQ.guardConsent("consent.html?next=voice-intake.html")) return;
+
+  var recording = false, paused = false;
+  var recorder = null, chunks = [], stream = null, analyser = null, audioCtx = null;
+  var waveRaf = null; /* voice-intake: the only animation loop on this page */
+  var wave = q("#wave"), wctx = wave ? wave.getContext("2d") : null;
+  /* waveform ink reads the shared token so the canvas never hard-codes a colour */
+  var waveInk = getComputedStyle(document.documentElement).getPropertyValue("--story-ink-hi").trim();
+
+  function drawWave() {
+    if (!wctx) return;
+    waveRaf = requestAnimationFrame(drawWave);
+    if (!analyser || !recording) return;
+    var data = new Uint8Array(analyser.fftSize || 1024);
+    analyser.getByteTimeDomainData(data);
+    wctx.clearRect(0, 0, wave.width, wave.height);
+    wctx.fillStyle = waveInk || "rgba(11,11,12,.85)";
+    var step = Math.max(1, Math.floor(data.length / wave.width));
+    for (var x = 0; x < wave.width; x++) {
+      var v = Math.abs(data[x * step] - 128) / 128;
+      var h = Math.max(1, v * wave.height);
+      wctx.fillRect(x, (wave.height - h) / 2, 1, h);
+    }
+  }
+
+  function setHint(t) { q("#micHint").textContent = t; }
+
+  var demoTyping = null;
+  function typeOut(text, done) {
+    var el = q("#transcript");
+    q("#tLabel").textContent = "मुझे जो सुनाई दिया · what I heard (synthetic demo text)";
+    el.textContent = "";
+    var i = 0;
+    clearInterval(demoTyping);
+    demoTyping = setInterval(function () {
+      if (paused) return;
+      el.textContent = text.slice(0, ++i);
+      if (i >= text.length) { clearInterval(demoTyping); if (done) done(); }
+    }, 34);
+  }
+
+  function finish(transcript, intake) {
+    recording = false;
+    q("#micBtn").setAttribute("aria-pressed", "false");
+    q("#stopBtn").disabled = true; q("#pauseBtn").disabled = true; q("#micBtn").disabled = false;
+    q("#afterRow").hidden = false;
+    if (transcript) q("#transcript").textContent = transcript;
+    state.rawTranscript = transcript || state.rawTranscript || "";
+    state.suggestedIntake = intake || HQ.DEMO.intake;
+    HQ.save();
+  }
+  /* labeled demo; never recomputed here : statutory math stays in statutory.py */
+  var DEMO_INTAKE_FALLBACK = HQ.DEMO.intake;
+
+  async function startRecording() {
+    setHint("सुन रहा है… बोलिए · listening…");
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    } catch (e) {
+      setHint("माइक नहीं मिला : डेमो बोली दिखाई जाएगी · no mic : showing demo speech");
+      demoPlayback();
+      return;
+    }
+    chunks = [];
+    recorder = new MediaRecorder(stream);
+    recorder.ondataavailable = function (e) { if (e.data && e.data.size) chunks.push(e.data); };
+    recorder.onstop = function () {
+      stream.getTracks().forEach(function (t) { t.stop(); });
+      var blob = new Blob(chunks, { type: recorder.mimeType || "audio/webm" });
+      if (blob.size > 1200) handleBlob(blob); else demoPlayback();
+    };
+    recorder.start();
+    paused = false;
+    recording = true;
+    q("#pauseBtn").disabled = false;
+    if ("AudioContext" in window) {
+      audioCtx = new AudioContext();
+      var src = audioCtx.createMediaStreamSource(stream);
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 1024;
+      src.connect(analyser);
+      drawWave();
+    }
+  }
+
+  function demoPlayback() { /* honest synthetic speech, always labeled as demo */
+    return typeOut(HQ.DEMO.transcript, function () { finish(HQ.DEMO.transcript, HQ.DEMO.intake); });
+  }
+
+  async function stopAndProcess() {
+    try {
+      if (recorder && recorder.state !== "inactive") recorder.stop();
+      if (audioCtx) { audioCtx.close(); audioCtx = null; analyser = null; }
+      cancelAnimationFrame(waveRaf); waveRaf = null;
+    } catch (e) { /* ignore */ }
+  }
+
+  async function handleBlob(blob) {
+    q("#tLabel").textContent = "प्रक्रिया में… transcribing";
+    q("#transcript").textContent = "…";
+    if (HQ.mode === "live") {
+      try {
+        var intake = await HQ.api.upload("/api/intake", "audio", blob);
+        state.intake = intake;
+        finish(intake.raw_transcript || HQ.DEMO.transcript, intake);
+        return;
+      } catch (err) { HQ.toast("API error : demo text दिखाया जा रहा है", "bad"); }
+    }
+    typeOut(HQ.DEMO.transcript, function () { finish(HQ.DEMO.transcript, HQ.DEMO.intake); });
+  }
+
+  /* wiring */
+  var micBtn = q("#micBtn");
+  micBtn.addEventListener("click", async function () {
+    if (!recording) { micBtn.setAttribute("aria-pressed", "true"); micBtn.disabled = true; await startRecording(); }
+  });
+  q("#pauseBtn").addEventListener("click", function () {
+    if (!recorder) return;
+    paused = !paused;
+    if (recorder.state === "recording") recorder.pause(); else if (recorder.state === "paused") recorder.resume();
+    q("#pauseBtn").textContent = paused ? "जारी · resume" : "रोकें · pause";
+  });
+  q("#stopBtn").addEventListener("click", stopAndProcess);
+
+  q("#fileBtn").addEventListener("click", function () { q("#fileInput").click(); });
+  q("#fileInput").addEventListener("change", function (e) {
+    var f = e.target.files[0];
+    if (f) { micBtn.disabled = true; handleBlob(f); }
+  });
+
+  if (state.rawTranscript) {
+    q("#transcript").textContent = state.rawTranscript;
+    q("#tLabel").textContent = "पिछली बोली · your last recording";
+    q("#afterRow").hidden = false;
+  }
+
+  /* demo typing falls back gracefully on no-mic environments */
+  window.addEventListener("beforeunload", function () { clearInterval(demoTyping); });
+})();
+</script>
+</body>
+</html>

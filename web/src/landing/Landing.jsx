@@ -169,6 +169,9 @@ export default function Landing() {
             <a className="cue" href="#act1">
               <span aria-hidden="true">↓</span> Scroll to see it happen
             </a>
+            <a className="btn btn--primary" href="#/start-case" style={{ marginTop: "var(--s-md)", display: "inline-block", textDecoration: "none" }}>
+              शिकायत शुरू करें · Start your case →
+            </a>
           </div>
 
           <div className="case" role="group" aria-label="Your case">

@@ -2,71 +2,92 @@
 <html lang="hi-IN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>हक़-वाणी | HaqVaani — RBI Refund Advocate</title>
 <meta name="description" content="भारत का पहला नागरिक-तरफा RBI सांविधिक रिफंड एडवोकेट। स्वर-प्रथम, मानव-नियंत्रित। सिंथेटिक डेमो।">
-<meta name="theme-color" content="#050508">
+<meta name="theme-color" content="#f6f7fb">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+Devanagari:wght@400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Noto+Sans+Devanagari:wght@400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --brand-primary:#00f2ff; --brand-secondary:#7c3aed; --brand-success:#00d97a;
-    --brand-warning:#ffb020; --brand-error:#ff4d4d; --brand-hindi:#ff85a2;
-    --bg-deep:#050508; --bg-panel:#0f1118; --bg-elev:#141824;
-    --glass-bg:rgba(255,255,255,.05); --glass-border:rgba(255,255,255,.14);
-    --glass-border-strong:rgba(255,255,255,.30);
-    --clay-surface:#161925;
-    --clay-shadow-out:8px 8px 18px #0a0b12,-8px -8px 18px #1c1f2c;
-    --clay-pressed:inset 4px 4px 8px #0a0b12,inset -4px -4px 8px #1c1f2c;
+    /* Evidence-canvas tokens — modern fintech (WCAG AA verified pairs) */
+    --canvas-evidence:#f6f7fb; --surface-card:#ffffff; --surface-soft:#eef0f6;
+    --ink:#171923; --body:#262a36; --mute:#5a6270; --stone-evidence:#737d91;
+    --hairline-light:#e4e6ef; --hairline-strong:#d3d7e4;
+    --primary:#4f46e5; --primary-bright:#6366f1; --primary-deep:#4338ca; --on-primary:#ffffff;
+    --primary-soft:rgba(79,70,229,.1);
+    --live-cyan:#0891b2; --verified-green:#047857; --verified-soft:rgba(4,120,87,.1);
+    --pending-orange:#b45309; --pending-deep:#92400e; --pending-chip:rgba(146,64,14,.1);
+    --blocked-red:#dc2626; --blocked-soft:rgba(220,38,38,.08);
+    --reasoning-violet:#6d28d9; --violet-soft:rgba(109,40,217,.08);
+    --hindi-pink:#be185d; --pink-soft:rgba(190,24,93,.08);
+    /* Compatibility aliases (JS/legacy refs) */
+    --brand-primary:var(--primary); --brand-secondary:var(--reasoning-violet);
+    --brand-success:var(--verified-green); --brand-warning:var(--pending-orange);
+    --brand-error:var(--blocked-red); --brand-hindi:var(--hindi-pink);
     --font-sans:'Inter','Noto Sans','Segoe UI',system-ui,sans-serif;
     --font-hi:'Noto Sans Devanagari','Mangal','Nirmala UI',sans-serif;
-    --font-mono:'Courier Prime','DejaVu Sans Mono',monospace;
+    --font-mono:'JetBrains Mono',ui-monospace,monospace;
     --space-xs:8px; --space-sm:12px; --space-md:20px; --space-lg:32px;
-    --radius-sm:12px; --radius-md:20px; --radius-lg:28px; --radius-full:999px;
+    --radius-sm:12px; --radius-md:16px; --radius-lg:24px; --radius-full:999px;
+    --shadow-card:0 1px 2px rgba(23,25,35,.05),0 10px 28px rgba(23,25,35,.05);
+    --shadow-lift:0 2px 4px rgba(23,25,35,.06),0 16px 40px rgba(23,25,35,.08);
     --t-fast:.15s cubic-bezier(.2,.8,.2,1); --t-smooth:.3s cubic-bezier(.4,0,.2,1);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
-  body{background:var(--bg-deep);color:#e8ecf2;font-family:var(--font-sans);
+  body{background:var(--canvas-evidence);color:var(--body);font-family:var(--font-sans);
     font-size:16px;line-height:1.6;overflow-x:hidden;min-height:100vh}
-  /* flat instrument background */
-  .bg{position:fixed;inset:0;z-index:-1;
-    background:
-      radial-gradient(circle at 15% 20%,rgba(0,242,255,.07) 0%,transparent 35%),
-      radial-gradient(circle at 85% 80%,rgba(124,58,237,.06) 0%,transparent 35%),
-      linear-gradient(180deg,#050508 0%,#07080d 100%)}
+  .bg{position:fixed;inset:0;z-index:-1;background:
+      radial-gradient(720px 420px at 85% -5%,rgba(79,70,229,.07),transparent 60%),
+      var(--canvas-evidence)}
   .hi{font-family:var(--font-hi)}
   .mono{font-family:var(--font-mono)}
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);border:0;white-space:nowrap}
-  .panel{position:relative;background:var(--glass-bg);backdrop-filter:blur(18px) saturate(160%);
-    -webkit-backdrop-filter:blur(18px) saturate(160%);border:1px solid var(--glass-border);
-    border-radius:var(--radius-lg);box-shadow:0 20px 50px rgba(0,0,0,.45)}
-  .clay-btn{position:relative;background:var(--clay-surface);border:none;border-radius:var(--radius-full);
-    color:#fff;font-family:var(--font-sans);font-weight:700;box-shadow:var(--clay-shadow-out);
-    cursor:pointer;transition:all var(--t-fast);display:inline-flex;align-items:center;
-    justify-content:center;gap:10px}
-  .clay-btn:active{box-shadow:var(--clay-pressed);transform:translateY(2px)}
-  .clay-btn:focus-visible{outline:3px solid var(--brand-primary);outline-offset:4px}
-  .clay-btn:disabled{opacity:.5;cursor:not-allowed}
-  .clay-btn.primary{background:linear-gradient(135deg,var(--brand-primary),#00c4e6);
-    color:#001a2e;box-shadow:0 10px 25px rgba(0,242,255,.3)}
-  .clay-btn.secondary{background:var(--clay-surface);border:1px solid var(--glass-border)}
-  .btn-lg{width:100%;height:60px;font-size:17px}
-  .btn-xl{width:112px;height:112px;font-size:18px;flex-direction:column}
-  .btn-sm{height:44px;padding:0 var(--space-md);font-size:14px;border-radius:var(--radius-md)}
-  .glass-input{width:100%;background:rgba(0,0,0,.35);border:1px solid var(--glass-border);
-    border-radius:var(--radius-md);color:#e8ecf2;padding:14px 18px;font-family:var(--font-mono);
+  :focus-visible{outline:3px solid rgba(79,70,229,.4);outline-offset:3px}
+  .glass-input:focus-visible,.docket-input:focus-visible{outline:none}
+
+  /* ---------- surfaces ---------- */
+  .panel{position:relative;background:var(--surface-card);border:1px solid var(--hairline-light);
+    border-radius:var(--radius-lg);box-shadow:var(--shadow-card)}
+  .panel.lift:hover{box-shadow:var(--shadow-lift)}
+
+  /* ---------- buttons (fintech pills) ---------- */
+  .btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    border-radius:var(--radius-full);font-family:var(--font-sans);font-weight:600;
+    cursor:pointer;transition:transform var(--t-fast),box-shadow var(--t-fast),background var(--t-fast),border-color var(--t-fast)}
+  .btn:active{transform:translateY(1px)}
+  .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+  .btn-primary{background:var(--primary);color:var(--on-primary);border:1px solid var(--primary);
+    box-shadow:0 8px 20px rgba(79,70,229,.25)}
+  .btn-primary:hover:not(:disabled){background:var(--primary-deep);box-shadow:0 10px 24px rgba(79,70,229,.32)}
+  .btn-secondary{background:var(--surface-card);border:1px solid var(--hairline-strong);color:var(--ink)}
+  .btn-secondary:hover:not(:disabled){border-color:var(--primary);color:var(--primary);background:var(--primary-soft)}
+  .btn-ok{background:var(--verified-green);color:#fff;border:1px solid var(--verified-green)}
+  .btn-ok:hover:not(:disabled){background:#055d3f}
+  .btn-lg{width:100%;height:56px;font-size:16px}
+  .btn-xl{width:112px;height:112px;font-size:18px;flex-direction:column;border-radius:50%;
+    background:linear-gradient(135deg,var(--primary),#6d28d9);border:1px solid transparent;color:#fff;
+    box-shadow:0 16px 36px rgba(79,70,229,.35)}
+  .btn-xl:hover:not(:disabled){box-shadow:0 18px 44px rgba(79,70,229,.45);transform:translateY(-2px)}
+  .btn-sm{height:44px;padding:0 18px;font-size:14px;border-radius:var(--radius-md)}
+
+  /* ---------- inputs ---------- */
+  .glass-input{width:100%;background:#fff;border:1px solid var(--hairline-strong);
+    border-radius:var(--radius-md);color:var(--ink);padding:13px 16px;font-family:var(--font-mono);
     font-size:16px;transition:border-color var(--t-fast),box-shadow var(--t-fast)}
-  .glass-input:focus{border-color:var(--brand-primary);box-shadow:0 0 0 4px rgba(0,242,255,.14);outline:none}
-  .glass-input::placeholder{color:rgba(232,236,242,.4)}
+  .glass-input:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(79,70,229,.14);outline:none}
+  .glass-input::placeholder{color:var(--stone-evidence)}
+
+  /* ---------- typography ---------- */
   h1,h2,h3{font-weight:800;letter-spacing:-.02em;line-height:1.2}
   h1{font-size:clamp(26px,6vw,44px)}
-  h2{font-size:clamp(20px,4vw,28px);margin-bottom:var(--space-sm)}
+  h2{font-size:clamp(20px,4vw,26px);margin-bottom:var(--space-sm)}
   .num{font-family:var(--font-mono);font-weight:700;letter-spacing:-.02em}
-  .num-xl{font-size:clamp(34px,7vw,52px);line-height:1.1}
-  .text-sm{font-size:14px;color:rgba(232,236,242,.65)}
-  .text-xs{font-size:12px;color:rgba(232,236,242,.5);letter-spacing:.05em;text-transform:uppercase}
+  .num-xl{font-size:clamp(32px,6vw,46px);line-height:1.1}
+  .text-sm{font-size:14px;color:var(--mute)}
+  .text-xs{font-size:12px;color:var(--stone-evidence);letter-spacing:.05em;text-transform:uppercase}
   .container{max-width:1120px;margin:0 auto;padding:var(--space-md);display:flex;flex-direction:column;min-height:100vh}
   .grid{display:grid;gap:var(--space-md)}
   .grid-2{grid-template-columns:1fr}
@@ -74,98 +95,166 @@
   .flex{display:flex;gap:var(--space-md);align-items:center;flex-wrap:wrap}
   .flex-col{flex-direction:column}
   .justify-between{justify-content:space-between}
+  .items-center{align-items:center}
   .w-full{width:100%}
   .text-center{text-align:center}
   .mb-sm{margin-bottom:var(--space-sm)} .mb-md{margin-bottom:var(--space-md)} .mb-lg{margin-bottom:var(--space-lg)}
-  /* badges */
+
+  /* ---------- header ---------- */
+  .app-header{position:sticky;top:0;z-index:40;background:rgba(246,247,251,.85);backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--hairline-light);margin:calc(var(--space-md)*-1) calc(var(--space-md)*-1) var(--space-md);
+    padding:14px var(--space-md)}
+  .brand-mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,var(--primary),#6d28d9);
+    display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(79,70,229,.35)}
+  .brand-mark svg{width:22px;height:22px;color:#fff}
+  .brand-name{font-size:19px;font-weight:800;color:var(--ink);line-height:1.2}
+  .brand-sub{font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--stone-evidence)}
+  .header-badges{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+
+  /* ---------- badges ---------- */
   .badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:var(--radius-full);
-    font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
-  .badge.sim{background:rgba(0,242,255,.12);border:1px solid var(--brand-primary);color:var(--brand-primary)}
-  .badge.no-dial{background:rgba(0,217,122,.12);border:1px solid var(--brand-success);color:var(--brand-success)}
-  .badge.disclosure{background:rgba(124,58,237,.14);border:1px solid var(--brand-secondary);color:var(--brand-secondary)}
-  .badge.secret{background:rgba(0,217,122,.12);border:1px solid var(--brand-success);color:var(--brand-success)}
-  .badge.synthetic{background:rgba(255,176,32,.12);border:1px solid var(--brand-warning);color:var(--brand-warning)}
-  .badge.live{background:rgba(0,217,122,.15);border:1px solid var(--brand-success);color:var(--brand-success)}
-  .badge.demo{background:rgba(255,176,32,.15);border:1px solid var(--brand-warning);color:var(--brand-warning)}
-  /* pipeline */
-  .pipeline{display:flex;align-items:center;gap:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+    font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border:1px solid;white-space:nowrap}
+  .badge.sim{background:rgba(8,145,178,.1);border-color:#0e7490;color:#0e7490}
+  .badge.no-dial{background:var(--verified-soft);border-color:var(--verified-green);color:var(--verified-green)}
+  .badge.disclosure{background:var(--violet-soft);border-color:var(--reasoning-violet);color:var(--reasoning-violet)}
+  .badge.secret{background:var(--verified-soft);border-color:var(--verified-green);color:var(--verified-green)}
+  .badge.synthetic{background:var(--pending-chip);border-color:var(--pending-deep);color:var(--pending-deep)}
+  .badge.live{background:rgba(8,145,178,.1);border-color:#0e7490;color:#0e7490}
+  .badge.demo{background:var(--pending-chip);border-color:var(--pending-deep);color:var(--pending-deep)}
+
+  /* ---------- telemetry strip ---------- */
+  .tele{display:flex;gap:20px;overflow-x:auto;padding:12px 16px;border-radius:var(--radius-md);
+    background:var(--surface-card);border:1px solid var(--hairline-light);font-family:var(--font-mono);
+    font-size:12px;color:var(--mute);white-space:nowrap;box-shadow:var(--shadow-card)}
+  .tele b{color:var(--primary);font-weight:700}
+
+  /* ---------- pipeline ---------- */
+  .pipeline{display:flex;align-items:center;gap:10px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
   .pipeline::-webkit-scrollbar{display:none}
   .stage{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:84px}
-  .stage-dot{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.07);
-    border:2px solid var(--glass-border);display:flex;align-items:center;justify-content:center;
-    font-size:12px;font-weight:800;color:rgba(232,236,242,.4);transition:all var(--t-smooth)}
-  .stage.active .stage-dot{background:var(--brand-primary);border-color:var(--brand-primary);
-    color:#001a2e;box-shadow:0 0 20px rgba(0,242,255,.5)}
-  .stage.done .stage-dot{background:var(--brand-success);border-color:var(--brand-success);color:#fff}
-  .stage-label{font-size:11px;color:rgba(232,236,242,.5);text-align:center;line-height:1.3}
-  .stage.active .stage-label{color:var(--brand-primary);font-weight:700}
-  .stage.done .stage-label{color:var(--brand-success)}
-  .stage-ms{font-family:var(--font-mono);font-size:11px;color:rgba(0,242,255,.75)}
-  .pipe-line{width:22px;height:2px;background:var(--glass-border);flex:0 0 auto}
-  /* mic */
-  @keyframes mic-pulse{0%{box-shadow:var(--clay-shadow-out),0 0 0 0 rgba(0,242,255,.7)}
-    70%{box-shadow:var(--clay-shadow-out),0 0 0 22px rgba(0,242,255,0)}
-    100%{box-shadow:var(--clay-shadow-out),0 0 0 0 rgba(0,242,255,0)}}
-  .mic-listening{animation:mic-pulse 2s infinite;background:linear-gradient(135deg,var(--brand-primary),#00c4e6)!important;color:#001a2e!important}
-  /* statutory meter */
-  .meter{width:100%;height:10px;background:rgba(255,255,255,.08);border-radius:var(--radius-full);
+  .stage-dot{width:38px;height:38px;border-radius:50%;background:var(--surface-soft);
+    border:2px solid var(--hairline-strong);display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:800;color:var(--stone-evidence);transition:all var(--t-smooth)}
+  .stage.active .stage-dot{background:var(--primary);border-color:var(--primary);
+    color:var(--on-primary);box-shadow:0 0 0 5px rgba(79,70,229,.16)}
+  .stage.done .stage-dot{background:var(--verified-green);border-color:var(--verified-green);color:#fff}
+  .stage-label{font-size:11px;color:var(--mute);text-align:center;line-height:1.3}
+  .stage.active .stage-label{color:var(--primary);font-weight:700}
+  .stage.done .stage-label{color:var(--verified-green)}
+  .stage-ms{font-family:var(--font-mono);font-size:11px;color:#0e7490}
+  .pipe-line{width:24px;height:2px;border-radius:2px;background:var(--hairline-strong);flex:0 0 auto}
+
+  /* ---------- mic ---------- */
+  #micBtn{position:relative}
+  .ring{position:absolute;inset:0;border-radius:50%;border:2px solid rgba(79,70,229,.45);animation:ripple 2.2s ease-out infinite;pointer-events:none}
+  .ring.r2{animation-delay:1.1s}
+  @keyframes ripple{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.55);opacity:0}}
+  .mic-listening{background:linear-gradient(135deg,var(--blocked-red),#f43f5e)!important;box-shadow:0 16px 36px rgba(220,38,38,.35)!important}
+  .mic-listening .ring{border-color:rgba(220,38,38,.5)}
+  .mic-listening .ring.r2{animation-delay:1.1s}
+
+  /* ---------- statutory meter ---------- */
+  .meter{width:100%;height:10px;background:var(--surface-soft);border-radius:var(--radius-full);
     overflow:hidden;margin:8px 0;position:relative}
-  .meter-fill{height:100%;background:linear-gradient(90deg,var(--brand-error),var(--brand-warning),var(--brand-success));
-    width:0%;border-radius:var(--radius-full);transition:width 1.2s ease;box-shadow:0 0 18px rgba(0,242,255,.35)}
-  /* script card */
-  .script-card{background:var(--bg-elev);border:1px solid var(--brand-secondary);border-radius:var(--radius-md);padding:var(--space-md)}
-  .script-en{font-size:15px;font-weight:600;color:var(--brand-secondary)}
-  .script-hi{font-family:var(--font-hi);font-size:16px;font-weight:600;color:var(--brand-hindi);margin-top:var(--space-xs)}
-  /* docket */
-  .docket-field{display:flex;gap:10px;align-items:center;background:rgba(0,0,0,.35);
-    border:1px solid var(--glass-border);border-radius:var(--radius-md);padding:10px 14px}
-  .docket-input{flex:1;background:transparent;border:none;color:#e8ecf2;font-family:var(--font-mono);
-    font-size:16px;outline:none}
-  .docket-verify{font-size:11px;font-weight:800;display:flex;align-items:center;gap:6px}
-  /* compliance corner */
-  .comp-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--radius-md);
-    background:rgba(255,255,255,.04);border:1px solid var(--glass-border)}
-  .comp-item .ic{width:22px;height:22px;flex:0 0 auto}
-  .comp-ok{color:var(--brand-success)}
-  .comp-warn{color:var(--brand-warning)}
-  /* toast */
+  .meter-fill{height:100%;background:linear-gradient(90deg,var(--blocked-red),var(--pending-orange),var(--verified-green));
+    width:0%;border-radius:var(--radius-full);transition:width 1.2s ease}
+
+  /* ---------- metric tiles ---------- */
+  .metric{background:var(--surface-soft);border:1px solid var(--hairline-light);border-radius:var(--radius-md);
+    padding:14px 12px;text-align:center}
+  .metric .l{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--stone-evidence);font-weight:700}
+  .metric .v{font-family:var(--font-mono);font-size:24px;font-weight:700;margin-top:4px;color:var(--ink)}
+
+  /* ---------- script card ---------- */
+  .script-card{background:var(--surface-card);border:1px solid var(--violet-soft);border-left:4px solid var(--reasoning-violet);
+    border-radius:var(--radius-md);padding:var(--space-md);box-shadow:var(--shadow-card)}
+  .script-en{font-size:15px;font-weight:600;color:var(--reasoning-violet)}
+  .script-hi{font-family:var(--font-hi);font-size:16px;font-weight:600;color:var(--hindi-pink);margin-top:var(--space-xs)}
+
+  /* ---------- docket ---------- */
+  .docket-field{display:flex;gap:10px;align-items:center;background:#fff;
+    border:1px solid var(--hairline-strong);border-radius:var(--radius-md);padding:8px 14px;
+    box-shadow:0 1px 2px rgba(23,25,35,.04)}
+  .docket-input{flex:1;background:transparent;border:none;color:var(--ink);font-family:var(--font-mono);
+    font-size:16px;outline:none;padding:6px 0}
+  .docket-verify{font-size:11px;font-weight:800;display:flex;align-items:center;gap:6px;white-space:nowrap}
+
+  /* ---------- compliance ---------- */
+  .comp-item{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:var(--radius-md);
+    background:var(--surface-card);border:1px solid var(--hairline-light);box-shadow:var(--shadow-card)}
+  .comp-item .ic{width:38px;height:38px;border-radius:12px;flex:0 0 auto;display:flex;align-items:center;justify-content:center}
+  .comp-item .ic svg{width:19px;height:19px}
+  .comp-ok{background:var(--verified-soft);color:var(--verified-green)}
+  .comp-warn{background:var(--pending-chip);color:var(--pending-deep)}
+
+  /* ---------- toast ---------- */
   .toast{position:fixed;bottom:var(--space-md);left:50%;transform:translateX(-50%) translateY(120px);
-    background:var(--bg-panel);border:1px solid var(--glass-border);border-radius:var(--radius-md);
-    padding:12px 20px;color:#e8ecf2;font-size:14px;box-shadow:0 20px 50px rgba(0,0,0,.5);
+    background:var(--surface-card);border:1px solid var(--hairline-light);border-radius:var(--radius-md);
+    padding:12px 20px;color:var(--ink);font-size:14px;box-shadow:var(--shadow-lift);
     z-index:1000;transition:transform var(--t-smooth);display:flex;align-items:center;gap:10px;
     max-width:92vw}
   .toast.show{transform:translateX(-50%) translateY(0)}
-  .toast.success{border-color:var(--brand-success)}
-  .toast.error{border-color:var(--brand-error)}
-  /* modal */
-  .modal{position:fixed;inset:0;z-index:2000;background:rgba(5,5,8,.92);display:flex;
-    align-items:center;justify-content:center}
+  .toast.success{border-color:var(--verified-green)}
+  .toast.error{border-color:var(--blocked-red)}
+
+  /* ---------- modal ---------- */
+  .modal{position:fixed;inset:0;z-index:2000;background:rgba(23,25,35,.55);display:flex;
+    align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
   .modal.hidden{display:none}
-  .modal-content{background:var(--bg-panel);border:1px solid var(--glass-border);border-radius:var(--radius-lg);
-    padding:var(--space-lg);max-width:440px;width:92%;text-align:center}
-  /* spinner */
-  .spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,.25);border-top-color:var(--brand-primary);
+  .modal-content{background:var(--surface-card);border:1px solid var(--hairline-light);border-radius:var(--radius-lg);
+    padding:var(--space-lg);max-width:440px;width:100%;text-align:center;box-shadow:var(--shadow-lift)}
+  .modal-lg{max-width:560px;text-align:left}
+
+  /* ---------- spinner ---------- */
+  .spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,.35);border-top-color:currentColor;
     border-radius:50%;animation:spin .8s linear infinite;display:none}
   .spinner.on{display:inline-block}
   @keyframes spin{to{transform:rotate(360deg)}}
-  /* telemetry strip */
-  .tele{display:flex;gap:18px;overflow-x:auto;padding:10px 14px;border-radius:var(--radius-md);
-    background:rgba(0,0,0,.3);border:1px solid var(--glass-border);font-family:var(--font-mono);
-    font-size:12px;color:rgba(232,236,242,.7);white-space:nowrap}
-  .tele b{color:var(--brand-primary);font-weight:700}
+
+  /* ---------- concept features ---------- */
+  .calc-btn{margin-top:12px}
+  .drawer{display:none;margin-top:12px;border-top:1px solid var(--hairline-light);padding-top:12px}
+  .drawer.open{display:block}
+  .calc-row{display:flex;justify-content:space-between;gap:12px;font-size:13px;padding:7px 0;border-bottom:1px dashed var(--hairline-light)}
+  .calc-row .k{color:var(--stone-evidence)}
+  .calc-note{margin-top:12px;font-size:12px;color:var(--mute);display:flex;gap:8px;align-items:center}
+  .lang-toggle{display:inline-flex;border:1px solid var(--hairline-strong);border-radius:var(--radius-full);overflow:hidden;background:var(--surface-card)}
+  .lang-toggle button{border:none;background:transparent;color:var(--mute);min-height:44px;padding:10px 18px;font-weight:700;cursor:pointer;font-size:13px;transition:background var(--t-fast),color var(--t-fast)}
+  .lang-toggle button.on{background:var(--primary);color:var(--on-primary)}
+  .approve-bar{margin-top:14px;border:1px solid var(--hairline-light);border-radius:var(--radius-md);padding:14px 16px;background:var(--surface-soft)}
+  .approve-tag{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--reasoning-violet);font-weight:800}
+  .approve-actions{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .draft-body{outline:none;font-family:var(--font-sans)!important}
+  .draft-body.editing{border:1px dashed var(--primary);box-shadow:0 0 0 3px rgba(79,70,229,.12);border-radius:var(--radius-sm)}
+  .brush-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:var(--radius-full);font-size:11px;font-weight:800;background:var(--pending-chip);border:1px solid var(--pending-deep);color:var(--pending-deep)}
+  .dossier-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;text-align:left;font-size:13px;margin:14px 0}
+  .dossier-row{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px dashed var(--hairline-light)}
+  .dossier-row .k{color:var(--stone-evidence)}
+  .evidence-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:12px}
+  .evidence-list li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--body)}
+  .evidence-list li::before{content:"";flex:0 0 auto;width:18px;height:18px;margin-top:2px;border-radius:6px;
+    background:var(--verified-soft);border:1px solid var(--verified-green);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23047857' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+    background-size:12px;background-position:center;background-repeat:no-repeat}
+  .suo-strip{display:flex;gap:10px;align-items:flex-start;background:var(--blocked-soft);
+    border:1px solid var(--blocked-red);border-radius:var(--radius-md);padding:12px 14px}
+  .suo-strip .ic{width:22px;height:22px;flex:0 0 auto;color:var(--blocked-red);margin-top:1px}
+
   @media(min-width:768px){
     .grid-2{grid-template-columns:1fr 1fr}
     .grid-3{grid-template-columns:1fr 1fr 1fr}
     .container{padding:var(--space-lg)}
+    .app-header{margin:calc(var(--space-lg)*-1) calc(var(--space-lg)*-1) var(--space-lg);padding:14px var(--space-lg)}
     .pipeline{justify-content:center}
   }
-  @media(min-width:1024px){ .container{max-width:1080px;padding:var(--space-xl)} }
-  @media(prefers-reduced-motion:reduce){
-    .mic-listening,.mic-listening .mic-icon{animation:none}
-    .meter-fill{transition:none}
+  @media(min-width:1024px){ .container{max-width:1080px;padding:var(--space-xl)} .app-header{margin:calc(var(--space-xl)*-1) calc(var(--space-xl)*-1) var(--space-xl);padding:14px var(--space-xl)} }
+  @media(max-width:600px){
+    .dossier-grid{grid-template-columns:1fr}
+    .comp-item{padding:12px 12px}
   }
-  @media(prefers-reduced-transparency:reduce){
-    .panel{background:var(--bg-panel)!important;backdrop-filter:none!important;border-color:var(--glass-border-strong)}
+  @media(prefers-reduced-motion:reduce){
+    .mic-listening,.mic-listening .mic-icon,.ring{animation:none}
+    .meter-fill{transition:none}
   }
 </style>
 </head>
@@ -173,10 +262,13 @@
 <div class="bg"></div>
 
 <!-- ═══════════ CONSENT MODAL ═══════════ -->
-<div id="consentModal" class="modal">
+<div id="consentModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="consentTitle">
   <div class="modal-content">
-    <h2 class="hi mb-md">सहमति / Consent</h2>
-    <p class="hi-text-lg mb-sm" style="font-family:var(--font-hi);font-size:17px;">
+    <div class="brand-mark" style="width:56px;height:56px;border-radius:18px;margin:0 auto 18px;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+    </div>
+    <h2 class="hi mb-md" id="consentTitle" style="font-size:24px;">सहमति / Consent</h2>
+    <p style="font-family:var(--font-hi);font-size:16px;margin-bottom:10px;">
       हक़-वाणी आपकी आवाज़ को प्रोसेस करेगा और RBI नियमों के अनुसार आपकी शिकायत तैयार करेगा।
       कोई वास्तविक फोन नंबर, OTP, या बैंक विवरण संग्रहीत नहीं किया जाएगा।
     </p>
@@ -184,29 +276,29 @@
       HaqVaani will process your voice to prepare your RBI complaint. No real phone number,
       OTP, or bank details are stored. You remain the caller; HaqVaani never autonomously dials the bank.
     </p>
-    <label style="display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;margin-bottom:18px;">
-      <input type="checkbox" id="consentCheckbox" style="width:20px;height:20px;">
+    <label style="display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;margin-bottom:20px;">
+      <input type="checkbox" id="consentCheckbox" style="width:20px;height:20px;accent-color:var(--primary);">
       <span class="hi" style="font-size:15px;">मैं सहमत हूँ / I consent</span>
     </label>
-    <button class="clay-btn btn-lg primary" id="consentBtn" disabled>
+    <button class="btn btn-primary btn-lg" id="consentBtn" disabled>
       <span id="consentSpinner" class="spinner"></span>
       <span>आगे बढ़ें / Continue</span>
     </button>
   </div>
 </div>
 
-<div class="container">
+<main class="container">
 
   <!-- Header -->
-  <header class="mb-lg flex justify-between">
-    <div class="flex" style="gap:10px;">
-      <div style="width:44px;height:44px;background:linear-gradient(135deg,var(--brand-primary),var(--brand-secondary));border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:20px;">🇮🇳</div>
+  <header class="app-header flex justify-between items-center">
+    <div class="flex" style="gap:12px;flex-wrap:nowrap;">
+      <div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg></div>
       <div>
-        <div class="text-xs">हक़-वाणी · RBI सांविधिक रिफंड एडवोकेट</div>
-        <div style="font-size:20px;font-weight:800;">HaqVaani</div>
+        <div class="brand-name">HaqVaani</div>
+        <div class="brand-sub hi">हक़-वाणी · RBI सांविधिक रिफंड एडवोकेट</div>
       </div>
     </div>
-    <div class="flex" style="gap:8px;">
+    <div class="header-badges">
       <span class="badge sim">SIMULATED DEMO</span>
       <span class="badge no-dial">NO AUTONOMOUS DIALING</span>
       <span class="badge demo" id="modeBadge">DEMO MODE</span>
@@ -219,7 +311,7 @@
     <span>Evon <b id="tEvon">—</b></span>
     <span>TTS <b id="tTts">—</b></span>
     <span>E2E <b id="tE2e">—</b></span>
-    <span>Secrets blocked <b style="color:var(--brand-success);" id="tSecrets">0</b></span>
+    <span>Secrets blocked <b style="color:var(--verified-green);" id="tSecrets">0</b></span>
   </div>
 
   <!-- Pipeline -->
@@ -240,7 +332,7 @@
   <div class="grid grid-2 mb-lg">
 
     <!-- LEFT: voice -->
-    <div class="panel flex flex-col items-center justify-center" style="padding:var(--space-lg);min-height:360px;gap:var(--space-md);">
+    <div class="panel flex flex-col items-center justify-center" style="padding:var(--space-lg);min-height:420px;gap:var(--space-md);">
       <div class="text-center">
         <h1 class="hi">आपकी आवाज़, आपका हक़</h1>
         <p style="font-size:16px;margin:10px 0;" class="hi">
@@ -249,38 +341,40 @@
         <p class="text-sm">बोलें → गणना → शिकायत → असिस्टेड कॉल। बैंक कॉल आप खुद करें।</p>
       </div>
 
-      <div class="flex-col w-full" style="max-width:340px;gap:14px;">
-        <div class="panel flex justify-between" style="padding:12px 16px;border-radius:var(--radius-md);">
+      <div class="flex-col w-full" style="max-width:360px;gap:16px;">
+        <div class="panel flex justify-between items-center" style="padding:12px 16px;border-radius:var(--radius-md);">
           <div class="flex" style="gap:8px;">
-            <div style="font-size:13px;" id="statusText">तैयार / Ready</div>
-            <div style="width:8px;height:8px;background:var(--brand-success);border-radius:50%;" id="statusDot"></div>
+            <span style="font-size:13px;font-weight:600;" id="statusText">तैयार / Ready</span>
+            <span style="width:8px;height:8px;background:var(--verified-green);border-radius:50%;" id="statusDot"></span>
           </div>
-          <div class="text-sm mono">8 kHz · हिंगlish</div>
+          <span class="text-sm mono">8 kHz · हिंगlish</span>
         </div>
 
-        <button class="clay-btn btn-xl primary" id="micBtn" aria-label="बोलें - वॉइस इनपुट" title="बोलें">
-          <div style="font-size:32px;" id="micIcon">🎤</div>
-          <div class="hi" style="font-size:15px;font-weight:800;">बोलें</div>
+        <button class="btn btn-xl" id="micBtn" aria-label="बोलें - वॉइस इनपुट" title="बोलें">
+          <span class="ring r1"></span><span class="ring r2"></span>
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
+          <span class="hi" style="font-size:15px;font-weight:800;margin-top:2px;" id="micIcon">बोलें</span>
         </button>
 
-        <label class="clay-btn btn-sm secondary w-full" style="cursor:pointer;">
+        <label class="btn btn-secondary btn-sm w-full" style="cursor:pointer;">
           <input type="file" id="audioFile" accept="audio/*" hidden>
-          <span>📁 ऑडियो फ़ाइल से</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span>ऑडियो फ़ाइल से</span>
         </label>
       </div>
     </div>
 
     <!-- RIGHT: statutory card -->
-    <div class="panel flex flex-col" style="padding:var(--space-lg);gap:12px;">
+    <div class="panel flex flex-col" style="padding:var(--space-lg);gap:14px;">
       <div class="flex justify-between items-center">
-        <h2 style="color:var(--brand-primary);font-size:20px;">RBI गणना</h2>
+        <h2 style="color:var(--primary);font-size:20px;">RBI गणना</h2>
         <span class="badge synthetic" id="circularBadge">RBI/2019-20/67</span>
       </div>
 
       <div class="grid grid-3">
-        <div><div class="text-xs">कटौती राशि</div><div class="num num-xl" style="font-size:26px;" id="amt">₹0</div></div>
-        <div><div class="text-xs">जुर्माना (₹100/दिन)</div><div class="num num-xl" style="font-size:26px;color:var(--brand-warning);" id="penalty">₹0</div></div>
-        <div><div class="text-xs">कुल दावा</div><div class="num num-xl" id="total">₹0</div></div>
+        <div class="metric"><div class="l">कटौती राशि</div><div class="v" id="amt">₹0</div></div>
+        <div class="metric"><div class="l">जुर्माना</div><div class="v" style="color:var(--pending-deep);" id="penalty">₹0</div></div>
+        <div class="metric"><div class="l">कुल दावा</div><div class="v" style="color:var(--primary);" id="total">₹0</div></div>
       </div>
 
       <div class="meter"><div class="meter-fill" id="meterFill"></div></div>
@@ -289,11 +383,19 @@
       <div class="flex justify-between text-sm"><span>TAT समाप्ति (T+1)</span><span class="mono" id="tatDate">—</span></div>
       <div class="flex justify-between text-sm"><span>देरी के दिन</span><span class="mono" id="overdue">—</span></div>
 
-      <div class="panel" style="background:rgba(255,77,77,.08);border-color:var(--brand-error);padding:12px 14px;" id="suoStrip">
-        <div class="flex" style="gap:8px;">
-          <span style="color:var(--brand-error);font-weight:700;">⚠</span>
-          <span class="text-sm" id="suoText">बैंक को suo motu भुगतान करना ज़रूरी है।</span>
-        </div>
+      <button class="btn btn-secondary btn-sm w-full calc-btn" id="calcBtn">SHOW CALCULATION ▾</button>
+      <div class="drawer" id="calcDrawer">
+        <div class="calc-row"><span class="k">RBI नियम / Rule</span><span class="mono" id="cCircular">—</span></div>
+        <div class="calc-row"><span class="k">ट्रांज़ैक्शन तिथि</span><span class="mono" id="cTxn">—</span></div>
+        <div class="calc-row"><span class="k">TAT समाप्ति (T+1/T+5)</span><span class="mono" id="cTat">—</span></div>
+        <div class="calc-row"><span class="k">देरी के दिन × ₹100</span><span class="mono" id="cPenalty">—</span></div>
+        <div class="calc-row"><span class="k">कुल दावा</span><span class="mono" id="cTotal">—</span></div>
+        <div class="calc-note">🧮 यह गणना शुद्ध Python (statutory.py) से हुई है — LLM से नहीं।</div>
+      </div>
+
+      <div class="suo-strip" id="suoStrip">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <span class="text-sm" id="suoText">बैंक को suo motu भुगतान करना ज़रूरी है।</span>
       </div>
     </div>
   </div>
@@ -301,52 +403,74 @@
   <!-- Complaint drafts -->
   <div class="panel mb-lg" style="padding:var(--space-lg);">
     <div class="flex justify-between items-center mb-sm">
-      <h2 style="color:var(--brand-secondary);font-size:20px;">कंप्लेंट ड्राफ्ट</h2>
+      <h2 style="color:var(--reasoning-violet);font-size:20px;">कंप्लेंट ड्राफ्ट</h2>
       <span class="badge disclosure">AI DISCLOSURE PLAYED</span>
     </div>
-    <div class="grid grid-3 mb-sm">
-      <button class="clay-btn btn-sm secondary" id="tabBank">बैंक</button>
-      <button class="clay-btn btn-sm secondary" id="tabWhats">व्हाट्सएप</button>
-      <button class="clay-btn btn-sm secondary" id="tabEmail">ईमेल</button>
+    <div class="flex justify-between items-center mb-sm" style="flex-wrap:wrap;gap:10px;">
+      <div class="grid grid-3" style="flex:1;min-width:260px;gap:10px;">
+        <button class="btn btn-secondary btn-sm" id="tabBank">बैंक</button>
+        <button class="btn btn-secondary btn-sm" id="tabWhats">व्हाट्सएप</button>
+        <button class="btn btn-secondary btn-sm" id="tabEmail">ईमेल</button>
+      </div>
+      <div class="flex" style="gap:10px;align-items:center;">
+        <div class="lang-toggle" id="langToggle">
+          <button type="button" id="langHI" class="on">हिन्दी</button>
+          <button type="button" id="langEN">English</button>
+        </div>
+        <span class="text-xs" id="draftLangNote">भाषा बदलें</span>
+      </div>
     </div>
-    <div class="panel" style="padding:16px;border-radius:var(--radius-md);max-height:220px;overflow:auto;">
-      <pre id="draftText" style="font-family:var(--font-sans);font-size:14px;white-space:pre-wrap;color:#d5dbe4;">शिकायत लेने के लिए पहले बोलें।</pre>
+    <div class="panel" style="padding:18px;border-radius:var(--radius-md);max-height:240px;overflow:auto;background:var(--surface-soft);">
+      <pre id="draftText" class="draft-body" style="font-family:var(--font-sans);font-size:14px;white-space:pre-wrap;color:var(--body);">शिकायत लेने के लिए पहले बोलें।</pre>
     </div>
-    <details class="text-sm" style="margin-top:12px;">
-      <summary style="cursor:pointer;font-weight:700;">सबूत चेकलिस्ट (Evidence checklist)</summary>
-      <ul id="evidenceList" style="margin:10px 0 0 18px;list-style:disc;">
+    <details class="text-sm" style="margin-top:14px;">
+      <summary style="cursor:pointer;font-weight:700;color:var(--ink);padding:8px 0;">सबूत चेकलिस्ट (Evidence checklist)</summary>
+      <ul class="evidence-list" id="evidenceList">
         <li>पहले बोलें — सबूत चेकलिस्ट तैयार होगी।</li>
       </ul>
     </details>
+
+    <div class="approve-bar" id="approveBar" hidden>
+      <div class="approve-tag">Generated by statutory engine + safety gates · Evon v3.3 formatting</div>
+      <div class="approve-actions">
+        <button class="btn btn-secondary btn-sm" id="editDraft">✏️ संपादित करें / Edit</button>
+        <button class="btn btn-ok btn-sm" id="approveDraft">✔ APPROVE FOR USE</button>
+      </div>
+      <div class="text-xs" style="margin-top:8px;color:var(--mute);">अनुमोदन का मतलब: आप यह पाठ अपने उपयोग के लिए स्वीकारते हैं। कुछ भी अपने आप नहीं भेजा जाता।</div>
+    </div>
   </div>
 
   <!-- Assisted call -->
   <div class="panel mb-lg" style="padding:var(--space-lg);">
-    <h2 style="color:var(--brand-primary);font-size:20px;">असिस्टेड कॉल मोड</h2>
-    <p class="text-sm mb-sm">बैंक को खुद कॉल करें। हक़-वाणी स्क्रिप्ट दिखाएगा और डॉकेट नंबर पकड़ लेगा।</p>
+    <div class="flex justify-between items-center" style="flex-wrap:wrap;gap:8px;">
+      <h2 style="color:var(--primary);font-size:20px;">असिस्टेड कॉल मोड</h2>
+      <span class="brush-badge" id="brushBadge" hidden>⚠ BRUSH-OFF</span>
+    </div>
+    <p class="text-sm mb-sm">बैंक को खुद कॉल करें। हक़-वाणी स्क्रिप्ट दिखाएगा और डॉकेट नंबर पकड़ लेगा। <b>SIMULATED IVR / SYNTHETIC DEMO</b></p>
 
     <div class="script-card mb-sm">
-      <div class="script-en" id="scriptEn">"Under RBI/2019-20/67, T+1 passed on 19 Oct; penalty accrued. Please log UDIR and share the SR ID."</div>
-      <div class="script-hi" id="scriptHi">"आरबीआई/2019-20/67 के तहत, T+1 गुज़र चुका है; जुर्माना जमा हुआ है। कृपया UDIR लॉग करें और SR आईडी साझा करें।"</div>
+      <div class="script-en" id="scriptEn">"Under RBI/2019-20/67, T+1 passed on 19 Oct; penalty accrued. Please log UTR and share the SR ID."</div>
+      <div class="script-hi" id="scriptHi">"आरबीआई/2019-20/67 के तहत, T+1 गुज़र चुका है; जुर्माना जमा हुआ है। कृपया UTR लॉग करें और SR आईडी साझा करें।"</div>
     </div>
 
     <div class="docket-field mb-sm">
       <input type="text" class="docket-input" placeholder="SR-DB-884120" id="docketInput">
-      <span class="docket-verify" id="docketVerify" style="color:rgba(232,236,242,.4);">पेंडिंग</span>
+      <span class="docket-verify" id="docketVerify" style="color:var(--stone-evidence);">पेंडिंग</span>
     </div>
 
     <div class="grid grid-2">
-      <button class="clay-btn btn-lg primary" id="assistedCallBtn">
+      <button class="btn btn-primary btn-lg" id="assistedCallBtn">
         <span id="callSpinner" class="spinner"></span><span>असिस्टेड कॉल शुरू करें</span>
       </button>
-      <button class="clay-btn btn-lg secondary" id="summaryBtn" disabled>हिंदी सारांश सुनें 🔊</button>
+      <button class="btn btn-secondary btn-lg" id="summaryBtn" disabled>हिंदी सारांश सुनें 🔊</button>
     </div>
+    <button class="btn btn-secondary btn-lg" id="dossierBtn" disabled style="margin-top:12px;width:100%;">📁 केस डॉसिये देखें / View dossier</button>
   </div>
 
   <!-- Compliance corner -->
   <div class="panel mb-lg" style="padding:var(--space-lg);">
     <div class="text-xs mb-sm">Compliance / Safety — हमेशा चालू</div>
-    <div class="grid grid-2" style="grid-template-columns:1fr 1fr;" id="compGrid">
+    <div class="grid grid-2" id="compGrid">
       <div class="comp-item"><span class="ic comp-ok" data-icon="shield"></span><span class="text-sm">Consent ✓ <span class="mono" id="consentTs">—</span></span></div>
       <div class="comp-item"><span class="ic comp-ok" data-icon="megaphone"></span><span class="text-sm">Disclosure ✓</span></div>
       <div class="comp-item"><span class="ic comp-ok" data-icon="lock"></span><span class="text-sm">Secrets blocked: <b class="mono" id="secretCount">0</b></span></div>
@@ -355,12 +479,23 @@
   </div>
 
   <footer class="text-center text-xs mb-lg">
-    <div style="color:rgba(232,236,242,.5);margin-bottom:4px;">सिंथेटिक डेमो · कोई वास्तविक PII नहीं · कोई स्वायत्त डायलिंग नहीं</div>
+    <div style="color:var(--mute);margin-bottom:4px;">सिंथेटिक डेमो · कोई वास्तविक PII नहीं · कोई स्वायत्त डायलिंग नहीं</div>
     <div>Gnani Prisma v2.5 · Evon v3.3 · Timbre v2.5/v3.0 · Deadline 10 नवंबर 2026</div>
   </footer>
-</div>
+</main>
 
-<div class="toast" id="toast"><span>✓</span><span id="toastMsg"></span></div>
+<div class="toast" id="toast" role="status" aria-live="polite"><span>✓</span><span id="toastMsg"></span></div>
+
+<div id="dossierModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="dossierTitle">
+  <div class="modal-content modal-lg">
+    <h2 class="hi mb-md" id="dossierTitle">केस डॉसिये · Case Dossier</h2>
+    <div id="dossierBody"></div>
+    <div class="flex" style="justify-content:center;margin-top:16px;">
+      <button class="btn btn-ok btn-sm" id="downloadDossier">⬇ JSON डाउनलोड</button>
+      <button class="btn btn-secondary btn-sm" id="closeDossier">बंद करें</button>
+    </div>
+  </div>
+</div>
 
 <script>
 /* ═══════════ ICONS (Lucide-style inline SVG) ═══════════ */
@@ -373,7 +508,7 @@ const ICONS = {
 document.querySelectorAll('[data-icon]').forEach(el=>{ const n=el.dataset.icon; if(ICONS[n]) el.innerHTML=ICONS[n]; });
 
 /* ═══════════ STATE ═══════════ */
-const state = { consent:false, disclosure:false, mode:'demo', secrets:0, intake:null, entitlement:null, draft:null };
+const state = { consent:false, disclosure:false, mode:'demo', secrets:0, intake:null, entitlement:null, draft:null, hindiDrafts:null, lang:'hi', approved:false, dossierJson:null };
 
 /* ═══════════ API LAYER (live ↔ demo fallback) ═══════════ */
 const API = {
@@ -387,13 +522,28 @@ const DEMO = {
   transcript:"Bhaiya 18 Oct ko 3,200 UPI kiya tha, paisa kat gaya par pahuncha nahi — UTR 629188340112",
   intake:{ utr:"629188340112", amount_inr:3200, txn_date:"2026-10-18", dispute_type:"upi_p2p", bank_name:"DemoBank Support", language:"hi-IN", confidence:0.97 },
   entitlement:{ circular_ref:"RBI/2019-20/67 (DPSS.CO.PD No.629/02.01.014/2019-20)", tat_date:"2026-10-19", days_overdue:6, penalty_inr:600, claim_inr:3200, total_inr:3800, eligible_for_rbi_cms:false },
-  ivr:"Thank you for calling DemoBank. Your complaint is registered under SR-DB-884120."
+  ivr:"Thank you for calling DemoBank. Your complaint is registered under SR-DB-884120.",
+  hindiDrafts:{
+    bank_complaint_text:"विषय: विफल UPI लेन-देन — धनवापसी + RBI/2019-20/67 के तहत सांविधिक क्षतिपूर्ति\n\nमैं Ramesh हूँ। 2026-10-18 को मैंने UPI से ₹3,200 का भुगतान किया था। मेरे खाते से राशि कट गई पर लाभार्थी को नहीं पहुँची (UTR: 629188340112)।\n\nRBI/2019-20/67 (DPSS.CO.PD No.629/02.01.014/2019-20) के तहत सांविधिक समय-सीमा 2026-10-19 (T+1) थी। आज तक 6 दिन की देरी हो चुकी है, इसलिए मैं ₹600 (₹100/दिन) क्षतिपूर्ति का अधिकारी हूँ, साथ में ₹3,200 की वापसी। कुल दावा: ₹3,800।\n\nधन्यवाद।\nRamesh\nफ़ोन: +91-90000-00000",
+    whatsapp_draft:"प्रिय DemoBank Support, मैं Ramesh हूँ। 2026-10-18 को ₹3,200 का UPI भुगतान डेबिट हुआ पर क्रेडिट नहीं हुआ (UTR: 629188340112)। RBI/2019-20/67 के तहत कृपया ₹3,200 वापस करें और ₹600 क्षतिपूर्ति (₹100/दिन) दें। SR/डॉकेट आईडी दर्ज कर साझा करें।",
+    email_draft:"To: complaints@demobanksupport.in\nविषय: धनवापसी + ₹100/दिन क्षतिपूर्ति — विफल UPI (UTR: 629188340112)\n\n(बैंक शिकायत ड्राफ्ट के अनुसार)",
+    evidence_checklist:["UPI लेन-देन संदर्भ (UTR) — भुगतान एप का स्क्रीनशॉट","बैंक स्टेटमेंट / पासबुक प्रविष्टि जो डेबिट दिखाती है","लाभार्थी की पुष्टि (P2P हो तो) — मित्र/विक्रेता स्क्रीनशॉट","यह शिकायत पत्र शिकायत की तारीख के साथ","बैंक का स्वीकृति / SR / डॉकेट आईडी मिलने पर"]
+  },
+  draft:{
+    bank_complaint_text:"Subject: Failed UPI transaction — refund + statutory compensation under RBI/2019-20/67\n\nI am Ramesh. On 2026-10-18 I attempted a payment of ₹3,200 via UPI. My account was debited but the beneficiary was not credited (UTR: 629188340112).\n\nUnder RBI/2019-20/67 (DPSS.CO.PD No.629/02.01.014/2019-20), the statutory turnaround time was 2026-10-19 (T+1). As of today, 6 day(s) have elapsed beyond TAT, so I am entitled to ₹600 compensation (₹100/day) in addition to the refund of ₹3,200. Total claim: ₹3,800.\n\nI request that you reverse the failed debit and credit the statutory compensation — both suo motu, as mandated by RBI. Please register this grievance and provide a Service Request / docket number for tracking.\n\nThank you.\nRamesh\nPhone: +91-90000-00000",
+    whatsapp_draft:"Dear DemoBank Support, I am Ramesh. UPI payment of ₹3,200 on 2026-10-18 was debited but not credited (UTR: 629188340112). Under RBI/2019-20/67, please reverse ₹3,200 and pay ₹600 compensation (₹100/day beyond TAT). Log SR/docket ID and share it.",
+    email_draft:"To: complaints@demobanksupport.in\nSubject: Refund + ₹100/day compensation — failed UPI (UTR: 629188340112)\n\n(as in bank complaint draft)",
+    evidence_checklist:["UPI transaction reference (UTR) — screenshot from payment app","Bank statement / passbook entry showing the debit","Beneficiary confirmation (if P2P) — friend/vendor screenshot","This complaint letter with the date of lodging","Bank's acknowledgment / SR / docket ID once provided"]
+  }
 };
 
 /* ═══════════ HELPERS ═══════════ */
 const $ = id => document.getElementById(id);
 const fmt = n => '₹'+Math.round(n).toLocaleString('en-IN');
 function toast(msg, type='success'){ const t=$('toast'), m=$('toastMsg'); m.textContent=msg; t.className='toast show '+type; setTimeout(()=>t.classList.remove('show'),3200); }
+function openModal(id){ const m=$(id); if(!m) return; m.classList.remove('hidden'); const f=m.querySelector('button,input,a'); if(f) f.focus(); }
+function closeModal(id){ const m=$(id); if(m) m.classList.add('hidden'); }
+document.addEventListener('keydown',e=>{ if(e.key!=='Escape') return; ['consentModal','dossierModal'].forEach(id=>{ const m=$(id); if(m && !m.classList.contains('hidden')) closeModal(id); }); });
 function setStage(n, ms, done=true){
   for(let i=1;i<=4;i++){ const s=$('stage'+i); s.classList.remove('active','done'); if(i<n) s.classList.add('done'); }
   $('stage'+n).classList.add(done?'done':'active'); if(ms) $('ms'+n).textContent=ms+' ms';
@@ -408,7 +558,13 @@ function fillEntitlement(e){
   $('suoText').textContent=e.eligible_for_rbi_cms
     ? 'RB-IOS 2026 में शिकायत दर्ज करें (cms.rbi.org.in)'
     : 'बैंक को suo motu भुगतान करना ज़रूरी है।';
+  $('cCircular').textContent=(e.circular_ref||'').split(' (')[0];
+  $('cTxn').textContent=e.txn_date||state.intake.txn_date;
+  $('cTat').textContent=e.tat_date;
+  $('cPenalty').textContent=(e.days_overdue||0)+' × ₹100 = '+fmt(e.penalty_inr);
+  $('cTotal').textContent=fmt(e.total_inr);
 }
+$('calcBtn').addEventListener('click',()=>{ $('calcDrawer').classList.toggle('open'); });
 
 /* ═══════════ CONSENT ═══════════ */
 $('consentCheckbox').addEventListener('change',()=>{ $('consentBtn').disabled=!$('consentCheckbox').checked; });
@@ -417,26 +573,31 @@ $('consentBtn').addEventListener('click', async ()=>{
   try{
     if(state.mode==='live') await API.post('/api/consent',{disclosure_played:true});
     state.consent=true; state.disclosure=true;
-    $('consentModal').classList.add('hidden');
+    closeModal('consentModal');
     $('consentTs').textContent=new Date().toLocaleTimeString('en-IN');
     toast('सहमति दर्ज की गई · Consent recorded');
     setStatus('तैयार / Ready', 'var(--brand-success)');
-  }catch(err){ toast('सर्वर से संपर्क नहीं — डेमो मोड', 'error'); state.consent=true; state.disclosure=true; $('consentModal').classList.add('hidden'); $('consentTs').textContent='demo'; }
+  }catch(err){ toast('सर्वर से संपर्क नहीं — डेमो मोड', 'error'); state.consent=true; state.disclosure=true; closeModal('consentModal'); $('consentTs').textContent='demo'; }
   finally{ $('consentSpinner').classList.remove('on'); }
 });
 
 /* ═══════════ MODE DETECT ═══════════ */
-(async()=>{ state.mode = (await API.health()) ? 'live' : 'demo';
-  const b=$('modeBadge'); b.textContent = state.mode==='live' ? 'LIVE · GNANI API' : 'DEMO MODE (offline)';
-  b.className = 'badge ' + (state.mode==='live' ? 'live' : 'demo');
+(async()=>{
+  let gnaniLive=false;
+  try{
+    const r=await fetch('/api/health');
+    if(r.ok){ const j=await r.json(); state.mode='live'; gnaniLive = j.mode==='live'; }
+  }catch(e){ state.mode='demo'; }
+  const b=$('modeBadge');
+  b.textContent = gnaniLive ? 'LIVE · GNANI API' : 'DEMO MODE (offline)';
+  b.className = 'badge ' + (gnaniLive ? 'live' : 'demo');
 })();
 
 /* ═══════════ VOICE INTAKE ═══════════ */
 let recorder=null, chunks=[];
 async function startListening(){
   setStage(1,null,false); setStatus('सुन रहा है…','var(--brand-primary)');
-  $('micBtn').classList.add('mic-listening'); $('micIcon').textContent='🔴';
-  $('micBtn').querySelector('.hi').textContent='सुन रहा है…';
+  $('micBtn').classList.add('mic-listening'); $('micIcon').textContent='सुन रहा है…';
   try{ const stream=await navigator.mediaDevices.getUserMedia({audio:true});
     recorder=new MediaRecorder(stream); chunks=[];
     recorder.ondataavailable=e=>chunks.push(e.data);
@@ -495,20 +656,33 @@ async function runComplaint(){
   try{
     let d;
     if(state.mode==='live') d=await API.post('/api/complaint',{intake:state.intake,entitlement:state.entitlement});
-    else { await delay(300); d={ bank_complaint_text:"बैंक शिकायत ड्राफ्ट — अभी डेमो। वास्तविक ड्राफ्ट लाइव मोड में आएगा।", whatsapp_draft:"WhatsApp draft (demo)", email_draft:"Email draft (demo)", evidence_checklist:["UPI UTR screenshot","Bank statement entry","Complaint letter","Bank acknowledgment/SR ID"] }; }
+    else { await delay(300); d=DEMO.draft; d.hindi_drafts=DEMO.hindiDrafts; }
     const ms=Math.round(performance.now()-t0); setStage(3,ms);
-    state.draft=d; renderDraft('bank');
+    state.draft=d; state.hindiDrafts = d.hindi_drafts || null;
+    $('approveBar').hidden=false;
+    renderDraft('bank');
   }catch(err){ toast('ड्राफ्ट त्रुटि','error'); }
 }
 function renderDraft(kind){
   if(!state.draft) return;
-  const map={ bank:state.draft.bank_complaint_text, whats:state.draft.whatsapp_draft, email:state.draft.email_draft };
-  $('draftText').textContent=map[kind]||'—';
-  if(state.draft.evidence_checklist){ $('evidenceList').innerHTML=state.draft.evidence_checklist.map(x=>'<li>'+x+'</li>').join(''); }
+  const hi=state.hindiDrafts;
+  let body, list;
+  if(state.lang==='hi' && hi){
+    body = { bank:hi.bank_complaint_text, whats:hi.whatsapp_draft, email:hi.email_draft }[kind];
+    list = hi.evidence_checklist;
+  } else {
+    body = { bank:state.draft.bank_complaint_text, whats:state.draft.whatsapp_draft, email:state.draft.email_draft }[kind];
+    list = state.draft.evidence_checklist;
+  }
+  if(body) $('draftText').textContent=body;
+  if(list){ $('evidenceList').innerHTML=list.map(x=>'<li>'+x+'</li>').join(''); }
 }
-$('tabBank').onclick=()=>renderDraft('bank');
-$('tabWhats').onclick=()=>renderDraft('whats');
-$('tabEmail').onclick=()=>renderDraft('email');
+let activeTab='bank';
+$('tabBank').onclick=()=>{activeTab='bank';renderDraft('bank');};
+$('tabWhats').onclick=()=>{activeTab='whats';renderDraft('whats');};
+$('tabEmail').onclick=()=>{activeTab='email';renderDraft('email');};
+$('langHI').onclick=()=>{state.lang='hi';$('langHI').classList.add('on');$('langEN').classList.remove('on');renderDraft(activeTab);};
+$('langEN').onclick=()=>{state.lang='en';$('langEN').classList.add('on');$('langHI').classList.remove('on');renderDraft(activeTab);};
 
 /* ═══════════ ASSISTED CALL ═══════════ */
 let callActive=false;
@@ -529,16 +703,31 @@ $('assistedCallBtn').addEventListener('click', ()=>{
     callActive=false; $('assistedCallBtn').textContent='असिस्टेड कॉल शुरू करें';
   }
 });
+function brushLabel(t){
+  const m={
+    wait_7_to_10_days:'⚠ WAIT 7–10 DAYS (BRUSH-OFF)',
+    tell_me_utr:'⚠ BANK ASKS UTR AGAIN',
+    request_kyc_otp:'⚠ KYC/OTP REQUESTED — DO NOT SHARE',
+    escalate_after_30_days:'⚠ ESCALATE AFTER 30 DAYS',
+    other:'INFO'
+  };
+  return m[t]||'';
+}
 function finishCall(res){
   $('callSpinner').classList.remove('on');
   setStage(4, Math.round(180+Math.random()*40));
-  $('scriptEn').textContent='"Under RBI/2019-20/67, T+1 passed on 19 Oct; '+fmt(state.entitlement.penalty_inr)+' penalty accrued. Please log UDIR and share the SR ID."';
-  $('scriptHi').textContent='"आरबीआई/2019-20/67 के तहत, T+1 गुज़र चुका है; '+fmt(state.entitlement.penalty_inr)+' जुर्माना जमा हुआ है। कृपया UDIR लॉग करें और SR आईडी साझा करें।"';
+  $('scriptEn').textContent=res.suggested_script_en || '"Under RBI/2019-20/67, T+1 passed on 19 Oct; '+fmt(state.entitlement.penalty_inr)+' penalty accrued. Please log UTR and share the SR ID."';
+  $('scriptHi').textContent=res.suggested_script_hi || '"आरबीआई/2019-20/67 के तहत, T+1 गुज़र चुका है; '+fmt(state.entitlement.penalty_inr)+' जुर्माना जमा हुआ है। कृपया UTR लॉग करें और SR आईडी साझा करें।"';
+  if(res.brush_off_type){
+    const lbl=brushLabel(res.brush_off_type);
+    if(lbl){ $('brushBadge').textContent=lbl; $('brushBadge').hidden=false; }
+  }
   const docket=(res.docket_id||'SR-DB-884120');
   $('docketInput').value=docket;
   $('docketVerify').textContent='सत्यापित ✓ Verified'; $('docketVerify').style.color='var(--brand-success)';
   setStatus('डॉकेट मिला: '+docket,'var(--brand-success)');
   $('summaryBtn').disabled=false;
+  $('dossierBtn').disabled=false;
   toast('डॉकेट सत्यापित: '+docket);
 }
 $('docketInput').addEventListener('input',()=>{
@@ -546,15 +735,81 @@ $('docketInput').addEventListener('input',()=>{
   const ok = state.mode==='demo' ? v==='SR-DB-884120' : true;
   if(v && ok){ $('docketVerify').textContent='सत्यापित ✓'; $('docketVerify').style.color='var(--brand-success)'; }
   else if(v){ $('docketVerify').textContent='असत्यापित'; $('docketVerify').style.color='var(--brand-error)'; }
-  else { $('docketVerify').textContent='पेंडिंग'; $('docketVerify').style.color='rgba(232,236,242,.4)'; }
+  else { $('docketVerify').textContent='पेंडिंग'; $('docketVerify').style.color='var(--stone-evidence)'; }
 });
-$('summaryBtn').addEventListener('click',()=>{
+$('summaryBtn').addEventListener('click', async ()=>{
   if(!state.entitlement) return;
   const e=state.entitlement;
-  toast('हिंदी सारांश: '+fmt(e.claim_inr)+' + '+fmt(e.penalty_inr)+' जुर्माना · डॉकेट SR-DB-884120');
+  const line = (state.lang==='hi')
+    ? 'रमेश भइया, '+fmt(e.claim_inr)+' और '+fmt(e.penalty_inr)+' RBI जुर्माना दर्ज हो गया — डॉकेट SR-DB-884120।'
+    : 'Ramesh, claim '+fmt(e.claim_inr)+' plus RBI penalty '+fmt(e.penalty_inr)+' recorded — docket SR-DB-884120.';
+  // 1) Timbre via the server (redaction-gated); 2) browser speech as offline fallback.
+  try{
+    const r=await fetch('/api/tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:line, lang: state.lang==='hi'?'hi-IN':'en-IN'})});
+    if(r.ok){
+      const j=await r.json();
+      if(j.audio_base64){
+        const a=new Audio('data:audio/mp3;base64,'+j.audio_base64); a.play(); return;
+      }
+    }
+  }catch(e){ /* offline → fall through to browser TTS */ }
+  if('speechSynthesis' in window){
+    const u=new SpeechSynthesisUtterance(line);
+    u.lang = state.lang==='hi' ? 'hi-IN' : 'en-IN';
+    const v=speechSynthesis.getVoices().find(v=>v.lang&&v.lang.toLowerCase().startsWith('hi'));
+    if(v) u.voice=v;
+    speechSynthesis.speak(u);
+  } else { toast(line); }
   setSecrets(state.secrets); // no secrets ever leaked
-  if(state.mode==='live'){ /* Timbre TTS plays here when /api/tts wired */ }
 });
+
+/* ═══════════ EDIT / APPROVE (Heron-style) ═══════════ */
+$('editDraft').addEventListener('click',()=>{
+  const p=$('draftText');
+  const editing=p.classList.toggle('editing');
+  p.contentEditable=editing?'true':'false';
+  if(editing) p.focus();
+});
+$('approveDraft').addEventListener('click',()=>{
+  state.approved=true;
+  $('approveDraft').textContent='✔ APPROVED';
+  $('approveDraft').disabled=true;
+  toast('ड्राफ्ट अनुमोदित · Draft approved for your own use');
+});
+
+/* ═══════════ DOSSIER ═══════════ */
+$('dossierBtn').addEventListener('click', async ()=>{
+  try{
+    const r=await fetch('/api/dossier');
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const j=await r.json();
+    const e=j.statutory_entitlement, i=j.citizen_intake, c=j.call;
+    const rows=[
+      ['Case ID', j.case_id],
+      ['UTR / Amount', i.utr+' · '+fmt(i.amount_inr)],
+      ['Dispute', i.dispute_type],
+      ['TAT (T+1/T+5)', e.tat_date],
+      ['Days overdue', e.days_overdue],
+      ['Penalty (₹100/day)', fmt(e.penalty_inr)],
+      ['Total claim', fmt(e.total_inr)],
+      ['Docket ID', c.docket_id||'—'],
+      ['Verbatim verified', c.verbatim_verified?'YES':'NO'],
+      ['Consent (timestamped)', j.consent.consent_timestamp?'VERIFIED':'—'],
+      ['AI disclosure', j.consent.disclosure_timestamp?'PLAYED':'—'],
+      ['Secrets detected', 'NONE'],
+      ['Status', 'DOSSIER READY'],
+    ];
+    $('dossierBody').innerHTML='<div class="dossier-grid">'+rows.map(([k,v])=>'<div class="dossier-row"><span class="k">'+k+'</span><span class="mono">'+v+'</span></div>').join('')+'</div>';
+    state.dossierJson=j;
+    openModal('dossierModal');
+  }catch(err){ toast('डॉसिये त्रुटि: '+err.message,'error'); }
+});
+$('downloadDossier').addEventListener('click',()=>{
+  if(!state.dossierJson) return;
+  const blob=new Blob([JSON.stringify(state.dossierJson,null,2)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='haqvaani_case_'+state.dossierJson.case_id+'.json'; a.click();
+});
+$('closeDossier').addEventListener('click',()=>closeModal('dossierModal'));
 
 /* ═══════════ MIC ═══════════ */
 $('micBtn').addEventListener('click',()=>{
@@ -562,10 +817,18 @@ $('micBtn').addEventListener('click',()=>{
   const listening=$('micBtn').classList.contains('mic-listening');
   if(listening) stopListening(); else startListening();
 });
-$('audioFile').addEventListener('change',e=>{
+$('audioFile').addEventListener('change',async e=>{
   const f=e.target.files[0]; if(!f) return;
   setStatus('फ़ाइल प्राप्त — प्रोसेसिंग…','var(--brand-warning)');
-  setTimeout(()=>{ $('tStt').textContent='—'; $('tStt').textContent=Math.round(120+Math.random()*80)+' ms'; setStage(1,undefined); processIntake(DEMO.intake); },600);
+  if(state.mode==='live'){
+    try{
+      const t0=performance.now();
+      const intake=await API.upload('/api/intake','audio',f);
+      const ms=Math.round(performance.now()-t0);
+      $('tStt').textContent=ms+' ms'; setStage(1,ms); processIntake(intake); return;
+    }catch(err){ toast('API त्रुटि — डेमो फ़ॉलबैक','error'); }
+  }
+  simulateIntake();
 });
 
 /* ═══════════ SCREEN READER ═══════════ */

@@ -1,0 +1,94 @@
+{
+ "v": 1,
+ "at": "2026-11-06T19:24:45.169Z",
+ "scope": "page",
+ "summary": {
+  "fails": 86,
+  "reflex": 37,
+  "warns": 10
+ },
+ "files": {
+  "frontend\\landing.html": {
+   "handlers": [],
+   "links": [
+    "#beat1",
+    "#beat2",
+    "#beat3",
+    "#beat4",
+    "#laws",
+    "#top",
+    "https://www.rbi.org.in",
+    "screens/call-prep.html",
+    "screens/complaint-builder.html",
+    "screens/dossier.html",
+    "screens/rights-check.html",
+    "screens/start-case.html",
+    "screens/voice-intake.html"
+   ],
+   "fields": [],
+   "hooks": [],
+   "ids": [
+    "beat1",
+    "beat2",
+    "beat3",
+    "beat4",
+    "beat5",
+    "laws",
+    "modeChip",
+    "safetyPanel",
+    "top"
+   ],
+   "scripts": [
+    "js/rail.js",
+    "js/router.js"
+   ]
+  }
+ },
+ "wiring": {
+  "handlers": [],
+  "links": [
+   "#beat1",
+   "#beat2",
+   "#beat3",
+   "#beat4",
+   "#laws",
+   "#top",
+   "https://www.rbi.org.in",
+   "screens/call-prep.html",
+   "screens/complaint-builder.html",
+   "screens/dossier.html",
+   "screens/rights-check.html",
+   "screens/start-case.html",
+   "screens/voice-intake.html"
+  ],
+  "fields": [],
+  "hooks": [],
+  "ids": [
+   "beat1",
+   "beat2",
+   "beat3",
+   "beat4",
+   "beat5",
+   "laws",
+   "modeChip",
+   "safetyPanel",
+   "top"
+  ]
+ },
+ "scripts": {
+  "frontend\\landing.html": {
+   "queried": [
+    "#hqToast",
+    "#stepMount",
+    ".rail-coin",
+    ".rail-fill",
+    "[data-tone]"
+   ],
+   "hooked": [
+    "[data-tone]"
+   ],
+   "hides": false
+  }
+ },
+ "pages": {}
+}

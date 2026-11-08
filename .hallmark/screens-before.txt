@@ -1,0 +1,331 @@
+FAIL 7a frontend\css\app.css:80 pure #000: color: #000 (.rail-coin) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:117 pure #fff: color: #fff (.lang-seg button[aria-pressed="true"]) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:120 pure #000: color: #000 (body[data-canvas="story"] .lang-seg button[aria-pressed="true"]) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:182 pure #fff: background: #fff (.card) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:206 pure #fff: color: #fff (.btn-primary) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:212 pure #fff: color: #fff (.btn-danger) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:217 pure #000: color: #000 (.btn-light) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:218 pure #fff: background: #fff (.btn-light:hover) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:234 pure #000: color: #000 (.mic-big[aria-pressed="true"]) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:247 pure #fff: background: #fff (input, select, textarea) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:275 pure #fff: background: #fff (.seg button[aria-selected="true"]) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:286 pure #fff: background: #fff (.ledger) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:367 pure #fff: color: #fff (.toast) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:401 pure #fff: background: #fff (body[data-canvas="evidence"]) | fix: Tint the base toward the anchor hue
+FAIL 19 frontend\screens\assisted-call.html:6 dash "—" in copy | fix: A comma, a colon, a full stop or parentheses; never a dash
+FAIL 19 frontend\screens\call-prep.html:6 dash "—" in copy | fix: A comma, a colon, a full stop or parentheses; never a dash
+FAIL 19 frontend\screens\complaint-builder.html:6 dash "—" in copy | fix: A comma, a colon, a full stop or parentheses; never a dash
+FAIL 19 frontend\screens\consent.html:6 dash "—" in copy | fix: A comma, a colon, a full stop or parentheses; never a dash
+FAIL 19 frontend\screens\consent.html:96 buzzword "unlock" | fix: Say what the product does, in its own nouns
+FAIL 19 frontend\screens\docket-capture.html:6 dash "—" in copy | fix: A comma, a colon, a full stop or parentheses; never a dash
+FAIL 19 frontend\screens\dossier.html:6 dash "—" in copy | fix: A comma, a colon, a full stop or parentheses; never a dash
+FAIL 19 frontend\screens\fact-review.html:6 dash "—" in copy | fix: A comma, a colon, a full stop or parentheses; never a dash
+FAIL 19 frontend\screens\post-call.html:6 dash "—" in copy | fix: A comma, a colon, a full stop or parentheses; never a dash
+FAIL 19 frontend\screens\rights-check.html:6 dash "—" in copy | fix: A comma, a colon, a full stop or parentheses; never a dash
+FAIL 19 frontend\screens\start-case.html:6 dash "—" in copy | fix: A comma, a colon, a full stop or parentheses; never a dash
+FAIL 19 frontend\screens\voice-intake.html:6 dash "—" in copy | fix: A comma, a colon, a full stop or parentheses; never a dash
+FAIL 26a frontend\screens\assisted-call.html:1 [1440px] nothing shows keyboard focus on input | fix: Give every control a :focus-visible ring; never remove an outline without putting one back
+FAIL 26a frontend\screens\complaint-builder.html:1 [1440px] nothing shows keyboard focus on input | fix: Give every control a :focus-visible ring; never remove an outline without putting one back
+FAIL 26a frontend\screens\consent.html:1 [1440px] nothing shows keyboard focus on input | fix: Give every control a :focus-visible ring; never remove an outline without putting one back
+FAIL 26a frontend\screens\voice-intake.html:1 [1440px] nothing shows keyboard focus on input | fix: Give every control a :focus-visible ring; never remove an outline without putting one back
+FAIL 34 frontend\css\tokens.css:1 no overflow-x: clip on html and body | fix: overflow-x: clip on both html and body
+FAIL 34 frontend\screens\assisted-call.html:1 [320px] horizontal scroll: scrollWidth 478 > viewport 320 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\assisted-call.html:1 [375px] horizontal scroll: scrollWidth 478 > viewport 375 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\assisted-call.html:1 [414px] horizontal scroll: scrollWidth 478 > viewport 414 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\call-prep.html:1 [320px] horizontal scroll: scrollWidth 454 > viewport 320 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\call-prep.html:1 [375px] horizontal scroll: scrollWidth 454 > viewport 375 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\call-prep.html:1 [414px] horizontal scroll: scrollWidth 454 > viewport 414 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\complaint-builder.html:1 [320px] horizontal scroll: scrollWidth 490 > viewport 320 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\complaint-builder.html:1 [375px] horizontal scroll: scrollWidth 490 > viewport 375 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\complaint-builder.html:1 [414px] horizontal scroll: scrollWidth 490 > viewport 414 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\consent.html:1 [320px] horizontal scroll: scrollWidth 478 > viewport 320 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\consent.html:1 [375px] horizontal scroll: scrollWidth 478 > viewport 375 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\consent.html:1 [414px] horizontal scroll: scrollWidth 478 > viewport 414 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\docket-capture.html:1 [320px] horizontal scroll: scrollWidth 474 > viewport 320 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\docket-capture.html:1 [375px] horizontal scroll: scrollWidth 474 > viewport 375 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\docket-capture.html:1 [414px] horizontal scroll: scrollWidth 474 > viewport 414 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\dossier.html:1 [320px] horizontal scroll: scrollWidth 473 > viewport 320 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\dossier.html:1 [375px] horizontal scroll: scrollWidth 473 > viewport 375 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\dossier.html:1 [414px] horizontal scroll: scrollWidth 473 > viewport 414 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\fact-review.html:1 [320px] horizontal scroll: scrollWidth 467 > viewport 320 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\fact-review.html:1 [375px] horizontal scroll: scrollWidth 467 > viewport 375 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\fact-review.html:1 [414px] horizontal scroll: scrollWidth 467 > viewport 414 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\post-call.html:1 [320px] horizontal scroll: scrollWidth 453 > viewport 320 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\post-call.html:1 [375px] horizontal scroll: scrollWidth 453 > viewport 375 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\post-call.html:1 [414px] horizontal scroll: scrollWidth 453 > viewport 414 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\rights-check.html:1 [320px] horizontal scroll: scrollWidth 465 > viewport 320 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\rights-check.html:1 [375px] horizontal scroll: scrollWidth 465 > viewport 375 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\rights-check.html:1 [414px] horizontal scroll: scrollWidth 465 > viewport 414 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\start-case.html:1 [320px] horizontal scroll: scrollWidth 456 > viewport 320 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\start-case.html:1 [375px] horizontal scroll: scrollWidth 456 > viewport 375 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\start-case.html:1 [414px] horizontal scroll: scrollWidth 456 > viewport 414 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\voice-intake.html:1 [320px] horizontal scroll: scrollWidth 478 > viewport 320 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\voice-intake.html:1 [375px] horizontal scroll: scrollWidth 478 > viewport 375 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 34 frontend\screens\voice-intake.html:1 [414px] horizontal scroll: scrollWidth 478 > viewport 414 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 40 frontend\screens\assisted-call.html:1 [1280px] contrast 3.84:1 against the pixels behind < 4.5:1 on p.field-err "पहला बॉक्स तिकणा होना चा" | fix: Raise the contrast to threshold
+FAIL 40 frontend\screens\assisted-call.html:1 [1280px] contrast 1.93:1 against the pixels behind < 4.5:1 on label "आपका नाम (वैकल्पिक) · yo" | fix: Raise the contrast to threshold
+FAIL 40 frontend\screens\assisted-call.html:1 [1280px] contrast 1.23:1 against the pixels behind < 4.5:1 on summary "सुरक्षा विवरण · safety s" | fix: Raise the contrast to threshold
+FAIL 40 frontend\screens\assisted-call.html:1 [1280px] computed contrast 3.36:1 < 4.5:1 on span.k "Consent (DPDP)" | fix: Raise the contrast to threshold
+FAIL 40 frontend\screens\assisted-call.html:1 [1440px] a field's edge is under 3:1 against what surrounds it: input 2.03:1 | fix: Draw the field in --color-muted, or fill it a step off the surface it sits on
+FAIL 40 frontend\screens\call-prep.html:1 [1280px] contrast 1.23:1 against the pixels behind < 4.5:1 on summary "सुरक्षा विवरण · safety s" | fix: Raise the contrast to threshold
+FAIL 40 frontend\screens\call-prep.html:1 [1280px] computed contrast 3.36:1 < 4.5:1 on span.k "Consent (DPDP)" | fix: Raise the contrast to threshold
+FAIL 40 frontend\screens\complaint-builder.html:1 [1440px] a field's edge is under 3:1 against what surrounds it: textarea.draft-area 1.24:1 | fix: Draw the field in --color-muted, or fill it a step off the surface it sits on
+FAIL 40 frontend\screens\consent.html:1 [1280px] contrast 3.84:1 against the pixels behind < 4.5:1 on p.field-err "पहला बॉक्स तिकणा होना चा" | fix: Raise the contrast to threshold
+FAIL 40 frontend\screens\consent.html:1 [1280px] contrast 1.93:1 against the pixels behind < 4.5:1 on label "आपका नाम (वैकल्पिक) · yo" | fix: Raise the contrast to threshold
+FAIL 40 frontend\screens\consent.html:1 [1280px] contrast 1.23:1 against the pixels behind < 4.5:1 on summary "सुरक्षा विवरण · safety s" | fix: Raise the contrast to threshold
+FAIL 40 frontend\screens\consent.html:1 [1280px] computed contrast 3.36:1 < 4.5:1 on span.k "Consent (DPDP)" | fix: Raise the contrast to threshold
+FAIL 40 frontend\screens\consent.html:1 [1440px] a field's edge is under 3:1 against what surrounds it: input 2.03:1 | fix: Draw the field in --color-muted, or fill it a step off the surface it sits on
+FAIL 40 frontend\screens\fact-review.html:1 [1440px] a field's edge is under 3:1 against what surrounds it: input 1.22:1, input 1.22:1, input 1.22:1 | fix: Draw the field in --color-muted, or fill it a step off the surface it sits on
+FAIL 40 frontend\screens\start-case.html:1 [1280px] contrast 3.84:1 against the pixels behind < 4.5:1 on span.xsmall.bad "शून्य देयता · zero liabi" | fix: Raise the contrast to threshold
+FAIL 40 frontend\screens\start-case.html:1 [1280px] contrast 3.54:1 against the pixels behind < 4.5:1 on span.xsmall.warn "यक़ीन नहीं" | fix: Raise the contrast to threshold
+FAIL 40 frontend\screens\start-case.html:1 [1280px] contrast 1.23:1 against the pixels behind < 4.5:1 on summary "सुरक्षा विवरण · safety s" | fix: Raise the contrast to threshold
+FAIL 40 frontend\screens\start-case.html:1 [1280px] computed contrast 3.36:1 < 4.5:1 on span.k "Consent (DPDP)" | fix: Raise the contrast to threshold
+FAIL 40 frontend\screens\voice-intake.html:1 [1280px] contrast 3.84:1 against the pixels behind < 4.5:1 on p.field-err "पहला बॉक्स तिकणा होना चा" | fix: Raise the contrast to threshold
+FAIL 40 frontend\screens\voice-intake.html:1 [1280px] contrast 1.93:1 against the pixels behind < 4.5:1 on label "आपका नाम (वैकल्पिक) · yo" | fix: Raise the contrast to threshold
+FAIL 40 frontend\screens\voice-intake.html:1 [1280px] contrast 1.23:1 against the pixels behind < 4.5:1 on summary "सुरक्षा विवरण · safety s" | fix: Raise the contrast to threshold
+FAIL 40 frontend\screens\voice-intake.html:1 [1280px] computed contrast 3.36:1 < 4.5:1 on span.k "Consent (DPDP)" | fix: Raise the contrast to threshold
+FAIL 40 frontend\screens\voice-intake.html:1 [1440px] a field's edge is under 3:1 against what surrounds it: input 2.03:1 | fix: Draw the field in --color-muted, or fill it a step off the surface it sits on
+FAIL 48 frontend\css\app.css:21 colour literal #f4f4f2 outside tokens (color on body[data-canvas="story"]) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:25 colour literal #f4f4f2 outside tokens (color on .band-story) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:41 colour literal rgba(244,244,242,.78) outside tokens (color on body[data-canvas="story"] .in…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:42 colour literal rgba(244,244,242,.62) outside tokens (color on body[data-canvas="story"] .in…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:80 colour literal #000 outside tokens (color on .rail-coin) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:98 colour literal rgba(255,255,255,.14) outside tokens (border-bottom-color on body[data-canvas="story"] .ap…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:106 colour literal rgba(244,244,242,.62) outside tokens (color on body[data-canvas="story"] .br…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:117 colour literal #fff outside tokens (color on .lang-seg button[aria-pressed…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:118 colour literal rgba(255,255,255,.24) outside tokens (border-color on body[data-canvas="story"] .la…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:119 colour literal rgba(244,244,242,.78) outside tokens (color on body[data-canvas="story"] .la…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:120 colour literal #f4f4f2 outside tokens (background on body[data-canvas="story"] .la…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:120 colour literal #000 outside tokens (color on body[data-canvas="story"] .la…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:131 colour literal rgba(255,255,255,.24) outside tokens (border-color on body[data-canvas="story"] .ch…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:131 colour literal rgba(244,244,242,.78) outside tokens (color on body[data-canvas="story"] .ch…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:161 colour literal rgba(244,244,242,.5) outside tokens (color on body[data-canvas="story"] .st…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:162 colour literal #f4f4f2 outside tokens (color on body[data-canvas="story"] .st…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:178 colour literal rgba(244,244,242,.72) outside tokens (color on body[data-canvas="story"] .ey…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:182 colour literal #fff outside tokens (background on .card) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:187 colour literal rgba(255,255,255,.14) outside tokens (border-color on body[data-canvas="story"] .ca…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:206 colour literal #fff outside tokens (color on .btn-primary) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:207 colour literal #3d41c4 outside tokens (background on .btn-primary:hover) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:212 colour literal #fff outside tokens (color on .btn-danger) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:213 colour literal #c02a3a outside tokens (background on .btn-danger:hover) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:215 colour literal #f4f4f2 outside tokens (color on .btn-ghost-dark) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:215 colour literal rgba(255,255,255,.24) outside tokens (border-color on .btn-ghost-dark) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:216 colour literal rgba(255,255,255,.07) outside tokens (background on .btn-ghost-dark:hover) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:217 colour literal #f4f4f2 outside tokens (background on .btn-light) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:217 colour literal #000 outside tokens (color on .btn-light) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:218 colour literal #fff outside tokens (background on .btn-light:hover) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:234 colour literal #000 outside tokens (color on .mic-big[aria-pressed="true"]) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:247 colour literal #fff outside tokens (background on input, select, textarea) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:275 colour literal #fff outside tokens (background on .seg button[aria-selected="tr…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:275 colour literal rgba(0,0,0,.08) outside tokens (box-shadow on .seg button[aria-selected="tr…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:286 colour literal #fff outside tokens (background on .ledger) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:323 colour literal #c9e8dd outside tokens (background on mark.match) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:326 colour literal rgba(255,255,255,.16) outside tokens (border on .scriptcard) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:328 colour literal rgba(244,244,242,.85) outside tokens (color on .you-bank) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:350 colour literal rgba(255,255,255,.14) outside tokens (border-top-color on body[data-canvas="story"] .sa…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:350 colour literal rgba(244,244,242,.72) outside tokens (color on body[data-canvas="story"] .sa…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:360 colour literal rgba(255,255,255,.18) outside tokens (border-top-color on body[data-canvas="story"] .sa…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:362 colour literal #5c6167 outside tokens (color on .safety .kv .k) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:367 colour literal #fff outside tokens (color on .toast) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:401 colour literal #fff outside tokens (background on body[data-canvas="evidence"]) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\assisted-call.html:16 colour literal rgba(244,244,242,.85) outside tokens (color on .status-pill) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\assisted-call.html:17 colour literal rgba(255,255,255,.16) outside tokens (border on .status-pill) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\assisted-call.html:23 colour literal rgba(255,255,255,.16) outside tokens (border on .xtr) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\assisted-call.html:25 colour literal rgba(244,244,242,.55) outside tokens (color on .xtr .t-label) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\assisted-call.html:26 colour literal #f4f4f2 outside tokens (color on .xtr .t-text) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\assisted-call.html:27 colour literal #f4f4f2 outside tokens (color on .paste-ta) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\assisted-call.html:28 colour literal rgba(255,255,255,.22) outside tokens (border on .paste-ta) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\assisted-call.html:92 inline-style colour literal rgba(244,244,242,.62) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\assisted-call.html:94 inline-style colour literal rgba(244,244,242,.62) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\call-prep.html:48 inline-style colour literal rgba(244,244,242,.62) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\call-prep.html:54 inline-style colour literal rgba(244,244,242,.62) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\call-prep.html:57 inline-style colour literal rgba(244,244,242,.85) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\call-prep.html:70 inline-style colour literal rgba(255,255,255,.1) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\call-prep.html:71 inline-style colour literal rgba(255,255,255,.1) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\call-prep.html:72 inline-style colour literal rgba(255,255,255,.1) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\call-prep.html:73 inline-style colour literal rgba(255,255,255,.1) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\call-prep.html:75 inline-style colour literal rgba(244,244,242,.62) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\consent.html:14 colour literal rgba(255,255,255,.12) outside tokens (border-top on .consent-card .clause) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\consent.html:17 colour literal rgba(0,194,217,.08) outside tokens (background on .ai-line) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\consent.html:72 inline-style colour literal rgba(244,244,242,.62) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\consent.html:81 inline-style colour literal rgba(244,244,242,.62) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\consent.html:89 inline-style colour literal #f4f4f2 | fix: Lift the value into the token block
+FAIL 48 frontend\screens\consent.html:90 inline-style colour literal rgba(244,244,242,.62) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\consent.html:100 inline-style colour literal rgba(244,244,242,.62) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\docket-capture.html:15 colour literal #f4f4f2 outside tokens (color on .hear-strip) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\docket-capture.html:17 colour literal rgba(244,244,242,.55) outside tokens (color on .hear-strip .t-label) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\post-call.html:69 inline-style colour literal rgba(244,244,242,.62) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\start-case.html:17 colour literal rgba(255,255,255,.16) outside tokens (border on .case-card) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\start-case.html:23 colour literal rgba(244,244,242,.62) outside tokens (color on .case-card .tat) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\voice-intake.html:15 colour literal rgba(255,255,255,.16) outside tokens (border on .transcript) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\voice-intake.html:18 colour literal rgba(244,244,242,.55) outside tokens (color on .transcript .t-label) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\voice-intake.html:19 colour literal #f4f4f2 outside tokens (color on .transcript .t-text) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\voice-intake.html:73 inline-style colour literal rgba(255,255,255,.24) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\voice-intake.html:75 inline-style colour literal rgba(244,244,242,.55) | fix: Lift the value into the token block
+FAIL 48 frontend\screens\voice-intake.html:116 inline-style colour literal rgba(244,244,242,.85) | fix: Lift the value into the token block
+FAIL 49a frontend\screens\assisted-call.html:1 [320px] control "घोषणा सुनिए · hear the disclosur" wraps to 3 lines (button.btn.btn-ghost-dark) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\assisted-call.html:1 [320px] control "मंजूर — माइक चालू कर दीजिए · I a" wraps to 6 lines (button.btn.btn-light) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\assisted-call.html:1 [375px] control "घोषणा सुनिए · hear the disclosur" wraps to 2 lines (button.btn.btn-ghost-dark) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\assisted-call.html:1 [375px] control "मंजूर — माइक चालू कर दीजिए · I a" wraps to 3 lines (button.btn.btn-light) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\call-prep.html:1 [320px] control "कॉल शुरू करें — सुनना चालू करें " wraps to 3 lines (a.btn.btn-light) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\call-prep.html:1 [320px] control "ड्राफ्ट पर वापस · back to drafts" wraps to 2 lines (a.btn.btn-ghost-dark) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\call-prep.html:1 [375px] control "कॉल शुरू करें — सुनना चालू करें " wraps to 2 lines (a.btn.btn-light) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\complaint-builder.html:1 [320px] control "बैंक पत्र" wraps to 2 lines (button) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\complaint-builder.html:1 [320px] control "मूल लौटाएँ · restore original" wraps to 4 lines (button.btn.btn-quiet) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\complaint-builder.html:1 [320px] control "मंजूर करें → कॉल की तैयारी · app" wraps to 2 lines (a.btn.btn-primary) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\complaint-builder.html:1 [320px] control "वापस हिसाब · back to numbers" wraps to 2 lines (a.btn.btn-quiet) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\consent.html:1 [320px] control "घोषणा सुनिए · hear the disclosur" wraps to 3 lines (button.btn.btn-ghost-dark) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\consent.html:1 [320px] control "मंजूर — माइक चालू कर दीजिए · I a" wraps to 6 lines (button.btn.btn-light) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\consent.html:1 [375px] control "घोषणा सुनिए · hear the disclosur" wraps to 2 lines (button.btn.btn-ghost-dark) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\consent.html:1 [375px] control "मंजूर — माइक चालू कर दीजिए · I a" wraps to 3 lines (button.btn.btn-light) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\docket-capture.html:1 [320px] control "कॉल पर वापस · back to the call" wraps to 2 lines (a.btn.btn-primary) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\docket-capture.html:1 [320px] control "कॉल समाप्त — आगे क्या · post-cal" wraps to 2 lines (a.btn.btn-primary) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\dossier.html:1 [320px] control "JSON सेव करें · download JSON" wraps to 2 lines (button.btn.btn-primary) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\dossier.html:1 [320px] control "नया केस शुरू करें · start a new " wraps to 2 lines (a.btn.btn-quiet) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\dossier.html:1 [320px] control "हक़-वाणी होम · back to the start" wraps to 2 lines (a.btn.btn-quiet) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\fact-review.html:1 [320px] control "हक जाँचें · check my rights" wraps to 2 lines (a.btn.btn-primary) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\post-call.html:1 [320px] control "कॉल पर चलें · go to the call" wraps to 2 lines (a.btn.btn-primary) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\post-call.html:1 [320px] control "पूरा केस फ़ोल्डर देखें · the who" wraps to 2 lines (a.btn.btn-primary) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\post-call.html:1 [320px] control "डॉकेट पर वापस · back to the dock" wraps to 2 lines (a.btn.btn-quiet) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\rights-check.html:1 [320px] control "शिकायत भरें · build the complain" wraps to 2 lines (a.btn.btn-primary) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\rights-check.html:1 [320px] control "सच सुधारें · edit the four facts" wraps to 2 lines (a.btn.btn-quiet) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\voice-intake.html:1 [320px] control "घोषणा सुनिए · hear the disclosur" wraps to 3 lines (button.btn.btn-ghost-dark) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\voice-intake.html:1 [320px] control "मंजूर — माइक चालू कर दीजिए · I a" wraps to 6 lines (button.btn.btn-light) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\voice-intake.html:1 [375px] control "घोषणा सुनिए · hear the disclosur" wraps to 2 lines (button.btn.btn-ghost-dark) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\screens\voice-intake.html:1 [375px] control "मंजूर — माइक चालू कर दीजिए · I a" wraps to 3 lines (button.btn.btn-light) | fix: Shorten the label or set nowrap
+FAIL 54 frontend\screens\assisted-call.html:51 eyebrow "4 कॉल · Call" before <h1> | fix: Cut it; the heading already says this (craft.md § 7 has twelve other openings)
+FAIL 54 frontend\screens\call-prep.html:32 eyebrow "3 तैयार करें · Prepare" before <h1> | fix: Cut it; the heading already says this (craft.md § 7 has twelve other openings)
+FAIL 54 frontend\screens\complaint-builder.html:36 eyebrow "3 तैयार करें · Prepare" before <h1> | fix: Cut it; the heading already says this (craft.md § 7 has twelve other openings)
+FAIL 54 frontend\screens\consent.html:41 eyebrow "1 बोलें · Speak — पहले दो शब्द …" before <h1> | fix: Cut it; the heading already says this (craft.md § 7 has twelve other openings)
+FAIL 54 frontend\screens\docket-capture.html:39 eyebrow "4 कॉल · Call" before <h1> | fix: Cut it; the heading already says this (craft.md § 7 has twelve other openings)
+FAIL 54 frontend\screens\dossier.html:36 eyebrow "5 सबूत · Prove" before <h1> | fix: Cut it; the heading already says this (craft.md § 7 has twelve other openings)
+FAIL 54 frontend\screens\fact-review.html:37 eyebrow "2 जाँच · Check" before <h1> | fix: Cut it; the heading already says this (craft.md § 7 has twelve other openings)
+FAIL 54 frontend\screens\post-call.html:39 eyebrow "4 कॉल · Call" before <h1> | fix: Cut it; the heading already says this (craft.md § 7 has twelve other openings)
+FAIL 54 frontend\screens\rights-check.html:35 eyebrow "2 जाँच · Check" before <h1> | fix: Cut it; the heading already says this (craft.md § 7 has twelve other openings)
+FAIL 54 frontend\screens\start-case.html:46 eyebrow "1 बोलें · Speak" before <h1> | fix: Cut it; the heading already says this (craft.md § 7 has twelve other openings)
+FAIL 54 frontend\screens\voice-intake.html:42 eyebrow "1 बोलें · Speak" before <h1> | fix: Cut it; the heading already says this (craft.md § 7 has twelve other openings)
+FAIL 62 frontend\css\app.css:291 .ledger-row is hidden at rest (opacity: 0) and depends on a script to appear | fix: Visible by default: scope the hidden state under a .js class the script adds, or animate from visible with @starting-style
+FAIL 62 frontend\css\app.css:313 .condense > * is hidden at rest (opacity: 0) and depends on a script to appear | fix: Visible by default: scope the hidden state under a .js class the script adds, or animate from visible with @starting-style
+FAIL 63 frontend\screens\assisted-call.html:64 middle-dot meta string "सुनना शुरू · start listening बंद · stop & read" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+FAIL 63 frontend\screens\assisted-call.html:82 middle-dot meta string "नंबर देखें और मंजूर करें · review the docket फिर …" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+FAIL 63 frontend\screens\call-prep.html:79 middle-dot meta string "कॉल शुरू करें — सुनना चालू करें · open assisted c…" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+FAIL 63 frontend\screens\complaint-builder.html:98 middle-dot meta string "मंजूर करें → कॉल की तैयारी · approve → call prep …" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+FAIL 63 frontend\screens\docket-capture.html:68 middle-dot meta string "सबूत · how it matched — डॉकेट काले उभार में · hig…" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+FAIL 63 frontend\screens\docket-capture.html:97 middle-dot meta string "फिर सुनें · listen again बिना नंबर आगे बढ़ें · co…" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+FAIL 63 frontend\screens\docket-capture.html:103 middle-dot meta string "कॉल समाप्त — आगे क्या · post-call notes फिर सुनें…" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+FAIL 63 frontend\screens\dossier.html:87 middle-dot meta string "JSON सेव करें · download JSON प्रिंट / PDF · print" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+FAIL 63 frontend\screens\dossier.html:97 middle-dot meta string "नया केस शुरू करें · start a new case हक़-वाणी होम…" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+FAIL 63 frontend\screens\fact-review.html:74 middle-dot meta string "10–24 अंक (12 सामान्य) · खाली भी चलेगा · digits o…" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+FAIL 63 frontend\screens\fact-review.html:114 middle-dot meta string "हक जाँचें · check my rights वापस बोलें · record a…" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+FAIL 63 frontend\screens\post-call.html:86 middle-dot meta string "पूरा केस फ़ोल्डर देखें · the whole dossier डॉकेट …" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+FAIL 63 frontend\screens\rights-check.html:77 middle-dot meta string "शिकायत भरें · build the complaint सच सुधारें · ed…" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+FAIL 63 frontend\screens\voice-intake.html:55 middle-dot meta string "रोकें · pause समाप्त · end & review" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+FAIL 63 frontend\screens\voice-intake.html:66 middle-dot meta string "चार सच समीक्षा · review the four facts फिर बोलें …" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+FAIL 67 frontend\screens\call-prep.html:71 "PIN · MPIN" typed in capitals at 13px (<li class="you-bank">) | fix: Sentence case in the body face; capitals survive only as a wordmark or as the display voice
+REFLEX 7b frontend\css\app.css:21 pure #000: background: var(--story-black) (body[data-canvas="story"]) | fix: Tint the base toward the anchor hue
+REFLEX 7b frontend\css\app.css:25 pure #000: background: var(--story-black) (.band-story) | fix: Tint the base toward the anchor hue
+REFLEX 7b frontend\css\app.css:350 pure #000: background: var(--story-black) (body[data-canvas="story"] .safety) | fix: Tint the base toward the anchor hue
+REFLEX 7b frontend\screens\docket-capture.html:15 pure #000: background: var(--story-black) (.hear-strip) | fix: Tint the base toward the anchor hue
+REFLEX 24b frontend\css\app.css:95 padding: 14px 24px 14px var(--rail-g… (off the 4px scale) on .app-head | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:101 gap: 10px (off the 4px scale) on .brand | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:108 gap: 10px (off the 4px scale) on .head-right | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:125 padding: 6px 12px (off the 4px scale) on .chip | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:136 padding: 18px 24px 6px var(--rail-gu… (off the 4px scale) on .stepbar | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:151 margin: 0 10px (off the 4px scale) on .stepbar li::after | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:176 gap: 10px (off the 4px scale) on .eyebrow | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:196 gap: 10px (off the 4px scale) on .btn | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:240 gap: 6px (off the 4px scale) on .field | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:249 padding: 10px 14px (off the 4px scale) on input, select, textarea | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:252 padding: 14px (off the 4px scale) on textarea | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:270 padding: 3px (off the 4px scale) on .seg | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:272 padding: 6px 16px (off the 4px scale) on .seg button | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:278 gap: 10px (off the 4px scale) on .statestrip | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:279 margin-top: 3px (off the 4px scale) on .statestrip .ic | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:289 padding: 18px 20px (off the 4px scale) on .ledger-row | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:302 padding: 10px 0 18px (off the 4px scale) on .timeline li | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:328 gap: 14px (off the 4px scale) on .you-bank | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:348 padding: 10px 24px (off the 4px scale) on .safety | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:359 margin-top: 10px (off the 4px scale) on .safety .panel | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:359 padding-top: 10px (off the 4px scale) on .safety .panel | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:359 gap: 6px (off the 4px scale) on .safety .panel | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:368 padding: 12px 18px (off the 4px scale) on .toast | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:376 gap: 10px (off the 4px scale) on .kv-list | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:377 padding-top: 10px (off the 4px scale) on .kv-list .kv | fix: Use the 4px spacing scale
+REFLEX 24b frontend\screens\assisted-call.html:13 padding: 28px 0 6px (off the 4px scale) on .call-stage | fix: Use the 4px spacing scale
+REFLEX 24b frontend\screens\assisted-call.html:15 gap: 10px (off the 4px scale) on .status-pill | fix: Use the 4px spacing scale
+REFLEX 24b frontend\screens\assisted-call.html:17 padding: 8px 18px (off the 4px scale) on .status-pill | fix: Use the 4px spacing scale
+REFLEX 24b frontend\screens\assisted-call.html:24 padding: 18px 20px (off the 4px scale) on .xtr | fix: Use the 4px spacing scale
+REFLEX 24b frontend\screens\assisted-call.html:25 margin-bottom: 6px (off the 4px scale) on .xtr .t-label | fix: Use the 4px spacing scale
+REFLEX 24b frontend\screens\assisted-call.html:29 padding: 12px 14px (off the 4px scale) on .paste-ta | fix: Use the 4px spacing scale
+REFLEX 24b frontend\screens\consent.html:14 padding: 16px 18px (off the 4px scale) on .consent-card .clause | fix: Use the 4px spacing scale
+REFLEX 24b frontend\screens\consent.html:18 padding: 14px 16px (off the 4px scale) on .ai-line | fix: Use the 4px spacing scale
+REFLEX 24b frontend\screens\consent.html:18 margin: 14px 0 (off the 4px scale) on .ai-line | fix: Use the 4px spacing scale
+REFLEX 24b frontend\screens\docket-capture.html:16 padding: 20px 22px (off the 4px scale) on .hear-strip | fix: Use the 4px spacing scale
+REFLEX 24b frontend\screens\docket-capture.html:17 margin-bottom: 6px (off the 4px scale) on .hear-strip .t-label | fix: Use the 4px spacing scale
+REFLEX 24b frontend\screens\post-call.html:15 padding: 6px 14px (off the 4px scale) on .brush-badge | fix: Use the 4px spacing scale
+REFLEX 24b frontend\screens\start-case.html:18 padding: 26px 24px (off the 4px scale) on .case-card | fix: Use the 4px spacing scale
+REFLEX 24b frontend\screens\start-case.html:23 margin-top: 14px (off the 4px scale) on .case-card .tat | fix: Use the 4px spacing scale
+REFLEX 24b frontend\screens\start-case.html:24 margin: 10px 0 0 (off the 4px scale) on .case-card h3 | fix: Use the 4px spacing scale
+REFLEX 24b frontend\screens\voice-intake.html:13 gap: 18px (off the 4px scale) on .mic-stage | fix: Use the 4px spacing scale
+REFLEX 24b frontend\screens\voice-intake.html:13 padding: 34px 0 10px (off the 4px scale) on .mic-stage | fix: Use the 4px spacing scale
+REFLEX 24b frontend\screens\voice-intake.html:16 padding: 20px 22px (off the 4px scale) on .transcript | fix: Use the 4px spacing scale
+REFLEX 24b frontend\screens\voice-intake.html:18 margin-bottom: 6px (off the 4px scale) on .transcript .t-label | fix: Use the 4px spacing scale
+REFLEX 39b frontend\screens\complaint-builder.html:1 [1440px] control height outside 32 to 52px: button.btn 104px | fix: Marketing controls stand 44 to 52px; app UI 32 to 40px with a 44px hit target
+REFLEX 64 frontend\css\app.css:177 monospace label voice on .eyebrow .n | fix: Labels in the body face, a step smaller, sentence case; mono only for code and figures
+REFLEX 72 frontend\screens\dossier.html:1 [1440px] text crowds the edge of its box: div.card bottom -365px | fix: Pad the box: max(8px, 0.5em) at the sides, max(4px, 0.3em) above and below
+WARN 3 frontend\screens\consent.html:17 side stripe border-left: 3px solid var(--live-cyan) on .ai-line | fix: Hairline all round, none, or an accent square
+WARN 41 frontend\css\app.css:187 dark surface (L 21%) on body[data-canvas="story"] .card sets no text colour | fix: Swap text to paper in the same rule
+WARN 41 frontend\css\app.css:326 dark surface (L 21%) on .scriptcard sets no text colour | fix: Swap text to paper in the same rule
+WARN 41 frontend\css\tokens.css:7 --ink ~ --story-surface on :root | fix: Use accent-ink or paper for the label
+WARN 41 frontend\screens\consent.html:13 dark surface (L 21%) on .consent-card sets no text colour | fix: Swap text to paper in the same rule
+WARN 49 frontend\screens\assisted-call.html:65 long clickable label "सुनना शुरू · start listening" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\assisted-call.html:83 long clickable label "नंबर देखें और मंजूर करें · review t…" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\call-prep.html:80 long clickable label "कॉल शुरू करें — सुनना चालू करें · o…" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\call-prep.html:84 long clickable label "ड्राफ्ट पर वापस · back to drafts" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\complaint-builder.html:54 long clickable label "मूल लौटाएँ · restore original" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\complaint-builder.html:99 long clickable label "मंजूर करें → कॉल की तैयारी · approv…" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\complaint-builder.html:103 long clickable label "वापस हिसाब · back to numbers" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\consent.html:59 long clickable label "घोषणा सुनिए · hear the disclosure" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\consent.html:95 long clickable label "मंजूर — माइक चालू कर दीजिए · I agre…" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\docket-capture.html:49 long clickable label "कॉल पर वापस · back to the call" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\docket-capture.html:94 long clickable label "मेरी पक्ष पर दर्ज करें · record my …" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\docket-capture.html:99 long clickable label "बिना नंबर आगे बढ़ें · continue with…" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\docket-capture.html:104 long clickable label "कॉल समाप्त — आगे क्या · post-call n…" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\dossier.html:88 long clickable label "JSON सेव करें · download JSON" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\dossier.html:98 long clickable label "नया केस शुरू करें · start a new case" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\dossier.html:99 long clickable label "हक़-वाणी होम · back to the start" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\fact-review.html:115 long clickable label "हक जाँचें · check my rights" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\fact-review.html:119 long clickable label "वापस बोलें · record again" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\post-call.html:48 long clickable label "कॉल पर चलें · go to the call" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\post-call.html:87 long clickable label "पूरा केस फ़ोल्डर देखें · the whole …" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\post-call.html:91 long clickable label "डॉकेट पर वापस · back to the docket" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\rights-check.html:78 long clickable label "शिकायत भरें · build the complaint" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\rights-check.html:82 long clickable label "सच सुधारें · edit the four facts" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\voice-intake.html:57 long clickable label "समाप्त · end &amp; review" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\voice-intake.html:67 long clickable label "चार सच समीक्षा · review the four fa…" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\screens\voice-intake.html:73 long clickable label "सुनने की जगह ऑडियो फ़ाइल दीजिए · us…" without nowrap | fix: Shorten the label or set nowrap
+WARN F1 frontend\screens\assisted-call.html:74 straight quote in prose x2 (first: Point your phone's speaker at t) | fix: Use typographic quotes: “ ” ’
+WARN F1 frontend\screens\complaint-builder.html:75 straight quote in prose x1 (first: आएगा · tick what's ready) | fix: Use typographic quotes: “ ” ’
+WARN F1 frontend\screens\docket-capture.html:75 straight quote in prose x1 (first: s is my complaint's docket.) | fix: Use typographic quotes: “ ” ’
+WARN F3 frontend\css\app.css:27 no text-wrap: balance on any display head (3 head rule(s), e.g. p, h1, h2, h3, h4) | fix: Add text-wrap: balance to h1/h2-level heads
+WARN F21 frontend\screens\complaint-builder.html:74 h1 is followed by h3 ("सबूत साथ निभाएँ · evidence chec…") | fix: Step heading levels one at a time; size a head with CSS, never with its level
+WARN F21 frontend\screens\start-case.html:54 h1 is followed by h3 ("पैसे कटे, व्यक्ति तक नहीं पहुँचे") | fix: Step heading levels one at a time; size a head with CSS, never with its level
+WARN F23 frontend\screens\assisted-call.html:1 the document lacks a meta description | fix: Name the language, title the page in its own words, and describe it in one sentence for link previews
+WARN F23 frontend\screens\call-prep.html:1 the document lacks a meta description | fix: Name the language, title the page in its own words, and describe it in one sentence for link previews
+WARN F23 frontend\screens\complaint-builder.html:1 the document lacks a meta description | fix: Name the language, title the page in its own words, and describe it in one sentence for link previews
+WARN F23 frontend\screens\consent.html:1 the document lacks a meta description | fix: Name the language, title the page in its own words, and describe it in one sentence for link previews
+WARN F23 frontend\screens\docket-capture.html:1 the document lacks a meta description | fix: Name the language, title the page in its own words, and describe it in one sentence for link previews
+WARN F23 frontend\screens\dossier.html:1 the document lacks a meta description | fix: Name the language, title the page in its own words, and describe it in one sentence for link previews
+WARN F23 frontend\screens\fact-review.html:1 the document lacks a meta description | fix: Name the language, title the page in its own words, and describe it in one sentence for link previews
+WARN F23 frontend\screens\post-call.html:1 the document lacks a meta description | fix: Name the language, title the page in its own words, and describe it in one sentence for link previews
+WARN F23 frontend\screens\rights-check.html:1 the document lacks a meta description | fix: Name the language, title the page in its own words, and describe it in one sentence for link previews
+WARN F23 frontend\screens\start-case.html:1 the document lacks a meta description | fix: Name the language, title the page in its own words, and describe it in one sentence for link previews
+WARN F23 frontend\screens\voice-intake.html:1 the document lacks a meta description | fix: Name the language, title the page in its own words, and describe it in one sentence for link previews
+WARN F26 frontend\screens\assisted-call.html:1 [375px] h1 "माइक से पहले, सहमति आपके समय की।" ends on a stub | fix: text-wrap: balance on heads and pretty on body copy, or rewrite the line; a <br> goes only between phrases and is checked at 375
+WARN F26 frontend\screens\call-prep.html:1 [375px] h1 "आप डायल करेंगे। हक़-वाणी सुनेगा।" ends on a stub | fix: text-wrap: balance on heads and pretty on body copy, or rewrite the line; a <br> goes only between phrases and is checked at 375
+WARN F26 frontend\screens\complaint-builder.html:1 [1280px] h1 "आपकी शिकायत — पढ़कर, बदल भी सकते" ends on a stub | fix: text-wrap: balance on heads and pretty on body copy, or rewrite the line; a <br> goes only between phrases and is checked at 375
+WARN F26 frontend\screens\consent.html:1 [375px] h1 "माइक से पहले, सहमति आपके समय की।" ends on a stub | fix: text-wrap: balance on heads and pretty on body copy, or rewrite the line; a <br> goes only between phrases and is checked at 375
+WARN F26 frontend\screens\post-call.html:1 [375px] h1 "कॉल समाप्त — यही रहा निष्कर्ष।" ends on a stub | fix: text-wrap: balance on heads and pretty on body copy, or rewrite the line; a <br> goes only between phrases and is checked at 375
+WARN F26 frontend\screens\start-case.html:1 [375px] h1 "आपकी शिकायत किस तरह की है?" ends on a stub; h3 "ATM कैश नहीं निकला, हिसाब से कट " ends on a stub | fix: text-wrap: balance on heads and pretty on body copy, or rewrite the line; a <br> goes only between phrases and is checked at 375
+WARN F26 frontend\screens\start-case.html:1 [1280px] h3 "ATM कैश नहीं निकला, हिसाब से कट " ends on a stub; h3 "जो मैंने नहीं किया, वह कटा (धोखा" ends on a stub | fix: text-wrap: balance on heads and pretty on body copy, or rewrite the line; a <br> goes only between phrases and is checked at 375
+WARN F26 frontend\screens\voice-intake.html:1 [375px] h1 "माइक से पहले, सहमति आपके समय की।" ends on a stub | fix: text-wrap: balance on heads and pretty on body copy, or rewrite the line; a <br> goes only between phrases and is checked at 375

@@ -14,6 +14,8 @@ import { api } from "../lib/api.js";
 import { DEMO, AI_DISCLOSURE } from "../lib/demo.js";
 import { SECRET_RE, fmtInr } from "../lib/format.js";
 import { navigate } from "../lib/router.js";
+import { Arrow, Trash } from "../components/Icon.jsx";
+import { PrepareScene } from "./art/CaseArt.jsx";
 
 const CHANNELS = ["bank", "whatsapp", "email"];
 const FIELD = { bank: "bank_complaint_text", whatsapp: "whatsapp_draft", email: "email_draft" };
@@ -137,6 +139,10 @@ export default function ComplaintBuilder() {
         </p>
       </div>
 
+      <div className="art" aria-hidden="true" style={{ marginTop: "var(--s-md)" }}>
+        <PrepareScene />
+      </div>
+
       <section className="col" style={{ marginTop: "var(--s-md)", gap: "var(--s-md)" }} aria-label="शिकायत ड्राफ्ट">
         {/* source honesty strip */}
         <div className="state-strip is-demo">
@@ -162,7 +168,7 @@ export default function ComplaintBuilder() {
               ))}
             </div>
             <button type="button" className="btn btn--line" onClick={restore} aria-label="मूल ड्राफ्ट लौटाएँ">
-              <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><polyline points="3 3 3 8 8 8" /></svg>
+              <Trash />
               मूल लौटाएँ · restore
             </button>
           </div>
@@ -233,7 +239,7 @@ export default function ComplaintBuilder() {
         <div className="row">
           <button className="btn btn--primary go" style={{ opacity: ok ? "" : ".45" }} aria-disabled={!ok} onClick={goPrep}>
             मंजूर करें → कॉल की तैयारी · approve → call prep
-            <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+            <Arrow />
           </button>
           <a className="btn btn--line" href="#/rights-check">
             वापस हिसाब <span className="pair"><span className="alt" lang="en-IN">back to numbers</span></span>

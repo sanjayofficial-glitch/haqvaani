@@ -13,6 +13,8 @@ import { api } from "../lib/api.js";
 import { DEMO } from "../lib/demo.js";
 import { fmtInr, fmtDate } from "../lib/format.js";
 import { navigate } from "../lib/router.js";
+import { Check, Arrow } from "../components/Icon.jsx";
+import { RightsScene } from "./art/CaseArt.jsx";
 
 export default function RightsCheck() {
   const { commit } = useCaseFile();
@@ -136,14 +138,16 @@ export default function RightsCheck() {
         </p>
       </div>
 
+      <div className="art" aria-hidden="true" style={{ marginTop: "var(--s-md)" }}>
+        <RightsScene />
+      </div>
+
       <section className="col" style={{ marginTop: "var(--s-md)", gap: "var(--s-md)" }} aria-label="हिसाब">
         {/* source honesty strip */}
         <div className="state-strip" style={live ? undefined : { borderLeftColor: "var(--ink)" }}>
           {live ? (
             <>
-              <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ width: 16, height: 16, marginTop: 3, flex: "0 0 auto" }}>
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
+              <Check size={15} />
               <p className="xsmall" style={{ margin: 0 }}>
                 <b>यह हिसाब पायथन से गणित है</b> (deterministic) : आपके सच : {fmtInr(intake.amount_inr)} · {fmtDate(intake.txn_date, "en")} · {intake.dispute_type}
               </p>
@@ -219,10 +223,9 @@ export default function RightsCheck() {
         </details>
       </section>
 
-      <div className="row" style={{ marginTop: "var(--s-md)" }}>
-        <button className="btn btn--primary" onClick={() => navigate("#/complaint-builder")}>
+      <div className="row" style={{ marginTop: "var(--s-md)" }}>            <button className="btn btn--primary go" onClick={() => navigate("#/complaint-builder")}>
           शिकायत भरें · build the complaint
-          <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+          <Arrow />
         </button>
         <a className="btn btn--line" href="#/fact-review">
           सच सुधारें <span className="pair"><span className="alt" lang="en-IN">edit the four facts</span></span>

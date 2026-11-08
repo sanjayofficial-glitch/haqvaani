@@ -6,9 +6,15 @@
 import { useMemo } from "react";
 import { useCaseState } from "../lib/state.jsx";
 import { useMode } from "../hooks/useMode.jsx";
+import { useToast } from "../hooks/useToast.jsx";
+import { navigate } from "../lib/router.js";
+import React from "react";
 import { fmtTs } from "../lib/format.js";
 import { LangToggle, Pair } from "../lib/i18n.jsx";
+import { Mic, Eye, Phone, Stamp, Check, Clock, Lock } from "../components/Icon.jsx";
 import { AI_DISCLOSURE } from "../lib/demo.js";
+
+const DONE_ICONS = [Check, Clock, Phone, Stamp, Eye];
 
 export const STEP_LABELS = [
   { en: "Speak",   hi: "बोलें" },
@@ -18,19 +24,47 @@ export const STEP_LABELS = [
   { en: "Prove",   hi: "सबूत" },
 ];
 
-export function StepBar({ active }) {
+/* step index → the case screen that represents that step (clickable rail) */
+export const STEP_PATHS = {
+  0: "/start-case",
+  1: "/fact-review",
+  2: "/complaint-builder",
+  3: "/assisted-call",
+  4: "/dossier",
+};
+
+export function StepBar({ active, onStepClick }) {
   const steps = useMemo(() => STEP_LABELS, []);
   return (
-    <div className="stepbar-wrap" id="stepBar">
-      <ol className="stepbar" aria-label="प्रक्रिया · process steps">
-        {steps.map((s, i) => (
-          <li key={s.en} className={i < active ? "done" : i === active ? "active" : ""} aria-current={i === active ? "step" : undefined}>
-            <span className="idx num">0{i + 1}</span>
-            <span className="lbl">
-              {s.hi} · {s.en}
-            </span>
-          </li>
-        ))}
+    <div className="stepbar-wrap" id="stepBar">          <ol className="stepbar" aria-label="प्रक्रिया · process steps">
+        {steps.map((s, i) => {
+          const done = i < active;
+          const cur = i === active;
+          const ic = DONE_ICONS[i];
+          return (
+            <li key={s.en} className={done ? "done" : cur ? "active" : ""} aria-current={cur ? "step" : undefined}>
+              {done && onStepClick ? (
+                <button
+                  type="button"
+                  className="step-link"
+                  onClick={() => onStepClick(i)}
+                  aria-label={s.hi + " · " + s.en + " · वापस जाएँ"}
+                >
+                  <span className="idx num">0{i + 1}</span>
+                  <span className="lbl">
+                    <span className="step-ic" aria-hidden="true">{ic && React.createElement(ic)}</span>
+                    {s.hi} · {s.en}
+                  </span>
+                </button>
+              ) : (
+                <>
+                  <span className="idx num">0{i + 1}</span>
+                  <span className="lbl">{s.hi} · {s.en}</span>
+                </>
+              )}
+            </li>
+          );
+        })}
       </ol>
     </div>
   );
@@ -62,12 +96,8 @@ function SafetyBar() {
   const rows = safetyRows(state, mode);
   return (
     <div className="safety" role="region" aria-label="सुरक्षा जानकारी · safety">
-      <div className="safety-in">
-        <span className="short">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-            <rect x="3" y="11" width="18" height="11" rx="2" />
-            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-          </svg>
+      <div className="safety-in">          <span className="short">
+          <Lock size={15} />
           <Pair hi="कभी OTP, PIN या CVV न बोलें : बैंक इनके लिए कभी पूछता नहीं।" en="Never share OTP, PIN or CVV : the bank never asks." />
         </span>
         <details>
@@ -82,21 +112,34 @@ function SafetyBar() {
           </div>
         </details>
       </div>
+      <div className="safety-foot">
+        <div className="call-foot-row">
+          <Eye size={14} />
+          <p className="xsmall mute-3" style={{ margin: 0 }}>
+            हक़-वाणी केवल आपकी तरफ़ सुनता है : सर्विस रिक्वेस्ट या OTP नहीं भेजता।
+            <span className="pair"><span className="alt" lang="en-IN">HaqVaani listens on your side only : it never dials out or sends your OTP.</span></span>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
 
 export function AppShell({ title, step, children }) {
   const mode = useMode();
+  const onStepClick = (i) => {
+    const p = STEP_PATHS[i];
+    if (p) navigate(p);
+  };
   return (
     <>
       <header className="app-head" data-page="app">
-        <div className="wrap">
-          <a
+        <div className="wrap">            <a
             className="brand"
             href="#/"
             aria-label="हक़-वाणी मुख्य पेज · HaqVaani landing"
           >
+            <Mic size={20} />
             <span className="hi" lang="hi-IN">हक़-वाणी</span>
             <small>{title || "case"}</small>
           </a>
@@ -109,7 +152,7 @@ export function AppShell({ title, step, children }) {
           </div>
         </div>
       </header>
-      <StepBar active={step || 0} />
+      <StepBar active={step || 0} onStepClick={onStepClick} />
       <main className="app-main wrap-narrow" style={{ paddingBottom: "var(--s-lg)" }}>
         {children}
       </main>

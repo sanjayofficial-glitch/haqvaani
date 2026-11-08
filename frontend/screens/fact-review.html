@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="hi-IN" data-lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>चार सच समीक्षा · Fact review: हक़-वाणी</title>
+<meta name="description" content="चार सच की जाँच: राशि, तारीख़, UTR, लेन-देन क़िसम। Four-fact review: amount, date, UTR, dispute type.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/app.css">
+<style>
+  .facts-form .field input, .facts-form .field select { font-family: var(--font-mono); font-size: 17px; }
+  .facts-form .field select { font-family: var(--font-hi); }
+  .src-note .k { min-width: 150px; }
+  @media (max-width: 560px) { .src-note .k { min-width: 0; } }
+</style>
+<script>document.documentElement.className += " js";</script>
+</head>
+<body data-page="app" data-step="1" data-canvas="evidence" data-tone="red">
+
+<header class="app-head">
+  <a class="brand" href="../landing.html" aria-label="हक़-वाणी मुख्य पेज">
+    <span class="hi" lang="hi">हक़-वाणी</span><small>Fact review</small>
+  </a>
+  <div class="head-right">
+    <span class="chip" id="modeChip" data-mode="demo"><span class="dot"></span>Synthetic demo</span>
+    <div class="lang-seg" role="group" aria-label="भाषा">
+      <button type="button" data-lang="hi">हिन्दी</button>
+      <button type="button" data-lang="en">English</button>
+    </div>
+  </div>
+</header>
+
+<div id="stepMount"></div>
+
+<main class="app-main narrow">
+  <div class="beat-head stack">
+    <h1 class="hi" lang="hi">चार सच। एक बार जाँच लीजिए।</h1>
+    <p class="when-en ink-2">Four facts decide your money: amount, date, UTR and dispute type.
+    Wrong here means wrong everywhere : check each one.</p>
+  </div>
+
+  <section class="stack facts-form" aria-label="चार सच का फ़ॉर्म">
+    <div class="card card-flat" aria-label="स्रोत">
+      <div class="kv" id="srcNote">
+        <span class="k">यह कहाँ से मिला</span>
+        <span class="xsmall">स्रोत तैयार हो रहा है… · loading source…</span>
+      </div>
+    </div>
+
+    <form id="factsForm" novalidate>
+      <div class="condense" id="fCondense">
+        <div class="split2">
+          <div class="field">
+            <label for="fAmount">राशि कितनी कटी? · amount debited <span aria-hidden="true">(₹)</span></label>
+            <input id="fAmount" name="amount" type="number" inputmode="decimal" min="1" step="1"
+                   placeholder="3200" required aria-describedby="errAmount">
+            <p class="field-err" id="errAmount" hidden>राशि 1 या अधिक होनी चाहिए · amount must be ₹1 or more</p>
+          </div>
+          <div class="field">
+            <label for="fDate">किस तारीख़ को कटा? · date of debit</label>
+            <input id="fDate" name="date" type="date" required aria-describedby="errDate hintDate">
+            <p class="hint" id="hintDate">आज से पहले ही होगी · must be today or earlier : RBI gives you
+              <span class="num">90</span> days to complain to the bank</p>
+            <p class="field-err" id="errDate" hidden>तारीख़ आज या उससे पहले होनी चाहिए · date must be today or earlier</p>
+          </div>
+        </div>
+
+        <div class="split2">
+          <div class="field">
+            <label for="fUtr">UTR / लेन-देन नंबर <span class="ink-3">(VPA नहीं)</span> · transaction ref</label>
+            <input id="fUtr" name="utr" type="text" inputmode="numeric" autocomplete="off"
+                   placeholder="629188340112" maxlength="24" aria-describedby="errUtr hintUtr">
+            <p class="hint hintUtr-like" id="hintUtr">10 से 24 अंक (12 सामान्य), खाली भी चलेगा · digits only, optional</p>
+            <p class="field-err" id="errUtr" hidden>केवल अंक, कम से कम 10 · digits only, at least 10</p>
+          </div>
+          <div class="field">
+            <label for="fType">कैसी कटौती है? · dispute type</label>
+            <select id="fType" name="dispute_type" required aria-describedby="errType">
+              <option value="upi_p2p">UPI P2P : पैसे कटे, पहुँचे नहीं (friend/person)</option>
+              <option value="upi_p2m">UPI P2M : दुकान/QR पर भुगतान कटे</option>
+              <option value="imps">IMPS ट्रांसफ़र कटा, पहुँचा नहीं</option>
+              <option value="atm_cash_not_dispensed">ATM में कैश नहीं निकला</option>
+              <option value="pos_card_debit">POS / कार्ड से कटौती</option>
+              <option value="unauthorised">अनधिकृत कटौती : मैंने नहीं अनुमति दी (fraud)</option>
+            </select>
+            <p class="field-err" id="errType" hidden>एक प्रकार चुनिए · pick one</p>
+            <p class="hint" id="typeHint">हर प्रकार का सांविधिक समय अलग है · each type has its own RBI timeline</p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="fBank">बैंक कौन-सा? <span class="ink-3">(वैकल्पिक)</span> · bank name (optional)</label>
+          <input id="fBank" name="bank_name" type="text" autocomplete="off" maxlength="80"
+                 placeholder="DemoBank Support" aria-describedby="hintBank">
+          <p class="hint" id="hintBank">शिकायत पत्र में यही नाम जुड़ता है · joins your complaint letter</p>
+        </div>
+
+        <div class="card card-flat" id="demoDiff" hidden
+             style="border-left:4px solid var(--pending-orange)">
+          <p class="hi" lang="hi" style="margin:0">ये अब <strong>आपके सच</strong> हैं : सैंपल केस का डेमो डेटा आगे नहीं दिखेगा।
+          बिना सर्वर चालू के दिखने वाला हिसाब सैंपल केस का होता है; सर्वर चालू होने पर आपके सचों से जुड़े नंबर सही आएँगे।</p>
+          <p class="xsmall when-en" style="margin:6px 0 0">These are now your own facts : the sample-case demo data will not be shown.
+          With no live server, the calculation shown next stays the sample case; with the API running it is computed from your facts.</p>
+        </div>
+
+        <div class="statestrip" id="validity" role="status" aria-live="polite">
+          <svg class="ic ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden id="okIc"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg class="ic bad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" hidden id="badIc"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16.5" x2="12" y2="16.6"/></svg>
+          <p class="hi" id="validityText" style="margin:0">जाँच जारी… · checking…</p>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:28px">
+        <a class="btn btn-primary" id="goRights" href="rights-check.html">
+          हक जाँचें · check my rights
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a class="btn btn-quiet" href="voice-intake.html">वापस बोलें <span class="en">record again</span></a>
+      </div>
+    </form>
+  </section>
+
+  <section class="stack" style="margin-top:34px" aria-label="आगे क्या होगा">
+    <p class="xsmall ink-3">आगे हक़-वाणी RBI नियमों से आपकी क्षतिपूर्ति गणना करेगा :
+    हिसाब पायथन में, कोई AI नहीं। · Next, HaqVaani computes your entitlement from the RBI rules in
+    deterministic Python : never an AI guess.</p>
+  </section>
+</main>
+
+<div class="safety" role="region" aria-label="सुरक्षा जानकारी">
+  <div class="safety-in">
+    <span class="short">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span class="hi" lang="hi">कभी OTP, PIN या CVV न बोलें : बैंक इनके लिए कभी पूछता नहीं।</span>
+      <span class="when-en">Never share OTP, PIN or CVV : the bank never asks.</span>
+    </span>
+    <details>
+      <summary>सुरक्षा विवरण · safety status</summary>
+      <div class="panel" id="safetyPanel"></div>
+    </details>
+  </div>
+</div>
+
+<script src="../js/rail.js"></script>
+<script src="../js/router.js"></script>
+<script>
+(function () {
+  "use strict";
+  var state = HQ.state;
+  var q = HQ.q, el = function (id) { return document.getElementById(id); };
+
+  /* ---------------------------------------------------------- prefill --- */
+  /* priority: real server extraction → demo transcript extraction → sample */
+  var src = state.intake || state.suggestedIntake || HQ.DEMO.intake;
+  var srcKind = state.intake ? "server" : (state.suggestedIntake ? "demo-speech" : "sample");
+
+  var SRC_LABELS = {
+    "server":      '<span class="ok" style="font-weight:600">सर्वर से निकाला</span> · extracted by the API from your recording',
+    "demo-speech": '<span class="warn" style="font-weight:600">सैंपल बोली से भरा (synthetic demo)</span> · pre-filled from the sample transcript',
+    "sample":      '<span class="warn" style="font-weight:600">सैंपल केस : synthetic demo</span> · ₹3,200 · 18 Oct · UPI P2P : the worked example below'
+  };
+
+  function fill() {
+    el("fAmount").value = src.amount_inr || "";
+    el("fDate").value = src.txn_date || "";
+    el("fUtr").value = src.utr || "";
+    el("fType").value = src.dispute_type || "upi_p2p";
+    el("fBank").value = src.bank_name || "";
+    el("srcNote").innerHTML = '<span class="k">यह कहाँ से मिला · source</span><span>' + SRC_LABELS[srcKind] + "</span>";
+  }
+  fill();
+
+  var today = new Date();
+  function isoToday() {
+    return today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, "0") + "-" + String(today.getDate()).padStart(2, "0");
+  }
+  el("fDate").max = isoToday();
+
+  /* zero-liability teaser : the one branch with a different RBI rule */
+  el("fType").addEventListener("change", function () {
+    var t = el("fType").value;
+    el("typeHint").innerHTML = (t === "unauthorised")
+      ? '<span class="bad" style="font-weight:600">शून्य-देयता वाला प्रकार</span> · zero-liability case : report within 3 working days, see the next screen'
+      : "हर प्रकार का सांविधिक समय अलग है · each type has its own RBI timeline";
+    validate();
+  });
+
+  /* ------------------------------------------------------- validation --- */
+  /* error rows stay hidden until a field is touched (blur) or the form is submitted */
+  var touched = {};
+
+  function errs() {
+    var out = {};
+    var amt = parseFloat(el("fAmount").value);
+    if (!amt || amt <= 0 || amt > 10000000) out.amount = true;
+
+    var d = el("fDate").value;
+    if (!d) out.date = true;
+    else {
+      var dd = new Date(d + "T00:00:00");
+      if (isNaN(dd) || dd.getTime() > new Date(isoToday() + "T23:59:59").getTime()) out.date = true;
+    }
+
+    var u = el("fUtr").value.trim();
+    if (u && (!/^\d+$/.test(u) || u.length < 10 || u.length > 24)) out.utr = true;
+    return out;
+  }
+
+  /* the four facts leave the browser only after validation passes */
+  function handleSubmit(e) {
+    var err = errs();
+    touched = { amount: true, date: true, utr: true, type: true }; /* submit touches everything */
+    showErrs(err);
+    if (Object.keys(err).length) {
+      e.preventDefault();
+      q("#validityText").textContent = "कुछ सच जाँचें : लाल रेखा देखिए · fix the marked facts first";
+      el("okIc").hidden = true; el("badIc").hidden = false;
+      state.secretsBlocked = state.secretsBlocked || 0; /* safety panel keeps its count */
+      HQ.save();
+      return;
+    }
+    state.intake = {
+      utr: el("fUtr").value.trim() || null,
+      amount_inr: parseFloat(el("fAmount").value),
+      txn_date: el("fDate").value,
+      dispute_type: el("fType").value,
+      bank_name: el("fBank").value.trim() || null,
+      language: (src.language || "hi-IN"),
+      confidence: (src && src.confidence) || (srcKind === "server" ? 0.97 : 0.9),
+      raw_transcript: state.rawTranscript || ""
+    };
+    state.factsEdited = editedBeyondDemo();
+    HQ.save();
+    /* real navigation via the <a href> : no intercept */
+  }
+  q("#goRights").addEventListener("click", handleSubmit);
+
+  function showErrs(err) {
+    el("errAmount").hidden = !(touched.amount && err.amount);
+    el("errDate").hidden = !(touched.date && err.date);
+    el("errUtr").hidden = !(touched.utr && err.utr);
+    el("errType").hidden = true; /* the select always keeps a valid choice */
+  }
+
+  /* ------------------------------------------------- demo-difference --- */
+  function editedBeyondDemo() {
+    var d = HQ.DEMO.intake;
+    return parseFloat(el("fAmount").value) !== d.amount_inr ||
+           el("fDate").value !== d.txn_date ||
+           (el("fUtr").value.trim()) !== d.utr ||
+           el("fType").value !== d.dispute_type;
+  }
+
+  function validate() {
+    var err = errs();
+    showErrs(err);
+    var good = !Object.keys(err).length;
+    el("okIc").hidden = !good; el("badIc").hidden = good;
+    q("#validityText").textContent = good
+      ? "चार सच ठीक हैं · all four facts look right"
+      : "कुछ सच ग़लत हैं · some facts look wrong";
+    el("demoDiff").hidden = !(srcKind !== "server" && editedBeyondDemo());
+  }
+  ["fAmount", "fDate", "fUtr", "fType", "fBank"].forEach(function (id) {
+    el(id).addEventListener("input", validate);
+    el(id).addEventListener("change", validate);
+    el(id).addEventListener("blur", function () {
+      touched[id.replace("f", "").toLowerCase()] = true; /* e.g. fAmount → amount */
+      validate();
+    });
+  });
+  validate();
+
+  /* state-change motion: facts condense once : final state under reduced motion (CSS) */
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
+      document.getElementById("fCondense").classList.add("played");
+    });
+  });
+})();
+</script>
+</body>
+</html>

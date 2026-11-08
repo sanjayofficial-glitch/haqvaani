@@ -1,0 +1,21 @@
+/* Icon component presentation layer (new, mirrors the rebuilt Icon.jsx).
+   Kept minimal: the `ic` base plus a compact stamp variant already used by
+   Icon.Stamp / Icon.StampVintage in several screens.                */
+
+.ic {
+  display: inline-block;
+  vertical-align: -2px;
+  color: currentColor;
+  flex-shrink: 0;
+}
+
+.ic[data-size],
+.ic[size] {
+  width: auto;
+  height: auto;
+}
+
+/* compact check / stamp marks used next to mono tokens */
+.ic.stamp-sm {
+  vertical-align: -1px;
+}

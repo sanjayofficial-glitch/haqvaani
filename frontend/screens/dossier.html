@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="hi-IN" data-lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>पूरा केस फ़ोल्डर · Dossier: हक़-वाणी</title>
+<meta name="description" content="सारे सबूत एक फ़ोल्डर में: सच, सांविधिक हिसाब, शिकायत, कॉल, सहमति : PDF/JSON में। The whole case record, exportable.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/app.css">
+<style>
+  .case-id { font-family: var(--font-mono); font-size: clamp(28px, 5vw, 46px); letter-spacing: -0.01em; word-break: break-all; }
+  .stamp-wrap { width: 74px; height: 74px; flex: 0 0 auto; }
+</style>
+</head>
+<body data-page="app" data-step="4" data-canvas="evidence" data-tone="green">
+
+<header class="app-head">
+  <a class="brand" href="../landing.html" aria-label="हक़-वाणी मुख्य पेज">
+    <span class="hi" lang="hi">हक़-वाणी</span><small>Dossier</small>
+  </a>
+  <div class="head-right">
+    <span class="chip" id="modeChip" data-mode="demo"><span class="dot"></span>Synthetic demo</span>
+    <div class="lang-seg" role="group" aria-label="भाषा">
+      <button type="button" data-lang="hi">हिन्दी</button>
+      <button type="button" data-lang="en">English</button>
+    </div>
+  </div>
+</header>
+
+<div id="stepMount"></div>
+
+<main class="app-main narrow">
+  <div class="beat-head stack">
+    <h1 class="hi" lang="hi">पूरा मामला, एक फ़ोल्डर में।</h1>
+    <p class="when-en ink-2">Everything this session collected : the facts, the statutory calculation, the complaint,
+    the call, the consent : in one record you can keep or print. Synthetic demo data only.</p>
+  </div>
+
+  <section class="stack" style="margin-top:24px" aria-label="केस फ़ोल्डर">
+    <!-- honesty: where this record came from -->
+    <div class="card card-flat" id="srcNote" hidden>
+      <p class="xsmall" style="margin:0"></p>
+    </div>
+
+    <!-- case identity + verified stamp -->
+    <div class="card" style="display:flex; gap:18px; align-items:center">
+      <svg class="stamp-draw stamp-wrap" id="stamp" viewBox="0 0 56 56" aria-hidden="true">
+        <circle cx="28" cy="28" r="25" fill="none" stroke="var(--verified-green)" stroke-width="2.5"
+                stroke-dasharray="158" stroke-dashoffset="158"/>
+        <polyline points="16,29 25,38 41,20" fill="none" stroke="var(--verified-green)" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="34" stroke-dashoffset="34"/>
+      </svg>
+      <div class="stack" style="gap:2px">
+        <p class="xsmall ink-3" style="margin:0">केस आईडी · case id</p>
+        <p class="case-id" id="caseId" style="margin:0">…</p>
+        <p class="xsmall ink-3" id="caseStampNote" style="margin:0">…</p>
+      </div>
+    </div>
+
+    <!-- the whole case: ledger rows from python / demo constants -->
+    <div class="ledger" id="factsLedger" aria-label="केस के तथ्य"></div>
+
+    <!-- consent + safety, session truth -->
+    <div class="card">
+      <p class="h3" style="margin:0 0 10px">सहमति और सुरक्षा · consent &amp; safety</p>
+      <div class="kv-list" id="safetyKv"></div>
+    </div>
+
+    <!-- complaint draft: kept text, expandable -->
+    <div class="card">
+      <p class="h3" style="margin:0 0 6px">शिकायत का ड्राफ़्ट · the complaint</p>
+      <p class="xsmall ink-3" id="draftMeta" style="margin:0 0 10px"></p>
+      <details>
+        <summary>पूरा हिंदी ड्राफ़्ट पढ़ें · read the full Hindi draft</summary>
+        <pre class="draft-text" id="draftText" style="margin:12px 0 0; white-space:pre-wrap; font-family:var(--font-mono); font-size:13.5px; line-height:1.6"></pre>
+      </details>
+      <p class="xsmall" style="margin-top:10px">
+        संपादित करना हो तो :
+        <a class="link" href="complaint-builder.html">builder में ड्राफ़्ट खुलेगा · open in the builder</a>
+      </p>
+    </div>
+
+    <!-- export row (hidden from print) -->
+    <div class="row no-print">
+      <button class="btn btn-primary" id="dlJson" type="button" aria-label="केस JSON सेव करें">
+        JSON सेव करें · download JSON
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12"/><polyline points="6 9 12 15 18 9"/><path d="M4 21h16"/></svg>
+      </button>
+      <button class="btn btn-quiet" id="printBtn" type="button" aria-label="प्रिंट या PDF बनाएँ">
+        प्रिंट / PDF <span class="en">print</span>
+      </button>
+    </div>
+
+    <div class="row">
+      <a class="btn btn-quiet" href="start-case.html">नया केस शुरू करें · start a new case</a>
+      <a class="btn btn-quiet" href="../landing.html">हक़-वाणी होम <span class="en">back to the start</span></a>
+    </div>
+  </section>
+</main>
+
+<div class="safety" role="region" aria-label="सुरक्षा जानकारी">
+  <div class="safety-in">
+    <span class="short">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span class="hi" lang="hi">कभी OTP, PIN या CVV न बोलें : बैंक इनके लिए कभी पूछता नहीं।</span>
+      <span class="when-en">Never share OTP, PIN or CVV : the bank never asks.</span>
+    </span>
+    <details>
+      <summary>सुरक्षा विवरण · safety status</summary>
+      <div class="panel" id="safetyPanel"></div>
+    </details>
+  </div>
+</div>
+
+<script src="../js/rail.js"></script>
+<script src="../js/router.js"></script>
+<script>
+(function () {
+  "use strict";
+  var state = HQ.state;
+  var el = function (id) { return document.getElementById(id); };
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var CASE = null;   // built record, used for JSON export (built exactly once)
+
+  /* ---- gather stage outputs --------------------------------------------------
+     Priority: server dossier (when the API session has all four modes) →
+     device state → demo canned data (mirrors statutory.py::_self_test/etc).
+     No statutory math happens here : only display of stored numbers. */
+  var intake = state.intake || HQ.DEMO.intake;
+  var ent = state.entitlement ||
+    (intake.dispute_type === "unauthorised" ? HQ.DEMO.unauthorised : HQ.DEMO.entitlement);
+  var call = state.call || null;
+  var draft = state.draft || null;
+  var docket = state.docket || (call ? { id: call.docket_id, verified: !!call.verbatim_verified } : null);
+
+  function assembleLocal() {
+    var c = state.consent || {};
+    return {
+      case_id: "HV-" + Math.random().toString(16).slice(2, 12).toUpperCase(),
+      citizen_intake: intake,
+      statutory_entitlement: ent,
+      complaint_draft: draft || HQ.DEMO.draft,
+      call: call || HQ.DEMO.call,
+      consent: {
+        citizen_consent_verified: !!c.ts,
+        consent_timestamp: c.ts || null,
+        ai_disclosure_played: !!c.disclosure,
+        disclosure_timestamp: c.ts || null,
+        disclosure_text: c.disclosureText || "This is an AI assistant assisting you."
+      },
+      created_at: new Date().toISOString()
+    };
+  }
+
+  function disputeLabel(v) {
+    return ({
+      upi_p2p: "UPI पैसे कटे, पहुँचे नहीं · P2P",
+      upi_p2m: "UPI दुकान/QR पर कटे · P2M",
+      imps: "IMPS ट्रांसफ़र कटा, पहुँचा नहीं",
+      atm_cash_not_dispensed: "ATM में नगद नहीं निकला",
+      pos_card_debit: "POS / कार्ड से कटौती",
+      unauthorised: "बिना मेरी जानकारी कटा · unauthorised"
+    })[v] || "पक्का नहीं · not sure";
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+
+  function build(rec, fromServer) {
+    CASE = rec;
+    var cInt = rec.citizen_intake || intake;
+    var cEnt = rec.statutory_entitlement || ent;
+    var cDraft = rec.complaint_draft || {};
+    var cCall = rec.call || {};
+    var cCons = rec.consent || {};
+
+    /* source note : the demo-honesty line for this screen */
+    var note = el("srcNote");
+    note.hidden = false;
+    note.firstElementChild.innerHTML = fromServer
+      ? "सर्वर सेशन से सत्यापित रिकॉर्ड लिया गया। <span class=\"xsmall\">full server record; statutory numbers still come from the Python engine, never from this page.</span>"
+      : "यह फ़ोल्डर इसी डिवाइस पर जोड़ा गया (synthetic demo) : सर्वर से पूरा रिकॉर्ड उपलब्ध नहीं था। <span class=\"xsmall\">assembled on this device (synthetic demo)</span>";
+
+    /* case id + verified stamp */
+    el("caseId").textContent = rec.case_id || "…";
+    var verified = !!(docket && docket.verified);
+    var stampNote;
+    if (verified) {
+      stampNote = "डॉकेट " + esc(docket.id) + " : शब्द-प्रति सत्यापित (verbatim)।";
+    } else if (docket && docket.id && docket.manual) {
+      stampNote = "डॉकेट " + esc(docket.id) + " : आपके लिखे शब्द (असत्यापित recall)।";
+    } else if (docket && docket.id) {
+      stampNote = "डॉकेट " + esc(docket.id) + " : असत्यापित; कॉल दोहराने पर पुष्ट करें।";
+    } else {
+      stampNote = "डॉकेट दर्ज नहीं हुआ : कॉल दोहराने पर पकड़ें।";
+    }
+    el("caseStampNote").innerHTML = stampNote;
+    if (verified) {
+      setTimeout(function () { el("stamp").classList.add("draw"); }, reduced ? 0 : 250);
+    }
+
+    /* facts ledger : rows appear one by one (400ms each) */
+    var rows = [
+      ["राशि · amount", HQ.fmt(cInt.amount_inr)],
+      ["लेन-देन तारीख · txn date", HQ.dfmt(cInt.txn_date)],
+      ["शिकायत का प्रकार · dispute", disputeLabel(cInt.dispute_type)],
+      ["UTR", cInt.utr ? esc(cInt.utr) : "नहीं दिया गया · not given"],
+      ["बैंक", esc(cInt.bank_name || "DemoBank Support")],
+      ["बैंक की समय-सीमा (TAT)", HQ.dfmt(cEnt.tat_date)],
+      ["समय-सीमा पार · overdue", (cEnt.days_overdue || 0) + " दिन"],
+      ["माँगी गई राशि · claim", HQ.fmt(cEnt.claim_inr)],
+      ["क्षतिपूर्ति (₹100/दिन) · penalty", HQ.fmt(cEnt.penalty_inr || 0)],
+      ["RBI परिपत्र · circular", esc((cEnt.circular_ref || "").split(" (")[0])],
+      ["कुल दावा · total claimed", HQ.fmt(cEnt.total_inr)]
+    ];
+    var ledger = el("factsLedger");
+    ledger.innerHTML = rows.map(function (r, i) {
+      var cls = "ledger-row" + (i === rows.length - 1 ? " total" : "");
+      return '<div class="' + cls + '"><span class="k"><span class="hi" lang="hi">' + r[0] +
+             '</span></span><span class="v">' + r[1] + "</span></div>";
+    }).join("");
+    HQ.qa(".ledger-row", ledger).forEach(function (row, i) {
+      setTimeout(function () { row.classList.add("in"); }, reduced ? 0 : i * 400);
+    });
+
+    /* consent + safety : the same truth the safety bar shows */
+    var sRows = [
+      ["Consent (DPDP)", cCons.consent_timestamp ? ("दर्ज · recorded " + HQ.tfmt(cCons.consent_timestamp)) : "अभी नहीं · not yet"],
+      ["AI disclosure", cCons.ai_disclosure_played ? '"This is an AI assistant assisting you."' : "अभी नहीं · not yet"],
+      ["Secrets blocked (OTP/PIN/CVV)", String(state.secretsBlocked || 0)],
+      ["Autonomous dialing", "0 : नागरिक ही डायल करता है · the citizen always dials"],
+      ["Your call mode", HQ.mode === "live" ? "live API" : "synthetic demo only"]
+    ];
+    el("safetyKv").innerHTML = sRows.map(function (r) {
+      return '<div class="kv"><span class="k">' + r[0] + "</span><span>" + r[1] +"</span></div>";
+    }).join("");
+
+    /* complaint draft */
+    var dText = cDraft.bank_complaint_text || HQ.DEMO.hindiDrafts.bank_complaint_text;
+    el("draftText").textContent = dText;
+    var channels = [
+      cDraft.whatsapp_draft ? "WhatsApp" : null,
+      cDraft.email_draft ? "email" : null
+    ].filter(Boolean).join(" और ");
+    el("draftMeta").textContent = "बैंक शिकायत + " + (channels || "सारे चैनल") + " ड्राफ़्ट इसी सेशन में बने थे · bank complaint, WhatsApp and email drafts from this session";
+
+    /* JSON export : the honest record, exactly what is shown here */
+    var out = Object.assign({}, rec);
+    if (!fromServer) out._note = "assembled locally on this device : synthetic demo";
+    el("dlJson").addEventListener("click", function () {
+      var blob = new Blob([JSON.stringify(out, null, 2)], { type: "application/json" });
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = (rec.case_id || "haqvaani-case") + ".json";
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+      HQ.toast("फ़ोल्डर JSON सेव हो गया · case JSON saved");
+    });
+    el("printBtn").addEventListener("click", function () { window.print(); });
+  }
+
+  /* ---- load ---------------------------------------------------------------
+     Try the server dossier first (all four modes completed in one session).
+     Demo mode, 404 CASE_INCOMPLETE or no API → build the honest local copy. */
+  function load() {
+    if (CASE) return; // built once; listeners registered exactly one time
+    if (HQ.mode !== "live") { build(assembleLocal(), false); return; }
+    HQ.api.get("/api/dossier")
+      .then(function (rec) { build(rec, true); })
+      .catch(function () { build(assembleLocal(), false); });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () { HQ.detectMode().then(load); });
+  } else {
+    HQ.detectMode().then(load);
+  }
+})();
+</script>
+</body>
+</html>

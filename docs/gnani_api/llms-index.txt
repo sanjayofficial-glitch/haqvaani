@@ -1,0 +1,42 @@
+# Gnani AI — complete documentation index (fetched 2026-11-06)
+# Source: https://docs.gnani.ai/llms.txt
+# Keep this file as the discovery index; individual pages are mirrored in this folder.
+
+Speech APIs (STT / TTS / VC):
+- Intro:            https://docs.gnani.ai/api/introduction/introduction.md
+- Quick Start:      https://docs.gnani.ai/api/introduction/quick-start.md
+- STT overview:     https://docs.gnani.ai/api/STT/overview.md
+- STT models:       https://docs.gnani.ai/api/STT/models/overview.md
+- Prisma v3.0:      https://docs.gnani.ai/api/STT/models/prisma-v3.md
+- Prisma v2.5:      https://docs.gnani.ai/api/STT/models/prisma-v2-5.md
+- STT REST:         https://docs.gnani.ai/api/STT/speech-to-text.md
+- STT Realtime:     https://docs.gnani.ai/api/STT/stt-websocket.md
+- STT languages:     https://docs.gnani.ai/api/STT/languages.md
+- STT limits:       https://docs.gnani.ai/api/STT/limits.md
+- Batch STT:        https://docs.gnani.ai/api/STTBatch/Introduction.md
+- TTS REST:         https://docs.gnani.ai/api/TTS/tts-inference.md
+- TTS SSE:          https://docs.gnani.ai/api/TTS/tts-sse.md
+- TTS Realtime:     https://docs.gnani.ai/api/TTS/tts-websocket.md
+- TTS audio tags:   https://docs.gnani.ai/api/TTS/tts-audio-tags.md
+- TTS input fmt:    https://docs.gnani.ai/api/TTS/tts-input-formating.md
+- Voices:           https://docs.gnani.ai/api/TTS/available-voices.md
+- VC embeddings:    https://docs.gnani.ai/api/VC/voice-clone-embeddings.md
+- VC REST:          https://docs.gnani.ai/api/VC/vc-inference.md
+- VC SSE:           https://docs.gnani.ai/api/VC/vc-sse.md
+- VC Realtime:      https://docs.gnani.ai/api/VC/vc-websocket.md
+- Errors:           https://docs.gnani.ai/api/introduction/errors.md
+- Changelog:        https://docs.gnani.ai/api/introduction/changelog.md
+- Python SDK:       https://docs.gnani.ai/python-sdk/introduction.md
+
+Agent Builder / Platform API:
+- Agent builder intro: https://docs.gnani.ai/introduction.md
+- Platform API intro:  https://docs.gnani.ai/Platform/platform-introduction.md
+- Platform errors:     https://docs.gnani.ai/Platform/Error_Reference.md
+
+OpenAPI / AsyncAPI specs:
+- STT:    https://docs.gnani.ai/STT.yml
+- STTBatch: https://docs.gnani.ai/STTBatch.yml
+- TTS:    https://docs.gnani.ai/TTS.yml
+- VC:     https://docs.gnani.ai/VC.yml
+- stt-websocket: https://docs.gnani.ai/stt-websocket.yml
+- tts-websocket: https://docs.gnani.ai/tts-websocket.yml

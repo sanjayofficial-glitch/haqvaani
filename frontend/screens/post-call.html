@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="hi-IN" data-lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>कॉल के बाद · Post call: हक़-वाणी</title>
+<meta name="description" content="कॉल का सारांश: डॉकेट, बैंक की टाल, अगला क़दम। Post-call summary: docket, brush-off, next steps.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/app.css">
+<style>
+  .band-story-main { padding: 56px 0; }
+  .brush-badge { display:inline-flex; align-items:center; gap:8px; border-radius:999px;
+                 padding:6px 14px; font-size:13.5px; border:1px solid var(--line); }
+  .brush-badge.warn { color: var(--pending-orange); border-color: color-mix(in srgb, var(--pending-orange) 40%, transparent); }
+  .brush-badge.bad  { color: var(--blocked-red);   border-color: color-mix(in srgb, var(--blocked-red) 40%, transparent); }
+</style>
+</head>
+<body data-page="app" data-step="3" data-canvas="evidence" data-tone="green">
+
+<header class="app-head">
+  <a class="brand" href="../landing.html" aria-label="हक़-वाणी मुख्य पेज">
+    <span class="hi" lang="hi">हक़-वाणी</span><small>Post call</small>
+  </a>
+  <div class="head-right">
+    <span class="chip" id="modeChip" data-mode="demo"><span class="dot"></span>Synthetic demo</span>
+    <div class="lang-seg" role="group" aria-label="भाषा">
+      <button type="button" data-lang="hi">हिन्दी</button>
+      <button type="button" data-lang="en">English</button>
+    </div>
+  </div>
+</header>
+
+<div id="stepMount"></div>
+
+<main class="app-main narrow">
+  <div class="beat-head stack">
+    <h1 class="hi" lang="hi">कॉल समाप्त : यही रहा निष्कर्ष।</h1>
+    <p class="when-en ink-2">Everything below is your own session record: the docket, what the bank said,
+    and what to do if they stall.</p>
+  </div>
+
+  <section class="stack" style="margin-top:24px" aria-label="कॉल सारांश">
+    <div class="card" id="noCall" hidden>
+      <p class="hi" lang="hi" style="margin:0 0 12px">कॉल अभी दर्ज नहीं हुई।</p>
+      <a class="btn btn-primary" href="assisted-call.html">कॉल पर चलें · go to the call</a>
+    </div>
+
+    <div id="sumBlock" class="stack" hidden>
+      <!-- docket -->
+      <div class="card">
+        <p class="xsmall ink-3" style="margin-bottom:6px">आपका डॉकेट नंबर · your docket number</p>
+        <p class="num" id="docketShow" style="font-size:24px; font-weight:600; margin:0">…</p>
+        <p class="xsmall ink-3" id="docketNote" style="margin-top:6px"></p>
+      </div>
+
+      <!-- brush-off -->
+      <div class="card">
+        <p class="xsmall ink-3" style="margin-bottom:8px">बैंक ने क्या कहा · what the bank said</p>
+        <span class="brush-badge" id="brushBadge">…</span>
+        <p class="hi xsmall" lang="hi" id="brushNote" style="margin:12px 0 0; color:var(--ink-2)"></p>
+      </div>
+
+      <!-- the stall counter-script, story canvas within evidence page -->
+      <section class="band-story band-story-main" style="margin:0 -9999px; padding:40px 9999px" aria-label="टालने का जवाब">
+        <div style="max-width:720px; margin:0 auto">
+          <p class="xsmall" style="color:var(--story-ink-4); margin-bottom:12px">अगर बैंक टाले तो यह बोलिए · if the bank stalls, say this (Hindi)</p>
+          <div class="scriptcard">
+            <p class="say hi" lang="hi" id="sayHi">…</p>
+            <div class="row" style="margin-top:16px">
+              <button class="btn btn-ghost-dark" id="speakBtn" type="button" aria-label="हिन्दी जवाब आवाज़ में सुनें">सुनिए · hear it</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- what to do next -->
+      <div class="card">
+        <p class="h3" style="margin:0 0 10px">आगे क्या · next steps</p>
+        <ul class="stack" id="nextList" style="gap:0; margin:0; padding-left:18px"></ul>
+      </div>
+    </div>
+
+    <div class="row" id="botRow">
+      <a class="btn btn-primary" href="dossier.html">
+        पूरा केस फ़ोल्डर देखें · the whole dossier
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a class="btn btn-quiet" href="docket-capture.html">डॉकेट पर वापस <span class="en">back to the docket</span></a>
+    </div>
+  </section>
+</main>
+
+<div class="safety" role="region" aria-label="सुरक्षा जानकारी">
+  <div class="safety-in">
+    <span class="short">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span class="hi" lang="hi">कभी OTP, PIN या CVV न बोलें : बैंक इनके लिए कभी पूछता नहीं।</span>
+      <span class="when-en">Never share OTP, PIN or CVV : the bank never asks.</span>
+    </span>
+    <details>
+      <summary>सुरक्षा विवरण · safety status</summary>
+      <div class="panel" id="safetyPanel"></div>
+    </details>
+  </div>
+</div>
+
+<script src="../js/rail.js"></script>
+<script src="../js/router.js"></script>
+<script>
+(function () {
+  "use strict";
+  var state = HQ.state;
+  var q = HQ.q, el = function (id) { return document.getElementById(id); };
+  var call = state.call, ent = state.entitlement || HQ.DEMO.entitlement;
+  var docket = state.docket || (call ? { id: call.docket_id, verified: !!call.verbatim_verified } : null);
+
+  if (!call) { el("noCall").hidden = false; el("botRow").hidden = true; return; }
+  el("sumBlock").hidden = false;
+
+  /* docket */
+  var dk = el("docketShow");
+  dk.textContent = (docket && docket.id) || call.docket_id || "…";
+  var note;
+  if (docket && docket.verified) note = "शब्द-प्रति मेल खाया (verbatim) : मज़ूत सबूत।";
+  else if (docket && docket.manual) note = "आपने खुद लिखा : असत्यापित। कॉल दोहराने पर दोबारा पुष्ट करें।";
+  else note = "असत्यापित : पुष्टि फिर से हो, तो दोबारा सुनें।";
+  el("docketNote").textContent = note;
+
+  /* brush-off */
+  var b = HQ.brushLabels[call.brush_off_type || "other"] || HQ.brushLabels.other;
+  var badge = el("brushBadge");
+  badge.className = "brush-badge " + b.kind;
+  badge.textContent = b.hi + " · " + b.en;
+  el("brushNote").textContent = (b.kind === "bad")
+    ? "OTP कभी नहीं देना है : बैंक ऐसा कभी पूछता नहीं। कॉल बंद करें और सुरक्षित शिकायत मार्ग अपनाएँ।"
+    : "बैंक ने रोका। नीचे दिया जवाब इसी टाल के लिए है।";
+
+  /* counter-script */
+  var sayHi = call.suggested_script_hi || HQ.DEMO.call.suggested_script_hi;
+  el("sayHi").textContent = sayHi;
+  el("speakBtn").addEventListener("click", function () { HQ.speak(sayHi, "hi"); });
+
+  /* next steps : honest list from stored python/demo values */
+  var pn = [];
+  pn.push(["<span class='num'>" + HQ.dfmt(ent.tat_date) + "</span> : बैंक की TAT समय-सीमा;", "आपकी आंखों से पीछा हो तो ₹100/दिन रोक-ठा बनती है (अब तक)।"]);
+  pn.push(["बैंक का जवाब 30 दिन में नहीं arrives : RBI CMS बहस का समय।", ""]);
+  if (ent.eligible_for_rbi_cms) {
+    pn.push(["<a class='link' target='_blank' rel='noopener noreferrer' href='https://cms.rbi.org.in/'>cms.rbi.org.in</a> : शिकायत दर्ज करें।", "तक: " + HQ.dfmt(ent.rbi_filing_deadline) + " (90 दिसंबरों की सीमा)।"]);
+  } else {
+    pn.push(["RBI CMS फिलहाल ज़रूरी नहीं : बैंक के अंदर दावा पूरा है।", "कुल दावा " + HQ.fmt(ent.total_inr) + "।"]);
+  }
+  pn.push(["दोबारा कॉल हो तो हक़-वाणी के साथ : प्रक्रिया यही है।", "फिर बोलें: नया सेशन शुरू करके।"]);
+  el("nextList").innerHTML = pn.map(function (p) {
+    return "<li class=\"xsmall\" style=\"padding:8px 0;border-top:1px solid var(--line)\"><span class=\"hi\" lang=\"hi\">" + p[0] + (p[1] ? " " + p[1] : "") + "</span></li>";
+  }).join("");
+})();
+</script>
+</body>
+</html>

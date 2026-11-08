@@ -26,3 +26,8 @@ eval/results/
 # graphify internals
 graphify-out/cache/
 graphify-out/.graphify_python
+
+# Local tool state / Chrome CDP profile (never commit)
+.codebase-memory/
+graphify-out/.graphify_*
+scripts/.cdp-profile/

@@ -11,7 +11,9 @@ import { useCaseFile, useCaseState } from "../lib/state.jsx";
 import { api } from "../lib/api.js";
 import { DEMO, AI_DISCLOSURE } from "../lib/demo.js";
 import { fmtInr, fmtDate, fmtTs } from "../lib/format.js";
-import { Stamp } from "../components/Svg.jsx";
+import { Stamp, StampVintage } from "../components/Icon.jsx";
+import { File, Eye, Arrow } from "../components/Icon.jsx";
+import { DossierScene } from "./art/CaseArt.jsx";
 
 /* dispute rows keep the old bilingual labels */
 function disputeLabel(v) {
@@ -224,6 +226,10 @@ export default function Dossier() {
         </p>
       </div>
 
+      <div className="art" aria-hidden="true" style={{ marginTop: "var(--s-md)" }}>
+        <DossierScene />
+      </div>
+
       <section className="col" style={{ marginTop: "var(--s-md)", gap: "var(--s-md)" }} aria-label="केस फ़ोल्डर">
         {/* honesty: where this record came from */}
         <div className="state-strip is-demo">
@@ -254,6 +260,10 @@ export default function Dossier() {
 
         {/* the whole case: ledger rows (staggered in, values only) */}
         <div className="ledger" aria-label="केस के तथ्य">
+          <div className="ledger-head">
+            <File size={13} />
+            <span className="xsmall mute-3">इस फ़ोल्डर में : सच, हिसाब, शिकायत, कॉल, सहमति — एक रिकॉर्ड।</span>
+          </div>
           {rows.map((r, i) => (
             <div className={"ledger-row" + (i === rows.length - 1 ? " total" : "")}
               style={{ "--i": i }} data-in={loaded || undefined} key={r[0]}>
@@ -281,11 +291,11 @@ export default function Dossier() {
           <p className="h3" style={{ margin: "0 0 6px" }}>शिकायत का ड्राफ़्ट · the complaint</p>
           <p className="xsmall mute-3" style={{ margin: "0 0 10px" }}>{draftMeta}</p>
           <details>
-            <summary>पूरा हिंदी ड्राफ़्ट पढ़ें · read the full Hindi draft</summary>
+            <summary><Eye size={12} /> पूरा हिंदी ड्राफ़्ट पढ़ें · read the full Hindi draft</summary>
             <pre className="draft-text" style={{ margin: "12px 0 0" }}>{dText}</pre>
           </details>
           <p className="xsmall" style={{ marginTop: 10 }}>
-            संपादित करना हो तो : <a className="linklike" href="#/complaint-builder">builder में ड्राफ़्ट खुलेगा · open in the builder</a>
+            संपादित करना हो तो : <a className="linklike" href="#/complaint-builder"><Arrow size={12} /> builder में ड्राफ़्ट खुलेगा · open in the builder</a>
           </p>
         </div>
 
@@ -293,20 +303,27 @@ export default function Dossier() {
         <div className="row no-print">
           <button className="btn btn--primary" type="button" onClick={download} aria-label="केस JSON सेव करें">
             JSON सेव करें · download JSON
-            <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M12 3v12" /><polyline points="6 9 12 15 18 9" /><path d="M4 21h16" /></svg>
+            <File />
           </button>
           <button className="btn btn--line" type="button" onClick={downloadCms} aria-label="RBI Ombudsman prefill डाउनलोड करें">
             Ombudsman prefill (CMS)
-            <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="12" y1="18" x2="12" y2="12" /><polyline points="9 15 12 18 15 15" /></svg>
+            <File />
           </button>
           <button className="btn btn--line" type="button" onClick={() => window.print()} aria-label="प्रिंट या PDF बनाएँ">
-            प्रिंट / PDF <span className="pair"><span className="alt" lang="en-IN">print</span></span>
+            प्रिंट / PDF
+            <Arrow />
           </button>
         </div>
 
         <div className="row">
-          <a className="btn btn--line" href="#/start-case">नया केस शुरू करें · start a new case</a>
-          <a className="btn btn--line" href="#/">हक़-वाणी होम <span className="pair"><span className="alt" lang="en-IN">back to the start</span></span></a>
+          <a className="btn btn--line" href="#/start-case">
+            <Arrow size={13} /> नया केस शुरू करें · start a new case
+          </a>
+          <a className="btn btn--line" href="#/">
+            हक़-वाणी होम
+            <Arrow />
+            <span className="pair"><span className="alt" lang="en-IN">back to the start</span></span>
+          </a>
         </div>
       </section>
     </>

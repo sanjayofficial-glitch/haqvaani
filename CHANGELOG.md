@@ -5,7 +5,52 @@
 
 ---
 
-## [2026-11-08] — Live-stack completion (user-approved backend patch)
+## [2026-11-09] — CTO review fixes: dotenv live boot + full worktree commit
+
+A CTO review found the app healthy but shipping in **demo mode** on a clean
+boot: `.env` existed but nothing loaded it, and ~half the work was
+uncommitted one day before submission (Day 15/16).
+
+### Changed
+- `haqvaani/api.py` — `load_dotenv()` runs before any env-gated module
+  (`voice_clients` etc.) is imported, so `make run-api` / `run.bat` /
+  `python -m haqvaani` all boot in live Gnani mode from a clean shell.
+- `Makefile` — `run-api` also passes `--env-file .env` (defense in depth).
+- `requirements.txt` — added `python-dotenv>=1.0.0`.
+- `.gitignore` — ignore `scripts/.cdp-profile/` (local Chrome profile),
+  `.codebase-memory/`, `graphify-out/.graphify_*` (tool state).
+
+### Verified
+- `pytest tests/` — 54 passed.
+- `python scripts/_ui_integrity_check.py` — green (11 frontend + 11 web).
+- `web/ npm run build` — clean.
+- Live API on :8010 (port 8000 held by a zombie process from another
+  session) — `/api/health` → `mode:"live"`, `stt_live/tts_live/evon_live`
+  all true; `scripts/_e2e_live.py http://localhost:8010` → ALL GREEN.
+- Full worktree committed in this entry — no `.env`, `node_modules/`, or
+  CDP profile staged.
+
+---
+
+
+
+## [2026-11-08] — Navigation UX fixes (case flow now discoverable)
+
+Users couldn't find how to start the case flow or move backward between screens.
+
+### Changed
+- `web/src/landing/Landing.jsx` — added a prominent primary "शिकायत शुरू करें · Start your case →" CTA button in the hero section (previously the only entry point was a small footer link below the fold).
+- `web/src/screens/VoiceIntake.jsx` — added "वापस · back" → `#/start-case` button on the post-recording row.
+- `web/src/screens/AssistedCall.jsx` — added "वापस · back" → `#/call-prep` button on the post-capture row.
+- `web/src/components/AppShell.jsx` — StepBar completed steps are now clickable buttons (`onStepClick` → `STEP_PATHS` map), so citizens can jump back to any earlier step; added `.step-link` CSS in `web/src/styles/app.css`.
+
+### Verified
+- `pytest tests/` — 54/54 passed.
+- `web/ npm run build` — clean (3.9s).
+- `python scripts/_ui_integrity_check.py` — green (11 frontend + 11 web screens).
+- `python -m haqvaani.statutory --self-test` and `python -m haqvaani.orchestrator` — both exit 0.
+
+---
 
 The two remaining "not live" pieces are resolved, with the user's explicit
 go-ahead to touch the frozen backend (documented in the code comment).

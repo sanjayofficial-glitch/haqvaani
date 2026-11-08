@@ -85,7 +85,10 @@ a:hover {
 .mute-2 { color: var(--ink-2); }
 .mute-3 { color: var(--ink-3); }
 
+/* Devanagari font funnels only through lang="hi"/class .hi in tokens; screens
+   mark Hindi as lang="hi-IN", which this ^ selector missed — match both.     */
 [lang="hi"],
+[lang^="hi-"],
 .hi {
   font-family: var(--font-hi);
 }
@@ -341,6 +344,19 @@ a:hover {
 .stepbar li.active { color: var(--accent); }
 .stepbar li.active::before { background: var(--accent); }
 .stepbar li[aria-current="step"] { color: var(--accent); }
+.step-link {
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+.step-link:hover { color: var(--accent); }
 @media (max-width: 760px) {
   .stepbar li .lbl { display: none; }
 }
@@ -785,6 +801,124 @@ details > summary { cursor: pointer; }
 .mono { font-family: var(--font-mono); font-size: 0.95em; }
 .ok { color: var(--ink); font-weight: 600; }
 .warn, .bad { color: var(--accent); font-weight: 600; }
+
+/* --- start-case: dispute-choice cards -------------------------------------- */
+/* Ported from frontend/screens/start-case.html (the styles were inline there
+   and never made it into this file), upgraded for the flat border-led system:
+   hairline sheet, hover/focus equivalence, AA text, arrow affordance.        */
+.case-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-sm);
+  margin-top: var(--s-md);
+}
+@media (min-width: 720px) {
+  .case-cards { grid-template-columns: 1fr 1fr; }
+}
+
+.case-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: var(--surface);
+  border: var(--ruled);
+  border-radius: var(--radius-card);
+  padding: 22px 24px 24px;
+  min-height: 176px; /* floor, not ceiling — grows with content/text zoom */
+  transition: border-color var(--speed) var(--ease), background-color var(--speed) var(--ease),
+    transform var(--speed) var(--ease);
+}
+.case-card:hover,
+.case-card:focus-visible {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.case-card:active { transform: translateY(1px); }
+.case-card:focus-visible {
+  border-radius: var(--radius-card); /* the global focus ring rounds to 2px */
+}
+
+/* the pictorial read-out — one scene per card, drawn in token ink with the
+   accent marking only where the money went wrong. Decorative: the link text
+   carries the meaning, so the whole well is aria-hidden in JSX.           */
+.case-card .art {
+  display: grid;
+  place-items: center;
+  height: 110px;
+  margin: 0 0 14px;
+  padding: 4px 0 12px;
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
+  color: var(--ink);
+  user-select: none;
+}
+.case-card .art svg {
+  width: 120px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  transition: transform var(--speed) var(--ease);
+}
+/* tiny hover/focus nudge; the global reduced-motion block kills the slide */
+.case-card:hover .art svg,
+.case-card:focus-visible .art svg { transform: translateY(-2px); }
+
+.case-card .kick {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.case-card .kick.tone-accent { color: var(--accent); }
+
+.case-card h2 {
+  margin: 10px 0 6px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-sub);
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.case-card .d {
+  font-size: var(--fs-body-sm);
+  line-height: 1.55;
+  color: var(--ink-2);
+  margin: 0;
+}
+
+/* the statutory readout is real text (no aria-hidden): SR users keep the
+   deadline/compensation. paired mono footer line with the go-affordance.     */
+.case-card .tat {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
+}
+/* the go arrow slides only under hover/focus; reduced-motion kills the slide */
+.case-card .go {
+  flex: 0 0 auto;
+  color: var(--ink-4);
+  transition: transform var(--speed) var(--ease), color var(--speed) var(--ease);
+}
+.case-card:hover .go,
+.case-card:focus-visible .go {
+  transform: translateX(4px);
+  color: var(--accent);
+}
+
+/* the provisional pick: dashed sheet reads as "not decided yet" */
+.case-card--unsure { border-style: dashed; }
 
 /* --- fact-review ---------------------------------------------------------- */
 .facts-form .field input { font-size: var(--fs-body); }

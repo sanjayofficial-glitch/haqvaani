@@ -8,6 +8,8 @@ import { useSpeak } from "../hooks/useSpeak.js";
 import { useCaseFile } from "../lib/state.jsx";
 import { DEMO } from "../lib/demo.js";
 import { WhisperArt } from "../components/Svg.jsx";
+import { Arrow } from "../components/Icon.jsx";
+import { PrepareScene } from "./art/CaseArt.jsx";
 
 export default function CallPrep() {
   const speak = useSpeak();
@@ -38,6 +40,10 @@ export default function CallPrep() {
           आप ख़ुद बैंक को कॉल करते हैं; हक़-वाणी सुनता है, क्या बोलना है दिखाता है, और डॉकेट नंबर नोट करता है।
           <span className="pair"><span className="alt" lang="en-IN">You dial the bank; HaqVaani listens, shows what to say, and writes down the docket number.</span></span>
         </p>
+      </div>
+
+      <div className="art" aria-hidden="true" style={{ marginTop: "22px" }}>
+        <PrepareScene />
       </div>
 
       <section className="col" style={{ marginTop: "var(--s-md)", gap: "var(--s-md)" }} aria-label="कॉल की तैयारी">
@@ -83,7 +89,7 @@ export default function CallPrep() {
       <div className="row" style={{ marginTop: "var(--s-md)" }}>
         <a className="btn btn--primary" href="#/assisted-call">
           कॉल शुरू करें : सुनना चालू करें · open assisted call
-          <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+          <Arrow />
         </a>
         <a className="btn btn--line" href="#/complaint-builder">
           ड्राफ्ट पर वापस <span className="pair"><span className="alt" lang="en-IN">back to drafts</span></span>

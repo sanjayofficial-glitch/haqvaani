@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="hi-IN" data-lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>शिकायत बनाएँ · Complaint builder: हक़-वाणी</title>
+<meta name="description" content="तीन ड्राफ़्ट: बैंक पत्र, व्हाट्सएप, ईमेल : आपके सचों से, आपकी मंजूरी से। Three drafts: bank letter, WhatsApp, email.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/app.css">
+<style>
+  .draft-area { min-height: 260px; width: 100%; font-family: var(--font-mono); font-size: 14.5px; line-height: 1.7; }
+  .tabwrap { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+</style>
+</head>
+<body data-page="app" data-step="2" data-canvas="evidence" data-tone="indigo">
+
+<header class="app-head">
+  <a class="brand" href="../landing.html" aria-label="हक़-वाणी मुख्य पेज">
+    <span class="hi" lang="hi">हक़-वाणी</span><small>Complaint builder</small>
+  </a>
+  <div class="head-right">
+    <span class="chip" id="modeChip" data-mode="demo"><span class="dot"></span>Synthetic demo</span>
+    <div class="lang-seg" role="group" aria-label="भाषा : ड्राफ्ट भी इसी विकल्प पर चलते हैं">
+      <button type="button" data-lang="hi">हिन्दी</button>
+      <button type="button" data-lang="en">English</button>
+    </div>
+  </div>
+</header>
+
+<div id="stepMount"></div>
+
+<main class="app-main">
+  <div class="beat-head stack">
+    <h1 class="hi" lang="hi">आपकी शिकायत : पढ़कर, बदल भी सकते हैं।</h1>
+    <p class="when-en ink-2">Three ready drafts (bank letter, WhatsApp, email) from your facts and the RBI circular.
+    Read each one, edit anything, then approve the one you will send.</p>
+  </div>
+
+  <section class="stack" style="margin-top:26px" aria-label="शिकायत ड्राफ्ट">
+    <div class="card card-flat" id="draftSrc" style="padding:14px 18px">
+      <p class="xsmall" style="margin:0">ड्राफ्ट बन रहे हैं… · building drafts…</p>
+    </div>
+
+    <div class="card">
+      <div class="tabwrap">
+        <div class="seg" role="tablist" aria-label="शिकायत चैनल">
+          <button type="button" id="tabBank"     role="tab" aria-selected="true"  data-channel="bank">बैंक पत्र</button>
+          <button type="button" id="tabWhatsApp" role="tab" aria-selected="false" data-channel="whatsapp">व्हाट्सएप</button>
+          <button type="button" id="tabEmail"    role="tab" aria-selected="false" data-channel="email">ईमेल</button>
+        </div>
+        <button type="button" class="btn btn-quiet" id="restoreBtn" aria-label="मूल ड्राफ्ट लौटाएँ">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><polyline points="3 3 3 8 8 8"/></svg>
+          मूल लौटाएँ · restore original
+        </button>
+      </div>
+
+      <div class="field" style="margin-top:16px">
+        <label for="draftText" id="draftLabel">आपका पाठ · your text : जो समझाएँ बदलिए</label>
+        <textarea id="draftText" class="draft-area" spellcheck="false" aria-describedby="secretWarn"></textarea>
+        <p class="field-err" id="secretErr" hidden>OTP/PIN/CVV जैसा शब्द बाहर नहीं जाएगा : रेडैक्टेड (तब तक स्वीकृति बंद) · a forbidden secret word was detected and it will never leave : no approval until removed</p>
+      </div>
+    </div>
+
+    <!-- secrets never leave: client pre-check mirrors server.verify verbatim -->
+    <div class="card card-flat" id="secretWarn" hidden style="border-left:4px solid var(--blocked-red)">
+      <p class="hi bad" lang="hi" style="margin:0 0 6px">लाल झंडा : पाठ में OTP/PIN/CVV/पासवर्ड जैसा शब्द आया।
+      यह शब्द कभी नहीं भेजा जाएगा; हटाइए, फिर अप्रूव करें। <span class="when-en">(nothing was sent : the word only sat in your box)</span></p>
+      <p class="xsmall" style="margin:0">हक़-वाणी ने आपके लिए ब्लॉक किया : <span class="num" id="blockedCount">0</span> बार इस सभा में अब तक · blocks so far</p>
+    </div>
+
+    <div class="card">
+      <h2 class="h3">सबूत साथ निभाएँ · evidence checklist</h2>
+      <p class="xsmall ink-2" style="margin-top:4px">जो मिल गया पर टिक लगाइए : डॉकेट लेने के बाद काम आएगा · tick what's ready</p>
+      <ul id="evList" class="stack" style="margin-top:10px; gap:0"></ul>
+    </div>
+
+    <details>
+      <summary>आपका दावा क्या बताता है · what your claim says</summary>
+      <div class="card card-flat" style="margin-top:10px">
+        <div class="kv" id="claimHint">
+          <span class="k">कुल दावा · total claim</span><span class="v num">…</span>
+        </div>
+        <p class="xsmall ink-3" style="margin-top:8px">संदर्भ <span class="mono" id="claimRef">…</span> ·
+        संख्याएँ पायथन से : बैंक से बात करते समय यही संदर्भ सुरुवात में बोलिए।</p>
+      </div>
+    </details>
+
+    <div class="check-row card card-flat" style="padding:16px 18px">
+      <input type="checkbox" id="fixCheck" aria-describedby="fixHint">
+      <label for="fixCheck" style="margin:0">
+        <span class="hi" lang="hi">मैंने पढ़ लिया और स्वीकृत करता हूँ : यह शिकायत मैंने खुद भेजी/बोली।</span>
+        <span class="xsmall" style="display:block;color:var(--ink-3)">I have read and approve this draft : I am the one sending it.</span>
+      </label>
+    </div>
+
+    <div class="row">
+      <a class="btn btn-primary" id="goPrep" href="call-prep.html" aria-disabled="false">
+        मंजूर करें → कॉल की तैयारी · approve → call prep
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a class="btn btn-quiet" href="rights-check.html">वापस हिसाब <span class="en">back to numbers</span></a>
+    </div>
+  </section>
+</main>
+
+<div class="safety" role="region" aria-label="सुरक्षा जानकारी">
+  <div class="safety-in">
+    <span class="short">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span class="hi" lang="hi">कभी OTP, PIN या CVV न बोलें : बैंक इनके लिए कभी पूछता नहीं।</span>
+      <span class="when-en">Never share OTP, PIN or CVV : the bank never asks.</span>
+    </span>
+    <details>
+      <summary>सुरक्षा विवरण · safety status</summary>
+      <div class="panel" id="safetyPanel"></div>
+    </details>
+  </div>
+</div>
+
+<script src="../js/rail.js"></script>
+<script src="../js/router.js"></script>
+<script>
+(function () {
+  "use strict";
+  var state = HQ.state;
+  var q = HQ.q, el = function (id) { return document.getElementById(id); };
+  var intake = state.intake || HQ.DEMO.intake;
+  var entitlement = state.entitlement || HQ.DEMO.entitlement;
+
+  var CHANNELS = ["bank", "whatsapp", "email"];
+  var FIELD = { bank: "bank_complaint_text", whatsapp: "whatsapp_draft", email: "email_draft" };
+  var channel = state.draft && state.draft.channel ? state.draft.channel : "bank";
+
+  /* drafts by language; one store for originals, edits kept separately */
+  var drafts = { en: null, hi: null };
+  var texts = {}; /* user edits keyed "en:bank" */
+
+  function key(lang, ch) { return lang + ":" + ch; }
+  function original(lang, ch) { return drafts[lang] ? drafts[lang][FIELD[ch]] : ""; }
+
+  /* ---------------------------------------------------- fetch drafts --- */
+  function loadDrafts() {
+    function demo() {
+      drafts.en = HQ.DEMO.draft;         /* sample-case text (synthetic demo) */
+      drafts.hi = HQ.DEMO.hindiDrafts;
+      return Promise.resolve({ demo: true });
+    }
+    if (HQ.mode === "live") {
+      return HQ.api.post("/api/complaint", { intake: intake, entitlement: entitlement })
+        .then(function (d) {
+          drafts.en = d;                          /* api returns EN drafts + hindi_drafts */
+          drafts.hi = d.hindi_drafts || HQ.DEMO.hindiDrafts;
+          return { demo: false };
+        })
+        .catch(function () { HQ.toast("API नहीं मिला : सैंपल ड्राफ्ट दिखे (synthetic demo)", "bad"); return demo(); });
+    }
+    return demo();
+  }
+
+  HQ.detectMode().then(loadDrafts).then(function (meta) {
+    el("draftSrc").innerHTML = meta.demo
+      ? '<p class="xsmall" style="margin:0"><span class="warn" style="font-weight:600">सैंपल केस के ड्राफ्ट : synthetic demo</span> · '
+        + 'letter text mirrors the demo worked example; with the API running these are built from your facts</p>'
+      : '<div class="statestrip"><svg class="ic ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:16px;height:16px;margin-top:3px"><polyline points="20 6 9 17 4 12"/></svg><p style="margin:0"><span style="font-weight:600">API से बने ड्राफ्ट</span> : आपके सच + RBI संदर्भ ' + (entitlement.circular_ref ? "<span class='mono'>" + entitlement.circular_ref + "</span>" : "") + '</p></div>';
+    refresh();
+    renderEvidence();
+  });
+
+  /* ------------------------------------------------------- textarea --- */
+  function currentText() {
+    return texts[key(HQ.lang, channel)] || original(HQ.lang, channel);
+  }
+
+  function renderEvidence() {
+    var list = (drafts.en && drafts.en.evidence_checklist) || [];
+    el("evList").innerHTML = list.map(function (t, i) {
+      return '<li class="check-row" style="padding:10px 0;border-top:1px solid var(--line)"><input type="checkbox" id="ev' + i +
+        '" data-ev="' + i + '"><label for="ev' + i + '" style="margin:0;flex:1"><span class="xsmall">' + t + "</span></label></li>";
+    }).join("");
+    HQ.qa("#evList input").forEach(function (c) {
+      c.checked = (state.draftChecklist || []).indexOf(Number(c.getAttribute("data-ev"))) !== -1;
+      c.addEventListener("change", function () {
+        var set = HQ.qa("#evList input").filter(function (x) { return x.checked; })
+          .map(function (x) { return Number(x.getAttribute("data-ev")); });
+        state.draftChecklist = set; HQ.save();
+      });
+    });
+  }
+
+  /* language + channel both drive the same box; restore restores per key */
+  HQ.onLang(refresh);
+  CHANNELS.forEach(function (ch) {
+    var btn = el("tab" + ({ bank: "Bank", whatsapp: "WhatsApp", email: "Email" }[ch]));
+    btn.addEventListener("click", function () {
+      channel = ch;
+      CHANNELS.forEach(function (c2) {
+        el("tab" + ({ bank: "Bank", whatsapp: "WhatsApp", email: "Email" }[c2]))
+          .setAttribute("aria-selected", String(c2 === ch));
+      });
+      refresh();
+    });
+  });
+
+  function refresh() {
+    if (!drafts[HQ.lang]) return; /* drafts not ready yet */
+    var ta = el("draftText");
+    ta.value = currentText();
+    el("draftLabel").innerHTML = "आपका पाठ · your text : <span class='xsmall'>" +
+      ({ bank: "बैंक पत्र", whatsapp: "व्हाट्सएप", email: "ईमेल" }[channel]) + "</span>";
+    checkSecret(ta.value);
+  }
+
+  el("restoreBtn").addEventListener("click", function () {
+    delete texts[key(HQ.lang, channel)];
+    refresh();
+    HQ.toast("मूल ड्राफ्ट लौट आया · original restored");
+  });
+
+  /* ------------------------------------------------- secret pre-check -- */
+  var baselineBlocked = state.secretsBlocked || 0;
+  function checkSecret(text) {
+    var hit = HQ.secretRE.test(text || "");
+    el("secretErr").hidden = !hit;
+    el("secretWarn").hidden = !hit;
+    el("draftText").setAttribute("aria-invalid", hit ? "true" : "false");
+    if (hit && !state.secretFlaggedThisScreen) {
+      state.secretsBlocked = baselineBlocked + 1;
+      state.secretFlaggedThisScreen = true;
+      HQ.save();
+      el("blockedCount").textContent = String(state.secretsBlocked);
+    }
+    refreshApprove();
+  }
+  el("draftText").addEventListener("input", function () {
+    texts[key(HQ.lang, channel)] = el("draftText").value;
+    checkSecret(el("draftText").value);
+  });
+
+  /* ---------------------------------------------------- approve gate --- */
+  var fixCheck = el("fixCheck");
+  fixCheck.checked = !!(state.draft && state.draft.approved);
+  fixCheck.addEventListener("change", refreshApprove);
+
+  function refreshApprove() {
+    var noSecret = !HQ.secretRE.test(el("draftText").value || "");
+    var notEmpty = (el("draftText").value || "").trim() !== "";
+    var ok = fixCheck.checked && noSecret && notEmpty && !!drafts[HQ.lang];
+    el("goPrep").style.opacity = ok ? "" : ".45";
+    el("goPrep").style.pointerEvents = ok ? "" : "none";
+  }
+
+  el("goPrep").addEventListener("click", function (e) {
+    var noSecret = !HQ.secretRE.test(el("draftText").value || "");
+    if (!fixCheck.checked || !noSecret) {
+      e.preventDefault();
+      HQ.toast(noSecret ? "पहले मंजूरी का टिक लगाइए · approve first" : "लाल शब्द पहले हटाइए · remove the flagged word first", "bad");
+      return;
+    }
+    state.draft = {
+      text: el("draftText").value,
+      channel: channel,
+      lang: HQ.lang,
+      approved: true,
+      evidence_checklist: (drafts.en && drafts.en.evidence_checklist) || []
+    };
+    HQ.save();
+    /* real navigation via href */
+  });
+
+  /* claim reminder inside the details drawer */
+  el("claimHint").innerHTML = '<span class="k">कुल दावा · total claim</span><span class="v num">' + HQ.fmt(entitlement.total_inr) + "</span>";
+  el("claimRef").textContent = entitlement.circular_ref || "…";
+  el("blockedCount").textContent = String(state.secretsBlocked || 0);
+  refreshApprove();
+})();
+</script>
+</body>
+</html>

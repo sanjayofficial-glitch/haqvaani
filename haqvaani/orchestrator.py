@@ -18,47 +18,18 @@ from .safety import SafetyGuardBlock, require_consent
 from .schemas import (
     CitizenIntake,
     ConsentRecord,
-    DisputeType,
     HaqVaaniCaseRecord,
     StatutoryEntitlement,
 )
 from .statutory import compute_statutory_entitlement
+from .voice_clients import DEMO_IVR_TRANSCRIPT, VoiceAPI  # adapter home (Prisma/Evon/Timbre)
 
 # ------------------------------------------------------------------ voice API ---
 
-class VoiceAPI:
-    """Adapter for Prisma/Timbre/Evon — filled once endpoints are verified.
+# `VoiceAPI` lives in voice_clients.py (Prisma/Evon/Timbre adapters with
+# deterministic demo fallback). It is re-exported here for back-compat:
+# tests/agents may keep using `orchestrator.VoiceAPI`.
 
-    Until then, `transcribe` returns a synthetic transcript (demo/fallback mode).
-    """
-
-    transcribe_mode = "synthetic"  # flips to "prisma" after roundtrip
-
-    @classmethod
-    def transcribe(cls, audio_path: str | None = None) -> str:
-        if cls.transcribe_mode == "prisma":
-            # TODO: stream via stt_client.py (Prisma v2.5 WSS) when wired.
-            raise NotImplementedError("Prisma client not yet wired")
-        return (
-            "Bhaiya 18 Oct ko 3,200 UPI kiya tha, paisa kat gaya par pahuncha nahi — "
-            "UTR 629188340112"
-        )
-
-    @classmethod
-    def parse_intake(cls, transcript: str) -> CitizenIntake:
-        if cls.transcribe_mode == "prisma":
-            # TODO: hosted Evon v3.3 JSON extraction (short schema).
-            raise NotImplementedError("Evon client not yet wired")
-        return CitizenIntake(
-            utr="629188340112",
-            amount_inr=3200,
-            txn_date=date(2026, 10, 18),
-            dispute_type=DisputeType.UPI_P2P,
-            bank_name="DemoBank Support",
-            language="hi-IN",
-            confidence=0.97,
-            raw_transcript=transcript,
-        )
 
 
 # ---------------------------------------------------------------- pipeline --------
@@ -95,10 +66,15 @@ def run_assisted(
     """
     from .safety import verify_verbatim_substring
 
-    t = transcript or VoiceAPI.transcribe(ivr_audio_path)
-    # Synthetic IVR script for demo/fallback:
-    if transcript is None:
-        t = "Thank you for calling DemoBank. Your complaint is registered under SR-DB-884120."
+    if transcript is not None:
+        t = transcript
+    elif ivr_audio_path is not None:
+        t = VoiceAPI.transcribe(audio_path=ivr_audio_path)
+        if not t:
+            t = DEMO_IVR_TRANSCRIPT
+    else:
+        # No IVR audio provided: synthetic demo IVR transcript (contains the docket).
+        t = DEMO_IVR_TRANSCRIPT
     candidate = "SR-DB-884120"
     verified = verify_verbatim_substring(candidate, t)
     return {

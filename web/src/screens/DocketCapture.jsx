@@ -9,7 +9,9 @@ import { useToast } from "../hooks/useToast.jsx";
 import { useCaseFile, useCaseState } from "../lib/state.jsx";
 import { BRUSH_LABELS } from "../lib/demo.js";
 import { navigate } from "../lib/router.js";
-import { Stamp } from "../components/Svg.jsx";
+import { Stamp, StampVintage } from "../components/Icon.jsx";
+import { Check, Eye, Phone, Arrow } from "../components/Icon.jsx";
+import { DocketScene } from "./art/CaseArt.jsx";
 
 /* the transcript with the docket hard-marked, as plain JSX (never innerHTML) */
 function hearText(transcript, docket) {
@@ -85,6 +87,10 @@ export default function DocketCapture() {
         </p>
       </div>
 
+      <div className="art" aria-hidden="true" style={{ marginTop: "var(--s-md)" }}>
+        <DocketScene />
+      </div>
+
       <section className="col" style={{ marginTop: "var(--s-md)", gap: "var(--s-md)" }} aria-label="डॉकेट जाँच">
         {noCall && (
           <div className="card">
@@ -149,12 +155,25 @@ export default function DocketCapture() {
               <div className="row" style={{ marginTop: 14 }}>
                 <button className="btn btn--primary" type="button" onClick={saveManual}>
                   मेरी पक्ष पर दर्ज करें · record my recall
+                  <StampVintage />
                 </button>
               </div>
             </div>
+
+        {/* case id chip */}
+        <div className="case-id-row" style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <StampVintage size={14} />
+          <span className="xsmall mute-3">सबूत की शर्त : यही नंबर।</span>
+        </div>
             <div className="row">
-              <a className="btn btn--line" href="#/assisted-call">फिर सुनें <span className="pair"><span className="alt" lang="en-IN">listen again</span></span></a>
-              <a className="btn btn--line" href="#/post-call">बिना नंबर आगे बढ़ें <span className="pair"><span className="alt" lang="en-IN">continue without a docket</span></span></a>
+              <a className="btn btn--line" href="#/assisted-call">
+                <Phone size={14} /> फिर सुनें
+                <span className="pair"><span className="alt" lang="en-IN">listen again</span></span>
+              </a>
+              <a className="btn btn--line" href="#/post-call">
+                <Eye size={14} /> बिना नंबर आगे बढ़ें
+                <span className="pair"><span className="alt" lang="en-IN">continue without a docket</span></span>
+              </a>
             </div>
           </>
         )}
@@ -162,10 +181,13 @@ export default function DocketCapture() {
         {!noCall && (
           <div className="row">
             <a className="btn btn--line" href="#/post-call">
-              कॉल समाप्त : आगे क्या · post-call notes
-              <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+              <Eye size={14} /> कॉल समाप्त : आगे क्या · post-call notes
+              <Arrow />
             </a>
-            <a className="btn btn--line" href="#/assisted-call">फिर सुनें <span className="pair"><span className="alt" lang="en-IN">listen again</span></span></a>
+            <a className="btn btn--line" href="#/assisted-call">
+              <Phone size={14} /> फिर सुनें
+              <span className="pair"><span className="alt" lang="en-IN">listen again</span></span>
+            </a>
           </div>
         )}
       </section>

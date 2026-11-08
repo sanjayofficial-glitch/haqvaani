@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="hi-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>हक़-वाणी | HaqVaani — आपकी आवाज़, आपका हक़</title>
+<meta name="description" content="भारत का पहला नागरिक-तरफा RBI सांविधिक रिफंड एडवोकेट। विफल UPI लेन-देन के लिए स्वर-प्रथम, मानव-नियंत्रित सहायता।">
+<meta name="theme-color" content="#07080d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Noto+Sans+Devanagari:wght@400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg0:#07080d; --bg1:#0d0f17; --surface:#12151f; --surface2:#181c29;
+    --line:rgba(255,255,255,.08); --line-strong:rgba(255,255,255,.16);
+    --text:#f4f5fa; --muted:rgba(244,245,250,.66); --faint:rgba(244,245,250,.42);
+    --brand:#6d74ff; --brand2:#8b91ff; --brand-strong:#4f46e5;
+    --cyan:#22d3ee; --green:#34d399; --amber:#fbbf24; --red:#f87171;
+    --violet:#a78bfa; --pink:#f472b6;
+    --font-sans:'Inter',system-ui,sans-serif;
+    --font-hi:'Noto Sans Devanagari',sans-serif;
+    --font-mono:'JetBrains Mono',ui-monospace,monospace;
+    --radius-lg:24px; --radius-md:16px; --radius-sm:12px; --radius-full:999px;
+    --shadow-lg:0 30px 80px rgba(0,0,0,.55); --shadow-md:0 18px 44px rgba(0,0,0,.45);
+    --t-fast:.15s cubic-bezier(.2,.8,.2,1); --t-smooth:.35s cubic-bezier(.4,0,.2,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg0);color:var(--text);font-family:var(--font-sans);overflow-x:hidden;line-height:1.65}
+  .hi{font-family:var(--font-hi)}
+  .mono{font-family:var(--font-mono)}
+  .container{max-width:1120px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
+  :focus-visible{outline:3px solid rgba(141,145,255,.5);outline-offset:3px;border-radius:4px}
+
+  /* ---------- nav ---------- */
+  nav{position:sticky;top:0;z-index:60;background:rgba(7,8,13,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 24px;max-width:1120px;margin:0 auto}
+  .nav-logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:18px;text-decoration:none;color:var(--text)}
+  .logo-mark{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--violet));display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(109,116,255,.4)}
+  .logo-mark svg{width:20px;height:20px}
+  .nav-links{display:flex;gap:4px;align-items:center}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;padding:8px 12px;border-radius:10px;transition:color var(--t-fast),background var(--t-fast)}
+  .nav-links a:hover{color:var(--text);background:rgba(255,255,255,.06)}
+  .nav-cta{display:flex;gap:10px;align-items:center}
+  .badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:var(--radius-full);font-size:10px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;border:1px solid;white-space:nowrap}
+  .badge.sim{color:var(--cyan);border-color:rgba(34,211,238,.45);background:rgba(34,211,238,.1)}
+  .badge.nodial{color:var(--green);border-color:rgba(52,211,153,.4);background:rgba(52,211,153,.1)}
+
+  /* ---------- buttons ---------- */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 28px;border-radius:var(--radius-full);font-weight:600;text-decoration:none;cursor:pointer;border:none;font-size:15px;font-family:var(--font-sans);transition:transform var(--t-fast),box-shadow var(--t-fast),background var(--t-fast)}
+  .btn-primary{background:var(--text);color:#05060a;box-shadow:0 14px 34px rgba(255,255,255,.14)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(255,255,255,.2)}
+  .btn-primary:active{transform:translateY(0)}
+  .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line-strong)}
+  .btn-ghost:hover{background:rgba(255,255,255,.05);transform:translateY(-2px)}
+  .btn-ghost:active{transform:translateY(0)}
+
+  /* ---------- hero ---------- */
+  .hero{min-height:94vh;display:flex;align-items:center;padding:80px 0 56px;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;z-index:0;background:
+      radial-gradient(640px 420px at 12% 18%,rgba(109,116,255,.22),transparent 65%),
+      radial-gradient(520px 380px at 88% 78%,rgba(34,211,238,.1),transparent 65%)
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand2);margin-bottom:20px;font-weight:800;border:1px solid rgba(139,145,255,.35);background:rgba(139,145,255,.08);padding:6px 14px;border-radius:var(--radius-full)}
+  .kicker .dot{width:6px;height:6px;border-radius:50%;background:var(--brand2);box-shadow:0 0 0 4px rgba(139,145,255,.2)}
+  .hero h1{font-size:clamp(44px,8.5vw,112px);line-height:1.02;letter-spacing:-.03em;font-weight:800}
+  .hero h1 .accent{background:linear-gradient(100deg,var(--brand2),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.sub{font-size:clamp(16px,2vw,19px);color:var(--muted);margin:24px 0 0;max-width:540px}
+  .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
+  .hero-trust{display:flex;gap:22px;flex-wrap:wrap;margin-top:40px;padding-top:24px;border-top:1px solid var(--line)}
+  .hero-trust span{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+  .hero-trust svg{width:16px;height:16px;color:var(--green)}
+  /* product mockup */
+  .mock-wrap{position:relative;perspective:1400px}
+  .mock{position:relative;background:linear-gradient(180deg,#0f111b,#0a0c14);border:1px solid var(--line-strong);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);overflow:hidden;transform:rotateY(-4deg) rotateX(2deg)}
+  .mock-top{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02)}
+  .mock-dots{display:flex;gap:6px}
+  .mock-dots i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.18)}
+  .mock-dots i:first-child{background:#ff5f57}.mock-dots i:nth-child(2){background:#febc2e}.mock-dots i:nth-child(3){background:#28c840}
+  .mock-url{flex:1;margin-left:6px;font-family:var(--font-mono);font-size:11px;color:var(--faint);background:rgba(255,255,255,.04);padding:5px 12px;border-radius:8px;text-align:center}
+  .mock-body{padding:20px;display:flex;flex-direction:column;gap:14px}
+  .mock-status{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--muted)}
+  .mock-status b{color:var(--green);font-weight:700}
+  .mock-pipe{display:flex;align-items:center;gap:8px}
+  .mock-pipe .p{flex:1;height:4px;border-radius:99px;background:rgba(255,255,255,.08)}
+  .mock-pipe .p.fill{background:linear-gradient(90deg,var(--brand),var(--cyan))}
+  .mock-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .mock-metric{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:12px 10px;text-align:center}
+  .mock-metric .l{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+  .mock-metric .v{font-family:var(--font-mono);font-size:18px;font-weight:700;margin-top:4px}
+  .mock-metric .v.ok{color:var(--green)} .mock-metric .v.warn{color:var(--amber)} .mock-metric .v.brand{color:var(--brand2)}
+  .mock-mic{width:64px;height:64px;margin:2px auto 0;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--violet));display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 8px rgba(109,116,255,.15),0 14px 30px rgba(109,116,255,.4)}
+  .mock-mic svg{width:24px;height:24px;color:#fff}
+  .mock-badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  .float-card{position:absolute;background:rgba(18,21,31,.94);border:1px solid var(--line-strong);border-radius:14px;padding:12px 16px;font-family:var(--font-mono);font-size:12px;box-shadow:var(--shadow-md);animation:floaty 6s ease-in-out infinite;z-index:3}
+  .fc1{top:-22px;left:-34px;color:var(--cyan)}
+  .fc2{bottom:-20px;right:-28px;color:var(--green);animation-delay:1.5s}
+  .fc3{top:38%;right:-42px;color:var(--amber);animation-delay:3s}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+  /* ---------- sections ---------- */
+  section{padding:96px 0;position:relative}
+  .sec-head{max-width:680px;margin:0 auto 52px;text-align:center}
+  .sec-kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand2);margin-bottom:14px;font-weight:800}
+  h2{font-size:clamp(28px,4.4vw,44px);font-weight:800;letter-spacing:-.02em;line-height:1.15;margin-bottom:16px}
+  .lead{color:var(--muted);font-size:16px}
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+  .stagger>*{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+  .stagger.in>*{opacity:1;transform:none}
+  .stagger.in>*:nth-child(1){transition-delay:.05s}.stagger.in>*:nth-child(2){transition-delay:.15s}
+  .stagger.in>*:nth-child(3){transition-delay:.25s}.stagger.in>*:nth-child(4){transition-delay:.35s}
+  .stagger.in>*:nth-child(5){transition-delay:.45s}.stagger.in>*:nth-child(6){transition-delay:.55s}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  /* stat composition card */
+  .stat-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:14px;box-shadow:var(--shadow-md)}
+  .stat-cell{background:var(--surface2);border:1px solid var(--line);border-radius:var(--radius-md);padding:20px 18px}
+  .stat-cell .big{font-family:var(--font-mono);font-size:clamp(26px,3.6vw,40px);font-weight:700;color:var(--brand2)}
+  .stat-cell .lbl{font-size:12px;color:var(--muted);margin-top:6px}
+  .stat-cell.accent .big{color:var(--green)}
+  .stat-cell.warn .big{color:var(--amber)}
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:8px}
+  .step{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:26px 22px;position:relative;transition:transform var(--t-fast),border-color var(--t-fast),background var(--t-fast)}
+  .step:hover{transform:translateY(-4px);border-color:rgba(109,116,255,.4);background:var(--surface2)}
+  .step .n{position:absolute;top:18px;right:20px;font-size:13px;color:var(--faint);font-weight:800;font-family:var(--font-mono)}
+  .step .ic{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;border:1px solid}
+  .step .ic svg{width:22px;height:22px}
+  .step h3{font-size:16px;margin-bottom:8px}
+  .step p{font-size:13px;color:var(--muted)}
+  .step.s1 .ic{background:rgba(34,211,238,.12);border-color:rgba(34,211,238,.4);color:var(--cyan)}
+  .step.s2 .ic{background:rgba(109,116,255,.14);border-color:rgba(109,116,255,.4);color:var(--brand2)}
+  .step.s3 .ic{background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.35);color:var(--amber)}
+  .step.s4 .ic{background:rgba(52,211,153,.12);border-color:rgba(52,211,153,.4);color:var(--green)}
+  /* counters */
+  .counters{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:8px}
+  .counter{background:linear-gradient(180deg,var(--surface2),var(--surface));border:1px solid var(--line);border-radius:20px;padding:30px 20px;text-align:center;box-shadow:var(--shadow-md)}
+  .counter .val{font-family:var(--font-mono);font-size:clamp(30px,4vw,46px);font-weight:700;color:var(--brand2)}
+  .counter .lbl{font-size:13px;color:var(--muted);margin-top:8px}
+  /* trust */
+  .trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+  .trust{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;display:flex;gap:14px;align-items:flex-start;transition:border-color var(--t-fast)}
+  .trust:hover{border-color:rgba(52,211,153,.35)}
+  .trust .ok{width:28px;height:28px;flex:0 0 auto;border-radius:9px;background:rgba(52,211,153,.12);color:var(--green);display:flex;align-items:center;justify-content:center}
+  .trust .ok svg{width:15px;height:15px}
+  .trust h4{font-size:14px;margin-bottom:5px}
+  .trust p{font-size:13px;color:var(--muted)}
+  /* demo strip */
+  .demo-strip{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+  .demo-card{background:linear-gradient(180deg,var(--surface2),var(--surface));border:1px solid var(--line);border-radius:22px;padding:34px;text-align:center;text-decoration:none;color:inherit;transition:transform var(--t-fast),border-color var(--t-fast);display:flex;flex-direction:column;align-items:center;gap:10px}
+  .demo-card:hover{transform:translateY(-5px);border-color:rgba(109,116,255,.5)}
+  .demo-card .ic{width:56px;height:56px;border-radius:16px;background:rgba(109,116,255,.14);border:1px solid rgba(109,116,255,.4);color:var(--brand2);display:flex;align-items:center;justify-content:center}
+  .demo-card .ic svg{width:26px;height:26px}
+  .demo-card h4{font-size:18px}
+  .demo-card p{font-size:13px;color:var(--muted)}
+  .demo-card .go{font-size:13px;font-weight:700;color:var(--brand2);display:inline-flex;align-items:center;gap:6px;margin-top:6px}
+  /* footer */
+  footer{border-top:1px solid var(--line);padding:44px 0;text-align:center;color:var(--faint);font-size:13px}
+  footer .hash{color:var(--brand2);font-weight:700}
+
+  @media(max-width:960px){
+    .hero-grid,.split{grid-template-columns:1fr;gap:40px}
+    .steps{grid-template-columns:1fr 1fr}
+    .counters,.trust-grid{grid-template-columns:1fr 1fr}
+    .nav-links{display:none}
+  }
+  @media(max-width:600px){
+    .steps,.counters,.trust-grid,.demo-strip,.stat-card{grid-template-columns:1fr}
+    .hero{padding:56px 0 40px}
+    section{padding:68px 0}
+    .nav-cta .badge{display:none}
+  }
+  @media(prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important} }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav aria-label="मुख्य नेविगेशन"><div class="nav-in">
+  <a class="nav-logo" href="#top">
+    <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></span>
+    <span>HaqVaani<span class="hi" style="font-weight:400;color:var(--faint);margin-left:8px;font-size:14px;">हक़-वाणी</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="#story">समस्या</a>
+    <a href="#how">कैसे काम करता है</a>
+    <a href="#numbers">RBI नियम</a>
+    <a href="#trust">भरोसा</a>
+    <a href="#demo">डेमो</a>
+  </div>
+  <div class="nav-cta">
+    <span class="badge sim">SIMULATED DEMO</span>
+    <span class="badge nodial">NO AUTONOMOUS DIALING</span>
+    <a class="btn btn-primary" style="padding:11px 22px;font-size:14px;" href="glass_ui.html">एप खोलें</a>
+  </div>
+</div></nav>
+
+<!-- ══ HERO ══ -->
+<div class="hero" id="top"><div class="container">
+  <div class="hero-grid">
+    <div>
+      <div class="kicker"><span class="dot"></span>RBI Statutory Refund Advocate</div>
+      <h1><span class="hi">आपकी आवाज़,</span><br><span class="accent hi">आपका हक़।</span></h1>
+      <p class="sub hi">विफल UPI लेन-देन — "पैसा कट गया, पर पहुँचा नहीं"। बैंक को कॉल करें, हक़-वाणी आपका हक़ समझाएगा, शिकायत लिखेगा, और बैंक से बात करने में मदद करेगा। आप खुद निर्णय लें।</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="glass_ui.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg> एप आज़माएँ</a>
+        <a class="btn btn-ghost" href="#story">कहानी पढ़ें ↓</a>
+      </div>
+      <div class="hero-trust">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg> DPDP सहमति</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg> TRAI अनुरूप</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg> सिंथेटिक डेटा</span>
+      </div>
+    </div>
+    <div class="mock-wrap">
+      <div class="mock">
+        <div class="mock-top">
+          <div class="mock-dots"><i></i><i></i><i></i></div>
+          <div class="mock-url">app.haqvaani · डेमो</div>
+        </div>
+        <div class="mock-body">
+          <div class="mock-status"><span>हक़-वाणी</span><b>● LIVE DEMO</b></div>
+          <div class="mock-pipe"><span class="p fill"></span><span class="p fill"></span><span class="p fill"></span><span class="p"></span></div>
+          <div class="mock-metrics">
+            <div class="mock-metric"><div class="l">कटौती</div><div class="v">₹3,200</div></div>
+            <div class="mock-metric"><div class="l">जुर्माना</div><div class="v warn">₹600</div></div>
+            <div class="mock-metric"><div class="l">कुल दावा</div><div class="v brand">₹3,800</div></div>
+          </div>
+          <div class="mock-mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg></div>
+          <div class="mock-badges">
+            <span class="badge sim">SIMULATED</span>
+            <span class="badge nodial">NO DIALING</span>
+          </div>
+        </div>
+      </div>
+      <div class="float-card fc1">▲ PRISMA v2.5 · 168ms</div>
+      <div class="float-card fc2">✓ ₹100/day जुर्माना</div>
+      <div class="float-card fc3">⚠ T+1 breached</div>
+    </div>
+  </div>
+</div></div>
+
+<!-- ══ STORY: PROBLEM ══ -->
+<section id="story"><div class="container">
+  <div class="split">
+    <div class="reveal">
+      <div class="stat-card">
+        <div class="stat-cell accent"><div class="big">₹100</div><div class="lbl">दिन का जुर्माना (suo motu)</div></div>
+        <div class="stat-cell"><div class="big">T+1</div><div class="lbl">P2P रिफंड TAT</div></div>
+        <div class="stat-cell"><div class="big">T+5</div><div class="lbl">मर्चेंट / ATM TAT</div></div>
+        <div class="stat-cell warn"><div class="big">14448</div><div class="lbl">RBI टोल-फ्री</div></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="sec-kicker">समस्या · The Problem</div>
+      <h2 class="hi">पैसा कट गया, पर पहुँचा नहीं।</h2>
+      <p class="lead">भारत में लाखों नागरिक हर दिन इसी समस्या से गुज़रते हैं। अंग्रेज़ी में बैंक प्रक्रियाएँ, भ्रमित IVR मेनू, और यह जानकारी कि RBI नियम उनके पक्ष में हैं — यह सब मिलकर उन्हें हार मानने पर मजबूर कर देते हैं।</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- ══ HOW IT WORKS ══ -->
+<section id="how" style="border-top:1px solid var(--line);"><div class="container">
+  <div class="sec-head reveal">
+    <div class="sec-kicker">समाधान · The Solution</div>
+    <h2 class="hi">चार चरण — चार मोड। बिल्कुल आपके नियंत्रण में।</h2>
+    <p class="lead">HaqVaani आपको बात करने का <b>भाषा</b> देता है, RBI के <b>सही नियम</b> देता है, और <b>शिकायत का सिलसिला</b> देता है। बैंक को कॉल आप खुद करते हैं।</p>
+  </div>
+  <div class="steps stagger">
+    <div class="step s1"><span class="n">01</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg></div><h3>वॉइस इनटेक</h3><p>हिंगlish में बोलें। Prisma v2.5 UTR, राशि और तारीख निकालता है।</p></div>
+    <div class="step s2"><span class="n">02</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div><h3>राइट्स चेकर</h3><p>शुद्ध Python में RBI गणना — TAT, देरी के दिन, ₹100/दिन जुर्माना।</p></div>
+    <div class="step s3"><span class="n">03</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><h3>कंप्लेंट बिल्डर</h3><p>बैंक शिकायत, व्हाट्सएप/ईमेल ड्राफ्ट और सबूत चेकलिस्ट।</p></div>
+    <div class="step s4"><span class="n">04</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.42 19.42 0 0 1-3.33-2.67 19.42 19.42 0 0 1-2.67-3.33A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><h3>असिस्टेड कॉल</h3><p>बैंक को कॉल आप करें; स्क्रिप्ट और डॉकेट सत्यापन — हमारा।</p></div>
+  </div>
+</div></section>
+
+<!-- ══ LIVE NUMBERS ══ -->
+<section id="numbers" style="border-top:1px solid var(--line);"><div class="container">
+  <div class="sec-head reveal">
+    <div class="sec-kicker">RBI नियम · सटीक, गणितीय</div>
+    <h2 class="hi">ये नंबर LLM से नहीं — कोड से आते हैं।</h2>
+    <p class="lead">हर नियम <b class="mono">haqvaani/statutory.py</b> में हार्डकोड है। LLM सिर्फ प्रारूप बनाता है; कानूनी गणित कभी नहीं।</p>
+  </div>
+  <div class="counters stagger">
+    <div class="counter"><div class="val" data-count="100" data-prefix="₹">₹0</div><div class="lbl">देरी का दैनिक जुर्माना</div></div>
+    <div class="counter"><div class="val" data-count="1" data-suffix=" दिन">0</div><div class="lbl">P2P रिफंड TAT (T+1)</div></div>
+    <div class="counter"><div class="val" data-count="5" data-suffix=" दिन">0</div><div class="lbl">मर्चेंट/ATM TAT (T+5)</div></div>
+    <div class="counter"><div class="val" data-count="0" data-suffix=" कॉल">0</div><div class="lbl">स्वायत्त डायलिंग (हमेशा)</div></div>
+  </div>
+</div></section>
+
+<!-- ══ TRUST ══ -->
+<section id="trust" style="border-top:1px solid var(--line);"><div class="container">
+  <div class="sec-head reveal">
+    <div class="sec-kicker">भरोसा · Trust by design</div>
+    <h2 class="hi">कानूनी सुरक्षा, हर चरण पर।</h2>
+  </div>
+  <div class="trust-grid stagger">
+    <div class="trust"><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><h4>सहमति (Consent)</h4><p>आवाज़ प्रोसेस करने से पहले टाइमस्टैम्प्ड सहमति — DPDP Act 2023।</p></div></div>
+    <div class="trust"><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><h4>AI डिस्क्लोज़र</h4><p>"This is an AI assistant assisting [user name]." — कभी इम्परसनेट नहीं।</p></div></div>
+    <div class="trust"><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><h4>सीक्रेट ब्लॉक</h4><p>OTP/PIN/MPIN/CVV/password — आउटबाउंड टेक्स्ट में कभी नहीं।</p></div></div>
+    <div class="trust"><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><h4>डॉकेट सत्यापन</h4><p>SR ID ट्रांस्क्रिप्ट का सटीक (verbatim) हिस्सा होना चाहिए।</p></div></div>
+    <div class="trust"><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><h4>कोई स्वायत्त कॉल नहीं</h4><p>TRAI 2026 A2P नियमों का सम्मान — मानव नियंत्रण में।</p></div></div>
+    <div class="trust"><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><h4>सिंथेटिक डेटा</h4><p>कोई वास्तविक PII नहीं — डेमो और टेस्ट दोनों में।</p></div></div>
+  </div>
+</div></section>
+
+<!-- ══ DEMO ══ -->
+<section id="demo" style="border-top:1px solid var(--line);"><div class="container">
+  <div class="sec-head reveal">
+    <div class="sec-kicker">लाइव डेमो</div>
+    <h2 class="hi">इसे खुद आज़माएँ।</h2>
+    <p class="lead">दोनों स्क्रीन वास्तविक एप हैं — अभी ब्राउज़र में खोलें।</p>
+  </div>
+  <div class="demo-strip stagger">
+    <a class="demo-card" href="glass_ui.html">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg></div>
+      <h4>नागरिक एप</h4>
+      <p>बोलें → गणना → शिकायत → असिस्टेड कॉल</p>
+      <span class="go">खोलें <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+    </a>
+    <a class="demo-card" href="hud.html">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+      <h4>टेलीमेट्री हड</h4>
+      <p>4-क्वाड्रेंट इंस्ट्रूमेंट पैनल (डेमो वीडियो के लिए)</p>
+      <span class="go">खोलें <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+    </a>
+  </div>
+</div></section>
+
+<footer>
+  <div>हक़-वाणी · सिंथेटिक डेमो · कोई वास्तविक PII नहीं · कोई स्वायत्त डायलिंग नहीं</div>
+  <div style="margin-top:10px;">Gnani <span class="hash">Prisma v2.5</span> · <span class="hash">Evon v3.3</span> · <span class="hash">Timbre v2.5/v3.0</span></div>
+  <div style="margin-top:10px;" class="hash">#GnaniAI #GreatIndianAIInternshipChallenge</div>
+</footer>
+
+<script>
+/* reveal on scroll */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.15});
+document.querySelectorAll('.reveal,.stagger').forEach(el=>io.observe(el));
+
+/* counters */
+function animateCount(el){
+  const target=+el.dataset.count,pre=el.dataset.prefix||'',suf=el.dataset.suffix||'';
+  const t0=performance.now(),dur=1200;
+  function tick(t){const p=Math.min(1,(t-t0)/dur),v=Math.round(target*p);el.textContent=pre+v+suf;if(p<1)requestAnimationFrame(tick);}
+  requestAnimationFrame(tick);
+}
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){animateCount(e.target);cio.unobserve(e.target);}}),{threshold:.6});
+document.querySelectorAll('.val[data-count]').forEach(el=>cio.observe(el));
+</script>
+</body>
+</html>

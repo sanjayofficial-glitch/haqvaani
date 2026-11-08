@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "at": "2026-11-06T19:25:31.434Z",
+ "scope": "page",
+ "summary": {
+  "fails": 100,
+  "reflex": 39,
+  "warns": 11
+ },
+ "files": {
+  "frontend\\landing.html": {
+   "handlers": [],
+   "links": [
+    "#beat1",
+    "#beat2",
+    "#beat3",
+    "#beat4",
+    "#laws",
+    "#top",
+    "https://www.rbi.org.in",
+    "screens/call-prep.html",
+    "screens/complaint-builder.html",
+    "screens/dossier.html",
+    "screens/rights-check.html",
+    "screens/start-case.html",
+    "screens/voice-intake.html"
+   ],
+   "fields": [],
+   "hooks": [],
+   "ids": [
+    "beat1",
+    "beat2",
+    "beat3",
+    "beat4",
+    "beat5",
+    "laws",
+    "modeChip",
+    "safetyPanel",
+    "top"
+   ],
+   "scripts": [
+    "js/rail.js",
+    "js/router.js"
+   ]
+  }
+ },
+ "wiring": {
+  "handlers": [],
+  "links": [
+   "#beat1",
+   "#beat2",
+   "#beat3",
+   "#beat4",
+   "#laws",
+   "#top",
+   "https://www.rbi.org.in",
+   "screens/call-prep.html",
+   "screens/complaint-builder.html",
+   "screens/dossier.html",
+   "screens/rights-check.html",
+   "screens/start-case.html",
+   "screens/voice-intake.html"
+  ],
+  "fields": [],
+  "hooks": [],
+  "ids": [
+   "beat1",
+   "beat2",
+   "beat3",
+   "beat4",
+   "beat5",
+   "laws",
+   "modeChip",
+   "safetyPanel",
+   "top"
+  ]
+ },
+ "scripts": {
+  "frontend\\landing.html": {
+   "queried": [
+    "#hqToast",
+    "#stepMount",
+    ".rail-coin",
+    ".rail-fill",
+    "[data-tone]"
+   ],
+   "hooked": [
+    "[data-tone]"
+   ],
+   "dom": [
+    ".rail-coin",
+    ".rail-fill",
+    "[data-tone]"
+   ],
+   "hides": false
+  }
+ },
+ "pages": {
+  "frontend\\landing.html": {
+   "links": [
+    "#top",
+    "#beat1",
+    "#beat2",
+    "#beat3",
+    "#beat4",
+    "#laws",
+    "screens/start-case.html",
+    "screens/voice-intake.html",
+    "screens/rights-check.html",
+    "screens/complaint-builder.html",
+    "screens/call-prep.html",
+    "screens/dossier.html",
+    "https://www.rbi.org.in/"
+   ],
+   "fields": [],
+   "actions": [],
+   "forms": [],
+   "hooked": [
+    ".rail-coin",
+    ".rail-fill",
+    "[data-tone]"
+   ],
+   "headings": [
+    "पैसा कट गया, पर पहुँचा नहीं।",
+    "अपनी कहनी अपने शब्दों में कहिए।",
+    "क़ानून आपकी तरफ़ है — और यह यहाँ दिन-ब-दिन साबित होता है।",
+    "हर शब्द आपके हाथ में।",
+    "कॉल आप करते हैं। हम आपके कान के पास रहते हैं।",
+    "जो कहा गया, वही हिसाब में आया।",
+    "क़ानून के नंबर · the law's numbers",
+    "एप में यही रेखा पाँच क़दम बन जाती है।"
+   ],
+   "figures": [
+    "3,200",
+    "629188340112",
+    "3,800",
+    "2019",
+    "02.01",
+    "09.07",
+    "2017"
+   ],
+   "images": [],
+   "controls": 0,
+   "words": 797
+  }
+ }
+}

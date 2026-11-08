@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="hi-IN" data-lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>सहमति · Consent: हक़-वाणी</title>
+<meta name="description" content="सहमति स्क्रीन: समय-चिह्नित DPDP सहमति और AI प्रकटीकरण पंक्ति। Consent: timestamped DPDP consent and the spoken AI-disclosure line.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/app.css">
+<style>
+  .consent-card { background: var(--story-surface); }
+  .consent-card .clause { padding: 16px 18px; border-top: 1px solid var(--story-edge-1); }
+  .consent-card .clause:first-child { border-top: 0; }
+  .ai-line {
+    border-left: 3px solid var(--live-cyan); background: var(--cyan-wash);
+    padding: 14px 16px; border-radius: var(--radius-input); margin: 14px 0;
+  }
+  .clause .en-sub { display: block; color: var(--story-ink-4); }
+</style>
+</head>
+<body data-page="app" data-step="0" data-canvas="story" data-tone="cyan">
+
+<header class="app-head">
+  <a class="brand" href="../landing.html" aria-label="हक़-वाणी मुख्य पेज">
+    <span class="hi" lang="hi">हक़-वाणी</span><small>Consent</small>
+  </a>
+  <div class="head-right">
+    <span class="chip" id="modeChip" data-mode="demo"><span class="dot"></span>Synthetic demo</span>
+    <div class="lang-seg" role="group" aria-label="भाषा">
+      <button type="button" data-lang="hi">हिन्दी</button>
+      <button type="button" data-lang="en">English</button>
+    </div>
+  </div>
+</header>
+
+<div id="stepMount"></div>
+
+<main class="app-main narrow">
+  <div class="beat-head stack">
+    <h1 class="hi" lang="hi">माइक से पहले, सहमति आपके समय की।</h1>
+    <p class="when-en ink-2">Under the DPDP Act 2023 your permission is asked before your voice is processed :
+    and you can withdraw it any time.</p>
+  </div>
+
+  <section class="stack" style="margin-top:26px" aria-label="सहमति">
+    <!-- the AI disclosure, readable without sound -->
+    <div class="card">
+      <p class="h3" style="margin:0 0 4px">ईमानदारी की सूचना · AI disclosure</p>
+      <div class="ai-line">
+        <p class="hi" lang="hi" style="margin:0 0 6px">“यह एआई सहायक आपकी सहायता कर रहा है।”</p>
+        <p class="xsmall ink-2" style="margin:0">“This is an AI assistant assisting you.” यही लाइन कॉल के दौरान सबसे पहले सुनाई जाती है।</p>
+      </div>
+      <p class="xsmall ink-3">यह घोषणा आवाज़ में भी वही शब्द कहती है : जब आप माइक शुरू करें, यह पहले बजती है।
+      हक़-वाणी कभी बैंक को खुद डायल नहीं करता; फ़ोन आपके हाथ में रहता है।
+      <span class="when-en">The same line is spoken out loud before any voice capture. No autonomous dialing : ever.</span></p>
+      <div class="row" style="margin-top:14px">
+        <button class="btn btn-ghost-dark" id="discloseBtn" type="button" aria-label="घोषणा आवाज़ में सुनें">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.5 8.5a4 4 0 0 1 0 7"/><line x1="21" y1="2" x2="21" y2="22" opacity=".4"/></svg>
+          घोषणा सुनिए · hear the disclosure
+        </button>
+      </div>
+    </div>
+
+    <div class="card consent-card">
+      <form id="consentForm" novalidate>
+        <div class="clause check-row">
+          <input type="checkbox" id="cData" aria-describedby="cDataErr">
+          <label for="cData" style="margin:0">
+            <span class="hi" lang="hi">मैं सहमत हूँ: बोली और चार सच, केवल इस सत्र के लिए, RBI शिकायत बनाने हेतु प्रसंस्करण होंगे।</span>
+            <span class="xsmall en-sub">I consent to processing my voice and the four facts for this session, only to build an RBI complaint. No payment data is carried any further.</span>
+          </label>
+        </div>
+        <p class="field-err" id="cDataErr" hidden>पहला बॉक्स तिकणा होना चाहिए · the first box is required</p>
+
+        <div class="clause check-row">
+          <input type="checkbox" id="cAi" aria-describedby="cAiErr">
+          <label for="cAi" style="margin:0">
+            <span class="hi" lang="hi">मैंने स्वीकृति बात पढ़/सुनी: ऑन-कॉल मदद “यह एआई सहायक आपकी सहायता कर रहा है” कहकर बता देता।</span>
+            <span class="xsmall en-sub">I acknowledge the spoken AI-disclosure line (“This is an AI assistant assisting you.”) goes out before any voice capture.</span>
+          </label>
+        </div>
+        <p class="field-err" id="cAiErr" hidden>दूसरा बॉक्स तिकिया होना चाहिए · the second box is required</p>
+
+        <div class="clause field">
+          <label for="cName">आपका नाम <span class="ink-3">(वैकल्पिक)</span> · your name (optional)</label>
+          <input id="cName" type="text" maxlength="60" autocomplete="off" placeholder="citizen"
+                 aria-describedby="cNameHint">
+          <p class="hint" id="cNameHint">नाम केवल पत्र के अंतर्गत लगता है : कोई पहचान-तथ्य सुरक्षित नहीं।
+          <span class="when-en">It only signs the letters : no PII is stored.</span></p>
+        </div>
+
+        <div class="clause stack" style="gap:14px">
+          <button class="btn btn-light" id="agreeBtn" type="submit" aria-label="दोनों सहमतियाँ दें और आगे बढ़ें">
+            मंजूर : माइक चालू कर दीजिए · I agree : start the mic
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+          <a class="btn btn-ghost-dark" href="start-case.html">वापस · back</a>
+          <p class="xsmall ink-2">आप इसे रद्द कर सकते हैं: सहमति हटने पर सत्र साफ़ हो जाता है और माइक बंद हो जाता है; टाइमस्टैम्प सुरक्षा पैनल में दिखता है।
+          <span class="when-en">You can withdraw any time : the safety panel shows exactly when you agreed.</span></p>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<div class="safety" role="region" aria-label="सुरक्षा जानकारी">
+  <div class="safety-in">
+    <span class="short">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span class="hi" lang="hi">कभी OTP, PIN या CVV न बोलें : बैंक इनके लिए कभी पूछता नहीं।</span>
+      <span class="when-en">Never share OTP, PIN or CVV : the bank never asks.</span>
+    </span>
+    <details>
+      <summary>सुरक्षा विवरण · safety status</summary>
+      <div class="panel" id="safetyPanel"></div>
+    </details>
+  </div>
+</div>
+
+<script src="../js/rail.js"></script>
+<script src="../js/router.js"></script>
+<script>
+(function () {
+  "use strict";
+  var state = HQ.state;
+  var q = HQ.q, el = function (id) { return document.getElementById(id); };
+
+  el("discloseBtn").addEventListener("click", function () {
+    HQ.speak("This is an AI assistant assisting you.", "en");
+  });
+
+  var form = el("consentForm");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var a = el("cData").checked, b = el("cAi").checked;
+    el("cDataErr").hidden = a; el("cAiErr").hidden = b;
+    if (!a || !b) {
+      HQ.toast("दोनों बॉक्स शर्त हैं · both boxes are required", "bad");
+      return;
+    }
+    var name = el("cName").value.trim() || "citizen";
+    var ts = new Date().toISOString();
+    var store = function (remoteRec) {
+      state.consent = {
+        ts: (remoteRec && (remoteRec.consent_timestamp || remoteRec.ts)) || ts,
+        disclosure: true,
+        name: name,
+        local: !remoteRec,
+        disclosureText: HQ.onConsent()
+      };
+      HQ.save();
+      var next = new URLSearchParams(location.search).get("next") || "voice-intake.html";
+      /* only allow in-app targets */
+      if (/^[a-z0-9-]+\.html(\?.*)?$/i.test(next)) location.href = next;
+      else location.href = "voice-intake.html";
+    };
+    if (HQ.mode === "live") {
+      HQ.api.post("/api/consent", { user_name: name }).then(store)
+        .catch(function () { HQ.toast("सर्वर सहमति नहीं दर्ज हो पाई : स्थानीय टाइमस्टैम्प ले लिया (demo)", "bad"); store(null); });
+    } else {
+      store(null);
+    }
+  });
+})();
+</script>
+</body>
+</html>

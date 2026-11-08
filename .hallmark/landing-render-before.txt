@@ -1,0 +1,150 @@
+FAIL 6a frontend\landing.html:28 hero sized in vh: min-height: 78vh on .hero | fix: dvh or svh
+FAIL 7a frontend\css\app.css:80 pure #000: color: #000 (.rail-coin) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:117 pure #fff: color: #fff (.lang-seg button[aria-pressed="true"]) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:120 pure #000: color: #000 (body[data-canvas="story"] .lang-seg button[aria-pressed="true"]) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:182 pure #fff: background: #fff (.card) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:206 pure #fff: color: #fff (.btn-primary) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:212 pure #fff: color: #fff (.btn-danger) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:217 pure #000: color: #000 (.btn-light) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:218 pure #fff: background: #fff (.btn-light:hover) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:234 pure #000: color: #000 (.mic-big[aria-pressed="true"]) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:247 pure #fff: background: #fff (input, select, textarea) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:275 pure #fff: background: #fff (.seg button[aria-selected="true"]) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:286 pure #fff: background: #fff (.ledger) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:367 pure #fff: color: #fff (.toast) | fix: Tint the base toward the anchor hue
+FAIL 7a frontend\css\app.css:401 pure #fff: background: #fff (body[data-canvas="evidence"]) | fix: Tint the base toward the anchor hue
+FAIL 19 frontend\landing.html:6 dash "—" in copy | fix: A comma, a colon, a full stop or parentheses; never a dash
+FAIL 26a frontend\landing.html:1 [1440px] focus ring 2.13:1 against what is behind it on a.btn "अपना केस शुरू करें" | fix: A ring at 3:1 or better against the surface it is drawn over: --color-focus, or a ring colour per band
+FAIL 34 frontend\css\tokens.css:1 no overflow-x: clip on html and body | fix: overflow-x: clip on both html and body
+FAIL 34 frontend\landing.html:1 [320px] horizontal scroll: scrollWidth 355 > viewport 320 | fix: overflow-x: clip on html and body; find the overflowing block
+FAIL 40 frontend\landing.html:1 [1280px] contrast 1.04:1 against the pixels behind < 4.5:1 on span.num "₹100 / दिन" | fix: Raise the contrast to threshold
+FAIL 40 frontend\landing.html:1 [1280px] contrast 1.04:1 against the pixels behind < 4.5:1 on span.hi "टी-समय गुज़रने के बाद हर" | fix: Raise the contrast to threshold
+FAIL 40 frontend\landing.html:1 [1280px] contrast 1.04:1 against the pixels behind < 4.5:1 on span "UPI-तरफ़ा पी2पी और IMPS " | fix: Raise the contrast to threshold
+FAIL 40 frontend\landing.html:1 [1280px] contrast 1.23:1 against the pixels behind < 4.5:1 on summary "सुरक्षा विवरण · safety s" | fix: Raise the contrast to threshold
+FAIL 40 frontend\landing.html:1 [1280px] computed contrast 3.36:1 < 4.5:1 on span.k "Consent (DPDP)" | fix: Raise the contrast to threshold
+FAIL 48 frontend\css\app.css:21 colour literal #f4f4f2 outside tokens (color on body[data-canvas="story"]) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:25 colour literal #f4f4f2 outside tokens (color on .band-story) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:41 colour literal rgba(244,244,242,.78) outside tokens (color on body[data-canvas="story"] .in…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:42 colour literal rgba(244,244,242,.62) outside tokens (color on body[data-canvas="story"] .in…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:80 colour literal #000 outside tokens (color on .rail-coin) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:98 colour literal rgba(255,255,255,.14) outside tokens (border-bottom-color on body[data-canvas="story"] .ap…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:106 colour literal rgba(244,244,242,.62) outside tokens (color on body[data-canvas="story"] .br…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:117 colour literal #fff outside tokens (color on .lang-seg button[aria-pressed…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:118 colour literal rgba(255,255,255,.24) outside tokens (border-color on body[data-canvas="story"] .la…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:119 colour literal rgba(244,244,242,.78) outside tokens (color on body[data-canvas="story"] .la…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:120 colour literal #f4f4f2 outside tokens (background on body[data-canvas="story"] .la…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:120 colour literal #000 outside tokens (color on body[data-canvas="story"] .la…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:131 colour literal rgba(255,255,255,.24) outside tokens (border-color on body[data-canvas="story"] .ch…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:131 colour literal rgba(244,244,242,.78) outside tokens (color on body[data-canvas="story"] .ch…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:161 colour literal rgba(244,244,242,.5) outside tokens (color on body[data-canvas="story"] .st…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:162 colour literal #f4f4f2 outside tokens (color on body[data-canvas="story"] .st…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:178 colour literal rgba(244,244,242,.72) outside tokens (color on body[data-canvas="story"] .ey…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:182 colour literal #fff outside tokens (background on .card) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:187 colour literal rgba(255,255,255,.14) outside tokens (border-color on body[data-canvas="story"] .ca…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:206 colour literal #fff outside tokens (color on .btn-primary) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:207 colour literal #3d41c4 outside tokens (background on .btn-primary:hover) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:212 colour literal #fff outside tokens (color on .btn-danger) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:213 colour literal #c02a3a outside tokens (background on .btn-danger:hover) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:215 colour literal #f4f4f2 outside tokens (color on .btn-ghost-dark) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:215 colour literal rgba(255,255,255,.24) outside tokens (border-color on .btn-ghost-dark) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:216 colour literal rgba(255,255,255,.07) outside tokens (background on .btn-ghost-dark:hover) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:217 colour literal #f4f4f2 outside tokens (background on .btn-light) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:217 colour literal #000 outside tokens (color on .btn-light) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:218 colour literal #fff outside tokens (background on .btn-light:hover) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:234 colour literal #000 outside tokens (color on .mic-big[aria-pressed="true"]) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:247 colour literal #fff outside tokens (background on input, select, textarea) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:275 colour literal #fff outside tokens (background on .seg button[aria-selected="tr…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:275 colour literal rgba(0,0,0,.08) outside tokens (box-shadow on .seg button[aria-selected="tr…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:286 colour literal #fff outside tokens (background on .ledger) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:323 colour literal #c9e8dd outside tokens (background on mark.match) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:326 colour literal rgba(255,255,255,.16) outside tokens (border on .scriptcard) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:328 colour literal rgba(244,244,242,.85) outside tokens (color on .you-bank) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:350 colour literal rgba(255,255,255,.14) outside tokens (border-top-color on body[data-canvas="story"] .sa…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:350 colour literal rgba(244,244,242,.72) outside tokens (color on body[data-canvas="story"] .sa…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:360 colour literal rgba(255,255,255,.18) outside tokens (border-top-color on body[data-canvas="story"] .sa…) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:362 colour literal #5c6167 outside tokens (color on .safety .kv .k) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:367 colour literal #fff outside tokens (color on .toast) | fix: Lift the value into the token block
+FAIL 48 frontend\css\app.css:401 colour literal #fff outside tokens (background on body[data-canvas="evidence"]) | fix: Lift the value into the token block
+FAIL 48 frontend\landing.html:21 colour literal rgba(255,255,255,.14) outside tokens (border-bottom on nav.topnav) | fix: Lift the value into the token block
+FAIL 48 frontend\landing.html:24 colour literal rgba(244,244,242,.72) outside tokens (color on nav.topnav .links a) | fix: Lift the value into the token block
+FAIL 48 frontend\landing.html:25 colour literal #f4f4f2 outside tokens (color on nav.topnav .links a:hover) | fix: Lift the value into the token block
+FAIL 48 frontend\landing.html:25 colour literal rgba(255,255,255,.06) outside tokens (background on nav.topnav .links a:hover) | fix: Lift the value into the token block
+FAIL 48 frontend\landing.html:33 colour literal rgba(244,244,242,.62) outside tokens (color on .statline .k) | fix: Lift the value into the token block
+FAIL 48 frontend\landing.html:35 colour literal rgba(255,255,255,.14) outside tokens (border-top on .h-byteline) | fix: Lift the value into the token block
+FAIL 48 frontend\landing.html:249 inline-style colour literal #d93445 | fix: Lift the value into the token block
+FAIL 48 frontend\landing.html:338 inline-style colour literal rgba(244,244,242,.62) | fix: Lift the value into the token block
+FAIL 49a frontend\landing.html:1 [320px] control "शुरू करें · Start my case" wraps to 2 lines (a.btn.btn-light) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\landing.html:1 [1024px] control "बोलें · Speak" wraps to 2 lines (a) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\landing.html:1 [1024px] control "जाँच · Check" wraps to 2 lines (a) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\landing.html:1 [1024px] control "तैयारी · Prepare" wraps to 2 lines (a) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\landing.html:1 [1024px] control "कॉल · Call" wraps to 2 lines (a) | fix: Shorten the label or set nowrap
+FAIL 49a frontend\landing.html:1 [1024px] control "क़ानून के नंबर" wraps to 2 lines (a) | fix: Shorten the label or set nowrap
+FAIL 54 frontend\landing.html:137 eyebrow "1 बोलें · Speak" before <h2> | fix: Cut it; the heading already says this (craft.md § 7 has twelve other openings)
+FAIL 54 frontend\landing.html:194 eyebrow "2 जाँच · Check" before <h2> | fix: Cut it; the heading already says this (craft.md § 7 has twelve other openings)
+FAIL 54 frontend\landing.html:208 eyebrow "3 तैयारी · Prepare" before <h2> | fix: Cut it; the heading already says this (craft.md § 7 has twelve other openings)
+FAIL 54 frontend\landing.html:252 eyebrow "4 कॉल · Call" before <h2> | fix: Cut it; the heading already says this (craft.md § 7 has twelve other openings)
+FAIL 54 frontend\landing.html:266 eyebrow "5 सबूत · Prove" before <h2> | fix: Cut it; the heading already says this (craft.md § 7 has twelve other openings)
+FAIL 56 frontend\css\app.css:92 two sticky top:0 elements: nav.topnav + .app-head | fix: Offset the second sticky by banner height
+FAIL 58 frontend\landing.html:1 [1440px] hero carries 4 text blocks before its actions | fix: Headline, one sentence, actions; delete the rest
+FAIL 62 frontend\css\app.css:291 .ledger-row is hidden at rest (opacity: 0) and depends on a script to appear | fix: Visible by default: scope the hidden state under a .js class the script adds, or animate from visible with @starting-style
+FAIL 62 frontend\css\app.css:313 .condense > * is hidden at rest (opacity: 0) and depends on a script to appear | fix: Visible by default: scope the hidden state under a .js class the script adds, or animate from visible with @starting-style
+FAIL 63 frontend\landing.html:54 middle-dot meta string "बोलें · Speak जाँच · Check तैयारी · Prepare कॉल ·…" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+FAIL 63 frontend\landing.html:122 middle-dot meta string "शुरू करें · Start my case कहानी पहले · the story …" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+FAIL 63 frontend\landing.html:128 middle-dot meta string "हर कदम पर समय-चिह्नित DPDP सहमति · 0 स्वायत्त कॉल…" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+FAIL 63 frontend\landing.html:142 arrow glued to the label "बोलना शुरू करें →" | fix: A verb as the label; the link already says it goes somewhere
+FAIL 63 frontend\landing.html:199 arrow glued to the label "मेरा हिसाब देखें →" | fix: A verb as the label; the link already says it goes somewhere
+FAIL 63 frontend\landing.html:213 arrow glued to the label "ड्राफ़्ट बनाइए →" | fix: A verb as the label; the link already says it goes somewhere
+FAIL 63 frontend\landing.html:257 arrow glued to the label "कॉल की तैयारी →" | fix: A verb as the label; the link already says it goes somewhere
+FAIL 63 frontend\landing.html:271 arrow glued to the label "डॉसिये देखें →" | fix: A verb as the label; the link already says it goes somewhere
+FAIL 63 frontend\landing.html:341 middle-dot meta string "सिंथेटिक डेमो · कोई वास्तविक PII नहीं · कोई स्वाय…" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+FAIL 63 frontend\landing.html:342 middle-dot meta string "Gnani Prisma v2.5 · Evon v3.3 · Timbre v2.5/v3.0 …" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+REFLEX 7b frontend\css\app.css:21 pure #000: background: var(--story-black) (body[data-canvas="story"]) | fix: Tint the base toward the anchor hue
+REFLEX 7b frontend\css\app.css:25 pure #000: background: var(--story-black) (.band-story) | fix: Tint the base toward the anchor hue
+REFLEX 7b frontend\css\app.css:350 pure #000: background: var(--story-black) (body[data-canvas="story"] .safety) | fix: Tint the base toward the anchor hue
+REFLEX 7b frontend\landing.html:21 pure #000: background: var(--story-black) (nav.topnav) | fix: Tint the base toward the anchor hue
+REFLEX 24b frontend\css\app.css:95 padding: 14px 24px 14px var(--rail-g… (off the 4px scale) on .app-head | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:101 gap: 10px (off the 4px scale) on .brand | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:108 gap: 10px (off the 4px scale) on .head-right | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:125 padding: 6px 12px (off the 4px scale) on .chip | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:136 padding: 18px 24px 6px var(--rail-gu… (off the 4px scale) on .stepbar | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:151 margin: 0 10px (off the 4px scale) on .stepbar li::after | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:176 gap: 10px (off the 4px scale) on .eyebrow | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:196 gap: 10px (off the 4px scale) on .btn | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:240 gap: 6px (off the 4px scale) on .field | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:249 padding: 10px 14px (off the 4px scale) on input, select, textarea | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:252 padding: 14px (off the 4px scale) on textarea | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:270 padding: 3px (off the 4px scale) on .seg | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:272 padding: 6px 16px (off the 4px scale) on .seg button | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:278 gap: 10px (off the 4px scale) on .statestrip | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:279 margin-top: 3px (off the 4px scale) on .statestrip .ic | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:289 padding: 18px 20px (off the 4px scale) on .ledger-row | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:302 padding: 10px 0 18px (off the 4px scale) on .timeline li | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:328 gap: 14px (off the 4px scale) on .you-bank | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:348 padding: 10px 24px (off the 4px scale) on .safety | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:359 margin-top: 10px (off the 4px scale) on .safety .panel | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:359 padding-top: 10px (off the 4px scale) on .safety .panel | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:359 gap: 6px (off the 4px scale) on .safety .panel | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:368 padding: 12px 18px (off the 4px scale) on .toast | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:376 gap: 10px (off the 4px scale) on .kv-list | fix: Use the 4px spacing scale
+REFLEX 24b frontend\css\app.css:377 padding-top: 10px (off the 4px scale) on .kv-list .kv | fix: Use the 4px spacing scale
+REFLEX 24b frontend\landing.html:22 padding-top: 14px (off the 4px scale) on nav.topnav .wrap | fix: Use the 4px spacing scale
+REFLEX 24b frontend\landing.html:22 padding-bottom: 14px (off the 4px scale) on nav.topnav .wrap | fix: Use the 4px spacing scale
+REFLEX 24b frontend\landing.html:23 gap: 6px (off the 4px scale) on nav.topnav .links | fix: Use the 4px spacing scale
+REFLEX 24b frontend\landing.html:30 margin-top: 18px (off the 4px scale) on .hero .thesis | fix: Use the 4px spacing scale
+REFLEX 24b frontend\landing.html:35 padding-top: 14px (off the 4px scale) on .h-byteline | fix: Use the 4px spacing scale
+REFLEX 24b frontend\landing.html:35 margin-top: 14px (off the 4px scale) on .h-byteline | fix: Use the 4px spacing scale
+REFLEX 24b frontend\landing.html:40 gap: 10px (off the 4px scale) on .journey .stepbar li | fix: Use the 4px spacing scale
+REFLEX 25 frontend\landing.html:1 [1440px] running prose set too wide: p.xsmall about 90 characters a line | fix: Cap the measure at 45 to 75ch
+REFLEX 59 frontend\landing.html:1 [1440px] smallest gap between sections is 96px (gaps: 160, 164, 164, 164, 164, 156, 96, 130) | fix: 120px or more between sections, by the --section-gap steps
+REFLEX 64 frontend\css\app.css:177 monospace label voice on .eyebrow .n | fix: Labels in the body face, a step smaller, sentence case; mono only for code and figures
+WARN 41 frontend\css\app.css:187 dark surface (L 21%) on body[data-canvas="story"] .card sets no text colour | fix: Swap text to paper in the same rule
+WARN 41 frontend\css\app.css:326 dark surface (L 21%) on .scriptcard sets no text colour | fix: Swap text to paper in the same rule
+WARN 41 frontend\css\tokens.css:7 --ink ~ --story-surface on :root | fix: Use accent-ink or paper for the label
+WARN 49 frontend\landing.html:63 long clickable label "शुरू करें · Start my case" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\landing.html:123 long clickable label "शुरू करें · Start my case" without nowrap | fix: Shorten the label or set nowrap
+WARN 49 frontend\landing.html:126 long clickable label "कहानी पहले · the story first" without nowrap | fix: Shorten the label or set nowrap
+WARN 58 frontend\landing.html:75 hero paragraph runs 13 words | fix: One sentence, twelve words or fewer
+WARN F1 frontend\landing.html:139 straight quote in prose x7 (first: "Bhaiya 18 ko 3,) | fix: Use typographic quotes: “ ” ’
+WARN F3 frontend\css\app.css:27 no text-wrap: balance on any display head (3 head rule(s), e.g. p, h1, h2, h3, h4) | fix: Add text-wrap: balance to h1/h2-level heads
+WARN F3 frontend\landing.html:29 no text-wrap: balance on any display head (4 head rule(s), e.g. .hero h1) | fix: Add text-wrap: balance to h1/h2-level heads
+WARN F26 frontend\landing.html:1 [375px] h2 "अपनी कहनी अपने शब्दों में कहिए।" ends on a stub; h2 "जो कहा गया, वही हिसाब में आया।" ends on a stub; h2 "एप… | fix: text-wrap: balance on heads and pretty on body copy, or rewrite the line; a <br> goes only between phrases and is checked at 375

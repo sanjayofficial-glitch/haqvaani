@@ -1,0 +1,1063 @@
+{
+ "v": 1,
+ "at": "2026-11-06T19:06:59.151Z",
+ "scope": "app",
+ "summary": {
+  "fails": 224,
+  "reflex": 51,
+  "warns": 56
+ },
+ "files": {
+  "frontend\\screens\\assisted-call.html": {
+   "handlers": [],
+   "links": [
+    "../landing.html",
+    "docket-capture.html"
+   ],
+   "fields": [],
+   "hooks": [],
+   "ids": [
+    "afterRow",
+    "againBtn",
+    "listenBtn",
+    "listenHint",
+    "modeChip",
+    "pasteTa",
+    "safetyPanel",
+    "statusPill",
+    "statusText",
+    "stepMount",
+    "stopBtn",
+    "tLabel",
+    "toDocket",
+    "transcript",
+    "useTextBtn"
+   ],
+   "scripts": [
+    "../js/rail.js",
+    "../js/router.js"
+   ]
+  },
+  "frontend\\screens\\call-prep.html": {
+   "handlers": [],
+   "links": [
+    "../landing.html",
+    "assisted-call.html",
+    "complaint-builder.html"
+   ],
+   "fields": [],
+   "hooks": [],
+   "ids": [
+    "modeChip",
+    "safetyPanel",
+    "sayEn",
+    "sayHi",
+    "speakBtn",
+    "stepMount"
+   ],
+   "scripts": [
+    "../js/rail.js",
+    "../js/router.js"
+   ]
+  },
+  "frontend\\screens\\complaint-builder.html": {
+   "handlers": [],
+   "links": [
+    "../landing.html",
+    "call-prep.html",
+    "rights-check.html"
+   ],
+   "fields": [],
+   "hooks": [],
+   "ids": [
+    "blockedCount",
+    "claimHint",
+    "claimRef",
+    "draftLabel",
+    "draftSrc",
+    "draftText",
+    "ev",
+    "evList",
+    "fixCheck",
+    "goPrep",
+    "modeChip",
+    "restoreBtn",
+    "safetyPanel",
+    "secretErr",
+    "secretWarn",
+    "stepMount",
+    "tabBank",
+    "tabEmail",
+    "tabWhatsApp"
+   ],
+   "scripts": [
+    "../js/rail.js",
+    "../js/router.js"
+   ]
+  },
+  "frontend\\screens\\consent.html": {
+   "handlers": [],
+   "links": [
+    "../landing.html",
+    "start-case.html",
+    "voice-intake.html"
+   ],
+   "fields": [],
+   "hooks": [],
+   "ids": [
+    "agreeBtn",
+    "cAi",
+    "cAiErr",
+    "cData",
+    "cDataErr",
+    "cName",
+    "cNameHint",
+    "consentForm",
+    "discloseBtn",
+    "modeChip",
+    "safetyPanel",
+    "stepMount"
+   ],
+   "scripts": [
+    "../js/rail.js",
+    "../js/router.js"
+   ]
+  },
+  "frontend\\screens\\docket-capture.html": {
+   "handlers": [],
+   "links": [
+    "../landing.html",
+    "assisted-call.html",
+    "post-call.html"
+   ],
+   "fields": [],
+   "hooks": [],
+   "ids": [
+    "ctaRow",
+    "docketBig",
+    "failBlock",
+    "failReasons",
+    "hearText",
+    "manualId",
+    "manualSave",
+    "modeChip",
+    "noCall",
+    "okCheck",
+    "safetyPanel",
+    "skipLink",
+    "stamp",
+    "stepMount",
+    "verifiedBlock"
+   ],
+   "scripts": [
+    "../js/rail.js",
+    "../js/router.js"
+   ]
+  },
+  "frontend\\screens\\dossier.html": {
+   "handlers": [],
+   "links": [
+    "../landing.html",
+    "complaint-builder.html",
+    "start-case.html"
+   ],
+   "fields": [],
+   "hooks": [],
+   "ids": [
+    "caseId",
+    "caseStampNote",
+    "dlJson",
+    "draftMeta",
+    "draftText",
+    "factsLedger",
+    "modeChip",
+    "printBtn",
+    "safetyKv",
+    "safetyPanel",
+    "srcNote",
+    "stamp",
+    "stepMount"
+   ],
+   "scripts": [
+    "../js/rail.js",
+    "../js/router.js"
+   ]
+  },
+  "frontend\\screens\\fact-review.html": {
+   "handlers": [],
+   "links": [
+    "../landing.html",
+    "rights-check.html",
+    "voice-intake.html"
+   ],
+   "fields": [
+    "amount",
+    "bank_name",
+    "date",
+    "dispute_type",
+    "utr"
+   ],
+   "hooks": [],
+   "ids": [
+    "badIc",
+    "demoDiff",
+    "errAmount",
+    "errDate",
+    "errType",
+    "errUtr",
+    "fAmount",
+    "fBank",
+    "fCondense",
+    "fDate",
+    "fType",
+    "fUtr",
+    "factsForm",
+    "goRights",
+    "hintBank",
+    "hintDate",
+    "hintUtr",
+    "modeChip",
+    "okIc",
+    "safetyPanel",
+    "srcNote",
+    "stepMount",
+    "typeHint",
+    "validity",
+    "validityText"
+   ],
+   "scripts": [
+    "../js/rail.js",
+    "../js/router.js"
+   ]
+  },
+  "frontend\\screens\\post-call.html": {
+   "handlers": [],
+   "links": [
+    "../landing.html",
+    "assisted-call.html",
+    "docket-capture.html",
+    "dossier.html",
+    "https://cms.rbi.org.in/"
+   ],
+   "fields": [],
+   "hooks": [],
+   "ids": [
+    "brushBadge",
+    "brushNote",
+    "docketNote",
+    "docketShow",
+    "modeChip",
+    "nextList",
+    "noCall",
+    "safetyPanel",
+    "sayHi",
+    "speakBtn",
+    "stepMount",
+    "sumBlock"
+   ],
+   "scripts": [
+    "../js/rail.js",
+    "../js/router.js"
+   ]
+  },
+  "frontend\\screens\\rights-check.html": {
+   "handlers": [],
+   "links": [
+    "../landing.html",
+    "complaint-builder.html",
+    "fact-review.html",
+    "https://www.rbi.org.in/"
+   ],
+   "fields": [],
+   "hooks": [],
+   "ids": [
+    "calcRefs",
+    "calcText",
+    "demoMismatch",
+    "ledger",
+    "modeChip",
+    "safetyPanel",
+    "srcNote",
+    "stepMount",
+    "timeline",
+    "vClaim",
+    "vDays",
+    "vPenalty",
+    "vTotal",
+    "zeroLiability",
+    "zlEn",
+    "zlNote"
+   ],
+   "scripts": [
+    "../js/rail.js",
+    "../js/router.js"
+   ]
+  },
+  "frontend\\screens\\start-case.html": {
+   "handlers": [],
+   "links": [
+    "../landing.html",
+    "consent.html?next=voice-intake.html"
+   ],
+   "fields": [],
+   "hooks": [],
+   "ids": [
+    "modeChip",
+    "safetyPanel",
+    "stepMount"
+   ],
+   "scripts": [
+    "../js/rail.js",
+    "../js/router.js"
+   ]
+  },
+  "frontend\\screens\\voice-intake.html": {
+   "handlers": [],
+   "links": [
+    "../landing.html",
+    "fact-review.html"
+   ],
+   "fields": [],
+   "hooks": [],
+   "ids": [
+    "afterRow",
+    "againBtn",
+    "fileBtn",
+    "fileInput",
+    "fileNote",
+    "micBtn",
+    "micHint",
+    "modeChip",
+    "pauseBtn",
+    "safetyPanel",
+    "stepMount",
+    "stopBtn",
+    "tLabel",
+    "toFacts",
+    "transcript",
+    "wave"
+   ],
+   "scripts": [
+    "../js/rail.js",
+    "../js/router.js"
+   ]
+  }
+ },
+ "wiring": {
+  "handlers": [],
+  "links": [
+   "../landing.html",
+   "assisted-call.html",
+   "call-prep.html",
+   "complaint-builder.html",
+   "consent.html?next=voice-intake.html",
+   "docket-capture.html",
+   "dossier.html",
+   "fact-review.html",
+   "https://cms.rbi.org.in/",
+   "https://www.rbi.org.in/",
+   "post-call.html",
+   "rights-check.html",
+   "start-case.html",
+   "voice-intake.html"
+  ],
+  "fields": [
+   "amount",
+   "bank_name",
+   "date",
+   "dispute_type",
+   "utr"
+  ],
+  "hooks": [],
+  "ids": [
+   "afterRow",
+   "againBtn",
+   "agreeBtn",
+   "badIc",
+   "blockedCount",
+   "brushBadge",
+   "brushNote",
+   "cAi",
+   "cAiErr",
+   "cData",
+   "cDataErr",
+   "cName",
+   "cNameHint",
+   "calcRefs",
+   "calcText",
+   "caseId",
+   "caseStampNote",
+   "claimHint",
+   "claimRef",
+   "consentForm",
+   "ctaRow",
+   "demoDiff",
+   "demoMismatch",
+   "discloseBtn",
+   "dlJson",
+   "docketBig",
+   "docketNote",
+   "docketShow",
+   "draftLabel",
+   "draftMeta",
+   "draftSrc",
+   "draftText",
+   "errAmount",
+   "errDate",
+   "errType",
+   "errUtr",
+   "ev",
+   "evList",
+   "fAmount",
+   "fBank",
+   "fCondense",
+   "fDate",
+   "fType",
+   "fUtr",
+   "factsForm",
+   "factsLedger",
+   "failBlock",
+   "failReasons",
+   "fileBtn",
+   "fileInput",
+   "fileNote",
+   "fixCheck",
+   "goPrep",
+   "goRights",
+   "hearText",
+   "hintBank",
+   "hintDate",
+   "hintUtr",
+   "ledger",
+   "listenBtn",
+   "listenHint",
+   "manualId",
+   "manualSave",
+   "micBtn",
+   "micHint",
+   "modeChip",
+   "nextList",
+   "noCall",
+   "okCheck",
+   "okIc",
+   "pasteTa",
+   "pauseBtn",
+   "printBtn",
+   "restoreBtn",
+   "safetyKv",
+   "safetyPanel",
+   "sayEn",
+   "sayHi",
+   "secretErr",
+   "secretWarn",
+   "skipLink",
+   "speakBtn",
+   "srcNote",
+   "stamp",
+   "statusPill",
+   "statusText",
+   "stepMount",
+   "stopBtn",
+   "sumBlock",
+   "tLabel",
+   "tabBank",
+   "tabEmail",
+   "tabWhatsApp",
+   "timeline",
+   "toDocket",
+   "toFacts",
+   "transcript",
+   "typeHint",
+   "useTextBtn",
+   "vClaim",
+   "vDays",
+   "vPenalty",
+   "vTotal",
+   "validity",
+   "validityText",
+   "verifiedBlock",
+   "wave",
+   "zeroLiability",
+   "zlEn",
+   "zlNote"
+  ]
+ },
+ "scripts": {
+  "frontend\\screens\\assisted-call.html": {
+   "queried": [
+    "#hqToast",
+    "#stepMount",
+    ".rail-coin",
+    ".rail-fill",
+    "[data-tone]"
+   ],
+   "hooked": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "dom": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "hides": true
+  },
+  "frontend\\screens\\call-prep.html": {
+   "queried": [
+    "#hqToast",
+    "#stepMount",
+    ".rail-coin",
+    ".rail-fill",
+    "[data-tone]"
+   ],
+   "hooked": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "dom": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "hides": false
+  },
+  "frontend\\screens\\complaint-builder.html": {
+   "queried": [
+    "#hqToast",
+    "#stepMount",
+    ".rail-coin",
+    ".rail-fill",
+    "[data-tone]"
+   ],
+   "hooked": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "dom": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "hides": true
+  },
+  "frontend\\screens\\consent.html": {
+   "queried": [
+    "#hqToast",
+    "#stepMount",
+    ".rail-coin",
+    ".rail-fill",
+    "[data-tone]"
+   ],
+   "hooked": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "dom": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "hides": true
+  },
+  "frontend\\screens\\docket-capture.html": {
+   "queried": [
+    "#hqToast",
+    "#stepMount",
+    ".rail-coin",
+    ".rail-fill",
+    "[data-tone]"
+   ],
+   "hooked": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "dom": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "hides": true
+  },
+  "frontend\\screens\\dossier.html": {
+   "queried": [
+    "#hqToast",
+    "#stepMount",
+    ".rail-coin",
+    ".rail-fill",
+    "[data-tone]"
+   ],
+   "hooked": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "dom": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "hides": true
+  },
+  "frontend\\screens\\fact-review.html": {
+   "queried": [
+    "#fCondense",
+    "#hqToast",
+    "#stepMount",
+    ".rail-coin",
+    ".rail-fill",
+    "[data-tone]"
+   ],
+   "hooked": [
+    "#fCondense",
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "dom": [
+    "#fCondense",
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "hides": true
+  },
+  "frontend\\screens\\post-call.html": {
+   "queried": [
+    "#hqToast",
+    "#stepMount",
+    ".rail-coin",
+    ".rail-fill",
+    "[data-tone]"
+   ],
+   "hooked": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "dom": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "hides": true
+  },
+  "frontend\\screens\\rights-check.html": {
+   "queried": [
+    "#hqToast",
+    "#stepMount",
+    ".h3",
+    ".rail-coin",
+    ".rail-fill",
+    "[data-tone]"
+   ],
+   "hooked": [
+    "#stepMount",
+    ".h3",
+    "[data-tone]"
+   ],
+   "dom": [
+    "#stepMount",
+    ".h3",
+    "[data-tone]"
+   ],
+   "hides": true
+  },
+  "frontend\\screens\\start-case.html": {
+   "queried": [
+    "#hqToast",
+    "#stepMount",
+    ".rail-coin",
+    ".rail-fill",
+    "[data-tone]"
+   ],
+   "hooked": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "dom": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "hides": false
+  },
+  "frontend\\screens\\voice-intake.html": {
+   "queried": [
+    "#hqToast",
+    "#stepMount",
+    ".rail-coin",
+    ".rail-fill",
+    "[data-tone]"
+   ],
+   "hooked": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "dom": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "hides": true
+  }
+ },
+ "pages": {
+  "frontend\\screens\\assisted-call.html": {
+   "links": [
+    "/D:/haqvaani/frontend/landing.html",
+    "start-case.html"
+   ],
+   "fields": [
+    "#cData",
+    "#cAi",
+    "#cName"
+   ],
+   "actions": [],
+   "forms": [
+    {
+     "key": "#consentForm",
+     "attrs": [
+      "method=get",
+      "novalidate"
+     ],
+     "fields": [
+      "#cData",
+      "#cAi",
+      "#cName"
+     ],
+     "hidden": [],
+     "submits": 1,
+     "controls": [
+      "input[type=checkbox]",
+      "input[type=text]",
+      "button[type=submit]"
+     ]
+    }
+   ],
+   "hooked": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "headings": [
+    "माइक से पहले, सहमति आपके समय की।"
+   ],
+   "figures": [],
+   "images": [],
+   "controls": 7,
+   "words": 295
+  },
+  "frontend\\screens\\call-prep.html": {
+   "links": [
+    "/D:/haqvaani/frontend/landing.html",
+    "assisted-call.html",
+    "complaint-builder.html"
+   ],
+   "fields": [],
+   "actions": [],
+   "forms": [],
+   "hooked": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "headings": [
+    "आप डायल करेंगे। हक़-वाणी सुनेगा।"
+   ],
+   "figures": [
+    "2026",
+    "2019",
+    "02.01"
+   ],
+   "images": [],
+   "controls": 3,
+   "words": 201
+  },
+  "frontend\\screens\\complaint-builder.html": {
+   "links": [
+    "/D:/haqvaani/frontend/landing.html",
+    "call-prep.html",
+    "rights-check.html"
+   ],
+   "fields": [
+    "#draftText",
+    "#ev0",
+    "#ev1",
+    "#ev2",
+    "#ev3",
+    "#ev4",
+    "#fixCheck"
+   ],
+   "actions": [],
+   "forms": [],
+   "hooked": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "headings": [
+    "आपकी शिकायत — पढ़कर, बदल भी सकते हैं।",
+    "सबूत साथ निभाएँ · evidence checklist"
+   ],
+   "figures": [],
+   "images": [],
+   "controls": 13,
+   "words": 245
+  },
+  "frontend\\screens\\consent.html": {
+   "links": [
+    "/D:/haqvaani/frontend/landing.html",
+    "start-case.html"
+   ],
+   "fields": [
+    "#cData",
+    "#cAi",
+    "#cName"
+   ],
+   "actions": [],
+   "forms": [
+    {
+     "key": "#consentForm",
+     "attrs": [
+      "method=get",
+      "novalidate"
+     ],
+     "fields": [
+      "#cData",
+      "#cAi",
+      "#cName"
+     ],
+     "hidden": [],
+     "submits": 1,
+     "controls": [
+      "input[type=checkbox]",
+      "input[type=text]",
+      "button[type=submit]"
+     ]
+    }
+   ],
+   "hooked": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "headings": [
+    "माइक से पहले, सहमति आपके समय की।"
+   ],
+   "figures": [],
+   "images": [],
+   "controls": 7,
+   "words": 295
+  },
+  "frontend\\screens\\docket-capture.html": {
+   "links": [
+    "/D:/haqvaani/frontend/landing.html",
+    "assisted-call.html",
+    "post-call.html"
+   ],
+   "fields": [
+    "#okCheck",
+    "#manualId"
+   ],
+   "actions": [],
+   "forms": [],
+   "hooked": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "headings": [
+    "डॉकेट नंबर पकड़ लिया गया?"
+   ],
+   "figures": [],
+   "images": [],
+   "controls": 5,
+   "words": 79
+  },
+  "frontend\\screens\\dossier.html": {
+   "links": [
+    "/D:/haqvaani/frontend/landing.html",
+    "complaint-builder.html",
+    "start-case.html"
+   ],
+   "fields": [],
+   "actions": [],
+   "forms": [],
+   "hooked": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "headings": [
+    "पूरा मामला, एक फ़ोल्डर में।"
+   ],
+   "figures": [
+    "3,200",
+    "2026",
+    "629188340112",
+    "2019",
+    "3,800"
+   ],
+   "images": [],
+   "controls": 4,
+   "words": 277
+  },
+  "frontend\\screens\\fact-review.html": {
+   "links": [
+    "/D:/haqvaani/frontend/landing.html",
+    "rights-check.html",
+    "voice-intake.html"
+   ],
+   "fields": [
+    "amount",
+    "date",
+    "utr",
+    "dispute_type",
+    "bank_name"
+   ],
+   "actions": [],
+   "forms": [
+    {
+     "key": "#factsForm",
+     "attrs": [
+      "method=get",
+      "novalidate"
+     ],
+     "fields": [
+      "amount",
+      "date",
+      "utr",
+      "dispute_type",
+      "bank_name"
+     ],
+     "hidden": [],
+     "submits": 0,
+     "controls": [
+      "input[type=number][name=amount]",
+      "input[type=date][name=date]",
+      "input[type=text][name=utr]",
+      "select[name=dispute_type]",
+      "input[type=text][name=bank_name]"
+     ]
+    }
+   ],
+   "hooked": [
+    "#fCondense",
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "headings": [
+    "चार सच। एक बार जाँच लीजिए।"
+   ],
+   "figures": [
+    "3,200",
+    "90days"
+   ],
+   "images": [],
+   "controls": 7,
+   "words": 312
+  },
+  "frontend\\screens\\post-call.html": {
+   "links": [
+    "/D:/haqvaani/frontend/landing.html",
+    "assisted-call.html",
+    "dossier.html",
+    "docket-capture.html"
+   ],
+   "fields": [],
+   "actions": [],
+   "forms": [],
+   "hooked": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "headings": [
+    "कॉल समाप्त — यही रहा निष्कर्ष।"
+   ],
+   "figures": [],
+   "images": [],
+   "controls": 3,
+   "words": 82
+  },
+  "frontend\\screens\\rights-check.html": {
+   "links": [
+    "/D:/haqvaani/frontend/landing.html",
+    "https://www.rbi.org.in/",
+    "complaint-builder.html",
+    "fact-review.html"
+   ],
+   "fields": [],
+   "actions": [],
+   "forms": [],
+   "hooked": [
+    "#stepMount",
+    ".h3",
+    "[data-tone]"
+   ],
+   "headings": [
+    "rbi नियम कहते हैं — आपको कितना मिलना चाहिए।"
+   ],
+   "figures": [
+    "2026",
+    "6days",
+    "3,200",
+    "3,800"
+   ],
+   "images": [],
+   "controls": 2,
+   "words": 160
+  },
+  "frontend\\screens\\start-case.html": {
+   "links": [
+    "/D:/haqvaani/frontend/landing.html",
+    "consent.html?next=voice-intake.html"
+   ],
+   "fields": [],
+   "actions": [],
+   "forms": [],
+   "hooked": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "headings": [
+    "आपकी शिकायत किस तरह की है?",
+    "पैसे कटे, व्यक्ति तक नहीं पहुँचे",
+    "atm कैश नहीं निकला, हिसाब से कट गया",
+    "जो मैंने नहीं किया, वह कटा (धोखा)",
+    "कहने नहीं का पता — बस पैसे कटे"
+   ],
+   "figures": [
+    "2019",
+    "2023"
+   ],
+   "images": [],
+   "controls": 2,
+   "words": 204
+  },
+  "frontend\\screens\\voice-intake.html": {
+   "links": [
+    "/D:/haqvaani/frontend/landing.html",
+    "start-case.html"
+   ],
+   "fields": [
+    "#cData",
+    "#cAi",
+    "#cName"
+   ],
+   "actions": [],
+   "forms": [
+    {
+     "key": "#consentForm",
+     "attrs": [
+      "method=get",
+      "novalidate"
+     ],
+     "fields": [
+      "#cData",
+      "#cAi",
+      "#cName"
+     ],
+     "hidden": [],
+     "submits": 1,
+     "controls": [
+      "input[type=checkbox]",
+      "input[type=text]",
+      "button[type=submit]"
+     ]
+    }
+   ],
+   "hooked": [
+    "#stepMount",
+    "[data-tone]"
+   ],
+   "headings": [
+    "माइक से पहले, सहमति आपके समय की।"
+   ],
+   "figures": [],
+   "images": [],
+   "controls": 7,
+   "words": 295
+  }
+ }
+}

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="hi-IN" data-lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>डॉकेट की जाँच · Docket capture: हक़-वाणी</title>
+<meta name="description" content="बैंक के बोले डॉकेट नंबर की शब्दशः जाँच : सबूत के तौर पर छापा जाता है। Verbatim docket verification.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/app.css">
+<style>
+  .big-id { font-family: var(--font-mono); font-size: clamp(30px, 5.5vw, 52px); letter-spacing: -0.01em; }
+  .stamp-wrap { width: 74px; height: 74px; }
+  .hear-strip { background: var(--story-black); color: var(--story-ink); border-radius: var(--radius-card);
+                padding: 20px 22px; border: 1px solid var(--story-edge-3); }
+  .hear-strip .t-label { font-size: 12.5px; color: var(--story-ink-dim); margin-bottom: 6px; }
+</style>
+</head>
+<body data-page="app" data-step="3" data-canvas="evidence" data-tone="cyan">
+
+<header class="app-head">
+  <a class="brand" href="../landing.html" aria-label="हक़-वाणी मुख्य पेज">
+    <span class="hi" lang="hi">हक़-वाणी</span><small>Docket capture</small>
+  </a>
+  <div class="head-right">
+    <span class="chip" id="modeChip" data-mode="demo"><span class="dot"></span>Synthetic demo</span>
+    <div class="lang-seg" role="group" aria-label="भाषा">
+      <button type="button" data-lang="hi">हिन्दी</button>
+      <button type="button" data-lang="en">English</button>
+    </div>
+  </div>
+</header>
+
+<div id="stepMount"></div>
+
+<main class="app-main narrow">
+  <div class="beat-head stack">
+    <h1 class="hi" lang="hi">डॉकेट नंबर पकड़ लिया गया?</h1>
+    <p class="when-en ink-2">The one string of digits that proves your complaint exists. Verbatim match only :
+    the same characters the bank spoke, in the same order.</p>
+  </div>
+
+  <section class="stack" style="margin-top:24px" aria-label="डॉकेट जाँच">
+    <!-- no call result yet => go back -->
+    <div class="card" id="noCall" hidden>
+      <p class="hi" lang="hi" style="margin:0 0 12px">पहले कॉल सुनाई नहीं दी गई।</p>
+      <a class="btn btn-primary" href="assisted-call.html">कॉल पर वापस · back to the call</a>
+    </div>
+
+    <!-- verified: stamp + marked verbatim proof -->
+    <div id="verifiedBlock" class="stack" hidden>
+      <div class="card" style="display:flex; gap:18px; align-items:center">
+        <svg class="stamp-draw stamp-wrap" id="stamp" viewBox="0 0 56 56" aria-hidden="true">
+          <circle cx="28" cy="28" r="25" fill="none" stroke="var(--verified-green)" stroke-width="2.5"
+                  stroke-dasharray="158" stroke-dashoffset="158"/>
+          <polyline points="16,29 25,38 41,20" fill="none" stroke="var(--verified-green)" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="34" stroke-dashoffset="34"/>
+        </svg>
+        <div>
+          <p class="xsmall ok" style="font-weight:600; margin:0 0 4px">शाबाश · verbatim verified</p>
+          <p class="big-id" id="docketBig" style="margin:0">…</p>
+          <p class="xsmall ink-3" style="margin-top:6px">बिल्कुल इसी रूप में सुना गया · captured exactly as spoken</p>
+        </div>
+      </div>
+      <div class="hear-strip">
+        <div class="t-label">सबूत · how it matched : डॉकेट काले उभार में highlighted in the strip</div>
+        <div class="t-text" id="hearText" lang="hi">…</div>
+      </div>
+      <div class="check-row card card-flat" style="padding:16px 18px">
+        <input type="checkbox" id="okCheck">
+        <label for="okCheck" style="margin:0">
+          <span class="hi" lang="hi">मैंने खुद सुना/पढ़ा : यह नंबर मेरी शिकायत का डॉकेट है।</span>
+          <span class="xsmall" style="display:block;color:var(--ink-3)">I heard it myself : this is my complaint's docket.</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- not verified: honest failure reasons -->
+    <div id="failBlock" class="stack" hidden>
+      <div class="card card-flat" style="border-left:4px solid var(--blocked-red)">
+        <p class="h3" style="margin:0 0 8px">अंक पक्के नहीं दिखे · could not verify the digits</p>
+        <ul class="stack" id="failReasons" style="gap:0; margin:0; padding-left:18px"></ul>
+      </div>
+      <div class="card">
+        <p class="hi" lang="hi" style="margin:0 0 10px">जो आपने अपने कानों से सुना, वही लिखिए : आपका शब्द ही माना जाएगा।
+        बिना पुष्टि के भी आगे बढ़ सकते हैं, पोस्ट-कॉल में साफ़ लिखा रहेगा।</p>
+        <div class="field">
+          <label for="manualId">नंबर जैसे सुना, वैसा लिखिए · type the number as you heard it</label>
+          <input id="manualId" type="text" autocomplete="off" spellcheck="false" placeholder="SR-884120">
+        </div>
+        <div class="row" style="margin-top:14px">
+          <button class="btn btn-primary" id="manualSave" type="button">मेरी पक्ष पर दर्ज करें · record my recall</button>
+        </div>
+      </div>
+      <div class="row">
+        <a class="btn btn-quiet" href="assisted-call.html">फिर सुनें <span class="en">listen again</span></a>
+        <a class="btn btn-quiet" id="skipLink" href="post-call.html">बिना नंबर आगे बढ़ें <span class="en">continue without a docket</span></a>
+      </div>
+    </div>
+
+    <div class="row" id="ctaRow" hidden>
+      <a class="btn btn-quiet" href="post-call.html">
+        कॉल समाप्त : आगे क्या · post-call notes
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a class="btn btn-quiet" href="assisted-call.html">फिर सुनें <span class="en">listen again</span></a>
+    </div>
+  </section>
+</main>
+
+<div class="safety" role="region" aria-label="सुरक्षा जानकारी">
+  <div class="safety-in">
+    <span class="short">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span class="hi" lang="hi">कभी OTP, PIN या CVV न बोलें : बैंक इनके लिए कभी पूछता नहीं।</span>
+      <span class="when-en">Never share OTP, PIN or CVV : the bank never asks.</span>
+    </span>
+    <details>
+      <summary>सुरक्षा विवरण · safety status</summary>
+      <div class="panel" id="safetyPanel"></div>
+    </details>
+  </div>
+</div>
+
+<script src="../js/rail.js"></script>
+<script src="../js/router.js"></script>
+<script>
+(function () {
+  "use strict";
+  var state = HQ.state;
+  var q = HQ.q, el = function (id) { return document.getElementById(id); };
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var call = state.call;
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+
+  if (!call) {
+    el("noCall").hidden = false;
+    go();
+  } else if (call.docket_id && call.verbatim_verified && call.transcript) {
+    /* verbatim proof: highlight the exact substring inside the transcript */
+    el("verifiedBlock").hidden = false;
+    el("docketBig").textContent = call.docket_id;
+    var raw = call.transcript;
+    var i = raw.toLowerCase().indexOf(String(call.docket_id).toLowerCase());
+    var html;
+    if (i >= 0) {
+      html = esc(raw.slice(0, i)) +
+             '<mark class="match">' + esc(raw.substr(i, call.docket_id.length)) + "</mark>" +
+             esc(raw.slice(i + call.docket_id.length));
+    } else {
+      html = esc(raw);
+    }
+    q("#hearText").innerHTML = html;
+    setTimeout(function () { el("stamp").classList.add("draw"); }, reduced ? 0 : 250);
+    setupOk();
+    go();
+  } else {
+    el("failBlock").hidden = false;
+    var reasons = [];
+    if (!call.docket_candidate) reasons.push(["bad", "डॉकेट जैसा कोई नंबर सुनाई नहीं दिया · nothing that looked like a docket was heard"]);
+    if (call.docket_candidate && !call.verbatim_verified) reasons.push(["warn", "सुना गया नंबर बैंक के शब्दों से बिल्कुल मेल नहीं खाया (verbatim नियम) · heard digits did not match verbatim"]);
+    if (call.brush_off_type) {
+      var b = HQ.brushLabels[call.brush_off_type];
+      if (b) reasons.push([b.kind === "bad" ? "bad" : "warn", (b.kind === "bad" ? "बैंक का OTP माँगा : कभी मत दें · " : "टाल रहे हैं: ") + b.hi + " · " + b.en]);
+    }
+    if (!reasons.length) reasons.push(["bad", "अनजाना कारक · unknown reason : try again"]);
+
+    el("failReasons").innerHTML = reasons.map(function (r) {
+      return '<li class="xsmall" style="padding:6px 0"><span class="' + r[0] + '">' + r[1] + "</span></li>";
+    }).join("");
+
+    if (call.brush_off_type === "request_kyc_otp") {
+      HQ.toast("OTP माँगा गया : काल बंद करें · someone asked for OTP : stop the call", "bad");
+    }
+    go();
+  }
+
+  function setupOk() {
+    var chk = el("okCheck");
+    chk.checked = !!(state.docket && state.docket.verified);
+    state.docket = state.docket || { id: call.docket_id, verified: false };
+    chk.addEventListener("change", function () {
+      state.docket = { id: call.docket_id, verified: chk.checked };
+      HQ.save();
+    });
+  }
+
+  el("manualSave").addEventListener("click", function () {
+    var v = el("manualId").value.trim();
+    if (!v) { HQ.toast("पहले नंबर जैसा सुना लिखिए · type what you heard first", "bad"); return; }
+    state.docket = { id: v, verified: false, manual: true };
+    HQ.save();
+    HQ.toast("आपके शब्दों में दर्ज (असत्यापित) · noted from your recall (unverified)");
+    location.href = "post-call.html";
+  });
+
+  function go() {
+    /* CTA is always available below; blocks added context */
+    el("ctaRow").hidden = false;
+  }
+})();
+</script>
+</body>
+</html>
