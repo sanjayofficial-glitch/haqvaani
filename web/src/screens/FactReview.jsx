@@ -9,7 +9,10 @@ import { useCaseFile } from "../lib/state.jsx";
 import { DEMO } from "../lib/demo.js";
 import { isoToday } from "../lib/format.js";
 import { parseOcrText } from "../lib/ocr.js";
+import { Check } from "../components/Icon.jsx";
 import { navigate } from "../lib/router.js";
+import { Arrow, Mic } from "../components/Icon.jsx";
+import { CheckScene } from "./art/CaseArt.jsx";
 
 export default function FactReview() {
   const { state, commit } = useCaseFile();
@@ -132,6 +135,10 @@ export default function FactReview() {
         </p>
       </div>
 
+      <div className="art" aria-hidden="true" style={{ marginTop: "var(--s-md)" }}>
+        <CheckScene />
+      </div>
+
       <form className="card facts-form" noValidate onSubmit={goRights} style={{ marginTop: "var(--s-md)", gap: "var(--s-md)" }}>
         {/* source honesty strip */}
         <div className="kv src-note" aria-label="स्रोत">
@@ -225,12 +232,8 @@ export default function FactReview() {
         )}
 
         <div className="state-strip" role="status" aria-live="polite">
-          <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" hidden={badSubmit && !good}>
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-          <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true" hidden={!(badSubmit && !good)}>
-            <circle cx="12" cy="12" r="9" /><line x1="12" y1="8" x2="12" y2="13" /><line x1="12" y1="16.5" x2="12" y2="16.6" />
-          </svg>
+          <Check size={16} style={{ width: 16, height: 16 }} aria-hidden="true" hidden={badSubmit && !good} />
+          <Check size={16} style={{ width: 16, height: 16 }} aria-hidden="true" hidden={!(badSubmit && !good)} />
           <p style={{ margin: 0 }}>
             {badSubmit && !good
               ? "कुछ सच जाँचें : लाल रेखा देखिए · fix the marked facts first"
@@ -240,12 +243,13 @@ export default function FactReview() {
         </div>
 
         <div className="row" style={{ marginTop: "var(--s-sm)" }}>
-          <button className="btn btn--primary" type="submit">
+          <button className="btn btn--primary go" type="submit">
             हक जाँचें · check my rights
-            <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+            <Arrow />
           </button>
           <a className="btn btn--line" href="#/voice-intake">
             वापस बोलें <span className="pair"><span className="alt" lang="en-IN">record again</span></span>
+            <Mic size={14} />
           </a>
         </div>
       </form>
