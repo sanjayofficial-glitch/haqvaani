@@ -5,6 +5,32 @@
 
 ---
 
+## [2026-11-08] — Live-stack completion (user-approved backend patch)
+
+The two remaining "not live" pieces are resolved, with the user's explicit
+go-ahead to touch the frozen backend (documented in the code comment).
+
+### Changed
+- `haqvaani/api.py` — `/api/tts` now returns JSON-safe output:
+  `{status, note, chunks, audio_base64}` instead of the raw `TTSResult`
+  dataclass (whose raw WAV `bytes` field made FastAPI's JSON encoder 500 in
+  live mode). The frontend's `useSpeak` already played `audio_base64`.
+- `.env` (gitignored) — `GNANI_LLM_URL` set to the documented Gnani default
+  (`https://api.vachana.ai/api/v1/llm/chat`), activating the Evon path.
+
+### Verified
+- `GET /api/health` → `mode:"live"`, `stt_live:true`, `tts_live:true`,
+  `evon_live:true`.
+- Live TTS: `/api/tts` returns `status:"live"` + 76 chunks +
+  `audio_base64` (153,644 WAV bytes) — no 500.
+- `scripts/_e2e_live.py` → `RESULT: ALL GREEN` (consent, 403 gate, intake,
+  rights, complaint EN+HI, assisted docket verbatim, dossier HV-, TTS
+  redaction 403).
+- Clean-env pytest: `54 passed`.
+- Frontend `npm run build` clean; `_ui_integrity_check.py` green.
+
+---
+
 ## [2026-11-08] — Round-1 moat features (anti-wrapper proof)
 
 Five deliverables that make the "not a generic LLM wrapper" claim concrete,
