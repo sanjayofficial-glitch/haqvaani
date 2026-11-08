@@ -12,7 +12,7 @@ import { useToast } from "../hooks/useToast.jsx";
 import { useSpeak } from "../hooks/useSpeak.js";
 import { useRoute, parseHash, navigate } from "../lib/router.js";
 import { AI_DISCLOSURE } from "../lib/demo.js";
-import { LangToggle } from "../lib/i18n.jsx";
+import { LangToggle, Pair } from "../lib/i18n.jsx";
 
 /* consent ?next values may only be bare in-app screen names (no paths) */
 const NEXT_RE = /^[a-z0-9-]+$/i;
