@@ -11,7 +11,7 @@ import { navigate, useRoute } from "../lib/router.js";
 import React from "react";
 import { fmtTs } from "../lib/format.js";
 import { LangToggle, Pair } from "../lib/i18n.jsx";
-import { Mic, Eye, Phone, Stamp, Check, Clock, Lock, Arrow } from "../components/Icon.jsx";
+import { Mic, Eye, Phone, Stamp, Check, Clock, Lock, Arrow, Gallery } from "../components/Icon.jsx";
 import { AI_DISCLOSURE } from "../lib/demo.js";
 
 const DONE_ICONS = [Check, Clock, Phone, Stamp, Eye];
@@ -139,7 +139,7 @@ function SafetyBar() {
   );
 }
 
-export function AppShell({ title, step, children }) {
+export function AppShell({ title, step, rail = true, children }) {
   const mode = useMode();
   const { path } = useRoute();
   const prev = PREV_PATH[path] || null;
@@ -174,11 +174,14 @@ export function AppShell({ title, step, children }) {
               <span className="dot" aria-hidden="true"></span>
               {mode === "live" ? "Live · Gnani connected" : "Synthetic demo (demo)"}
             </span>
+            <a className="chip chip--studio" href="#/studio" aria-label="स्टूडियो · studio">
+              <Gallery size={14} /> स्टूडियो
+            </a>
             <LangToggle />
           </div>
         </div>
       </header>
-      <StepBar active={step || 0} onStepClick={onStepClick} />
+      {rail && <StepBar active={step || 0} onStepClick={onStepClick} />}
       <main className="app-main wrap-narrow" style={{ paddingBottom: "var(--s-lg)" }}>
         {children}
       </main>

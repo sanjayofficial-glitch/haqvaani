@@ -21,6 +21,7 @@ import AssistedCall from "./screens/AssistedCall.jsx";
 import DocketCapture from "./screens/DocketCapture.jsx";
 import PostCall from "./screens/PostCall.jsx";
 import Dossier from "./screens/Dossier.jsx";
+import StudioHub from "./studio/StudioHub.jsx";
 
 const SCREEN_MAP = {
   "/start-case": StartCase,
@@ -34,6 +35,7 @@ const SCREEN_MAP = {
   "/docket-capture": DocketCapture,
   "/post-call": PostCall,
   "/dossier": Dossier,
+  "/studio": StudioHub,
 };
 
 export default function App() {
@@ -67,7 +69,7 @@ export default function App() {
 
   const Screen = SCREEN_MAP[path];
   return (
-    <AppShell title={def.title} step={def.step}>
+    <AppShell title={def.title} step={def.step} rail={def.rail !== false}>
       <Screen />
     </AppShell>
   );

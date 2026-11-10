@@ -1,9 +1,10 @@
 /* ==========================================================================
-   HaqVaani "Heron × HaqVaani" design tokens — web/ source of truth.
-   One canvas (white), charcoal ink, hairline rules, ONE orange signal accent,
-   mono technical voice. Depth comes from scale, contrast and the accent only:
-   no shadows, no gradients, no glass. (docs/DESIGN.md behavioral spec +
-   the user prompt's merged Heron palette, which resolves colour conflicts.)
+   HaqVaani "Studio v2" design tokens — web/ source of truth.
+   New visual language (2026-11-10 redesign): deep-ink canvas, paper-light
+   text, hairline rules, ONE orange signal accent, mono technical voice.
+   Depth comes from contrast, scale and the accent only: no shadows, no
+   gradients, no glass. The paper landing keeps its own light-paper token
+   set in paper.css; everything inside the app shell uses these.
    ========================================================================== */
 
 /* base viewport hardening: never collapse the app frame */
@@ -16,19 +17,20 @@ html, body, #root {
 :root {
   /* ------------------------------------------------------------- colors -- */
   --accent: #fa3600; /* the ONLY signal colour: rail progress, deadline
-                            countdown, ₹/day ticker, primary CTA, focus rings */
-  --ink: #282828; /* all text — never pure black */
-  --line: #e5e7eb; /* 1px borders, hairline rules, separators */
-  --canvas: #ffffff; /* the dominant background everywhere */
-  --surface: #ffffff;
-  --success: #1a7f4b; /* ONLY for the "refund credited" terminal state */
+                          countdown, ₹/day ticker, primary CTA, focus rings */
+  --ink: #f4f1ea; /* text colour on the dark canvas — paper-light, never pure white */
+  --line: rgba(244, 241, 234, 0.16); /* 1px borders, hairline rules, separators */
+  --canvas: #101214; /* the deep-ink background everywhere in the app shell */
+  --surface: #191d22; /* cards, panels, code blocks */
+  --surface-2: #232930; /* hover/elevated surfaces */
+  --success: #28b96c; /* ONLY for the "refund credited" terminal state */
 
   /* derivative neutrals (opacity of ink/line, never new hues) */
-  --ink-2: rgba(40, 40, 40, 0.72);
-  --ink-3: rgba(40, 40, 40, 0.52);
-  --ink-4: rgba(40, 40, 40, 0.38);
-  --accent-soft: rgba(250, 54, 0, 0.08); /* 8% wash only for focus/track fills */
-  --success-soft: rgba(26, 127, 75, 0.08);
+  --ink-2: rgba(244, 241, 234, 0.72);
+  --ink-3: rgba(244, 241, 234, 0.52);
+  --ink-4: rgba(244, 241, 234, 0.38);
+  --accent-soft: rgba(250, 54, 0, 0.14); /* focus/track fills */
+  --success-soft: rgba(40, 185, 108, 0.14);
 
   /* --------------------------------------------------------- typography -- */
   --font-display: "Archivo", "Noto Sans Devanagari", sans-serif;

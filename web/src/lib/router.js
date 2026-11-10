@@ -51,4 +51,5 @@ export const SCREENS = {
   "/docket-capture":    { step: 3, canvas: "story",   title: "Docket" },
   "/post-call":         { step: 4, canvas: "story",   title: "Post-call" },
   "/dossier":           { step: 4, canvas: "story",   title: "Dossier" },
+  "/studio":            { step: 0, canvas: "story",   title: "Studio · recordings", rail: false },
 };

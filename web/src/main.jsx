@@ -11,6 +11,7 @@ import { ToastProvider } from "./hooks/useToast.jsx";
 import { ModeProvider } from "./hooks/useMode.jsx";
 import "./styles/tokens.css";
 import "./styles/app.css";
+import "./styles/studio.css";
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>

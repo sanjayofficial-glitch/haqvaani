@@ -198,10 +198,10 @@ web_demo = web_read("src/lib/demo.js")
 #     green reserved for the refund-credited moment) -----------------------
 WEB_TOKEN_EXACT = {
     "--accent": "#fa3600",
-    "--ink": "#282828",
-    "--line": "#e5e7eb",
-    "--canvas": "#ffffff",
-    "--success": "#1a7f4b",
+    "--ink": "#f4f1ea",
+    "--line": "rgba(244, 241, 234, 0.16)",
+    "--canvas": "#101214",
+    "--success": "#28b96c",
     "--s-xs": "8px",
     "--s-sm": "18px",
     "--s-md": "26px",
