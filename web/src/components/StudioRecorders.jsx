@@ -5,6 +5,7 @@ import {
   addRecording, fmtDur, playbackURL,
 } from "../lib/recordings.js";
 import { T, useLang } from "../lib/i18n.jsx";
+import { blobToWav } from "../lib/wav.js";
 import { RecDot, Stop, Pause, Play, Mic, Video } from "./Icon.jsx";
 
 /* Studio v2 — one honest recorder panel for voice (mic) and screen capture.
@@ -79,14 +80,17 @@ export function VoiceRecorder({ title, onSaved, onTooShort, onBlob, onStarted, a
       setNote("short");
       return;
     }
-    setDiag(`${(blob.size / 1024).toFixed(0)} KB · ${blob.type || "audio/webm"}`);
-    onBlob && onBlob(blob, ms);
+    /* normalize to WAV so the backend (no ffmpeg) can decode it */
+    const wav = await blobToWav(blob, { sampleRate: 16000 });
+    const uploadBlob = wav || blob;
+    setDiag(`${(uploadBlob.size / 1024).toFixed(0)} KB · ${uploadBlob.type || blob.type || "audio/webm"}`);
+    onBlob && onBlob(uploadBlob, ms);
     if (autoSave) {
       try {
-        const rec = await addRecording({ kind: "voice", title, blob, durMs: ms });
+        const rec = await addRecording({ kind: "voice", title, blob: uploadBlob, durMs: ms });
         onSaved && onSaved(rec);
         setLastRec(rec);
-        setNote(`saved:${Math.max(1, Math.round(blob.size / 1024))}`);
+        setNote(`saved:${Math.max(1, Math.round(uploadBlob.size / 1024))}`);
         return;
       } catch { /* fall through */ }
     }
