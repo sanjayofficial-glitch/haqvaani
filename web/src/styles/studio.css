@@ -364,3 +364,62 @@ html, body, #root {
     transition: none;
   }
 }
+
+/* ---------------------------------------------------------- mobile compact */
+@media (max-width: 720px) {
+  /* slim top bar */
+  .app-head {
+    padding: 10px 0;
+  }
+  .app-head .brand small {
+    display: none; /* screen title moves into main, not the bar */
+  }
+  .app-head .brand .hi {
+    font-size: 16px;
+  }
+  .app-head .head-tools {
+    gap: 6px;
+  }
+  .app-head .chip {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+  .app-head .btn--quiet.back {
+    min-height: 40px;
+    padding: 0 10px;
+    font-size: 13px;
+  }
+  /* slim step rail */
+  .stepbar {
+    gap: 4px;
+    padding: 8px 0;
+    overflow-x: auto;
+  }
+  .stepbar li {
+    padding: 6px 10px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  /* compact bottom safety bar */
+  .safety-in {
+    padding: 8px 0;
+  }
+  .safety .short {
+    font-size: 12px;
+    gap: 6px;
+  }
+  .safety .safety-foot {
+    padding: 6px 0;
+  }
+  .safety .safety-foot .xsmall {
+    font-size: 11px;
+  }
+  .safety summary {
+    font-size: 12px;
+    padding: 4px 0;
+  }
+  /* main padding */
+  .app-main {
+    padding-top: 18px;
+  }
+}
