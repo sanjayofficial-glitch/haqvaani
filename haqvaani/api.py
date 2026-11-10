@@ -27,6 +27,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from fastapi import FastAPI, File, Form, Header, HTTPException, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -42,6 +43,16 @@ WEB_DIR = Path(__file__).resolve().parent.parent / "web"
 WEB_DIST_DIR = WEB_DIR / "dist"
 
 app = FastAPI(title="HaqVaani API", version="0.1.0")
+
+# CORS for the deployed Vercel frontends (Vite SPA on a different origin than
+# the Railway-hosted API). Restrict to Vercel app domains — never "*".
+# Rationale: docs/adr/0001-cors-middleware.md
+app.add_middleware(
+    CORSMiddleware,
+    allow_origin_regex=r"https://.*\.vercel\.app",
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Session store: {session_id: {"consent": ConsentRecord, "parts": {...}}}
 SESSIONS: dict[str, dict] = {}
