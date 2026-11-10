@@ -11,7 +11,7 @@ import { navigate, useRoute } from "../lib/router.js";
 import React from "react";
 import { fmtTs } from "../lib/format.js";
 import { LangToggle, Pair, T, useLang } from "../lib/i18n.jsx";
-import { Mic, Eye, Phone, Stamp, Check, Clock, Lock, Arrow, Gallery, House, Shield } from "../components/Icon.jsx";
+import { Mic, Eye, Phone, Stamp, Check, Clock, Lock, Arrow, Gallery, House, Shield, File } from "../components/Icon.jsx";
 import { AI_DISCLOSURE } from "../lib/demo.js";
 
 const DONE_ICONS = [Check, Clock, Phone, Stamp, Eye];
@@ -152,6 +152,10 @@ function MobileNav() {
       <button type="button" className="m-nav-item" onClick={() => navigate("/")} aria-label="Home">
         <House size={20} />
         <span><T en="Home" hi="होम" /></span>
+      </button>
+      <button type="button" className="m-nav-item" onClick={() => navigate("/start-case")} aria-label="Case">
+        <File size={20} />
+        <span><T en="Case" hi="केस" /></span>
       </button>
       <button type="button" className="m-nav-item" onClick={() => navigate("/studio")} aria-label="Studio">
         <Gallery size={20} />

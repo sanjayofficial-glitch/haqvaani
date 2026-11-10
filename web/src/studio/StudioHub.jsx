@@ -3,8 +3,49 @@ import { VoiceRecorder, ScreenRecorder } from "../components/StudioRecorders.jsx
 import {
   listRecordings, removeRecording, clearRecordings, playbackURL, fmtDur, fmtTs,
 } from "../lib/recordings.js";
-import { Gallery, Mic, Video, Trash, Play, Warning } from "../components/Icon.jsx";
+import { Gallery, Mic, Video, Trash, Play, Warning, Arrow, File, Shield } from "../components/Icon.jsx";
 import { T } from "../lib/i18n.jsx";
+import { navigate } from "../lib/router.js";
+
+const FLOW_STEPS = [
+  { icon: Mic, path: "/voice-intake", en: "Speak your issue", hi: "अपनी समस्या बोलिए" },
+  { icon: Shield, path: "/rights-check", en: "See your rights & claim", hi: "अपने अधिकार देखिए" },
+  { icon: File, path: "/dossier", en: "Collect complaint + proof", hi: "शिकायत और सबूत बनाइए" },
+];
+
+function FlowStarter() {
+  return (
+    <section className="flow-banner card" aria-label="start a complaint">
+      <div className="flow-banner-copy">
+        <h2 className="h2" lang="en-IN"><T en="Start a real complaint" hi="शिकायत दर्ज करें" /></h2>
+        <p className="body mute-2">
+          <T
+            en="Speak your failed-UPI issue in your own words — then auto-review facts, rights, and build your complaint."
+            hi="अपने असफल UPI की समस्या अपने शब्दों में बोलिए — फिर सच, अधिकार और शिकायत अपने-आप बनती है।"
+          />
+        </p>
+      </div>
+      <button type="button" className="btn btn--primary" onClick={() => navigate("/start-case")}>
+        <Mic size={16} /> <T en="Start case →" hi="केस शुरू करें →" />
+      </button>
+    </section>
+  );
+}
+
+function FlowSteps() {
+  return (
+    <section className="flow-steps" aria-label="case journey">
+      {FLOW_STEPS.map((s, i) => (
+        <button type="button" key={s.path} className="flow-step card" onClick={() => navigate(s.path)}>
+          <span className="flow-step-idx num">0{i + 1}</span>
+          <s.icon size={18} />
+          <span className="flow-step-label"><T en={s.en} hi={s.hi} /></span>
+          <Arrow size={14} />
+        </button>
+      ))}
+    </section>
+  );
+}
 
 /* Studio v2 — the recording hub.
    Two ways to create (voice clip / screen capture) + a gallery to check
@@ -35,14 +76,11 @@ export default function StudioHub() {
         <h1 className="d-lg" lang="en-IN">
           <T en="Studio · Recordings" hi="स्टूडियो · रिकॉर्डिंग" />
         </h1>
-        <p className="caption mute-2"><T en="Check recordings & create new ones" hi="रिकॉर्डिंग देखें और नई बनाएँ" /></p>
-        <p className="body mute-2" style={{ maxWidth: "62ch" }}>
-          <T
-            en="Record voice clips or screen captures, review them here — all on-device, synthetic demo."
-            hi="यहाँ आप आवाज़ का क्लिप या स्क्रीन कैप्चर बना सकते हैं, और सब चेक कर सकते हैं। सब कुछ इसी डिवाइस पर रहता है — सिंथेटिक डेमो।"
-          />
-        </p>
+        <p className="caption mute-2"><T en="Your case control room — record, review, and follow the complaint journey" hi="आपके केस का कंट्रोल रूम — रिकॉर्ड करें, देखें और शिकायत का सफ़र जारी रखें" /></p>
       </div>
+
+      <FlowStarter />
+      <FlowSteps />
 
       <section className="studio-creators" aria-label="create recordings">
         <div className="studio-create">
@@ -94,6 +132,16 @@ export default function StudioHub() {
                 <div className="rec-item-actions">
                   <Play size={13} />
                   <span className="mute-3"><T en="on-device · synthetic demo" hi="डिवाइस पर · सिंथेटिक डेमो" /></span>
+                  {rec.kind === "voice" && (
+                    <button
+                      type="button"
+                      className="btn btn--primary btn--sm"
+                      onClick={() => navigate("/voice-intake")}
+                      aria-label="use in complaint"
+                    >
+                      <Arrow size={14} /> <T en="Use in complaint" hi="शिकायत में प्रयोग करें" />
+                    </button>
+                  )}
                   <button
                     type="button"
                     className="btn btn--ghost btn--sm"
