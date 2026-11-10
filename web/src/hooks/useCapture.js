@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
    Returns { start, stop, level } where level feeds waveform/status dots.
    Recording stays entirely on-device; identical behavior to the old screens
    (the citizen controls start/stop, never automatic). */
-export function useCapture({ minSize = 1200, onBlob, onError } = {}) {
+export function useCapture({ minSize = 400, onBlob, onError } = {}) {
   const streamRef = useRef(null);
   const recorderRef = useRef(null);
   const ctxRef = useRef(null);
@@ -60,7 +60,7 @@ export function useCapture({ minSize = 1200, onBlob, onError } = {}) {
       if (blob.size > minSize) onBlob && onBlob(blob);
       else onBlob && onBlob(null); /* too short → honest fallback path */
     };
-    recorder.start();
+    recorder.start(250); /* timeslice → chunks flush steadily (browser-safe) */
     if ("AudioContext" in window) {
       try {
         ctxRef.current = new AudioContext();

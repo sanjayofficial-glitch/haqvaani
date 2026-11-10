@@ -24,10 +24,10 @@ export default function VoiceIntake() {
   const stRef = useRef(st);
   stRef.current = st;
 
-  const [hint, setHint] = useState("दबाइए और बोलिए · press and speak");
   const [tLabel, setTLabel] = useState("मुझे जो सुनाई दिया · what I heard (always visible : works muted)");
   const [tText, setTText] = useState("…");
   const [after, setAfter] = useState(false);
+  const [demoOffer, setDemoOffer] = useState(false);
   const typeRef = useRef(null);
   /* sliding-window redaction: secrets split across segments still get caught */
   const redactorRef = useRef(new RollingRedactor());
@@ -104,8 +104,6 @@ export default function VoiceIntake() {
     }
   }, []);
 
-  const recording = false;
-
   return (
     <>
       <div className="col" style={{ gap: "var(--s-xs)" }}>
@@ -124,9 +122,20 @@ export default function VoiceIntake() {
       <section className="col" style={{ marginTop: "var(--s-sm)" }} aria-label="माइक">
         <VoiceRecorder
           title="Voice intake"
-          onTooShort={demoPlayback}
+          onTooShort={() => setDemoOffer(true)}
           onBlob={(blob) => handleBlob(blob)}
         />
+        {demoOffer && (
+          <div className="row">
+            <button
+              type="button"
+              className="btn btn--ghost"
+              onClick={() => { setDemoOffer(false); demoPlayback(); }}
+            >
+              डेमो बोली दिखाएँ · show demo speech
+            </button>
+          </div>
+        )}
       </section>
 
       <section className="col" style={{ marginTop: "var(--s-md)" }} aria-label="मुझे जो सुनाई दिया">
