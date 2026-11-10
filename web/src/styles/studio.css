@@ -230,6 +230,15 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  width: 100%;
+  max-width: 620px;
+}
+.studio-create .rec-panel {
+  max-width: none;
+}
+.rec-controls .btn {
+  min-width: 160px;
+  min-height: 56px;
 }
 .rec-head {
   display: flex;
@@ -266,6 +275,24 @@ html, body, #root {
 @keyframes recPulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(250, 54, 0, 0.35); }
   50% { box-shadow: 0 0 0 10px rgba(250, 54, 0, 0); }
+}
+/* listening state: accent border aliveness (pure colour, no gradient/glow) */
+.rec-panel .note-listening {
+  color: var(--accent);
+}
+.rec-panel .note-listening::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: dotBlink 1s ease-in-out infinite;
+}
+@keyframes dotBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
 }
 .rec-panel[data-kind="screen"] .rec-start {
   animation: none;

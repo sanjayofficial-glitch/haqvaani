@@ -10,7 +10,7 @@ import { useToast } from "../hooks/useToast.jsx";
 import { navigate, useRoute } from "../lib/router.js";
 import React from "react";
 import { fmtTs } from "../lib/format.js";
-import { LangToggle, Pair } from "../lib/i18n.jsx";
+import { LangToggle, Pair, T, useLang } from "../lib/i18n.jsx";
 import { Mic, Eye, Phone, Stamp, Check, Clock, Lock, Arrow, Gallery, House, Shield } from "../components/Icon.jsx";
 import { AI_DISCLOSURE } from "../lib/demo.js";
 
@@ -144,31 +144,32 @@ function SafetyBar() {
 function MobileNav() {
   const state = useCaseState();
   const mode = useMode();
+  const { lang } = useLang();
   const [openSafety, setOpenSafety] = useState(false);
   const rows = safetyRows(state, mode);
   return (
     <nav className="m-nav" aria-label="मोबाइल नेविगेशन · mobile navigation">
-      <button type="button" className="m-nav-item" onClick={() => navigate("/")} aria-label="होम · home">
+      <button type="button" className="m-nav-item" onClick={() => navigate("/")} aria-label="Home">
         <House size={20} />
-        <span>Home</span>
+        <span><T en="Home" hi="होम" /></span>
       </button>
-      <button type="button" className="m-nav-item" onClick={() => navigate("/studio")} aria-label="स्टूडियो · studio">
+      <button type="button" className="m-nav-item" onClick={() => navigate("/studio")} aria-label="Studio">
         <Gallery size={20} />
-        <span>Studio</span>
+        <span><T en="Studio" hi="स्टूडियो" /></span>
       </button>
-      <button type="button" className="m-nav-item" onClick={() => setOpenSafety((v) => !v)} aria-expanded={openSafety} aria-label="सुरक्षा · safety">
+      <button type="button" className="m-nav-item" onClick={() => setOpenSafety((v) => !v)} aria-expanded={openSafety} aria-label="Safety">
         <Shield size={20} />
-        <span>Safety</span>
+        <span><T en="Safety" hi="सुरक्षा" /></span>
       </button>
       <span className="m-nav-item">
         <LangToggle />
-        <span className="m-nav-label">Language</span>
+        <span className="m-nav-label"><T en="Language" hi="भाषा" /></span>
       </span>
       {openSafety && (
-        <div className="m-safety-sheet" role="region" aria-label="सुरक्षा जानकारी · safety">
+        <div className="m-safety-sheet" role="region" aria-label="safety status">
           <div className="m-safety-head">
             <Lock size={14} />
-            <span className="mute-2">सुरक्षा विवरण · safety status</span>
+            <span className="mute-2"><T en="Safety status" hi="सुरक्षा विवरण" /></span>
             <span className={`chip chip--dot chip--${mode}`}>
               <span className="dot" aria-hidden="true"></span>
               {mode === "live" ? "live" : "demo"}
@@ -183,8 +184,10 @@ function MobileNav() {
             ))}
           </div>
           <p className="xsmall mute-3" style={{ margin: 0 }}>
-            हक़-वाणी केवल आपकी तरफ़ सुनता है : कभी डायल नहीं करता।
-            <span className="pair"><span className="alt" lang="en-IN">HaqVaani listens on your side only : it never dials out.</span></span>
+            <T
+              en="HaqVaani listens on your side only : it never dials out."
+              hi="हक़-वाणी केवल आपकी तरफ़ सुनता है : कभी डायल नहीं करता।"
+            />
           </p>
         </div>
       )}

@@ -11,6 +11,7 @@ import { useToast } from "../hooks/useToast.jsx";
 import { useCaseFile, useCaseState } from "../lib/state.jsx";
 import { api } from "../lib/api.js";
 import { DEMO, AI_DISCLOSURE } from "../lib/demo.js";
+import { T } from "../lib/i18n.jsx";
 import { RollingRedactor } from "../lib/redact.js";
 import { SpeakScene } from "./art/CaseArt.jsx";
 import { navigate } from "../lib/router.js";
@@ -109,11 +110,15 @@ export default function VoiceIntake() {
   return (
     <>
       <div className="col" style={{ gap: "var(--s-xs)" }}>
-        <h1 className="d-lg" lang="hi-IN">अपनी बात अपने शब्दों में बोलिए।</h1>
+        <h1 className="d-lg" lang="en-IN">
+          <T en="Speak your complaint in your own words." hi="अपनी बात अपने शब्दों में बोलिए।" />
+        </h1>
         <p className="caption mute-2">{AI_DISCLOSURE}</p>
         <p className="body mute-2" style={{ maxWidth: "62ch" }}>
-          एक गड़बड़ साँस में ही बोल डालिए : राशि, तारीख़, UTR, कौन, कहाँ।
-          <span className="pair"><span className="alt" lang="en-IN">Say it in one messy breath : amount, date, UTR, who, where.</span></span>
+          <T
+            en="Say it in one messy breath : amount, date, UTR, who, where."
+            hi="एक गड़बड़ साँस में ही बोल डालिए : राशि, तारीख़, UTR, कौन, कहाँ।"
+          />
         </p>
       </div>
 
@@ -124,8 +129,8 @@ export default function VoiceIntake() {
       <section className="col" style={{ marginTop: "var(--s-sm)" }} aria-label="माइक">
         <p className="hint mute-3">
           {mode === "live"
-            ? "लाइव Gnani STT जुड़ा है · live Gnani STT connected — your voice transcribes for real"
-            : "सिंथेटिक डेमो मोड · synthetic demo mode — transcripts are sample text (no live STT)"}
+            ? <T en="Live Gnani STT connected — your voice transcribes for real" hi="लाइव Gnani STT जुड़ा है — आपकी आवाज़ सचमुच ट्रांसक्राइब होती है" />
+            : <T en="Synthetic demo mode — transcripts are sample text (no live STT)" hi="सिंथेटिक डेमो मोड — ट्रांसक्रिप्ट नमूना टेक्स्ट है (लाइव STT नहीं)" />}
         </p>
         <VoiceRecorder
           title="Voice intake"
@@ -146,7 +151,7 @@ export default function VoiceIntake() {
               className="btn btn--ghost"
               onClick={() => { setDemoOffer(false); demoPlayback(); }}
             >
-              डेमो बोली दिखाएँ · show demo speech
+              <T en="Show demo speech" hi="डेमो बोली दिखाएँ" />
             </button>
           </div>
         )}
@@ -159,34 +164,32 @@ export default function VoiceIntake() {
         </div>
         <div className="row" hidden={!after}>
           <a className="btn btn--line" href="#/start-case">
-            वापस · back
+            <T en="Back" hi="वापस" />
           </a>
           <button className="btn btn--primary" onClick={() => navigate("#/fact-review")}>
-            चार सच समीक्षा · review the four facts
+            <T en="Review the four facts" hi="चार सच समीक्षा" />
           </button>
           <button
             className="btn btn--line"
-            aria-label="फिर से बोलें"
+            aria-label="say again"
             onClick={() => {
               /* honest reset: stage cleared, mic ready again */
               clearInterval(typeRef.current);
               setAfter(false);
               setTLabel("मुझे जो सुनाई दिया · what I heard (always visible : works muted)");
               setTText("…");
-              setHint("दबाइए और बोलिए · press and speak");
             }}
           >
-            फिर बोलें · say again
+            <T en="Say again" hi="फिर बोलें" />
           </button>
         </div>
         <div className="card">
           <label className="field">
-            <span>सुनने की जगह ऑडियो फ़ाइल दीजिए · use an audio file</span>
+            <span><T en="Or use an audio file" hi="सुनने की जगह ऑडियो फ़ाइल दीजिए" /></span>
             <input type="file" accept="audio/*,.webm,.wav,.m4a" onChange={onFile} />
           </label>
           <p className="hint">
-            8 kHz टेलीफ़ोनी रिकॉर्डिंग भी चलेगी
-            <span className="mute-3"> · 8 kHz phone recordings work too</span>
+            <T en="8 kHz phone recordings work too" hi="8 kHz टेलीफ़ोनी रिकॉर्डिंग भी चलेगी" />
           </p>
         </div>
       </section>
