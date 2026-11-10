@@ -36,12 +36,17 @@ class BrushOffType(str, Enum):
 
 
 class CitizenIntake(BaseModel):
-    """Mode 1 output: structured facts extracted from the citizen's spoken complaint."""
+    """Mode 1 output: structured facts extracted from the citizen's spoken complaint.
+
+    Fields are optional at extraction time: anything the STT/extractor could not
+    determine is left `None` so the citizen fills it in (never invented values).
+    Endpoints that need a complete intake (rights/complaint) validate before use.
+    """
 
     utr: str | None = Field(default=None, description="12-digit UTR (synthetic only)")
-    amount_inr: float = Field(gt=0, description="Debited amount in INR")
-    txn_date: date = Field(description="Calendar date of the failed transaction (T)")
-    dispute_type: DisputeType
+    amount_inr: float | None = Field(default=None, gt=0, description="Debited amount in INR")
+    txn_date: date | None = Field(default=None, description="Calendar date of the failed transaction (T)")
+    dispute_type: DisputeType | None = Field(default=None, description="Dispute class (RBI circular)")
     bank_name: str | None = None
     language: str = "hi-IN"
     confidence: float = Field(default=0.0, ge=0.0, le=1.0)

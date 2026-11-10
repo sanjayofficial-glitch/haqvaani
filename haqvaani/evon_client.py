@@ -184,27 +184,94 @@ def parse_intake(transcript: str) -> EvonIntakeResult:
 
 
 def _deterministic_intake(transcript: str) -> CitizenIntake:
-    """No-LLM extraction (regex + documented synthetic defaults)."""
+    """No-LLM extraction from the actual transcript.
+
+    Only facts that are actually present in the words are filled; everything
+    else stays None so the citizen completes it (never demo constants).
+    """
+    found = 0.0
+
+    # UTR / transaction reference: bare 12-digit runs, or prefixed runs.
     utr_m = re.search(r"\b(\d{12})\b", transcript)
-    amt_m = re.search(r"(?:₹|Rs\.?)\s*([0-9][0-9,]*(?:\.\d+)?)", transcript)
-    date_m = re.search(
+    if not utr_m:
+        utr_m = re.search(r"\butr\s*[:=\-]?\s*(\d{10,24})", transcript, flags=re.IGNORECASE)
+    utr = utr_m.group(1) if utr_m else None
+    if utr:
+        found += 1.0
+
+    # Amount: explicit currency or next to rupaye/rupees/₹ wording.
+    amt_m = re.search(
+        r"(?:₹|Rs\.?)\s*([0-9][0-9,]*(?:\.\d+)?)|"
+        r"([0-9][0-9,]*(?:\.\d+)?)\s*(?:rupaye|rupees|रुपये|रुपए)",
+        transcript,
+        flags=re.IGNORECASE,
+    )
+    amount = None
+    if amt_m:
+        raw = (amt_m.group(1) or amt_m.group(2)).replace(",", "")
+        try:
+            amount = float(raw)
+        except ValueError:
+            amount = None
+    if amount is None:
+        # fallback: the only plausible money-sized number (not a year/date part)
+        nums = [float(m.group(0).replace(",", ""))
+                for m in re.finditer(r"\b([0-9][0-9,]*(?:\.\d+)?)\b", transcript)
+                if m.group(0).replace(",", "").replace(".", "").isdigit()]
+        plausible = [n for n in nums if 100 <= n <= 10_000_000]
+        if len(plausible) == 1:
+            amount = plausible[0]
+    if amount is not None:
+        found += 1.0
+
+    # Date: "18 oct" month-name form, or numeric d/m/y (Indian) and ISO forms.
+    txn_date = None
+    month_m = re.search(
         r"\b(\d{1,2})\s+(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)",
         transcript,
         flags=re.IGNORECASE,
     )
-    amount = float(amt_m.group(1).replace(",", "")) if amt_m else 3200.0
-    txn_day = int(date_m.group(1)) if date_m else 18
-    txn_month = _MONTHS[date_m.group(2).lower()] if date_m else 10
-    txn_date = date(2026, txn_month, min(txn_day, 28))
-    confidence = sum(x is not None for x in (utr_m, amt_m, date_m)) / 3.0
+    if month_m:
+        day = int(month_m.group(1))
+        month = _MONTHS[month_m.group(2).lower()]
+        try:
+            txn_date = date(2026, month, min(day, 28))
+        except ValueError:
+            txn_date = None
+    if txn_date is None:
+        num_m = re.search(r"\b(\d{1,2})[/\-.](\d{1,2})[/\-.](\d{2,4})\b", transcript)
+        if num_m:
+            d, m, y = int(num_m.group(1)), int(num_m.group(2)), int(num_m.group(3))
+            if y < 100:
+                y += 2000
+            try:
+                txn_date = date(y, m, d)
+            except ValueError:
+                txn_date = None
+    if txn_date is None:
+        iso_m = re.search(r"\b(\d{4})-(\d{2})-(\d{2})\b", transcript)
+        if iso_m:
+            try:
+                txn_date = date(*map(int, iso_m.groups()))
+            except ValueError:
+                txn_date = None
+    if txn_date is not None:
+        found += 1.0
+
+    # Dispute type: only "upi_p2p" is safely inferable from wording today.
+    dispute_type = DisputeType.UPI_P2P if re.search(r"upi", transcript, flags=re.IGNORECASE) else None
+    if dispute_type is not None:
+        found += 1.0
+
+    confidence = round(found / 4.0, 2)
     return CitizenIntake(
-        utr=utr_m.group(1) if utr_m else "629188340112",
+        utr=utr,
         amount_inr=amount,
         txn_date=txn_date,
-        dispute_type=DisputeType.UPI_P2P,
-        bank_name="DemoBank Support",
+        dispute_type=dispute_type,
+        bank_name=None,
         language="hi-IN",
-        confidence=round(confidence, 2),
+        confidence=confidence,
         raw_transcript=transcript,
     )
 

@@ -36,7 +36,7 @@ from .complaint_builder import build_complaint_draft, build_hindi_drafts
 from .safety import SafetyGuardBlock, grant_consent, require_consent, verify_verbatim_substring
 from .schemas import CitizenIntake, ConsentRecord, StatutoryEntitlement
 from .statutory import compute_statutory_entitlement
-from .voice_clients import DEMO_IVR_TRANSCRIPT, VoiceAPI, synthesize_tts
+from .voice_clients import DEMO_TRANSCRIPT, DEMO_IVR_TRANSCRIPT, VoiceAPI, synthesize_tts
 
 FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
 WEB_DIR = Path(__file__).resolve().parent.parent / "web"
@@ -68,6 +68,18 @@ def _guard(exc: SafetyGuardBlock) -> HTTPException:
 
 def _session_id(x_session: str | None) -> str:
     return x_session or "default"
+
+
+def _missing_intake_fields(intake: CitizenIntake) -> list[str]:
+    """Fields that must be present before rights/complaint can run."""
+    missing: list[str] = []
+    if not intake.amount_inr:
+        missing.append("amount_inr")
+    if not intake.txn_date:
+        missing.append("txn_date")
+    if not intake.dispute_type:
+        missing.append("dispute_type")
+    return missing
 
 
 # ------------------------------------------------------------------- request models
@@ -140,7 +152,7 @@ async def intake_route(
                         "reason": "No speech recognized — please try again or enter the details manually.",
                     },
                 )
-            transcript = DEMO_IVR_TRANSCRIPT
+            transcript = DEMO_TRANSCRIPT
         obj = VoiceAPI.parse_intake(transcript)
 
     s["parts"]["intake"] = obj
@@ -155,6 +167,13 @@ def rights(body: CitizenIntake, x_session: str | None = Header(default=None, ali
         require_consent(s["consent"])
     except SafetyGuardBlock as e:
         raise _guard(e)
+
+    missing = _missing_intake_fields(body)
+    if missing:
+        raise HTTPException(
+            status_code=400,
+            detail={"code": "INCOMPLETE_INTAKE", "reason": "Fill the missing facts first.", "missing": missing},
+        )
 
     ent = compute_statutory_entitlement(
         amount_inr=body.amount_inr,
@@ -173,6 +192,13 @@ def complaint(body: ComplaintRequest, x_session: str | None = Header(default=Non
         require_consent(s["consent"])
     except SafetyGuardBlock as e:
         raise _guard(e)
+
+    missing = _missing_intake_fields(body.intake)
+    if missing:
+        raise HTTPException(
+            status_code=400,
+            detail={"code": "INCOMPLETE_INTAKE", "reason": "Fill the missing facts first.", "missing": missing},
+        )
 
     draft = build_complaint_draft(body.intake, body.entitlement)
     hindi = build_hindi_drafts(body.intake, body.entitlement)
