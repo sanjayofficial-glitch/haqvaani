@@ -4,6 +4,7 @@
   "buildCommand": "cd web && npx vite build",
   "outputDirectory": "web/dist",
   "routes": [
+    { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
