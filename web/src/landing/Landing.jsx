@@ -17,6 +17,7 @@ import { useReducedMotion } from "../hooks/useReducedMotion.js";
 import { api } from "../lib/api.js";
 import { DEMO } from "../lib/demo.js";
 import { consentGranted, useCaseState } from "../lib/state.jsx";
+import { T } from "../lib/i18n.jsx";
 import { inr, demoScenario, estimateScenario, scenarioFromEntitlement, TAT_DAYS, PER_DAY } from "./data/scenario";
 import Act01 from "./acts/Act01";
 import Act02 from "./acts/Act02";
@@ -169,8 +170,8 @@ export default function Landing() {
             <a className="cue" href="#act1">
               <span aria-hidden="true">↓</span> Scroll to see it happen
             </a>
-            <a className="btn btn--primary" href="#/start-case" style={{ marginTop: "var(--s-md)", display: "inline-block", textDecoration: "none" }}>
-              शिकायत शुरू करें · Start your case →
+            <a className="btn btn--primary btn--hero" href="#/start-case" style={{ marginTop: "var(--s-md)", display: "inline-block", textDecoration: "none" }}>
+              <T en="Start your case → speak your issue" hi="शिकायत शुरू करें → अपनी समस्या बोलिए" />
             </a>
           </div>
 

@@ -298,7 +298,12 @@ html, body, #root {
   animation: none;
 }
 
-/* --------------------------------------------------------------- studio */
+/* ---------------------------------------------------------- studio CTA */
+.btn--hero {
+  min-height: 68px;
+  padding: 0 30px;
+  font-size: 17px;
+}
 .flow-banner {
   display: flex;
   align-items: center;
