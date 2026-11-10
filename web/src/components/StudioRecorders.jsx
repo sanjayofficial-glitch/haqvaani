@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useCapture } from "../hooks/useCapture.js";
 import { useScreenCapture } from "../hooks/useScreenCapture.js";
-import { addRecording, fmtDur } from "../lib/recordings.js";
+import {
+  addRecording, fmtDur, playbackURL,
+} from "../lib/recordings.js";
 import { RecDot, Stop, Pause, Play, Mic, Video } from "./Icon.jsx";
 
 /* Studio v2 — one honest recorder panel for voice (mic) and screen capture.
@@ -55,6 +57,7 @@ export function VoiceRecorder({ title, onSaved, onTooShort, onBlob, onStarted, a
   const capture = useCapture({ minSize: 400, onBlob: (b) => handleBlob(b) });
   const [note, setNote] = useState("idle"); // idle | listening | denied | missing | short | saved:<kb>
   const [diag, setDiag] = useState("");
+  const [lastRec, setLastRec] = useState(null);
   const [busy, setBusy] = useState(false);
   const ms = useTimer(capture.recording);
 
@@ -80,6 +83,7 @@ export function VoiceRecorder({ title, onSaved, onTooShort, onBlob, onStarted, a
       try {
         const rec = await addRecording({ kind: "voice", title, blob, durMs: ms });
         onSaved && onSaved(rec);
+        setLastRec(rec);
         setNote(`saved:${Math.max(1, Math.round(blob.size / 1024))}`);
         return;
       } catch { /* fall through */ }
@@ -123,6 +127,12 @@ export function VoiceRecorder({ title, onSaved, onTooShort, onBlob, onStarted, a
       <Waveform recording={capture.recording} paused={capture.paused} levelRef={capture.levelRef} />
       <p className={`caption mute-3 note-${note}`} aria-live="polite">{disp}</p>
       {diag && <p className="hint mute-3 num" style={{ fontSize: "12px" }}>{diag}</p>}
+      {lastRec && playbackURL(lastRec) && (
+        <div className="rec-preview">
+          <span className="mute-3">सुनिए · hear your clip:</span>
+          <audio controls preload="none" src={playbackURL(lastRec)} className="preview-audio" />
+        </div>
+      )}
       <div className="rec-controls">
         {capture.recording ? (
           <>

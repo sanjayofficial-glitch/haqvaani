@@ -122,6 +122,11 @@ export default function VoiceIntake() {
       </div>
 
       <section className="col" style={{ marginTop: "var(--s-sm)" }} aria-label="माइक">
+        <p className="hint mute-3">
+          {mode === "live"
+            ? "लाइव Gnani STT जुड़ा है · live Gnani STT connected — your voice transcribes for real"
+            : "सिंथेटिक डेमो मोड · synthetic demo mode — transcripts are sample text (no live STT)"}
+        </p>
         <VoiceRecorder
           title="Voice intake"
           onStarted={() => {
