@@ -14,6 +14,8 @@ python-dotenv>=1.0.0
 numpy>=1.26.0
 soundfile>=0.12.1
 faster-whisper>=1.0.0
+# Static ffmpeg binary (no system deps) — backend audio decode safety net
+imageio-ffmpeg>=0.4.9
 
 # Statutory engine & validation
 pydantic>=2.9.0

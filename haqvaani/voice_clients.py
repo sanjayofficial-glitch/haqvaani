@@ -140,25 +140,43 @@ class VoiceAPI:
         """Decode arbitrary audio bytes (webm/opus/wav/...) to (float32 mono, native sample rate).
 
         Uses ffmpeg to demux/decode to WAV at the native rate, then soundfile to read.
+        Prefers the system ffmpeg; falls back to the pip-bundled imageio-ffmpeg binary
+        (so containers without ffmpeg — e.g. Railway — still decode uploads).
         """
         import tempfile
         import subprocess
         import soundfile as sf
+
+        def _ffmpeg_binaries():
+            exes = ["ffmpeg"]
+            try:
+                import imageio_ffmpeg
+                exes.append(imageio_ffmpeg.get_ffmpeg_exe())
+            except Exception:  # noqa: BLE001
+                pass
+            return exes
 
         with tempfile.NamedTemporaryFile(suffix=".webm", delete=False) as tmp:
             tmp.write(audio_bytes)
             tmp_path = tmp.name
         wav_path = tmp_path + ".wav"
         try:
-            # Decode to mono WAV at the native sample rate (let DSP handle 8k->16k resample).
-            subprocess.run(
-                ["ffmpeg", "-y", "-i", tmp_path, "-ac", "1", "-f", "wav", wav_path],
-                check=True, capture_output=True,
-            )
-            data, sr = sf.read(wav_path, dtype="float32")
-            if data.ndim > 1:
-                data = data.mean(axis=1)
-            return data.astype(np.float32), int(sr)
+            last_exc = None
+            for exe in _ffmpeg_binaries():
+                try:
+                    # Decode to mono WAV at the native sample rate (let DSP handle 8k->16k resample).
+                    subprocess.run(
+                        [exe, "-y", "-i", tmp_path, "-ac", "1", "-f", "wav", wav_path],
+                        check=True, capture_output=True,
+                    )
+                    data, sr = sf.read(wav_path, dtype="float32")
+                    if data.ndim > 1:
+                        data = data.mean(axis=1)
+                    return data.astype(np.float32), int(sr)
+                except (FileNotFoundError, OSError, subprocess.CalledProcessError) as exc:
+                    last_exc = exc
+                    continue
+            raise RuntimeError(f"no ffmpeg available to decode audio: {last_exc}")
         finally:
             for p in (tmp_path, wav_path):
                 try:
