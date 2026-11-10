@@ -127,6 +127,20 @@ async def intake_route(
         # STT/WSS is blocking and uses asyncio.run() — run it off the loop
         # so live Prisma works inside this async route (no event-loop error).
         transcript = await asyncio.to_thread(VoiceAPI.transcribe, audio_bytes=blob)
+        # Honest pipeline: in live mode we NEVER inject the demo transcript.
+        # If a real recording was uploaded but nothing was recognized, tell the
+        # citizen plainly so they can retry or fill details manually — no
+        # invented facts. (No-audio calls keep the demo path, e.g. tests.)
+        if not transcript.strip():
+            if VoiceAPI.live_enabled and blob is not None:
+                raise HTTPException(
+                    status_code=422,
+                    detail={
+                        "code": "STT_NO_TRANSCRIPT",
+                        "reason": "No speech recognized — please try again or enter the details manually.",
+                    },
+                )
+            transcript = DEMO_IVR_TRANSCRIPT
         obj = VoiceAPI.parse_intake(transcript)
 
     s["parts"]["intake"] = obj

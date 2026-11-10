@@ -13,6 +13,7 @@ import { api } from "../lib/api.js";
 import { DEMO, AI_DISCLOSURE } from "../lib/demo.js";
 import { T } from "../lib/i18n.jsx";
 import { RollingRedactor } from "../lib/redact.js";
+import { Warning } from "../components/Icon.jsx";
 import { SpeakScene } from "./art/CaseArt.jsx";
 import { navigate } from "../lib/router.js";
 
@@ -29,6 +30,7 @@ export default function VoiceIntake() {
   const [tText, setTText] = useState("…");
   const [after, setAfter] = useState(false);
   const [demoOffer, setDemoOffer] = useState(false);
+  const [notRecognized, setNotRecognized] = useState(false);
   const typeRef = useRef(null);
   /* sliding-window redaction: secrets split across segments still get caught */
   const redactorRef = useRef(new RollingRedactor());
@@ -81,7 +83,13 @@ export default function VoiceIntake() {
         commit({ intake });
         finish(intake.raw_transcript || DEMO.transcript, intake);
         return;
-      } catch {
+      } catch (err) {
+        const msg = (err && err.message) || "";
+        if (/STT_NO_TRANSCRIPT|No speech recognized/.test(msg)) {
+          toast("आवाज़ नहीं पहचानी गई · voice not recognized — try again or fill details manually", "bad");
+          setNotRecognized(true);
+          return;
+        }
         toast("API error : रिकॉर्डिंग भेजी नहीं जा सकी · send failed", "bad");
         setDemoOffer(true);
         return;
@@ -153,6 +161,33 @@ export default function VoiceIntake() {
             >
               <T en="Show demo speech" hi="डेमो बोली दिखाएँ" />
             </button>
+          </div>
+        )}
+        {notRecognized && (
+          <div className="card empty-state" style={{ padding: "22px" }}>
+            <Warning size={18} />
+            <p className="body mute-2">
+              <T
+                en="We couldn't hear a clear recording. Please try again — or fill the details manually."
+                hi="हमें साफ़ रिकॉर्डिंग नहीं सुनाई दी। कृपया दोबारा कोशिश करें — या विवरण हाथ से भरें।"
+              />
+            </p>
+            <div className="row">
+              <button
+                type="button"
+                className="btn btn--primary"
+                onClick={() => {
+                  setNotRecognized(false);
+                  setTLabel("मुझे जो सुनाई दिया · what I heard (always visible : works muted)");
+                  setTText("…");
+                }}
+              >
+                <T en="Try again" hi="फिर से कोशिश करें" />
+              </button>
+              <button type="button" className="btn btn--line" onClick={() => navigate("#/fact-review")}>
+                <T en="Fill details manually" hi="विवरण हाथ से भरें" />
+              </button>
+            </div>
           </div>
         )}
       </section>

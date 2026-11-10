@@ -99,9 +99,9 @@ class VoiceAPI:
                     audio_array = audio_array.mean(axis=1)
             except Exception as exc:  # noqa: BLE001
                 logger.warning("Audio file read failed: %s", exc)
-                return DEMO_TRANSCRIPT
+                return "" if cls.live_enabled else DEMO_TRANSCRIPT
         else:
-            return DEMO_TRANSCRIPT
+            return "" if cls.live_enabled else DEMO_TRANSCRIPT
 
         if audio_array.size == 0:
             return ""
@@ -191,24 +191,24 @@ class VoiceAPI:
             from faster_whisper import WhisperModel
         except Exception as exc:  # noqa: BLE001
             logger.warning("faster-whisper not importable: %s", exc)
-            return DEMO_TRANSCRIPT
+            return "" if cls.live_enabled else DEMO_TRANSCRIPT
 
         if cls._WHISPER_MODEL is None:
             try:
                 cls._WHISPER_MODEL = WhisperModel("tiny", device="cpu", compute_type="int8")
             except Exception as exc:  # noqa: BLE001
                 logger.warning("faster-whisper model load failed (offline? %s)", exc)
-                return DEMO_TRANSCRIPT
+                return "" if cls.live_enabled else DEMO_TRANSCRIPT
 
         try:
             segments, _ = cls._WHISPER_MODEL.transcribe(
                 audio_16k, language=None, beam_size=1, vad_filter=True
             )
             text = " ".join(seg.text for seg in segments).strip()
-            return text or DEMO_TRANSCRIPT
+            return text or ("" if cls.live_enabled else DEMO_TRANSCRIPT)
         except Exception as exc:  # noqa: BLE001
             logger.warning("faster-whisper transcription failed: %s", exc)
-            return DEMO_TRANSCRIPT
+            return "" if cls.live_enabled else DEMO_TRANSCRIPT
 
     # ---------------------------------------------------------------- Evon -----
 
