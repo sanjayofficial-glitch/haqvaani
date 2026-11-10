@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "installCommand": "cd web && npm install",
+  "buildCommand": "cd web && npx vite build",
+  "outputDirectory": "web/dist",
+  "routes": [
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
+}
