@@ -5,6 +5,28 @@
 
 ---
 
+## [2026-11-10] — Public deployment: Vercel frontend + Railway backend (deadline day)
+
+### Added
+- `web/vercel.json` — Vercel static config for the React/Vite app (build → `dist`, SPA rewrite).
+- `railway.json` — Railway/Railpack config: start command
+  `uvicorn haqvaani.api:app --host 0.0.0.0 --port ${PORT:-8000}`, restart policy, health check.
+- `.dockerignore` — keeps Railway build context small (excludes `node_modules/`, `videos/`
+  (1 GB+ render frames), `web/dist/`, caches, `.env` secrets).
+- `web/.gitignore` — Vercel local state (`.vercel`, `.env*`).
+- `.gitignore` — now also excludes `videos/` and `web/test-results/` (large local outputs).
+
+### Changed
+- `haqvaani/dsp_audio.py` — `import torch` made lazy (inside Silero VAD branch): app now
+  boots without torch installed (fixes Railway/local boot failure); VAD falls back to the
+  designed energy-VAD path when torch is absent. Identical behavior when torch is present.
+
+### Live
+- Frontend: https://haqvaani.vercel.app (Vercel, demo mode).
+- Backend: Railway service from this repo (demo mode; `GNANI_API_KEY` → live speech).
+
+---
+
 ## [2026-11-09] — 60s Simulated Demo Day Drop video (code-rendered, Aurora Glass)
 
 Produced the competition demo video as a **deterministic, code-rendered motion-graphics

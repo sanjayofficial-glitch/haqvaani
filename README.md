@@ -60,7 +60,7 @@ trail — while keeping them in control.
 | Statutory engine | Pure Python + Pydantic v2 |
 | Frontend / HUD | Two frontends: `frontend/` (vanilla HTML/CSS/JS, served at `/`) and `web/` (Vite + React 18 scroll-story rebuild, dev at :5173) |
 | Database | SQLite (file-based) or none |
-| Deployment | Hugging Face Spaces (Docker) / Render free / Colab |
+| Deployment | Vercel — `web/` React app live at https://haqvaani.vercel.app · Railway — FastAPI backend (`railway.json` railpack start command) · alternates: HF Spaces / Render / Colab |
 
 Budget: Gnani free 5,000 programme credits + open-source tools + free GPU (Kaggle/Colab).
 
@@ -105,6 +105,24 @@ curl http://localhost:8000/api/health
 
 > All test data is synthetic (e.g. UTR 629188340112, SR-DB-884120). No real phone numbers,
 > accounts, or recordings are used. **HaqVaani does not autonomously call banks.**
+
+---
+
+## Live deployments
+
+- **Frontend (React/Vite)** → **https://haqvaani.vercel.app** — Vercel project
+  `haqvaani`, built from `web/` (`web/vercel.json`: `npx vite build` → `dist`, SPA rewrite).
+  Fully functional in **synthetic demo mode** (no backend required).
+- **Backend (FastAPI)** → Railway service deployed from this repo — `railway.json`
+  declares the start command (`uvicorn haqvaani.api:app --host 0.0.0.0 --port ${PORT:-8000}`)
+  and health check `/api/health`; `.dockerignore` keeps the build context lean. Runs in
+  demo mode by default; add `GNANI_API_KEY` (+ endpoints) for live Gnani speech.
+- **Wiring:** to point the Vercel frontend at the Railway backend, set
+  `VITE_API_BASE=https://<service>.up.railway.app` at build time — REST calls then need
+  the CORS exception on `api.py` (see `web/README.md`); WebSocket voice works cross-origin.
+
+> Both deploys are free-tier (Vercel Hobby / Railway trial credit). Everything remains
+> synthetic demo data — no real PII, no autonomous dialing.
 
 ---
 
