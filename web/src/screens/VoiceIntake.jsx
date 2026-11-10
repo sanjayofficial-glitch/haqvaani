@@ -81,7 +81,9 @@ export default function VoiceIntake() {
         finish(intake.raw_transcript || DEMO.transcript, intake);
         return;
       } catch {
-        toast("API error : demo text दिखाया जा रहा है", "bad");
+        toast("API error : रिकॉर्डिंग भेजी नहीं जा सकी · send failed", "bad");
+        setDemoOffer(true);
+        return;
       }
     }
     demoPlayback();
@@ -122,6 +124,13 @@ export default function VoiceIntake() {
       <section className="col" style={{ marginTop: "var(--s-sm)" }} aria-label="माइक">
         <VoiceRecorder
           title="Voice intake"
+          onStarted={() => {
+            /* fresh recording: wipe the stale/previous transcript from view */
+            commit({ rawTranscript: "" });
+            setTLabel("सुन रहा है… · listening…");
+            setTText("");
+            setAfter(false);
+          }}
           onTooShort={() => setDemoOffer(true)}
           onBlob={(blob) => handleBlob(blob)}
         />

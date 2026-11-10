@@ -51,9 +51,10 @@ function Waveform({ recording, paused, levelRef }) {
   return <canvas ref={ref} className="wavebar" width="220" height="10" aria-hidden="true" />;
 }
 
-export function VoiceRecorder({ title, onSaved, onTooShort, onBlob, autoSave = true }) {
+export function VoiceRecorder({ title, onSaved, onTooShort, onBlob, onStarted, autoSave = true }) {
   const capture = useCapture({ minSize: 400, onBlob: (b) => handleBlob(b) });
-  const [note, setNote] = useState("idle"); // idle | listening | denied | missing | short | saved
+  const [note, setNote] = useState("idle"); // idle | listening | denied | missing | short | saved:<kb>
+  const [diag, setDiag] = useState("");
   const [busy, setBusy] = useState(false);
   const ms = useTimer(capture.recording);
 
@@ -63,20 +64,23 @@ export function VoiceRecorder({ title, onSaved, onTooShort, onBlob, autoSave = t
     denied: "माइक की अनुमति नहीं मिली · mic permission denied",
     missing: "माइक नहीं मिला · no microphone found",
     short: "बोली बहुत छोटी थी · that was too short — try again",
-    saved: "रिकॉर्डिंग सेव हुई · clip saved to studio",
   };
+  const disp = note.startsWith("saved:")
+    ? `रिकॉर्डिंग सेव हुई · ${note.split(":")[1]} KB clip saved to studio`
+    : NOTE_COPY[note] || note;
 
   async function handleBlob(blob) {
     if (!blob) {
       setNote("short");
       return;
     }
+    setDiag(`${(blob.size / 1024).toFixed(0)} KB · ${blob.type || "audio/webm"}`);
     onBlob && onBlob(blob, ms);
     if (autoSave) {
       try {
         const rec = await addRecording({ kind: "voice", title, blob, durMs: ms });
         onSaved && onSaved(rec);
-        setNote("saved");
+        setNote(`saved:${Math.max(1, Math.round(blob.size / 1024))}`);
         return;
       } catch { /* fall through */ }
     }
@@ -86,12 +90,15 @@ export function VoiceRecorder({ title, onSaved, onTooShort, onBlob, autoSave = t
   async function onMic() {
     if (capture.recording || busy) return;
     setBusy(true);
+    setDiag("");
     try {
       await capture.start();
       setNote("listening");
+      onStarted && onStarted();
     } catch (err) {
       const name = err && err.name;
       setNote(name === "NotAllowedError" || name === "PermissionDeniedError" ? "denied" : "missing");
+      setDiag(name ? `${name}: ${err.message || ""}` : String(err));
     } finally {
       setBusy(false);
     }
@@ -101,7 +108,7 @@ export function VoiceRecorder({ title, onSaved, onTooShort, onBlob, autoSave = t
     <button
       type="button"
       className="btn btn--ghost"
-      onClick={() => { setNote("idle"); onTooShort(); }}
+      onClick={() => { setNote("idle"); setDiag(""); onTooShort(); }}
     >
       डेमो टेक्स्ट दिखाएँ · use demo text
     </button>
@@ -114,7 +121,8 @@ export function VoiceRecorder({ title, onSaved, onTooShort, onBlob, autoSave = t
         <span className="rec-timer num">{fmtDur(ms)}</span>
       </div>
       <Waveform recording={capture.recording} paused={capture.paused} levelRef={capture.levelRef} />
-      <p className={`caption mute-3 note-${note}`} aria-live="polite">{NOTE_COPY[note]}</p>
+      <p className={`caption mute-3 note-${note}`} aria-live="polite">{disp}</p>
+      {diag && <p className="hint mute-3 num" style={{ fontSize: "12px" }}>{diag}</p>}
       <div className="rec-controls">
         {capture.recording ? (
           <>
