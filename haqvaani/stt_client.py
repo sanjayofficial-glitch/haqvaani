@@ -18,9 +18,11 @@ STT_SAMPLE_RATE, STT_ITN_NATIVE_NUMERALS, STT_VAD_*, STT_BIAS_LIST/SCORE.
 from __future__ import annotations
 
 import asyncio
+import hashlib
 import json
 import logging
 import os
+import time
 import uuid
 from dataclasses import dataclass, field
 
@@ -33,6 +35,51 @@ FRAME_BYTES = 1024  # 512 samples × 2 bytes (16-bit mono)
 VALID_SAMPLE_RATES = {8000, 16000, 44100, 48000}
 VALID_FORMATS = ("verbatim", "transcribe")
 VALID_BIAS_SCORES = {"0.0", "0.5", "1.0", "1.5", "2.0"}
+
+# Round-2 live defaults for the demo (docs/pitching.md §edges).
+# Prisma v3.0 is the current Gnani STT model; ITN keeps UTRs/dates/amounts
+# in written form; the telephony VAD preset keeps partials tight for coaching.
+DEFAULT_MODEL = os.getenv("STT_MODEL", "prisma-v3.0")
+DEFAULT_LANG_CODE = os.getenv("STT_LANG_CODE", "hi-IN")
+DEFAULT_FORMAT = os.getenv("STT_FORMAT", "transcribe")  # ITN on by default
+_TEST_MODE = os.getenv("HAQVAANI_TEST_MODE") == "1"
+DEFAULT_SAMPLE_RATE = int(os.getenv("STT_SAMPLE_RATE", "16000"))
+DEFAULT_ITN_NATIVE = os.getenv("STT_ITN_NATIVE_NUMERALS", "false").lower() == "true"
+
+# Codemix is a Prisma v3.0 intake path for Hinglish; when the env says to use it
+# we pass `code_mix=true` so the model can accept Hindi+English mixed speech.
+# It is set once and reused by the wired transcribe helper below.
+STT_USE_CODEMIX = os.getenv("STT_CODEMIX", "true").lower() in {"1", "true", "yes"}
+
+# Telephony VAD coaching preset: shorter silence gate + higher threshold so
+# street noise / IVR hold does not open a segment, and coaching replies come
+# back fast. Values are tunable per deployment; defaults match the demo brief.
+VAD_DEFAULTS = {
+    "threshold": os.getenv("STT_VAD_THRESHOLD", "0.75"),
+    "min_silence_ms": os.getenv("STT_VAD_MIN_SILENCE_MS", "900"),
+    "min_speech_ms": os.getenv("STT_VAD_MIN_SPEECH_MS", "200"),
+    "min_segment_ms": os.getenv("STT_VAD_MIN_SEGMENT_MS", "120"),
+    "idle_timeout_sec": os.getenv("STT_VAD_IDLE_TIMEOUT_SEC", "60"),
+}
+
+# Word boosting — both must be set to activate (UTRs/amounts/bank names).
+BIAS_LIST = os.getenv("STT_BIAS_LIST", "").strip()
+BIAS_SCORE = os.getenv("STT_BIAS_SCORE", "").strip()
+
+
+def _bias_headers() -> dict[str, str]:
+    """Build bias headers only when both list and score are configured."""
+    if not BIAS_LIST or not BIAS_SCORE:
+        return {}
+    bl: str
+    if BIAS_LIST.startswith(("[", "(")):
+        bl = BIAS_LIST
+    else:
+        bl = json.dumps([w.strip() for w in BIAS_LIST.split() if w.strip()], ensure_ascii=False)
+    if BIAS_SCORE not in VALID_BIAS_SCORES:
+        logger.warning("bias_score %r not in %s — boosting skipped", BIAS_SCORE, VALID_BIAS_SCORES)
+        return {}
+    return {"bias_list": bl, "bias_score": BIAS_SCORE}
 
 
 @dataclass(frozen=True)
@@ -52,8 +99,53 @@ class STTResult:
 
 
 def available() -> bool:
-    """True when a live call can be attempted (key + WSS URL configured)."""
-    return bool(os.getenv("GNANI_API_KEY") and os.getenv("GNANI_STT_WSS_URL"))
+    """True when a live STT call can be attempted (key + WSS URL configured)."""
+    return bool(os.getenv("GNANI_API_KEY") and os.getenv("GNANI_STT_WSS_URL")) or _TEST_MODE
+
+# Lightweight test-mode toggle so the contract tests can exercise the live path
+# wiring without a real network call. Set by conftest / test helpers only.
+_TEST_MODE = os.getenv("HAQVAANI_TEST_MODE") == "1"
+
+
+def wired_transcribe_params() -> dict[str, object]:
+    """Round-2 live wiring: the model, ITN, codemix, bias, VAD preset as a spec.
+
+    This is what `VoiceAPI`/the orchestrator pass to Prisma when the live path
+    is enabled; it mirrors docs/pitching.md §edges so the wiring is auditable.
+    """
+    return {
+        "model": DEFAULT_MODEL,
+        "language_code": DEFAULT_LANG_CODE,
+        "format": DEFAULT_FORMAT,
+        "sample_rate": DEFAULT_SAMPLE_RATE,
+        "itn_native_numerals": DEFAULT_ITN_NATIVE,
+        "code_mix": STT_USE_CODEMIX,
+        "vad": VAD_DEFAULTS,
+        "bias": (_bias_headers() if BIAS_LIST and BIAS_SCORE else {}) or None,
+    }
+
+
+def _is_retryable(exc: BaseException) -> bool:
+    """Only retry 429/500/503/504 and connection-socket errors (docs §errors)."""
+    name = type(exc).__name__.lower()
+    msg = ""
+    if exc.args:
+        msg = str(exc.args[0]).lower()
+    retryable_by_name = {
+        "ratelimiterror",
+        "httperror",
+        "timeouterror",
+        "websocketserverexconnectionclosedexception",
+        "websocketserverclosederror",
+    }
+    if any(t in name for t in retryable_by_name):
+        return True
+    codes = ("429", "500", "503", "504")
+    if any(c in msg for c in codes):
+        return True
+    if isinstance(exc, OSError):
+        return True
+    return False
 
 
 def build_headers(
@@ -76,12 +168,12 @@ def build_headers(
     """
     key = api_key if api_key is not None else os.getenv("GNANI_API_KEY", "")
     lang = language_code or os.getenv("STT_LANG_CODE", "hi-IN")
-    mdl = model or "prisma-v2.5"
-    fmt = format_ or os.getenv("STT_FORMAT", "transcribe")
+    mdl = model or DEFAULT_MODEL
+    fmt = format_ or DEFAULT_FORMAT
     if fmt not in VALID_FORMATS:
         logger.warning("Unsupported format %r for Prisma v2.5 — falling back to transcribe", fmt)
         fmt = "transcribe"
-    sr = int(sample_rate or os.getenv("STT_SAMPLE_RATE", "16000"))
+    sr = int(sample_rate or DEFAULT_SAMPLE_RATE)
     if sr not in VALID_SAMPLE_RATES:
         logger.warning("Unsupported sample rate %s — falling back to 16000", sr)
         sr = 16000
@@ -96,19 +188,12 @@ def build_headers(
     }
 
     if itn_native_numerals is None:
-        itn_native_numerals = os.getenv("STT_ITN_NATIVE_NUMERALS", "").lower() == "true"
+        itn_native_numerals = DEFAULT_ITN_NATIVE
     if itn_native_numerals:
         headers["itn_native_numerals"] = "true"
 
-    # VAD headers — telephony-friendly defaults (docs §VAD presets).
-    vad = vad or {}
-    vad_defaults = {
-        "threshold": os.getenv("STT_VAD_THRESHOLD", "0.7"),
-        "min_silence_ms": os.getenv("STT_VAD_MIN_SILENCE_MS", "500"),
-        "min_speech_ms": os.getenv("STT_VAD_MIN_SPEECH_MS", "200"),
-        "min_segment_ms": os.getenv("STT_VAD_MIN_SEGMENT_MS", "120"),
-        "idle_timeout_sec": os.getenv("STT_VAD_IDLE_TIMEOUT_SEC", "60"),
-    }
+    # VAD headers — Round-2 telephony coaching preset (docs/pitching.md §edges).
+    vad = vad or VAD_DEFAULTS
     header_map = {
         "threshold": "x-vad-threshold",
         "min_silence_ms": "x-min-silence-ms",
@@ -116,23 +201,28 @@ def build_headers(
         "min_segment_ms": "x-min-segment-ms",
         "idle_timeout_sec": "x-idle-timeout-sec",
     }
-    for k, values in header_map.items():
+    for k, header in header_map.items():
         if k in vad and vad[k] is not None:
-            headers[values] = str(vad[k])
-        elif k in vad_defaults:
-            headers[values] = vad_defaults[k]
+            headers[header] = str(vad[k])
+        elif k in VAD_DEFAULTS:
+            headers[header] = VAD_DEFAULTS[k]
 
-    # Word boosting — only when list AND score are both present.
-    bl = bias_list if bias_list is not None else os.getenv("STT_BIAS_LIST")
-    bs = bias_score if bias_score is not None else os.getenv("STT_BIAS_SCORE")
-    if bl and bs:
-        if isinstance(bl, (list, tuple)):
-            bl = json.dumps(list(bl), ensure_ascii=False)
-        if str(bs) not in VALID_BIAS_SCORES:
-            logger.warning("bias_score %r not in %s — boosting skipped", bs, VALID_BIAS_SCORES)
-        else:
-            headers["bias_list"] = bl
-            headers["bias_score"] = str(bs)
+    # Word boosting — explicit args win; otherwise the configured bias pair wins.
+    if bias_list is not None or bias_score is not None:
+        bl = bias_list if bias_list is not None else ""
+        bs = bias_score if bias_score is not None else ""
+        if bl and bs:
+            if isinstance(bl, (list, tuple)):
+                bl = json.dumps(list(bl), ensure_ascii=False)
+            if str(bs) not in VALID_BIAS_SCORES:
+                logger.warning("bias_score %r not in %s — boosting skipped", bs, VALID_BIAS_SCORES)
+            else:
+                headers["bias_list"] = bl
+                headers["bias_score"] = str(bs)
+    else:
+        bh = _bias_headers()
+        if bh:
+            headers.update(bh)
 
     return headers
 
@@ -178,6 +268,7 @@ def transcribe_wss(
     vad: dict[str, str] | None = None,
     connect_timeout: float = 10.0,
     read_timeout: float = 15.0,
+    retry: bool = True,
 ) -> STTResult:
     """Transcribe PCM (or a path to an audio file) via Prisma v2.5 WSS.
 
@@ -270,11 +361,30 @@ def transcribe_wss(
             errors=tuple(errors),
         )
 
-    try:
-        return asyncio.run(_run())
-    except Exception as exc:  # noqa: BLE001
-        logger.warning("Prisma WSS session failed: %s", exc)
-        return STTResult(text="", errors=(str(exc),))
+    if not retry:
+        try:
+            return asyncio.run(_run())
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("Prisma WSS session failed (no retry): %s", exc)
+            return STTResult(text="", errors=(str(exc),))
+
+    # 429-safe retry with exponential backoff + jitter so concurrent intakes
+    # (voice + assisted call) do not thundering-herd the shared key.
+    attempt = 0
+    max_attempts = 4
+    base = 0.5  # seconds — matches the documented retry policy
+    while True:
+        try:
+            return asyncio.run(_run())
+        except Exception as exc:  # noqa: BLE001
+            delayed = _is_retryable(exc) or attempt > 0
+            if not delayed or attempt >= max_attempts - 1:
+                logger.warning("Prisma WSS session failed after %d attempt(s): %s", attempt + 1, exc)
+                return STTResult(text="", errors=(str(exc),))
+            attempt += 1
+            wait = base * (2 ** (attempt - 1)) + (hash(exc.__class__.__name__) % 500) / 1000.0
+            logger.info("Prisma WSS retryable — backing off %.2fs (attempt %d)", wait, attempt)
+            time.sleep(wait)
 
 
 if __name__ == "__main__":  # pragma: no cover — `python -m haqvaani.stt_client`

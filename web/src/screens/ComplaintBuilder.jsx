@@ -168,7 +168,7 @@ export default function ComplaintBuilder() {
               ))}
             </div>
             <button type="button" className="btn btn--line" onClick={restore} aria-label="मूल ड्राफ्ट लौटाएँ">
-              <Trash />
+              <Trash tone="ink" />
               मूल लौटाएँ · restore
             </button>
           </div>

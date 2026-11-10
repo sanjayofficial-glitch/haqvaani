@@ -5,6 +5,48 @@
 
 ---
 
+## [2026-11-09] — 60s Simulated Demo Day Drop video (code-rendered, Aurora Glass)
+
+Produced the competition demo video as a **deterministic, code-rendered motion-graphics
+film** (Aurora Glass style on the HaqVaani charcoal + `#fa3600` tokens) with real Gnani
+Timbre TTS voiceovers.
+
+### Added (new `videos/haqvaani/` project)
+- `public/demo.html` — the full 60s animated film in one file: 8 scenes
+  (hook → intake → rights → complaint → assisted call → docket → summary → recap),
+  4-quadrant HUD (STT vs Whisper, Statutory Card + ₹600 counter, assisted-call script,
+  compliance), persistent `SIMULATED DEMO` / `SYNTHETIC DATA` / `NO AUTONOMOUS DIALING`
+  badges, conditional `AI DISCLOSURE PLAYED` / `ZERO SECRETS LEAKED`, kinetic Hinglish/Hindi
+  captions, telemetry readout per beat. Frame-driven `window.__haqvaani_update(frame)`.
+- `scripts/render_demo_frames.cjs` — headless-Chrome CDP frame renderer (1800 frames @ 30fps
+  in parallel chunks; DOM-QA script included: `scripts/verify_demo_qa.cjs`, all 8 beats PASS).
+- `scripts/gen_demo_audio.py` — live Timbre TTS voiceovers (hi-IN + en-IN) for all 8 cues,
+  gated by `FORBIDDEN_SECRET_RE`; WAVs + `audio.wav` mix (60s stereo bed at cue offsets).
+- `scripts/assemble_demo_video.py` — builds audio bed, 24 segment-encode commands (12 × 150
+  frames, 16:9 + 9:16 letterbox cut), concat lists, mux commands.
+- `STORYBOARD.md`, `SCRIPT.md`, `src/constants.ts`, `src/scenes/*.tsx`,
+  `src/components/*.tsx`, `src/index.ts`, `public/cues.json` — Remotion blueprint + final
+  story/script (Remotion render deferred to the HTML/CDP pipeline because `@remotion/cli`
+  could not be installed in this offline environment).
+
+### Changed
+- `haqvaani/tts_client.py` — fixed a latent bug: `_synthesize_once` referenced `cfg`
+  (audio config) from the parent scope but never received it → `NameError: cfg` on every
+  live Timbre call (`Status: demo` fallback). Now threaded through as a parameter; live
+  TTS works (verified: 8/8 voiceovers synthesized from `.env` credentials).
+
+### Deliverables (in `videos/haqvaani/renders/`)
+- `haqvaani-demo-16x9.mp4` — 1920×1080, h264 @ 30fps, 60.00s, AAC 192k
+- `haqvaani-demo-9x16.mp4` — 1080×1920 vertical cut (fit-width letterbox), same specs
+
+### Verified
+- `scripts/verify_demo_qa.cjs` — 8/8 scene/telemetry/geometry checks PASS.
+- All 1800 frames present and non-blank (avg ~60 KB).
+- Final MP4s probed: exact 60.00s duration, correct resolution, h264 + AAC streams.
+- `python -m py_compile haqvaani/tts_client.py` clean.
+
+---
+
 ## [2026-11-09] — Live voice actually works: STT fix + async-route fix + proof
 
 The Gnani live path was configured but not truly functional inside the app:
@@ -801,10 +843,39 @@ the landing; after this pass both measure 0 FAIL.
 - `haqvaani/schemas.py` — Pydantic v2 treaty-border models: `CitizenIntake`, `StatutoryEntitlement`, `AgentNegotiationExtraction`, `ConsentRecord`, `HaqVaaniCaseRecord`.
 - `haqvaani/statutory.py` — deterministic `compute_statutory_entitlement()`: RBI/2019-20/67 (T+1/T+5, ₹100/day), DBR 2017-18 zero liability, RB-IOS 2026 filing clocks.
 - `haqvaani/safety.py` — `FORBIDDEN_SECRET_RE`, consent/disclosure gates, verbatim docket verify, `SafetyGuardBlock`.
-- `tests/test_statutory.py`, `tests/test_safety.py`; `pyproject.toml`; `conftest.py`; `.gitignore`; git initialized.
+- `tests/test_statutory.py`, `tests/test_safety.py`; `pyproject.toml`; `conftest.py`; `.gitignore`; git initialized.### Notes
 
-### Notes
-- Statutory math matches `docs/legal_matrix.md` §1 worked example exactly: T=18 Oct, ₹3,200, today=25 Oct → TAT 19 Oct, 6 days overdue, ₹600 penalty, ₹3,800 total.
+- Statu
+
+---
+
+## [2026-11-09] — Round-2 live-Gnani wiring complete (Vachana STT + Timbre TTS v3.0)
+
+The only open TODO item from the Day 15/16 build is now done: the repo is
+wired for the Round-2 Gnani endpoints (prisma-v3.0 STT, timbre-v3.0 TTS)
+with 429-safe retry, and the full test suite + web build + UI integrity
+check all stay green.
+
+### Added
+- `tests/conftest.py` — session-scoped Round-2 wiring fixture now reloads
+  ONLY `haqvaani.stt_client` / `haqvaani.tts_client` / `haqvaani.voice_clients`
+  (not the whole `haqvaani.*` tree), so the Round-2 contract tests get the
+  wired defaults (prisma-v3.0 / ITN true / VAD 0.75·900 / timbre-v3.0) while
+  the other modules (orchestrator/safety/statutory/complaint/api) keep running
+  against the real `.env` without identity-reference breakage.
+- `tests/test_voice_contract.py` — 19 offline contract tests (headers, PCM
+  frames, result dataclasses, `wired_transcribe_params()`, voice catalog,
+  WAV assembly, 429-safe `retry` kwarg defaults, live-enabled reflection)
+  now pass in the full-suite run.
+
+### Verified
+- `python -m pytest tests/ -q` — 60 passed, 0 failed.
+- `cd web && npx vite build` — clean (3.28s).
+- `python scripts/_ui_integrity_check.py` — green (22 screens: 11 frontend +
+  11 web).
+- Safety gates untouched: `FORBIDDEN_SECRET_RE`, consent/disclosure gates,
+  no-autonomous-dialing line all still enforced; statutory math still pure
+  Python, never LLM-computed.tory math matches `docs/legal_matrix.md` §1 worked example exactly: T=18 Oct, ₹3,200, today=25 Oct → TAT 19 Oct, 6 days overdue, ₹600 penalty, ₹3,800 total.
 - No API credentials required for this slice; Gnani access + STT/TTS clients are the next dependency.
 
 ---

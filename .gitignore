@@ -12,6 +12,10 @@ dist/
 # Node / web app
 node_modules/
 
+# Large render outputs — never push to GitHub (1GB+ of frames)
+videos/
+web/test-results/
+
 # Local results (measured benchmark outputs — gitignored per PROJECT_STRUCTURE.md)
 eval/results/
 

@@ -1,0 +1,56 @@
+# Pre-cached static audio for the consent/gating screens.
+
+This directory is intended for short, pre-rendered WAV files the consent
+screen prefers in LIVE mode so the first spoken disclosure is instant and
+does not consume the shared Gnani TTS quota each session.
+
+At MVP / demo time these files do NOT exist yet — the consent screen falls
+back to the existing server `/api/tts` path and/or browser speech. When you
+generate them (see the note below), place them here and the consent hook will
+start preferring them automatically in live mode.
+
+GENERATION NOTE (do this once, offline, with your own Gnani credentials):
+
+    python - <<'PY'
+    import base64, json, wave, io
+    import httpx
+
+    key = ""  # paste your own GNANI_API_KEY from Gnani dashboard — do NOT commit
+    url = "https://api.vachana.ai/api/v1/tts/sse"
+    payload = {
+        "text": "This is an AI assistant assisting you.",
+        "voice": "Kaveri",
+        "model": "timbre-v3.0",
+        "language": "en-IN",
+        "speed": 1.0,
+        "audio_config": {
+            "sample_rate": 48000,
+            "num_channels": 1,
+            "sample_width": 2,
+            "encoding": "linear_pcm",
+            "container": "raw",
+        },
+    }
+    headers = {"X-API-Key-ID": key, "Content-Type": "application/json"}
+    pcm = b""
+    with httpx.stream("POST", url, json=payload, headers=headers, timeout=40) as r:
+        for line in r.iter_lines():
+            if line is None:
+                continue
+            line = line.strip()
+            if not line or not line.startswith("data:"):
+                continue
+            obj = json.loads(line[len("data:"):])
+            b64 = obj.get("audio")
+            if b64:
+                pcm += base64.b64decode(b64)
+    with wave.open("web/public/audio/consent-en.wav", "wb") as w:
+        w.setnchannels(1); w.setsampwidth(2); w.setframerate(48000)
+        w.writeframes(pcm)
+    print("wrote web/public/audio/consent-en.wav")
+    PY
+
+Once the file exists, the consent hook in `web/src/hooks/useSpeak.js` will
+prefer it in live mode and fall back to the existing server TTS / browser
+speech otherwise. Keep these files short (a single disclosure sentence) so
+they are cheap to cache and safe to ship to the client.

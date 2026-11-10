@@ -1121,3 +1121,73 @@ details > summary { cursor: pointer; }
   line-height: 1.6;
   white-space: pre-wrap;
 }
+
+/* inline icon cues in buttons/links: small inktone marker next to text */
+.btn .ic,
+.btn--quiet .ic,
+.linklike .ic,
+.field .ic,
+.check-row .ic {
+  flex: 0 0 auto;
+  color: var(--ink-2);
+  transition: color var(--speed) var(--ease);
+}
+.btn--primary .ic,
+.card :where(.row .btn--primary) .ic {
+  color: #fff;
+}
+.btn--line:hover .ic,
+.btn--primary:hover .ic,
+.linklike:hover .ic,
+.case-card:hover .ic,
+.case-card:focus-visible .ic {
+  color: var(--accent);
+}
+.btn[disabled] .ic { color: var(--ink-4); }
+.go .ic { margin-left: auto; }
+/* status marker dots that sit next to a status line */
+.state-strip > .ic:first-child {
+  flex: 0 0 auto;
+  color: var(--ink-2);
+  margin-top: 2px;
+}
+/* summary markers inside details/summary */
+summary .ic { margin-right: 6px; flex: 0 0 auto; }
+
+/* ledger header strip (dossier) */
+.ledger-head {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  color: var(--ink-3);
+  margin: 6px 0 4px;
+}
+.ledger-head .ic { color: var(--ink-2); }
+
+/* case-id / stamp block row */
+.case-id-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  color: var(--ink-3);
+  margin-top: 8px;
+}
+.call-foot-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  color: var(--ink-3);
+}
+.call-foot-row .ic { color: var(--ink-2); flex: 0 0 auto; }
+.call-foot-row p { margin: 0; }
+
+/* arrow affordance on a link that sits beside a label */
+.row > a .ic,
+.row > button .ic { flex: 0 0 auto; }
+.row > a .ic[style*="margin-left"] { margin-left: auto; }

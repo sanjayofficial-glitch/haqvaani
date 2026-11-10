@@ -98,7 +98,7 @@ export default function PostCall() {
               {playing ? "रुके · pause" : "सुनें · play"}
             </button>
             <button className="btn btn--line" type="button" disabled={playing} onClick={() => setTText("")}>
-              <Trash />
+              <Trash tone="ink" />
               साफ़ · clear
             </button>
           </div>

@@ -236,10 +236,32 @@ class VoiceAPI:
     # ----------------------------------------------------- Timbre TTS ------
 
     @classmethod
-    def synthesize_tts(cls, text: str, lang: str = "hi-IN") -> dict:
-        """Timbre v2.5/v3.0 SSE synth via tts_client. Hard-blocks forbidden secrets."""
+    def synthesize_tts(
+        cls,
+        text: str,
+        lang: str = "hi-IN",
+        *,
+        retry: bool = True,
+        voice: str | None = None,
+        model: str | None = None,
+        speed: float | str | None = None,
+        audio_config: dict | None = None,
+    ) -> dict:
+        """Timbre v2.5/v3.0 SSE synth via tts_client. Hard-blocks forbidden secrets.
+
+        Round-2 wiring: exposes retry + voice/model/speed/audio_config so the
+        orchestrator and API can enable 429-safe queuing and coaching defaults.
+        """
         assert_no_forbidden_secret(text)  # RULES.md §3.2
-        return tts_client.synthesize_sse(text, language=lang)
+        return tts_client.synthesize_sse(
+            text,
+            language=lang,
+            retry=retry,
+            voice=voice,
+            model=model,
+            speed=speed,
+            audio_config=audio_config,
+        )
 
 
 # Module-level convenience wrappers (back-compat for orchestrator/api).

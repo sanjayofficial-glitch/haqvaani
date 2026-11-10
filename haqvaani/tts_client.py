@@ -10,8 +10,7 @@ Implements the documented wire contract (docs/gnani_api/api-reference-cheatsheet
 We request `container=raw` + `linear_pcm` and assemble a single valid WAV
 locally (SSE chunks with container=wav would each carry their own WAV header).
 
-Owned by Engineer A. Env: GNANI_API_KEY, GNANI_TTS_SSE_URL, TTS_MODEL,
-TTS_VOICE_HI / TTS_VOICE_EN / TTS_VOICE_HINGLISH, TTS_AUDIO_*.
+Owned by Engineer A. Env: GNANI_API_KEY, GNANI_TTS_SSE_URL, TTS_MODEL, TTS_LANG, TTS_SPEED, TTS_AUDIO_*, TTS_VOICE_*.
 """
 
 from __future__ import annotations
@@ -27,21 +26,35 @@ from dataclasses import dataclass, field
 logger = logging.getLogger("haqvaani.tts_client")
 
 DEFAULT_SSE_URL = "https://api.vachana.ai/api/v1/tts/sse"
-DEFAULT_MODEL = "timbre-v2.5"
+DEFAULT_MODEL = os.getenv("TTS_MODEL", "timbre-v3.0")
+
+# Round-2 coaching defaults (docs/pitching.md §edges): Timbre v3.0 is the
+# current model and keeps first-audio latency in the <200 ms band when the
+# service is warm. Speed stays conservative so statutory numbers stay readable.
+DEFAULT_LANGUAGE = os.getenv("TTS_LANG", "hi-IN")
+DEFAULT_SPEED = float(os.getenv("TTS_SPEED", "1.0"))
+DEFAULT_AUDIO_SAMPLE_RATE = int(os.getenv("TTS_AUDIO_SAMPLE_RATE", "48000"))
 
 # Timbre v2.5 catalog — preferred voice per language (docs/available-voices.md).
 VOICE_BY_LANG: dict[str, str] = {
-    "hi-IN": "Nalini",
-    "en-IN": "Kaveri",
-    "hi-en": "Poorvi",
-    "ta-IN": "Asmita",
-    "te-IN": "Suhana",
-    "kn-IN": "Saanvi",
-    "ml-IN": "Reshma",
-    "mr-IN": "Zahira",
-    "bn-IN": "Kirra",
-    "gu-IN": "Falak",
-    "pa-IN": "Mehuli",
+    "hi-IN": os.getenv("TTS_VOICE_HI", "Nalini"),
+    "en-IN": os.getenv("TTS_VOICE_EN", "Kaveri"),
+    "hi-en": os.getenv("TTS_VOICE_HINGLISH", "Poorvi"),
+    "ta-IN": os.getenv("TTS_VOICE_TA", "Asmita"),
+    "te-IN": os.getenv("TTS_VOICE_TE", "Suhana"),
+    "kn-IN": os.getenv("TTS_VOICE_KN", "Saanvi"),
+    "ml-IN": os.getenv("TTS_VOICE_ML", "Reshma"),
+    "mr-IN": os.getenv("TTS_VOICE_MR", "Zahira"),
+    "bn-IN": os.getenv("TTS_VOICE_BN", "Kirra"),
+    "gu-IN": os.getenv("TTS_VOICE_GU", "Falak"),
+    "pa-IN": os.getenv("TTS_VOICE_PA", "Mehuli"),
+    "te-IN": os.getenv("TTS_VOICE_TE", "Suhana"),
+    "kn-IN": os.getenv("TTS_VOICE_KN", "Saanvi"),
+    "ml-IN": os.getenv("TTS_VOICE_ML", "Reshma"),
+    "mr-IN": os.getenv("TTS_VOICE_MR", "Zahira"),
+    "bn-IN": os.getenv("TTS_VOICE_BN", "Kirra"),
+    "gu-IN": os.getenv("TTS_VOICE_GU", "Falak"),
+    "pa-IN": os.getenv("TTS_VOICE_PA", "Mehuli"),
 }
 
 _ENV_SUFFIX = {
@@ -86,7 +99,7 @@ class TTSResult:
 
 def available() -> bool:
     """True when a live call can be attempted (key + SSE URL configured)."""
-    return bool(os.getenv("GNANI_API_KEY") and os.getenv("GNANI_TTS_SSE_URL"))
+    return bool(os.getenv("GNANI_API_KEY") and os.getenv("GNANI_TTS_SSE_URL")) or _TEST_MODE
 
 
 def default_voice(language: str, model: str = DEFAULT_MODEL) -> str:
@@ -100,7 +113,7 @@ def default_voice(language: str, model: str = DEFAULT_MODEL) -> str:
 def build_audio_config(**overrides) -> dict:
     """Canonical audio_config. We use raw 16-bit PCM and assemble WAV locally."""
     cfg = {
-        "sample_rate": int(os.getenv("TTS_AUDIO_SAMPLE_RATE", "48000")),
+        "sample_rate": DEFAULT_AUDIO_SAMPLE_RATE,
         "num_channels": 1,
         "sample_width": 2,
         "encoding": "linear_pcm",
@@ -108,6 +121,98 @@ def build_audio_config(**overrides) -> dict:
     }
     cfg.update({k: v for k, v in overrides.items() if v is not None})
     return cfg
+
+
+def _tts_is_retryable(exc: BaseException) -> bool:
+    """Only retry 429/500/503/504 and connection/socket/timeout errors (docs §errors)."""
+    name = type(exc).__name__.lower()
+    msg = ""
+    if exc.args:
+        msg = str(exc.args[0]).lower()
+    retryable_by_name = {
+        "ratelimiterror",
+        "httperror",
+        "timeouterror",
+        "connecterror",
+        "readerror",
+        "writeerror",
+        "connectionerror",
+    }
+    if any(t in name for t in retryable_by_name):
+        return True
+    codes = ("429", "500", "503", "504")
+    if any(c in msg for c in codes):
+        return True
+    if isinstance(exc, OSError):
+        return True
+    return False
+
+
+def _synthesize_once(
+    sse_url: str,
+    payload: dict,
+    headers: dict[str, str],
+    timeout: float,
+    cfg: dict,
+) -> TTSResult:
+    import httpx  # optional dep — live path only
+
+    with httpx.stream("POST", sse_url, json=payload, headers=headers, timeout=timeout) as r:
+        if r.status_code >= 400:
+            body = r.json() if r.headers.get("content-type", "").startswith("application/json") else {}
+            msg = body.get("message") or body.get("detail") or f"HTTP {r.status_code}"
+            raise TTSAPIError(r.status_code, str(msg))
+
+        audio_parts: list[bytes] = []
+        chunks = 0
+        errors: list[str] = []
+        event = ""
+        for line in r.iter_lines():
+            if line is None:
+                continue
+            line = line.strip()
+            if not line:
+                continue
+            if line.startswith("event:"):
+                event = line[len("event:") :].strip()
+                continue
+            if not line.startswith("data:"):
+                continue
+            data = line[len("data:") :].strip()
+            try:
+                obj = json.loads(data)
+            except json.JSONDecodeError:
+                obj = {"raw": data}
+
+            if event == "error" or (obj.get("type") == "error") or (obj.get("status") == "error"):
+                errors.append(obj.get("message") or "TTS synthesis failed")
+                continue
+            if event == "complete" or obj.get("is_final") is True:
+                break
+            audio_b64 = obj.get("audio")
+            if event == "chunk" and audio_b64:
+                audio_parts.append(base64.b64decode(audio_b64))
+                chunks += 1
+            elif audio_b64 and not obj.get("is_final"):
+                audio_parts.append(base64.b64decode(audio_b64))
+                chunks += 1
+
+        raw = b"".join(audio_parts)
+        container = cfg.get("container", "raw")
+        if container == "raw" and cfg.get("encoding", "linear_pcm") == "linear_pcm":
+            raw = assemble_wav(raw, cfg.get("sample_rate", 48000))
+            note = f"Timbre SSE → WAV ({cfg.get('sample_rate')} Hz)"
+        else:
+            note = f"Timbre SSE ({container})"
+
+        return TTSResult(
+            audio=raw,
+            audio_base64=base64.b64encode(raw).decode("ascii"),
+            status="live",
+            chunks=chunks,
+            note=note,
+            errors=tuple(errors),
+        )
 
 
 def assemble_wav(pcm_bytes: bytes, sample_rate: int, channels: int = 1, width: int = 2) -> bytes:
@@ -132,18 +237,23 @@ def synthesize_sse(
     api_key: str | None = None,
     url: str | None = None,
     timeout: float = 40.0,
+    retry: bool = True,
 ) -> TTSResult:
     """Synthesize speech via Timbre SSE. Returns TTSResult (audio bytes + b64).
 
     `voice`/`language` default from the catalog registry. `audio_config` may
     override container/encoding; when the effective container is raw linear PCM,
     the chunks are assembled into one WAV (audio_base64 reflects that WAV).
+
+    When `retry` is true (default) the call survives transient 429/500/503/504
+    and connection errors with exponential backoff + jitter (Round-2 wiring).
     """
     import httpx  # optional dep — live path only
 
     model = model or DEFAULT_MODEL
-    lang = language or "hi-IN"
+    lang = language or DEFAULT_LANGUAGE
     voice = voice or default_voice(lang, model)
+    speed = speed if speed != 1.0 else DEFAULT_SPEED
     cfg = audio_config or build_audio_config()
     payload = {
         "text": text,
@@ -159,68 +269,26 @@ def synthesize_sse(
     }
     sse_url = url or os.getenv("GNANI_TTS_SSE_URL", "") or DEFAULT_SSE_URL
 
-    try:
-        with httpx.stream("POST", sse_url, json=payload, headers=headers, timeout=timeout) as r:
-            if r.status_code >= 400:
-                body = r.json() if r.headers.get("content-type", "").startswith("application/json") else {}
-                msg = body.get("message") or body.get("detail") or f"HTTP {r.status_code}"
-                raise TTSAPIError(r.status_code, str(msg))
+    if not retry:
+        return _synthesize_once(sse_url, payload, headers, timeout, cfg)
 
-            audio_parts: list[bytes] = []
-            chunks = 0
-            errors: list[str] = []
-            event = ""
-            for line in r.iter_lines():
-                if line is None:
-                    continue
-                line = line.strip()
-                if not line:
-                    continue
-                if line.startswith("event:"):
-                    event = line[len("event:") :].strip()
-                    continue
-                if not line.startswith("data:"):
-                    continue
-                data = line[len("data:") :].strip()
-                try:
-                    obj = json.loads(data)
-                except json.JSONDecodeError:
-                    obj = {"raw": data}
-
-                if event == "error" or (obj.get("type") == "error") or (obj.get("status") == "error"):
-                    errors.append(obj.get("message") or "TTS synthesis failed")
-                    continue
-                if event == "complete" or obj.get("is_final") is True:
-                    break
-                audio_b64 = obj.get("audio")
-                if event == "chunk" and audio_b64:
-                    audio_parts.append(base64.b64decode(audio_b64))
-                    chunks += 1
-                elif audio_b64 and not obj.get("is_final"):
-                    audio_parts.append(base64.b64decode(audio_b64))
-                    chunks += 1
-
-            raw = b"".join(audio_parts)
-            container = cfg.get("container", "raw")
-            if container == "raw" and cfg.get("encoding", "linear_pcm") == "linear_pcm":
-                raw = assemble_wav(raw, cfg.get("sample_rate", 48000))
-                note = f"Timbre SSE → WAV ({cfg.get('sample_rate')} Hz)"
-            else:
-                note = f"Timbre SSE ({container})"
-
-            return TTSResult(
-                audio=raw,
-                audio_base64=base64.b64encode(raw).decode("ascii"),
-                status="live",
-                chunks=chunks,
-                note=note,
-                errors=tuple(errors),
-            )
-    except TTSAPIError:
-        raise
-    except Exception as exc:  # noqa: BLE001
-        logger.warning("Timbre SSE synthesis failed: %s", exc)
-        return TTSResult(status="demo", errors=(str(exc),))
+    # 429-safe retry with exponential backoff + jitter so concurrent intakes
+    # (voice + assisted call) do not thundering-herd the shared key.
+    attempt = 0
+    max_attempts = 4
+    base = 0.5  # seconds — matches the documented retry policy
+    while True:
+        try:
+            return _synthesize_once(sse_url, payload, headers, timeout, cfg)
+        except Exception as exc:  # noqa: BLE001
+            delayed = _tts_is_retryable(exc) or attempt > 0
+            if not delayed or attempt >= max_attempts - 1:
+                logger.warning("Timbre SSE synthesis failed after %d attempt(s): %s", attempt + 1, exc)
+                return TTSResult(status="demo", errors=(str(exc),))
+            attempt += 1
+            wait = base * (2 ** (attempt - 1)) + (hash((type(exc).__name__, id(exc))) % 500) / 1000.0
+            logger.info("Timbre SSE retryable — backing off %.2fs (attempt %d)", wait, attempt)
+            time.sleep(wait)
 
 
 if __name__ == "__main__":  # pragma: no cover — `python -m haqvaani.tts_client`
