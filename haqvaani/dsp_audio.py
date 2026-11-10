@@ -15,7 +15,6 @@ import logging
 from dataclasses import dataclass
 
 import numpy as np
-import torch
 
 logger = logging.getLogger("haqvaani.dsp_audio")
 
@@ -122,6 +121,7 @@ def vad_segments(audio_f32: np.ndarray, *,
     model = _load_silero_vad()
     if model is not None:
         silero_model, get_speech_timestamps = model
+        import torch  # lazy: torch is optional (edge/CPU deploys); falls back to energy VAD
         torch_audio = torch.from_numpy(audio_f32)
         # Silero expects 16 kHz mono float32.
         try:
