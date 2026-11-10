@@ -204,6 +204,14 @@ export function Shield({ size = 14, style, ...rest }) {
   );
 }
 
+export function House({ size = 16, style, ...rest }) {
+  return (
+    <svg {...base(size, style, rest)}>
+      <path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10" />
+    </svg>
+  );
+}
+
 export function Spark({ size = 14, style, ...rest }) {
   return (
     <svg {...base(size, style, rest)}>

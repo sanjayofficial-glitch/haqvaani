@@ -3,7 +3,7 @@
    (Speak·Check·Prepare·Call·Prove), main, and the persistent safety bar with
    its truth panel. Mirrors old #stepMount + #safetyPanel contracts.        */
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useCaseState } from "../lib/state.jsx";
 import { useMode } from "../hooks/useMode.jsx";
 import { useToast } from "../hooks/useToast.jsx";
@@ -11,7 +11,7 @@ import { navigate, useRoute } from "../lib/router.js";
 import React from "react";
 import { fmtTs } from "../lib/format.js";
 import { LangToggle, Pair } from "../lib/i18n.jsx";
-import { Mic, Eye, Phone, Stamp, Check, Clock, Lock, Arrow, Gallery } from "../components/Icon.jsx";
+import { Mic, Eye, Phone, Stamp, Check, Clock, Lock, Arrow, Gallery, House, Shield } from "../components/Icon.jsx";
 import { AI_DISCLOSURE } from "../lib/demo.js";
 
 const DONE_ICONS = [Check, Clock, Phone, Stamp, Eye];
@@ -139,6 +139,59 @@ function SafetyBar() {
   );
 }
 
+/* Mobile app-style navigation — replaces the header + safety bar on phones.
+   Fixed bottom tab bar: Home · Studio · Safety (sheet) · Language. */
+function MobileNav() {
+  const state = useCaseState();
+  const mode = useMode();
+  const [openSafety, setOpenSafety] = useState(false);
+  const rows = safetyRows(state, mode);
+  return (
+    <nav className="m-nav" aria-label="मोबाइल नेविगेशन · mobile navigation">
+      <button type="button" className="m-nav-item" onClick={() => navigate("/")} aria-label="होम · home">
+        <House size={20} />
+        <span>Home</span>
+      </button>
+      <button type="button" className="m-nav-item" onClick={() => navigate("/studio")} aria-label="स्टूडियो · studio">
+        <Gallery size={20} />
+        <span>Studio</span>
+      </button>
+      <button type="button" className="m-nav-item" onClick={() => setOpenSafety((v) => !v)} aria-expanded={openSafety} aria-label="सुरक्षा · safety">
+        <Shield size={20} />
+        <span>Safety</span>
+      </button>
+      <span className="m-nav-item">
+        <LangToggle />
+        <span className="m-nav-label">Language</span>
+      </span>
+      {openSafety && (
+        <div className="m-safety-sheet" role="region" aria-label="सुरक्षा जानकारी · safety">
+          <div className="m-safety-head">
+            <Lock size={14} />
+            <span className="mute-2">सुरक्षा विवरण · safety status</span>
+            <span className={`chip chip--dot chip--${mode}`}>
+              <span className="dot" aria-hidden="true"></span>
+              {mode === "live" ? "live" : "demo"}
+            </span>
+          </div>
+          <div className="safety-panel-kv">
+            {rows.map(([k, v]) => (
+              <div className="kv" key={k}>
+                <span className="k">{k}</span>
+                <span className="v num">{v}</span>
+              </div>
+            ))}
+          </div>
+          <p className="xsmall mute-3" style={{ margin: 0 }}>
+            हक़-वाणी केवल आपकी तरफ़ सुनता है : कभी डायल नहीं करता।
+            <span className="pair"><span className="alt" lang="en-IN">HaqVaani listens on your side only : it never dials out.</span></span>
+          </p>
+        </div>
+      )}
+    </nav>
+  );
+}
+
 export function AppShell({ title, step, rail = true, children }) {
   const mode = useMode();
   const { path } = useRoute();
@@ -186,6 +239,7 @@ export function AppShell({ title, step, rail = true, children }) {
         {children}
       </main>
       <SafetyBar />
+      <MobileNav />
     </>
   );
 }

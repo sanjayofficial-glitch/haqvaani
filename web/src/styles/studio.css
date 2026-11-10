@@ -366,29 +366,97 @@ html, body, #root {
 }
 
 /* ---------------------------------------------------------- mobile compact */
+/* The app-style bottom navigation is desktop-hidden, mobile-visible. */
+.m-nav {
+  display: none;
+}
+
 @media (max-width: 720px) {
-  /* slim top bar */
-  .app-head {
-    padding: 10px 0;
+  /* remove top + bottom bars on phones — nav takes over */
+  .app-head,
+  .safety {
+    display: none;
   }
-  .app-head .brand small {
-    display: none; /* screen title moves into main, not the bar */
+  .app-main {
+    padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px));
   }
-  .app-head .brand .hi {
-    font-size: 16px;
+
+  /* fixed bottom tab bar */
+  .m-nav {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    background: var(--canvas);
+    border-top: var(--ruled);
+    padding: 8px 8px calc(8px + env(safe-area-inset-bottom, 0px));
+    gap: 4px;
   }
-  .app-head .head-tools {
-    gap: 6px;
+  .m-nav-item {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    border: 0;
+    background: transparent;
+    color: var(--ink-3);
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 8px 4px;
+    border-radius: var(--radius-card);
+    cursor: pointer;
+    line-height: 1;
   }
-  .app-head .chip {
-    padding: 6px 10px;
+  .m-nav-item:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+  .m-nav-item:active {
+    color: var(--accent);
+  }
+  .m-nav-label {
     font-size: 11px;
   }
-  .app-head .btn--quiet.back {
-    min-height: 40px;
-    padding: 0 10px;
-    font-size: 13px;
+
+  /* safety sheet */
+  .m-safety-sheet {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+    margin: 0 14px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 60vh;
+    overflow: auto;
+    box-shadow: none;
   }
+  .m-safety-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+  .chip--dot .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ink-4);
+  }
+  .chip--live .dot { background: var(--success); }
+  .chip--demo .dot { background: var(--accent); }
+
   /* slim step rail */
   .stepbar {
     gap: 4px;
@@ -399,27 +467,5 @@ html, body, #root {
     padding: 6px 10px;
     font-size: 12px;
     white-space: nowrap;
-  }
-  /* compact bottom safety bar */
-  .safety-in {
-    padding: 8px 0;
-  }
-  .safety .short {
-    font-size: 12px;
-    gap: 6px;
-  }
-  .safety .safety-foot {
-    padding: 6px 0;
-  }
-  .safety .safety-foot .xsmall {
-    font-size: 11px;
-  }
-  .safety summary {
-    font-size: 12px;
-    padding: 4px 0;
-  }
-  /* main padding */
-  .app-main {
-    padding-top: 18px;
   }
 }
