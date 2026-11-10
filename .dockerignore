@@ -1,0 +1,22 @@
+# Keep the deploy context small — exclude local/node/build junk
+.git
+.gitignore
+.env
+.env.*
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+node_modules/
+**/node_modules/
+web/node_modules/
+web/dist/
+videos/
+eval/results/
+graphify-out/cache/
+graphify-out/.graphify_*
+web/test-results/
+.idea/
+.vscode/
+*.log
